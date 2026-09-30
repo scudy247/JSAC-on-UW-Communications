@@ -67,6 +67,17 @@ def _true_means(cfg):
                      for s in cfg["arms"]["snr_db"]])
 
 
+def ack_threshold(cfg):
+    """A number, or {between_arms: [i, j], frac: f} = mu_i + f (mu_j - mu_i) on the true means
+    (used by the sweeps, where the reward scale moves with alpha and the gaps)."""
+    a = cfg["ack_threshold"]
+    if isinstance(a, dict):
+        mu = true_means(cfg)
+        i, j = a["between_arms"]
+        return float(mu[i] + float(a["frac"]) * (mu[j] - mu[i]))
+    return float(a)
+
+
 def make_table(cfg, seed):
     rng = np.random.default_rng(seed)
     T, nu = int(cfg["T"]), int(cfg["nu"])
@@ -80,7 +91,7 @@ def make_table(cfg, seed):
         stream = sas_complex_isotropic(noise["alpha"], noise["c"], (T, nu), rng).real
     else:
         raise ValueError(f"unknown reward_model {cfg['reward_model']!r}")
-    ack = (g > float(cfg["ack_threshold"])).astype(float)
+    ack = (g > ack_threshold(cfg)).astype(float)
     return OutcomeTable(fields={"gamma_db": g, "ack": ack}, truth_mean=np.tile(mu, (T, 1)),
                         noise=stream, T_slot_s=float(cfg.get("T_slot_s", 1.0)))
 
@@ -138,27 +149,33 @@ def run_seed(args):
     cfg, s = args
     seed = int(cfg["seed"]) + s
     tab = make_table(cfg, seed)
+    idx = checkpoints(cfg)
     out = {}
     for j, spec in enumerate(cfg["agents"]):
         agent = make_agent(spec, cfg, tab.n_arms, seed * 1000 + j)
         t0 = time.perf_counter()
         res = TableEnv(tab, int(cfg["tau_rt_slots"])).run(agent)
-        out[spec["name"]] = {"cum_regret": np.cumsum(res.regret_inst).tolist(),
+        out[spec["name"]] = {"cum_regret": np.cumsum(res.regret_inst)[idx].tolist(),   # at checkpoints
                              "wall_s": time.perf_counter() - t0}
     return out
 
 
-def summarise(cfg, per_seed):
+def checkpoints(cfg):
     T = int(cfg["T"])
-    idx = np.unique(np.linspace(0, T - 1, min(T, 200)).astype(int))
+    return np.unique(np.linspace(0, T - 1, min(T, 200)).astype(int))
+
+
+def summarise(cfg, per_seed):
+    idx = checkpoints(cfg)
     summary = {"checkpoints": (idx + 1).tolist(), "agents": {}}
     for spec in cfg["agents"]:
-        R = np.array([ps[spec["name"]]["cum_regret"] for ps in per_seed])[:, idx]
+        R = np.array([ps[spec["name"]]["cum_regret"] for ps in per_seed])
         n = R.shape[0]
         half = 1.96 * R.std(axis=0, ddof=1) / math.sqrt(n) if n > 1 else np.zeros(R.shape[1])
         summary["agents"][spec["name"]] = {
             "mean": R.mean(axis=0).tolist(), "ci95_half": half.tolist(),
             "final_mean": float(R[:, -1].mean()), "final_ci95_half": float(half[-1]),
+            "final_per_seed": R[:, -1].tolist(),
             "wall_s_mean": float(np.mean([ps[spec["name"]]["wall_s"] for ps in per_seed]))}
     return summary
 
@@ -239,6 +256,7 @@ def main(argv=None):
         per_seed = pool.map(run_seed, [(cfg, s) for s in range(int(cfg["n_seeds"]))])
     summary = summarise(cfg, per_seed)
     summary["true_means"] = true_means(cfg).tolist()
+    summary["ack_threshold"] = ack_threshold(cfg)
     summary["wall_total_s"] = time.perf_counter() - t0
     (out_dir / "config.json").write_text(json.dumps(cfg, indent=2))
     (out_dir / "metadata.json").write_text(json.dumps(run_metadata(), indent=2))
