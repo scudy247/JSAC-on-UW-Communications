@@ -104,3 +104,113 @@ def test_delay_safe_initialisation_and_validation():
         GaussianTS(2, rng=np.random.RandomState(0))
     with pytest.raises(ValueError):
         AckUCB1(1)
+
+
+def test_median_of_means_matches_lemma2_and_its_coverage():
+    from uwsb.bandits.robust import median_of_means, mom_width
+    x = np.arange(1.0, 21.0)                                             # n = 20
+    lt = math.log(math.exp(0.125) / 0.5)                                 # delta = 0.5 -> 8*lt = 6.54 -> k = 6
+    k, N = 6, 3
+    assert median_of_means(x, lt) == pytest.approx(np.median(x[: k * N].reshape(k, N).mean(axis=1)))
+    alpha, c, eps, delta, n, reps = 1.5, 1.0, 0.4, 0.05, 400, 2000
+    v = sas_abs_moment(1 + eps, alpha, c)                                # centred moment, no mean needed
+    lt = math.log(math.exp(0.125) / delta)
+    w = mom_width(v, eps, lt, n)
+    rng = np.random.default_rng(9)
+    up = sum(median_of_means(5.0 + sas_real(alpha, c, n, rng), lt) > 5.0 + w for _ in range(reps))
+    assert up / reps <= delta                                            # holds even with a large mean
+
+
+def test_median_of_means_ucb_learns():
+    from uwsb.bandits.robust import MedianOfMeansUCB
+    alpha, c, eps = 1.5, 1.0, 0.4
+    tab = _sas_table(6000, [5.0, 6.0], alpha, c, seed=10)                # large means: MoM is centred
+    agent = MedianOfMeansUCB(2, eps=eps, v=sas_abs_moment(1 + eps, alpha, c))
+    res = TableEnv(tab, tau_rt_slots=2).run(agent)
+    best = res.arms == 1
+    assert best[-2000:].mean() > best[:2000].mean() and best.mean() > 0.5
+
+
+# --- AdaR-UCB ---------------------------------------------------------------------------------
+def test_adar_threshold_solves_eq13_and_follows_prop9():
+    from uwsb.bandits.robust import ADAR_C, adar_threshold
+    xp = sas_real(1.5, 1.0, 500, np.random.default_rng(11))
+    L = math.log(1 / 0.05)
+    M = adar_threshold(xp, L)
+    assert np.sum(np.minimum(xp ** 2 / M ** 2, 1.0)) == pytest.approx(ADAR_C * L, rel=1e-9)
+    few = np.zeros(100)
+    few[:int(ADAR_C * L)] = 1.0                                   # nonzero count <= c log(1/delta)
+    assert adar_threshold(few, L) is None
+
+
+def test_adar_index_is_line9_and_arm_played_twice():
+    from uwsb.bandits.robust import AdaRUCB, adar_threshold
+    tab = _sas_table(400, [-1.0, -0.2], 1.5, 1.0, seed=12)
+    agent = AdaRUCB(2)
+    res = TableEnv(tab, tau_rt_slots=1).run(agent)
+    assert np.all(res.arms[0::2] == res.arms[1::2])               # pairs: played twice per round
+    L = 3 * math.log(agent.tau)
+    B = agent.index()
+    for i in range(2):
+        x = np.asarray(agent.X[i]); M = adar_threshold(agent.Xp[i], L)
+        if M is None:
+            assert np.isinf(B[i]); continue
+        y = np.where(np.abs(x) <= M, x, 0.0); N = x.size
+        manual = y.mean() + math.sqrt(2 * np.var(y, ddof=1) * L / N) + 10 * M * L / N
+        assert B[i] == pytest.approx(manual, rel=1e-12)
+
+
+def test_adar_learns_under_its_assumption_1():
+    from uwsb.bandits.robust import AdaRUCB
+    # symmetric noise around NEGATIVE means: E[X 1{|X|>M}] <= 0 for the optimal arm (Assumption 1)
+    tab = _sas_table(8000, [-1.5, -0.5], 1.5, 1.0, seed=13)
+    res = TableEnv(tab, tau_rt_slots=1).run(AdaRUCB(2))
+    best = res.arms == 1
+    assert best[-2000:].mean() > best[:2000].mean() and best.mean() > 0.5
+
+
+# --- NIR-UCB v0 --------------------------------------------------------------------------------
+def test_nir_eps_rule_is_the_brute_force_minimiser():
+    from uwsb.bandits.robust import NIRUCB
+    agent = NIRUCB(2)
+    L, n = 2 * math.log(1000), 300
+    eps, u = agent.choose_eps(1.5, 1.0, n, L)
+    grid = np.linspace(0.001, 0.499, 2000)
+    w = [4 * sas_abs_moment(1 + e, 1.5, 1.0) ** (1 / (1 + e)) * (L / n) ** (e / (1 + e)) for e in grid]
+    assert eps == pytest.approx(grid[int(np.argmin(w))], abs=0.03)
+    assert 0 < eps < 0.5 and u == pytest.approx(sas_abs_moment(1 + eps, 1.5, 1.0))
+    assert agent.choose_eps(2.0, 1.0, n, L) == (1.0, 2.0)          # Gaussian: eps = 1, u = 2c^2
+
+
+def _nir_table(T, means, alpha, c, seed, nu=200):
+    rng = np.random.default_rng(seed)
+    g = np.asarray(means) + sas_real(alpha, c, (T, len(means)), rng)
+    noise = sas_real(alpha, c, (T, nu), rng)                          # same law: Layer-1 assumption
+    return OutcomeTable(fields={"gamma_db": g}, truth_mean=np.tile(means, (T, 1)), noise=noise)
+
+
+def test_nir_round_robin_before_side_information_then_learns():
+    from uwsb.bandits.robust import NIRUCB
+    tab = _nir_table(6000, [5.0, 6.0], 1.5, 1.0, seed=14)            # large means: shift needed
+    agent = NIRUCB(2, min_noise_samples=2000)
+    res = TableEnv(tab, tau_rt_slots=3).run(agent)
+    assert list(res.arms[:10]) == [0, 1] * 5                          # no side information yet
+    assert agent.state["alpha"] == pytest.approx(1.5, abs=0.05)       # noise state learned
+    best = res.arms == 1
+    assert best[-2000:].mean() > best[:2000].mean() and best.mean() > 0.5
+
+
+def test_nir_regime_alarm_inflates_widths():
+    from uwsb.bandits.robust import NIRUCB
+    agent = NIRUCB(2, inflate=3.0, inflate_window=50)
+    rng = np.random.default_rng(15)
+    for _ in range(40):
+        agent.observe_noise(0.0, sas_real(1.8, 1.0, 1000, rng))
+    for k in range(2):
+        for v in np.random.default_rng(16 + k).standard_normal(50):
+            agent.observe(k, 0.0, {"gamma_db": v})
+    agent.t = 100
+    base = agent.index()
+    agent.observe_noise(0.0, sas_real(1.8, 10.0, 1000, rng))          # 20 dB level jump -> alarm
+    assert agent.state["regime_change"]
+    assert np.all(agent.index() > base)                                # inflated widths

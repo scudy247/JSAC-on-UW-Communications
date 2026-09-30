@@ -162,3 +162,194 @@ class TruncatedMeanUCB(_Agent):
         self.n[arm] += 1
         self._pending[arm] = max(self._pending[arm] - 1, 0)
         self.x[arm].append(float(reward[self.field]))
+
+
+def median_of_means(x, log_term: float) -> float:
+    """BCL Lemma 2: k = floor(min(8 log(e^(1/8)/delta), n/2)) blocks of N = floor(n/k) points
+    (the first kN samples), median of the block means. `log_term` = log(e^(1/8)/delta)."""
+    x = np.asarray(x, dtype=float)
+    n = x.size
+    k = int(max(1, math.floor(min(8.0 * log_term, n / 2.0))))
+    N = n // k
+    return float(np.median(x[: k * N].reshape(k, N).mean(axis=1)))
+
+
+def mom_width(v: float, eps: float, log_term: float, n: int) -> float:
+    """BCL Lemma 2 deviation: (12 v)^(1/(1+eps)) (16 log(e^(1/8)/delta) / n)^(eps/(1+eps)),
+    with v bounding the CENTRED moment E|X - mu|^(1+eps) (Theorem 3)."""
+    return (12.0 * v) ** (1.0 / (1.0 + eps)) * (16.0 * log_term / n) ** (eps / (1.0 + eps))
+
+
+class MedianOfMeansUCB(TruncatedMeanUCB):
+    """BCL robust UCB with the median-of-means estimator (Theorem 3; centred moment bound v)."""
+
+    def __init__(self, K, field="gamma_db", eps=1.0, v=1.0):
+        super().__init__(K, field, eps=eps, u=v)
+        self.v = self.u
+
+    def index(self) -> np.ndarray:
+        log_term = 0.125 + 2.0 * math.log(max(self.t, 2))           # log(e^(1/8) / t^-2)
+        return np.array([median_of_means(self.x[a], log_term)
+                         + mom_width(self.v, self.eps, log_term, self.n[a]) for a in range(self.K)])
+
+
+# --- AdaR-UCB (Genalti, Marsigli, Gatti, Metelli, COLT 2024) -----------------------------------
+ADAR_C = (1.0 + math.sqrt(2.0)) ** 2
+
+
+def adar_threshold(xp, log_inv_delta: float, c: float = ADAR_C) -> float | None:
+    """Empirical trimming threshold: positive root M of sum_j min(X'_j^2 / M^2, 1) = c log(1/delta)
+    (Genalti Eq. 13). The left side decreases from #nonzero (M -> 0) to 0 (M -> inf), so a root
+    exists iff #{X'_j != 0} > c log(1/delta) (Proposition 9); otherwise None."""
+    x2 = np.asarray(xp, dtype=float) ** 2
+    target = c * log_inv_delta
+    if np.count_nonzero(x2) <= target:
+        return None
+    g = lambda M: float(np.sum(np.minimum(x2 / M ** 2, 1.0)))
+    lo, hi = 1e-300, math.sqrt(float(x2.max())) + 1.0
+    while g(hi) > target:                     # g(max|x|) = sum x^2 / max^2 may still exceed target
+        hi *= 2.0
+    lo = hi
+    while g(lo) < target:
+        lo /= 2.0
+    for _ in range(200):                      # bisection in log space
+        mid = math.sqrt(lo * hi)
+        if g(mid) > target:
+            lo = mid
+        else:
+            hi = mid
+        if hi / lo < 1 + 1e-12:
+            break
+    return math.sqrt(lo * hi)
+
+
+class AdaRUCB(_Agent):
+    """AdaR-UCB, theory-consistent version (owner decision 2026-09-30, THEORY-B T-7).
+
+    Differences from the printed Algorithm 1, which contradicts the paper's own text/theory:
+    - the threshold is computed from X' and the trimmed mean/variance from X (text of §5.1 and
+      Theorem 6 need independent halves; lines 7-8 print X for both);
+    - forced exploration while #{X' != 0} <= c log tau^3 with c = (1+sqrt 2)^2 (Proposition 9:
+      the threshold exists iff the count exceeds c log(1/delta), delta = tau^-3; line 4 prints
+      '4 log tau^-3', which is negative).
+    The chosen arm is played twice per round (line 12): the first observation goes to X, the
+    second to X'. Index (line 9): mu + sqrt(2 V log tau^3 / N) + 10 M log tau^3 / N.
+    Guarantee requires Genalti's Assumption 1 (truncated non-positivity of the optimal arm).
+    """
+
+    def __init__(self, K, field="gamma_db"):
+        super().__init__(K, field)
+        self.X = [[] for _ in range(K)]
+        self.Xp = [[] for _ in range(K)]
+        self.tau = 0
+        self._second = None                   # arm owing its second pull in this round
+        self._toggle = np.zeros(K, dtype=int)
+
+    def index(self) -> np.ndarray:
+        L = 3.0 * math.log(max(self.tau, 2))  # log tau^3
+        B = np.full(self.K, np.inf)
+        for i in range(self.K):
+            N = len(self.X[i])
+            if N < 2:
+                continue
+            M = adar_threshold(self.Xp[i], L)
+            if M is None:
+                continue
+            x = np.asarray(self.X[i])
+            y = np.where(np.abs(x) <= M, x, 0.0)
+            mu = float(y.mean())
+            V = float(np.sum((y - mu) ** 2) / (N - 1))
+            B[i] = mu + math.sqrt(2.0 * V * L / N) + 10.0 * M * L / N
+        return B
+
+    def select(self, now_s):
+        self.t += 1
+        if self._second is not None:
+            k, self._second = self._second, None
+            return k
+        self.tau += 1
+        B = self.index()
+        k = int(np.argmax(B))                 # +inf (forced exploration) wins; ties -> first
+        self._second = k
+        return k
+
+    def observe(self, arm, tx_time_s, reward):
+        self.n[arm] += 1
+        (self.X if self._toggle[arm] == 0 else self.Xp)[arm].append(float(reward[self.field]))
+        self._toggle[arm] ^= 1
+
+
+# --- NIR-UCB v0 (Proposal B; DRAFT pending group sign-off, THEORY-B T-8) ------------------------
+class NIRUCB(_Agent):
+    """Noise-Informed Robust UCB, version 0.
+
+    Side information: every observe_noise() feeds a NoiseState (log-moment tracker, THEORY-B D-B3
+    recommendation) giving (alpha_hat, c_hat) and regime alarms. `noise_to_reward` maps the noise
+    law to the reward-noise law; default identity = the Layer-1 assumption that reward noise and
+    noise stream share one law (the real mapping is the gate's M3 calibration).
+    Estimator (plan §2.4, owner decision T-8): BCL truncated mean on y = X - a_k, with a_k the
+    running median of arm k's samples (HEURISTIC: BCL's proof assumes a data-independent shift;
+    it makes the raw-moment bound u ~ centred moment of the noise).
+    Moment order (owner decision T-8): per arm and decision, eps in (0, min(1, alpha_r - 1)) that
+    minimises the predicted BCL width 4 u(eps)^(1/(1+eps)) (L/n)^(eps/(1+eps)), with
+    u(eps) = E|X|^(1+eps) of SaS(alpha_r, c_r); alpha_r >= 2 - 1e-3 -> eps = 1, u = 2 c_r^2.
+    Regime alarm (D-B5 default, widths only): widths x `inflate` for `inflate_window` decisions.
+    Before the noise state is available: round-robin (no side information yet).
+    """
+
+    EPS_GRID = np.linspace(0.02, 1.0, 50)
+
+    def __init__(self, K, field="gamma_db", noise_state=None, noise_to_reward=None,
+                 inflate=2.0, inflate_window=100, min_noise_samples=1000):
+        super().__init__(K, field)
+        from ..estimation.noise_state import NoiseState
+        from ..estimation.regime import RegimeDetector
+        self.ns = noise_state or NoiseState("log_moment", detector=RegimeDetector())
+        self.map = noise_to_reward or (lambda a, c: (a, c))
+        self.inflate, self.inflate_window = float(inflate), int(inflate_window)
+        self.min_noise = int(min_noise_samples)
+        self.x = [[] for _ in range(K)]
+        self._noise_seen = 0
+        self._inflate_until = -1
+        self.state = {}
+
+    def observe_noise(self, now_s, samples):
+        out = self.ns.update(samples)
+        self._noise_seen += np.size(samples)
+        self.state = out
+        if out.get("regime_change"):
+            self._inflate_until = self.t + self.inflate_window
+
+    def observe(self, arm, tx_time_s, reward):
+        self.n[arm] += 1
+        self.x[arm].append(float(reward[self.field]))
+
+    def choose_eps(self, alpha_r, c_r, n, L) -> tuple[float, float]:
+        if alpha_r >= 2.0 - 1e-3:
+            return 1.0, 2.0 * c_r ** 2
+        grid = self.EPS_GRID[self.EPS_GRID < min(1.0, alpha_r - 1.0) - 1e-6]
+        if grid.size == 0:
+            raise ValueError(f"alpha_r = {alpha_r} too close to 1 for a finite (1+eps) moment")
+        us = np.array([sas_abs_moment(1.0 + e, alpha_r, c_r) for e in grid])
+        w = 4.0 * us ** (1.0 / (1.0 + grid)) * (L / n) ** (grid / (1.0 + grid))
+        j = int(np.argmin(w))
+        return float(grid[j]), float(us[j])
+
+    def index(self) -> np.ndarray:
+        L = 2.0 * math.log(max(self.t, 2))
+        alpha_r, c_r = self.map(self.state["alpha"], self.state["c"])
+        mult = self.inflate if self.t <= self._inflate_until else 1.0
+        out = np.empty(self.K)
+        for a in range(self.K):
+            x = np.asarray(self.x[a])
+            shift = float(np.median(x))
+            eps, u = self.choose_eps(alpha_r, c_r, x.size, L)
+            out[a] = shift + truncated_mean(x - shift, u, eps, L) + mult * bcl_width(u, eps, L, x.size)
+        return out
+
+    def select(self, now_s):
+        self.t += 1
+        ready = self._noise_seen >= self.min_noise and np.isfinite(self.state.get("alpha", np.nan))
+        if not ready or np.any(self.n < 2):
+            return (self.t - 1) % self.K          # round-robin until side information and 2 samples/arm
+        return int(np.argmax(self.index()))
