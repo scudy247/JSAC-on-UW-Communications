@@ -78,3 +78,18 @@ def test_output_delay_within_the_impulse_response_span():
     xc = signal.correlate(y, x, mode="full", method="fft")
     lag_s = (np.argmax(np.abs(xc)) - (x.size - 1)) / fs
     assert 0.0 <= lag_s <= ch.n_taps / ch.fs_delay_hz              # within the 32.8 ms delay span
+
+
+@pytest.mark.parametrize("name,fs,elements,dur_s,start_s", [
+    ("red_1", 96_000.0, [0], 0.3, 10.0),
+    ("red_1", 96_000.0, [2, 0], 0.5, 31.7),
+    ("blue_1", 48_000.0, [0, 5, 11], 0.25, 3.3),
+])
+def test_cached_replay_identical_to_library_replay(name, fs, elements, dur_s, start_s):
+    ch = _chan(name)
+    x = _band_noise(fs, ch.band_hz, dur_s, seed=21)
+    ref = ch.replay(x, fs, elements, start_s)
+    fast = ch.replay_cached(x, fs, elements, start_s)
+    fast2 = ch.replay_cached(x, fs, elements, start_s)             # second call uses the cache
+    np.testing.assert_array_equal(fast, ref)
+    np.testing.assert_array_equal(fast2, ref)
