@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import numpy as np
 
+from .regime import RegimeDetector
 from .tail_index import EULER_GAMMA, _ALPHA_GRID, _quantile_table
 
 
@@ -109,7 +110,8 @@ class ExceedanceCounter:
 class NoiseState:
     """Composite tracker fed with successive noise-only blocks (e.g. per slot)."""
 
-    def __init__(self, method: str = "log_moment", forget: float = 1.0, k_sigma: float = 5.0):
+    def __init__(self, method: str = "log_moment", forget: float = 1.0, k_sigma: float = 5.0,
+                 detector: RegimeDetector | None = None):
         if method == "log_moment":
             self.tracker = LogMomentTracker(forget)
         elif method == "quantile":
@@ -118,11 +120,16 @@ class NoiseState:
             raise ValueError(f"method must be 'log_moment' or 'quantile', got {method!r}")
         self.method = method
         self.exceed = ExceedanceCounter(k_sigma)
+        self.detector = detector
 
     def update(self, x) -> dict:
         _, c_before = self.tracker.estimate()
         self.exceed.update(x, c_before)             # uses only past information
         self.tracker.update(x)
         alpha, c = self.tracker.estimate()
-        return {"alpha": alpha, "c": c, "n_exceed": self.exceed.n_exceed,
-                "exceed_rate": self.exceed.rate}
+        out = {"alpha": alpha, "c": c, "n_exceed": self.exceed.n_exceed,
+               "exceed_rate": self.exceed.rate, "regime_change": False, "regime_id": 0}
+        if self.detector is not None:
+            d = self.detector.update(x)
+            out["regime_change"], out["regime_id"] = d["alarm"], d["regime_id"]
+        return out
