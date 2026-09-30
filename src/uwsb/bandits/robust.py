@@ -200,24 +200,40 @@ ADAR_C = (1.0 + math.sqrt(2.0)) ** 2
 def adar_threshold(xp, log_inv_delta: float, c: float = ADAR_C) -> float | None:
     """Empirical trimming threshold: positive root M of sum_j min(X'_j^2 / M^2, 1) = c log(1/delta)
     (Genalti Eq. 13). The left side decreases from #nonzero (M -> 0) to 0 (M -> inf), so a root
-    exists iff #{X'_j != 0} > c log(1/delta) (Proposition 9); otherwise None."""
-    x2 = np.asarray(xp, dtype=float) ** 2
+    exists iff #{X'_j != 0} > c log(1/delta) (Proposition 9); otherwise None.
+    Exact solve: with x2 sorted and j values below M^2, the equation is (n - j) + S_j / M^2 = target
+    (S_j = sum of the j smallest), valid for M^2 in (x2[j-1], x2[j]]; O(n log n)."""
+    x2 = np.sort(np.asarray(xp, dtype=float) ** 2)
+    n = x2.size
     target = c * log_inv_delta
     if np.count_nonzero(x2) <= target:
         return None
+    S = np.concatenate([[0.0], np.cumsum(x2)])
+    j = np.arange(n + 1)
+    denom = target - (n - j)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        M2 = np.where(denom > 0, S / denom, np.nan)
+    lower = np.concatenate([[0.0], x2])
+    upper = np.concatenate([x2, [np.inf]])
+    ok = np.flatnonzero((denom > 0) & (M2 > lower) & (M2 <= upper))
+    if ok.size == 0:                       # numerically on a boundary: fall back to bisection
+        return _adar_threshold_bisect(x2, target)
+    return float(math.sqrt(M2[ok[0]]))
+
+
+def _adar_threshold_bisect(x2, target):
+    if np.count_nonzero(x2) <= target:
+        raise ValueError("no positive root (Proposition 9 condition not met)")
     g = lambda M: float(np.sum(np.minimum(x2 / M ** 2, 1.0)))
-    lo, hi = 1e-300, math.sqrt(float(x2.max())) + 1.0
-    while g(hi) > target:                     # g(max|x|) = sum x^2 / max^2 may still exceed target
+    hi = math.sqrt(float(x2.max())) + 1.0
+    while g(hi) > target:
         hi *= 2.0
     lo = hi
     while g(lo) < target:
         lo /= 2.0
-    for _ in range(200):                      # bisection in log space
+    for _ in range(200):
         mid = math.sqrt(lo * hi)
-        if g(mid) > target:
-            lo = mid
-        else:
-            hi = mid
+        lo, hi = (mid, hi) if g(mid) > target else (lo, mid)
         if hi / lo < 1 + 1e-12:
             break
     return math.sqrt(lo * hi)

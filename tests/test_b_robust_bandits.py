@@ -214,3 +214,21 @@ def test_nir_regime_alarm_inflates_widths():
     agent.observe_noise(0.0, sas_real(1.8, 10.0, 1000, rng))          # 20 dB level jump -> alarm
     assert agent.state["regime_change"]
     assert np.all(agent.index() > base)                                # inflated widths
+
+
+def test_adar_exact_threshold_equals_bisection():
+    from uwsb.bandits.robust import ADAR_C, _adar_threshold_bisect, adar_threshold
+    rng = np.random.default_rng(17)
+    for n in (30, 300, 3000):
+        xp = sas_real(1.4, 2.0, n, rng)
+        xp[: n // 10] = 0.0                                             # zeros are allowed
+        L = 3 * math.log(50)
+        exact = adar_threshold(xp, L)
+        if np.count_nonzero(xp) <= ADAR_C * L:                          # Prop. 9: no root
+            assert exact is None
+            with pytest.raises(ValueError):
+                _adar_threshold_bisect(np.sort(xp ** 2), ADAR_C * L)
+            continue
+        ref = _adar_threshold_bisect(np.sort(xp ** 2), ADAR_C * L)
+        assert exact == pytest.approx(ref, rel=1e-9)
+    assert exact is not None                                            # n = 3000 does have a root

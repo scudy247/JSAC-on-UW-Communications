@@ -1,0 +1,20 @@
+# Layer-1 smoke test (< 60 s): all agents, branch S, tiny horizon.
+name: b_layer1_smoke
+reward_model: sas
+seed: 100
+n_seeds: 2
+T: 400
+nu: 100
+tau_rt_slots: 3
+noise: {alpha: 1.6, c: 1.0}
+arms: {means: [0.0, 0.5, 1.0]}
+ack_threshold: 0.5
+agents:
+  - {name: "UCB (naive, oracle sigma)", type: empirical_ucb, params: {sigma: oracle}}
+  - {name: "Gaussian TS (naive)", type: gaussian_ts, params: {sigma: oracle}}
+  - {name: "ACK UCB1", type: ack_ucb1}
+  - {name: "ACK Bernoulli TS", type: bernoulli_ts}
+  - {name: "Trunc-mean UCB (oracle)", type: trunc_ucb, params: {eps: 0.3}}
+  - {name: "MoM UCB (oracle)", type: mom_ucb, params: {eps: 0.3}}
+  - {name: "AdaR-UCB", type: adar_ucb}
+  - {name: "NIR-UCB v0", type: nir_ucb, params: {min_noise_samples: 1000}}
