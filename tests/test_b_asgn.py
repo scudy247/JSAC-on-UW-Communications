@@ -41,3 +41,51 @@ def test_reproducible_seed_sensitive_and_validated():
         asgn_m(1.5, 1.0, [1.0, 1.2], 10, np.random.default_rng(0))      # not positive definite
     with pytest.raises(TypeError):
         asgn_m(1.5, 1.0, [1.0, 0.5], 10, np.random.RandomState(0))
+
+
+def test_regression_seed_1012_small_q_no_stall():
+    """The prior-only sampler stalled here (q ~ 0); the tilted scheme must handle it."""
+    x = asgn_m(ALPHA_D1, 1.0, RHO_D1, 100_000, np.random.default_rng(1012), max_tries=200_000)
+    assert np.all(np.isfinite(x))
+
+
+def _force(scheme, q, m, n, seed):
+    from uwsb.noise.asgn import _Pool, _TiltedPool
+    rng = np.random.default_rng(seed)
+    a_half = ALPHA_D1 / 2
+    pool, tilted = _Pool(a_half, rng), _TiltedPool(a_half, m, rng)
+    out = np.empty(n)
+    for i in range(n):
+        if scheme == "prior":
+            log_lmax = -0.5 * m * np.log(q / m) - 0.5 * m
+            while True:
+                a, u = pool.next()
+                if np.log(u) <= -0.5 * m * np.log(a) - q / (2 * a) - log_lmax:
+                    break
+        else:
+            while True:
+                a, u = tilted.next()
+                if u <= np.exp(-q / (2 * a)):
+                    break
+        out[i] = a
+    return out
+
+
+@pytest.mark.parametrize("q", [0.5, 2.0, 6.0])
+def test_both_exact_schemes_sample_the_same_posterior(q):
+    m = 4
+    a_p = np.log(_force("prior", q, m, 20_000, 1))
+    a_t = np.log(_force("tilted", q, m, 20_000, 2))
+    for p in (0.1, 0.5, 0.9):
+        assert np.quantile(a_p, p) == pytest.approx(np.quantile(a_t, p), abs=0.05)
+
+
+def test_tilted_prior_matches_reweighted_prior_at_q0():
+    from uwsb.noise.asgn import _TiltedPool
+    from uwsb.noise.stable import positive_stable
+    m, a_half = 4, ALPHA_D1 / 2
+    tp = _TiltedPool(a_half, m, np.random.default_rng(3), size=200_000)
+    lt = np.log(tp.draws)
+    f = positive_stable(a_half, 2_000_000, np.random.default_rng(4))
+    wts = f ** (-m / 2)
+    assert np.mean(lt) == pytest.approx(np.sum(wts * np.log(f)) / np.sum(wts), abs=0.02)

@@ -11,8 +11,10 @@ The paper generates x_t from the conditional PDF of eq. (11). Given the past m s
   - Gaussian part: mean mu(p) = R21 R11^{-1} p (independent of A), variance A s^2 with
     s^2 = R22 - R21 R11^{-1} R12 (Schur complement);
   - mixing variable: A | p has density proportional to f_A(a) a^{-m/2} exp(-q / (2a)),
-    q = p^T R11^{-1} p. Sampled EXACTLY by rejection from the prior f_A: the likelihood
-    L(a) = a^{-m/2} exp(-q/(2a)) peaks at a* = q/m with L(a*) = (q/m)^{-m/2} exp(-m/2).
+    q = p^T R11^{-1} p. Sampled EXACTLY by rejection with two schemes (_posterior_mixing):
+    prior proposals when a* = q/m >= 1, tilted-prior proposals when a* < 1. (2026-09-30:
+    the prior-only scheme stalled for q ~ 0 -- acceptance collapses ~ (q/m)^(m/2) --
+    found by the D-B3 convergence study, seed 1012.)
 The first m samples are drawn from the exact m-dimensional marginal (one A, G ~ N(0, R11)).
 m = 0 gives i.i.d. SaS(alpha, delta). Real-valued (the paper's model is real).
 """
@@ -44,6 +46,68 @@ class _Pool:
         return a, u
 
 
+def _kanter_k(u, a):
+    return np.sin(a * u) / np.sin(u) ** (1.0 / a) * np.sin((1.0 - a) * u) ** ((1.0 - a) / a)
+
+
+class _TiltedPool:
+    """Exact draws from h(a) ∝ f_A(a) a^(-m/2) (positive a-stable prior tilted by a^(-m/2)).
+
+    Kanter: A = K(U) W^(-(1-a)/a), U ~ Unif(0, pi), W ~ Exp(1). Tilting by A^(-m/2) factorises:
+    U has density ∝ K(U)^(-m/2) (rejection from Unif(0, pi); K increases from K0 = a(1-a)^((1-a)/a)
+    at 0, so (K/K0)^(-m/2) <= 1; checked numerically 2026-09-30) and W ~ Gamma(1 + m(1-a)/(2a)).
+    """
+
+    def __init__(self, a_half, m, rng, size=65536):
+        self.a, self.m, self.rng, self.size = a_half, m, rng, size
+        self.k0 = a_half * (1.0 - a_half) ** ((1.0 - a_half) / a_half)
+        self.shape = 1.0 + m * (1.0 - a_half) / (2.0 * a_half)
+        self._refill()
+
+    def _refill(self):
+        us = []
+        while sum(u.size for u in us) < self.size:
+            u = self.rng.uniform(0.0, np.pi, self.size)
+            v = self.rng.random(self.size)
+            us.append(u[v <= (_kanter_k(u, self.a) / self.k0) ** (-0.5 * self.m)])
+        u = np.concatenate(us)[: self.size]
+        w = self.rng.gamma(self.shape, 1.0, self.size)
+        self.draws = _kanter_k(u, self.a) * w ** (-(1.0 - self.a) / self.a)
+        self.acc = self.rng.random(self.size)
+        self.i = 0
+
+    def next(self):
+        if self.i == self.size:
+            self._refill()
+        a, v = self.draws[self.i], self.acc[self.i]
+        self.i += 1
+        return a, v
+
+
+def _posterior_mixing(q, m, prior_pool, tilted_pool, max_tries, t):
+    """Exact draw of A from p(a | q) ∝ f_A(a) a^(-m/2) exp(-q/(2a)).
+
+    Two exact rejection schemes; the choice only affects speed:
+    - a* = q/m >= 1: proposals from the prior f_A, accept w.p. L(a)/L(a*) with
+      L(a) = a^(-m/2) exp(-q/(2a)) (efficient when the likelihood peak is in the prior bulk);
+    - a* < 1: proposals from the tilted prior h(a) ∝ f_A(a) a^(-m/2), accept w.p. exp(-q/(2a))
+      (efficient when q is small, where the first scheme's acceptance collapses ~ (q/m)^(m/2)).
+    """
+    a_star = q / m
+    if a_star >= 1.0:
+        log_lmax = -0.5 * m * np.log(a_star) - 0.5 * m
+        for _ in range(max_tries):
+            a, u = prior_pool.next()
+            if np.log(u) <= -0.5 * m * np.log(a) - q / (2.0 * a) - log_lmax:
+                return a
+    else:
+        for _ in range(max_tries):
+            a, u = tilted_pool.next()
+            if u <= np.exp(-q / (2.0 * a)):
+                return a
+    raise RuntimeError(f"rejection sampler did not accept in {max_tries} tries at t={t}")
+
+
 def asgn_m(alpha: float, delta: float, rho, n: int, rng: np.random.Generator,
            max_tries: int = 1_000_000) -> np.ndarray:
     """n samples of alphaSGN(m) with m = len(rho) - 1 and rho = r_{1,1+k} / (2 delta^2), rho[0] = 1."""
@@ -72,18 +136,12 @@ def asgn_m(alpha: float, delta: float, rho, n: int, rng: np.random.Generator,
     g0 = rng.multivariate_normal(np.zeros(m), R11)
     x[:head] = np.sqrt(a0) * g0[:head]
     pool = _Pool(a_half, rng)
+    tilted = _TiltedPool(a_half, m, rng)
     eps = rng.standard_normal(max(n - m, 0))
     for t in range(m, n):
         p = x[t - m:t]
         q = float(p @ R11_inv @ p)
-        a_star = max(q / m, 1e-300)
-        log_lmax = -0.5 * m * np.log(a_star) - 0.5 * m
-        for _ in range(max_tries):
-            a, u = pool.next()
-            if np.log(u) <= -0.5 * m * np.log(a) - q / (2.0 * a) - log_lmax:
-                break
-        else:
-            raise RuntimeError(f"rejection sampler did not accept in {max_tries} tries at t={t}")
+        a = _posterior_mixing(q, m, pool, tilted, max_tries, t)
         x[t] = w @ p + np.sqrt(a) * s * eps[t - m]
     return x
 
