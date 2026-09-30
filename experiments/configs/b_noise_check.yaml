@@ -1,0 +1,55 @@
+# Noise census content check (reports/noise_census.md §4, step 1). Model-free statistics
+# only. Sources are public and open; see the census for licences. Deferred: West Bay (S3).
+name: b_noise_check
+block_s: 60.0        # statistics per 60 s block
+warmup_s: 1.0        # discard band-pass transient at the start of each file
+k_sigma: 5.0         # exceedance threshold in robust sigmas
+clip_level: 0.999    # |x| >= this (full scale = 1) counts as clipped (raw, before filtering)
+bands_hz:            # library channel bands (reports/library_notes.md §2)
+  blue: [10500.0, 15500.0]
+  purple: [9200.0, 15800.0]
+  red: [20000.0, 30000.0]
+files:
+  # S1 SanctSound Florida Keys FK01, 48 kHz, continuous 6.00 h (FLAC header, 2026-09-30)
+  - id: S1_fk01
+    url: https://storage.googleapis.com/noaa-passive-bioacoustic/sanctsound/audio/fk01/sanctsound_fk01_01/audio/SanctSound_FK01_01_671359016_20181218T214011Z.flac
+    bands: [blue, purple, red]          # red skipped automatically (above Nyquist)
+    expected_fs_hz: 48000
+    expected_duration_s: 21600
+  # S2 SanctSound Hawaii HI01, 96 kHz, 15-min files every 30 min: four consecutive files
+  - id: S2_hi01
+    url: https://storage.googleapis.com/noaa-passive-bioacoustic/sanctsound/audio/hi01/sanctsound_hi01_01/audio/SanctSound_HI01_01_671129638_20181115T000002Z.flac
+    bands: [blue, purple, red]
+    expected_fs_hz: 96000
+    expected_duration_s: 900
+  - id: S2_hi01
+    url: https://storage.googleapis.com/noaa-passive-bioacoustic/sanctsound/audio/hi01/sanctsound_hi01_01/audio/SanctSound_HI01_01_671129638_20181115T003002Z.flac
+    bands: [blue, purple, red]
+    expected_fs_hz: 96000
+    expected_duration_s: 900
+  - id: S2_hi01
+    url: https://storage.googleapis.com/noaa-passive-bioacoustic/sanctsound/audio/hi01/sanctsound_hi01_01/audio/SanctSound_HI01_01_671129638_20181115T010002Z.flac
+    bands: [blue, purple, red]
+    expected_fs_hz: 96000
+    expected_duration_s: 900
+  - id: S2_hi01
+    url: https://storage.googleapis.com/noaa-passive-bioacoustic/sanctsound/audio/hi01/sanctsound_hi01_01/audio/SanctSound_HI01_01_671129638_20181115T013002Z.flac
+    bands: [blue, purple, red]
+    expected_fs_hz: 96000
+    expected_duration_s: 900
+  # S4 MBARI Pacific Sound (MARS), 256 kHz WAV, 10-min files: three consecutive (30 min)
+  - id: S4_mbari
+    url: https://pacific-sound-256khz-2024.s3.us-west-2.amazonaws.com/01/MARS_20240101_000646.wav
+    bands: [blue, purple, red]
+    expected_fs_hz: 256000
+    expected_duration_s: 600
+  - id: S4_mbari
+    url: https://pacific-sound-256khz-2024.s3.us-west-2.amazonaws.com/01/MARS_20240101_001646.wav
+    bands: [blue, purple, red]
+    expected_fs_hz: 256000
+    expected_duration_s: 600
+  - id: S4_mbari
+    url: https://pacific-sound-256khz-2024.s3.us-west-2.amazonaws.com/01/MARS_20240101_002646.wav
+    bands: [blue, purple, red]
+    expected_fs_hz: 256000
+    expected_duration_s: 600

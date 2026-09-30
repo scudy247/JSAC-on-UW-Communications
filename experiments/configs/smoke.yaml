@@ -1,0 +1,26 @@
+# Tiny end-to-end run (project.MD §7.8). Must finish in < 60 s.
+name: smoke
+mode: compare
+seed: 1
+n_seeds: 2
+T: 1500
+channel:
+  K: 4
+  m: [0.60, 0.55, 0.50, 0.45]
+  sigma_idio: 0.20
+  b: 0.0
+  Tc_s: 40.0
+  T_slot_s: 1.0
+delay:
+  tau_rt_slots: 30
+  tau_ow_slots: 15
+reward:
+  type: gaussian
+  sigma_n: 0.10
+agents:
+  - {name: PUCB, type: predictive_ucb, beta: 1.5}
+  - {name: PTS, type: predictive_thompson}
+  - {name: UCB1, type: ucb1}
+  - {name: "SW-UCB(150)", type: sw_ucb, window: 150}
+  - {name: "D-UCB(0.99)", type: d_ucb, gamma: 0.99}
+  - {name: Greedy-stale, type: latest_greedy}

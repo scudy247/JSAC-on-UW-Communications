@@ -1,0 +1,16 @@
+# Delay-tax preview (THEORY.md Prop 1 / §8 prediction 1). Symmetric arms so
+# Delta=0: the best causal surplus over stationary must decay as e^{-S}.
+# This is a preview of the milestone-3 kill test.
+name: delay_tax
+mode: delay_tax
+seed: 4242
+n_seeds: 40
+T: 40000
+channel:
+  K: 2
+  m: [0.5, 0.5]          # symmetric: Delta_bar = 0
+  sigma_idio: 0.30
+  b: 0.0
+  Tc_s: 50.0
+  T_slot_s: 1.0
+S_grid: [0.1, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0]

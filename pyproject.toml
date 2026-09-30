@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uwsb"
+version = "0.1.0"
+description = "Staleness-aware bandits for underwater acoustic link adaptation"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Fabio Busacca" }]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "matplotlib>=3.7",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-cov"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["error::RuntimeWarning"]
+
+[tool.uwsb]
+# Locked model decisions (THEORY.md §1). Read by code so there is ONE source.
+tc_convention = "1/e"          # R(T_c) = 1/e ; T_c is the kernel time constant
+tau_semantics = "round_trip"   # tau := tau_ow + tau_fb ; predict forward to t+tau_ow

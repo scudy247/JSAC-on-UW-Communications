@@ -1,0 +1,19 @@
+# Milestone 3: the phase-transition experiment (THEORY.md Prop 2/3, §8 pred 2).
+# Sweep (Delta_bar/sigma_D, S=tau/Tc); measure the best-causal relative gain
+# (caus-stat)/(dyn-stat), compare to the closed form (†), show the collapse onto
+# z=u e^S, and confirm the compensated-gain boundary is slope -1.
+# THIS IS THE MAKE-OR-BREAK CHECK (project.MD §8 milestone 3).
+name: phase_transition
+mode: phase_transition
+seed: 90210
+n_seeds: 15
+T: 20000
+channel:
+  Tc_s: 50.0
+  T_slot_s: 1.0
+  sigma_idio: 0.30          # sigma_D = sqrt(2)*sigma_idio = 0.424
+u_grid: [0.05, 0.1, 0.2, 0.35, 0.6, 1.0, 1.7, 2.8, 4.0]   # Delta_bar / sigma_D
+S_grid: [0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 2.5, 3.0]        # tau / Tc
+include_pucb: true
+pucb_sigma_n: 0.10
+pucb_seeds: 4

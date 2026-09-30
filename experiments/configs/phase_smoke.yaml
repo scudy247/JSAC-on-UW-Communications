@@ -1,0 +1,13 @@
+# Tiny phase-transition smoke (gates the new mode; < 60 s).
+name: phase_smoke
+mode: phase_transition
+seed: 1
+n_seeds: 2
+T: 1500
+channel:
+  Tc_s: 40.0
+  T_slot_s: 1.0
+  sigma_idio: 0.30
+u_grid: [0.1, 0.5, 2.0]
+S_grid: [0.5, 1.0, 2.0]
+include_pucb: false

@@ -1,0 +1,38 @@
+# Publish code only (owner decision 2026-09-30). Ignore everything at the top level by
+# default; only the entries re-included below are tracked. New top-level files stay
+# private unless added here on purpose.
+/*
+!/.gitignore
+!/README.md
+!/pyproject.toml
+!/Makefile
+!/requirements-lock.txt
+!/src/
+!/tests/
+!/experiments/
+!/desert/
+
+# Inside the published folders: never caches, builds, credentials or large binaries
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+*.so*
+*.o
+*.lo
+*.la
+.env
+*.pem
+*.key
+id_*
+*.wav
+*.flac
+*.mat
+*.h5
+*.hdf5
+*.npz
+*.npy
+*.pkl
+*.zip
+*.pdf
+*.png

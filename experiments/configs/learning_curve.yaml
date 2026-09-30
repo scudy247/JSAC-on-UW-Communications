@@ -1,0 +1,31 @@
+# Layer-1 multi-agent regret curves (milestone 2 deliverable).
+# Moderate staleness S = tau_rt/Tc = 30/60 = 0.5 -> tracking is worthwhile, so
+# PUCB/PTS should beat the windowed baselines and the stale-greedy reference.
+name: learning_curve
+mode: compare
+seed: 20260711
+n_seeds: 12
+T: 40000
+channel:
+  K: 6
+  m: [0.60, 0.57, 0.54, 0.51, 0.48, 0.45]
+  sigma_idio: 0.25
+  b: 0.0
+  Tc_s: 60.0
+  T_slot_s: 1.0
+delay:
+  tau_rt_slots: 30
+  tau_ow_slots: 15
+reward:
+  type: gaussian
+  sigma_n: 0.10
+agents:
+  - {name: PUCB, type: predictive_ucb, beta: 1.5}
+  - {name: "PUCB(theory-beta)", type: predictive_ucb, beta: theory}
+  - {name: PTS, type: predictive_thompson}
+  - {name: UCB1, type: ucb1}
+  - {name: "SW-UCB(300)", type: sw_ucb, window: 300}
+  - {name: "SW-UCB(1000)", type: sw_ucb, window: 1000}
+  - {name: "D-UCB(0.995)", type: d_ucb, gamma: 0.995}
+  - {name: TS, type: gaussian_thompson}
+  - {name: Greedy-stale, type: latest_greedy}
