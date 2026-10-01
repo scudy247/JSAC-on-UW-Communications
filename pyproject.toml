@@ -5,10 +5,10 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "uwsb"
 version = "0.1.0"
-description = "Staleness-aware bandits for underwater acoustic link adaptation"
+description = "Bandit link adaptation for underwater acoustic links (JSAC SI companion code)"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = { file = "LICENSE" }
 authors = [{ name = "Fabio Busacca" }]
 dependencies = [
     "numpy>=1.24",
@@ -19,6 +19,10 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "pytest-cov"]
+# Proposal B: noise recordings (FLAC) and the Underwater Acoustic Channel Library. uwa-channels is
+# pinned: LibraryChannel.replay_cached reproduces the arithmetic of its 0.7.1 replay exactly.
+# Tested versions: requirements-lock.txt.
+b = ["soundfile", "uwa-channels==0.7.1", "h5py"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
