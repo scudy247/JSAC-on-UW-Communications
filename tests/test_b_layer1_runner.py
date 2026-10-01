@@ -28,3 +28,13 @@ def test_layer1_smoke_branch_e_new_baselines(tmp_path, monkeypatch):
     assert summary["best_fixed_arm_final_mean"] == 0.0           # stationary table
     mu = summary["true_means"]
     assert summary["ack_threshold"] == pytest.approx(0.5 * (mu[0] + mu[1]))
+
+
+def test_agent_seeding_by_name_is_independent_of_list_position():
+    cfg = {"seed": 7, "agent_seeding": "name"}
+    a = run_layer1_b.agent_seed(cfg, 7, 0, "ACK Bernoulli TS")
+    b = run_layer1_b.agent_seed(cfg, 7, 5, "ACK Bernoulli TS")
+    assert a == b and a != run_layer1_b.agent_seed(cfg, 7, 0, "Gaussian TS (naive)")
+    assert run_layer1_b.agent_seed({"seed": 7}, 7, 3, "x") == 7003               # default unchanged
+    with pytest.raises(ValueError):
+        run_layer1_b.agent_seed({"agent_seeding": "bad"}, 7, 0, "x")

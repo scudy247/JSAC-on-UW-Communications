@@ -20,6 +20,7 @@ for _v in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
     os.environ.setdefault(_v, "1")
 
 import argparse
+import hashlib
 import json
 import math
 import sys
@@ -154,6 +155,18 @@ def make_agent(spec, cfg, K, seed):
 
 
 # --- runs -------------------------------------------------------------------------------------
+def agent_seed(cfg, seed, j, name):
+    """Agent random stream. Default (configs without `agent_seeding`): seed * 1000 + list position, as
+    in all results so far. `agent_seeding: name` (THEORY-B G-7): keyed by the agent's name, so adding or
+    reordering agents leaves every other agent's results unchanged."""
+    mode = cfg.get("agent_seeding", "position")
+    if mode == "position":
+        return seed * 1000 + j
+    if mode == "name":
+        return [int(seed), int.from_bytes(hashlib.sha1(name.encode()).digest()[:4], "little")]
+    raise ValueError(f"agent_seeding must be 'position' or 'name', got {mode!r}")
+
+
 def run_seed(args):
     cfg, s = args
     seed = int(cfg["seed"]) + s
@@ -161,7 +174,7 @@ def run_seed(args):
     idx = checkpoints(cfg)
     out = {"_best_fixed_arm_final": float(best_fixed_arm_regret(tab, int(cfg["T"])).sum())}
     for j, spec in enumerate(cfg["agents"]):
-        agent = make_agent(spec, cfg, tab.n_arms, seed * 1000 + j)
+        agent = make_agent(spec, cfg, tab.n_arms, agent_seed(cfg, seed, j, spec["name"]))
         t0 = time.perf_counter()
         res = TableEnv(tab, int(cfg["tau_rt_slots"])).run(agent)
         out[spec["name"]] = {"cum_regret": np.cumsum(res.regret_inst)[idx].tolist(),   # at checkpoints
