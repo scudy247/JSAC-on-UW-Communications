@@ -3,7 +3,7 @@
 .PHONY: install smoke test lint figures clean
 
 install:
-	pip install -e .[dev]
+	pip install -e ".[dev,b]"
 
 # project.MD §7.8: tiny end-to-end run must pass before any grid search.
 smoke:
