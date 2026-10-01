@@ -1,0 +1,28 @@
+# NIR-UCB v1 under noise regime changes (THEORY-B G-0: calibration must stay right when the noise changes).
+# Branch E (gamma-hat in dB, 256 pilot symbols), noise law switching between alpha = 1.9 (calm) and 1.3
+# (impulsive) with the same c, Markov chain with mean dwell 1000 slots (~10 switches in T = 1e4).
+# Fixed calibrations are right in one regime only; v1 follows alpha-hat (tracker restarted on regime alarms).
+name: b_layer1_v1_regime_E
+reward_model: evm_db
+seed: 20261001
+n_seeds: 50
+T: 10000
+nu: 200
+tau_rt_slots: 3
+noise: {alpha: 1.9, c: 0.1}
+regimes:
+  laws: [{alpha: 1.9, c: 0.1}, {alpha: 1.3, c: 0.1}]
+  P: [[0.999, 0.001], [0.001, 0.999]]
+arms: {snr_db: [0.0, 1.0, 1.5, 2.0]}
+evm: {n_sym: 256, mc_packets: 200000, mc_seed: 7}
+ack_threshold: {between_arms: [0, 1], frac: 0.5}
+agent_seeding: name
+agents:
+  - {name: "UCB (naive, calibrated at alpha=1.9)", type: empirical_ucb, params: {sigma: {law_alpha: 1.9}}}
+  - {name: "UCB (naive, calibrated at alpha=1.3)", type: empirical_ucb, params: {sigma: {law_alpha: 1.3}}}
+  - {name: "UCB (naive, calibrated at alpha=2)", type: empirical_ucb, params: {sigma: {law_alpha: 2.0}}}
+  - {name: "ACK Bernoulli TS", type: bernoulli_ts}
+  - {name: "NIR-UCB v1 (gauss)", type: nir_ucb_v1, params: {width: gauss}}
+  - {name: "NIR-UCB v1 (bernstein)", type: nir_ucb_v1, params: {width: bernstein}}
+  - {name: "NIR-UCB v1 (gauss, original detector)", type: nir_ucb_v1, params: {width: gauss, detector: original}}
+  - {name: "NIR-UCB v1 (gauss, no detector)", type: nir_ucb_v1, params: {width: gauss, detector: none}}

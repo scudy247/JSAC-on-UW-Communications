@@ -33,8 +33,9 @@ class NIRUCBv1(EmpiricalUCB):
             raise ValueError("a reward-law map is required (estimation/reward_law.py)")
         if width not in ("gauss", "bernstein"):
             raise ValueError("width must be 'gauss' or 'bernstein'")
+        # detector_params: None -> REAL_NOISE preset; dict -> RegimeDetector(**dict); False -> no detector (ablation)
         dp = RegimeDetector.REAL_NOISE if detector_params is None else detector_params
-        self.ns = NoiseState("log_moment", forget=forget, detector=RegimeDetector(**dp))
+        self.ns = NoiseState("log_moment", forget=forget, detector=RegimeDetector(**dp) if dp is not False else None)
         self._new_tracker = lambda: LogMomentTracker(forget)
         self.law, self.width = law, width
         self.inflate, self.inflate_window = float(inflate), int(inflate_window)

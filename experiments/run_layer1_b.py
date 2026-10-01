@@ -82,7 +82,57 @@ def ack_threshold(cfg):
     return float(a)
 
 
+def regime_path(P, T, rng):
+    """Markov chain of noise regimes over slots, starting in regime 0 (P[i][j] = P(i -> j))."""
+    P = np.asarray(P, dtype=float)
+    if P.ndim != 2 or P.shape[0] != P.shape[1] or not np.allclose(P.sum(axis=1), 1.0) or np.any(P < 0):
+        raise ValueError("P must be a square row-stochastic matrix")
+    cum = np.cumsum(P, axis=1)
+    u = rng.random(T)
+    z = np.zeros(T, dtype=int)
+    for t in range(1, T):
+        z[t] = min(int(np.searchsorted(cum[z[t - 1]], u[t], side="right")), P.shape[0] - 1)
+    return z
+
+
+def _regime_cfgs(cfg):
+    laws = cfg["regimes"]["laws"]
+    if dict(laws[0]) != dict(cfg["noise"]):
+        raise ValueError("regimes.laws[0] must equal `noise` (regime 0 defines the reference means)")
+    return [dict(cfg, noise=dict(law)) for law in laws]
+
+
+def make_regime_table(cfg, seed):
+    """Regime-switching table (THEORY-B G-0: the noise law changes over time). Per slot a regime z_t from
+    the Markov chain cfg['regimes']['P']; rewards, ACKs and the noise stream of slot t follow law z_t;
+    truth_mean[t] = true means under law z_t. ACK threshold from regime 0's means."""
+    rng = np.random.default_rng(seed)
+    T, nu = int(cfg["T"]), int(cfg["nu"])
+    rc = _regime_cfgs(cfg)
+    z = regime_path(cfg["regimes"]["P"], T, rng)
+    K = len(cfg["arms"]["snr_db"] if cfg["reward_model"] == "evm_db" else cfg["arms"]["means"])
+    g, stream, truth = np.empty((T, K)), np.empty((T, nu)), np.empty((T, K))
+    for r, c_r in enumerate(rc):
+        idx = np.flatnonzero(z == r)
+        if idx.size == 0:
+            continue
+        mu = true_means(c_r)
+        noise = c_r["noise"]
+        if cfg["reward_model"] == "sas":
+            g[idx] = mu + sas_real(noise["alpha"], noise["c"], (idx.size, K), rng)
+            stream[idx] = sas_real(noise["alpha"], noise["c"], (idx.size, nu), rng)
+        else:
+            g[idx] = np.column_stack([_evm_db(s, idx.size, c_r, rng) for s in cfg["arms"]["snr_db"]])
+            stream[idx] = sas_complex_isotropic(noise["alpha"], noise["c"], (idx.size, nu), rng).real
+        truth[idx] = mu
+    ack = (g > ack_threshold(cfg)).astype(float)
+    return OutcomeTable(fields={"gamma_db": g, "ack": ack}, truth_mean=truth, noise=stream,
+                        T_slot_s=float(cfg.get("T_slot_s", 1.0)), meta={"regime": z})
+
+
 def make_table(cfg, seed):
+    if "regimes" in cfg:
+        return make_regime_table(cfg, seed)
     rng = np.random.default_rng(seed)
     T, nu = int(cfg["T"]), int(cfg["nu"])
     noise = cfg["noise"]
@@ -151,6 +201,8 @@ def make_agent(spec, cfg, K, seed):
     rng = np.random.default_rng(seed)
     if t in ("empirical_ucb", "gaussian_ts"):
         sg_ = p.get("sigma", 1.0)
+        if sg_ == "oracle" and "regimes" in cfg:
+            raise ValueError("sigma: oracle is ambiguous under regimes; use {law_alpha: a}")
         if sg_ == "oracle":
             sigma = oracle_sigma(cfg)
         elif isinstance(sg_, dict):                       # {law_alpha: a}: calibrated for alpha = a (mis-tuned
@@ -179,7 +231,7 @@ def make_agent(spec, cfg, K, seed):
         return rb.AdaRUCB(K)
     if t == "nir_ucb_v1":
         det = p.pop("detector", "real_noise")
-        dp = {"real_noise": RegimeDetector.REAL_NOISE, "original": {}}[det]
+        dp = {"real_noise": RegimeDetector.REAL_NOISE, "original": {}, "none": False}[det]
         return NIRUCBv1(K, law=reward_law(cfg), detector_params=dp, **p)
     if t == "nir_ucb":
         return rb.NIRUCB(K, **p)
@@ -316,6 +368,8 @@ def main(argv=None):
         per_seed = pool.map(run_seed, [(cfg, s) for s in range(int(cfg["n_seeds"]))])
     summary = summarise(cfg, per_seed)
     summary["true_means"] = true_means(cfg).tolist()
+    if "regimes" in cfg:
+        summary["regime_true_means"] = [true_means(c_r).tolist() for c_r in _regime_cfgs(cfg)]
     summary["ack_threshold"] = ack_threshold(cfg)
     summary["wall_total_s"] = time.perf_counter() - t0
     (out_dir / "config.json").write_text(json.dumps(cfg, indent=2))
