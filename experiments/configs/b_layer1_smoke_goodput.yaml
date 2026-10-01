@@ -1,0 +1,19 @@
+# Layer-1 smoke test (< 60 s), goodput model: every goodput agent, tiny horizon and small tables.
+name: b_layer1_smoke_goodput
+reward_model: goodput
+seed: 102
+n_seeds: 2
+T: 400
+nu: 100
+tau_rt_slots: 3
+noise: {alpha: 1.6, c: 0.5}
+goodput: {snr_db: 7.0, mc_packets: 5000, mc_seed: 12345}
+table: {alphas: [1.4, 1.6, 2.0], s_grid: [-10.0, 25.0, 0.5], n_mc: 2000, seed: 13}
+agent_seeding: name
+agents:
+  - {name: "ACK TS (per arm)", type: goodput_ack_ts}
+  - {name: "ACK UCB1 (per arm)", type: goodput_ack_ucb1}
+  - {name: "Structured UCB (AWGN-calibrated)", type: structured_goodput, params: {calibration: 2.0}}
+  - {name: "NIR-UCB v1-goodput (gauss)", type: structured_goodput, params: {calibration: noise_stream, width: gauss}}
+  - {name: "NIR-UCB v1-goodput (bernstein)", type: structured_goodput, params: {calibration: noise_stream, width: bernstein}}
+  - {name: "Threshold AMC (median W=16)", type: threshold_amc, params: {window: 16}}

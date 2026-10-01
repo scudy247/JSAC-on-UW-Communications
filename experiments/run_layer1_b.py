@@ -32,7 +32,9 @@ import numpy as np
 import yaml
 
 from uwsb.bandits import robust as rb
+from uwsb.bandits.goodput import GoodputAckTS, GoodputAckUCB1, StructuredGoodputUCB, ThresholdAMC
 from uwsb.bandits.nir import NIRUCBv1
+from uwsb.envs.goodput import GoodputModel, cached_success_table, expected_goodput, make_goodput_table
 from uwsb.estimation.regime import RegimeDetector
 from uwsb.estimation.reward_law import SasLaw, cached_evm_db_law
 from uwsb.envs.table_env import OutcomeTable, TableEnv, best_fixed_arm_regret
@@ -59,11 +61,38 @@ def _memo(tag, cfg, fn):
     return _CACHE[key]
 
 
+# --- goodput model (THEORY-B G-1/G-2; envs/goodput.py) ------------------------------------------
+TABLE_DEFAULTS = {"alphas": [1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0], "s_grid": [-10.0, 25.0, 0.5],
+                  "n_mc": 20_000, "seed": 13}
+
+
+def goodput_model(cfg) -> GoodputModel:
+    gp = {k: v for k, v in cfg["goodput"].items() if k not in ("mc_packets", "mc_seed")}
+    for k in ("subband_gains_db", "rates"):
+        if k in gp:
+            gp[k] = tuple(gp[k])
+    return GoodputModel(alpha=float(cfg["noise"]["alpha"]), c=float(cfg["noise"]["c"]), **gp)
+
+
+def success_table(cfg):
+    tb = {**TABLE_DEFAULTS, **cfg.get("table", {})}
+    lo, hi, step = tb["s_grid"]
+    key = ("success_table", json.dumps(cfg["goodput"], sort_keys=True), float(cfg["noise"]["c"]),
+           json.dumps(tb, sort_keys=True))
+    if key not in _CACHE:
+        _CACHE[key] = cached_success_table(goodput_model(cfg), tb["alphas"], np.arange(lo, hi + step / 2, step),
+                                           tb["n_mc"], tb["seed"])
+    return _CACHE[key]
+
+
 def true_means(cfg):
     return _memo("means", cfg, lambda: _true_means(cfg))
 
 
 def _true_means(cfg):
+    if cfg["reward_model"] == "goodput":
+        gp = cfg["goodput"]
+        return expected_goodput(goodput_model(cfg), int(gp.get("mc_packets", 100_000)), int(gp.get("mc_seed", 12345)))
     if cfg["reward_model"] == "sas":
         return np.asarray(cfg["arms"]["means"], float)
     rng = np.random.default_rng(int(cfg["evm"]["mc_seed"]))
@@ -131,6 +160,10 @@ def make_regime_table(cfg, seed):
 
 
 def make_table(cfg, seed):
+    if cfg["reward_model"] == "goodput":
+        if "regimes" in cfg:
+            raise NotImplementedError("regimes are not implemented for the goodput model yet")
+        return make_goodput_table(goodput_model(cfg), int(cfg["T"]), int(cfg["nu"]), seed, truth=true_means(cfg))
     if "regimes" in cfg:
         return make_regime_table(cfg, seed)
     rng = np.random.default_rng(seed)
@@ -165,6 +198,8 @@ def reward_law(cfg):
 
 
 def _needs_law(cfg):
+    if cfg["reward_model"] == "goodput":
+        return False
     return any(a["type"] == "nir_ucb_v1" or isinstance(a.get("params", {}).get("sigma"), dict)
                for a in cfg["agents"])
 
@@ -229,6 +264,17 @@ def make_agent(spec, cfg, K, seed):
         return rb.MedianFilterGreedy(K, window=int(p.get("window", 16)))
     if t == "adar_ucb":
         return rb.AdaRUCB(K)
+    if t in ("goodput_ack_ts", "goodput_ack_ucb1", "structured_goodput", "threshold_amc"):
+        m = goodput_model(cfg)
+        if t == "goodput_ack_ts":
+            return GoodputAckTS(K, m.arm_rates, rng=rng)
+        if t == "goodput_ack_ucb1":
+            return GoodputAckUCB1(K, m.arm_rates)
+        if t == "threshold_amc":
+            return ThresholdAMC(m.J, m.M, m.rates, success_table(cfg), **p)
+        det = p.pop("detector", "real_noise")
+        dp = {"real_noise": None, "original": {}, "none": False}[det]
+        return StructuredGoodputUCB(m.J, m.M, m.rates, success_table(cfg), detector_params=dp, **p)
     if t == "nir_ucb_v1":
         det = p.pop("detector", "real_noise")
         dp = {"real_noise": RegimeDetector.REAL_NOISE, "original": {}, "none": False}[det]
@@ -364,13 +410,16 @@ def main(argv=None):
     t0 = time.perf_counter()
     if _needs_law(cfg):
         reward_law(cfg)                                   # build/load once; forked workers inherit it
+    if cfg["reward_model"] == "goodput":
+        success_table(cfg), true_means(cfg)               # build/load once; forked workers inherit them
     with Pool(args.n_workers) as pool:
         per_seed = pool.map(run_seed, [(cfg, s) for s in range(int(cfg["n_seeds"]))])
     summary = summarise(cfg, per_seed)
     summary["true_means"] = true_means(cfg).tolist()
     if "regimes" in cfg:
         summary["regime_true_means"] = [true_means(c_r).tolist() for c_r in _regime_cfgs(cfg)]
-    summary["ack_threshold"] = ack_threshold(cfg)
+    if "ack_threshold" in cfg:
+        summary["ack_threshold"] = ack_threshold(cfg)
     summary["wall_total_s"] = time.perf_counter() - t0
     (out_dir / "config.json").write_text(json.dumps(cfg, indent=2))
     (out_dir / "metadata.json").write_text(json.dumps(run_metadata(), indent=2))
