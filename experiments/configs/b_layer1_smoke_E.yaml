@@ -1,0 +1,18 @@
+# Layer-1 smoke test (< 60 s), branch E: agents that need a finite variance (Catoni) or dB clipping.
+name: b_layer1_smoke_E
+reward_model: evm_db
+seed: 101
+n_seeds: 2
+T: 400
+nu: 100
+tau_rt_slots: 3
+noise: {alpha: 1.6, c: 0.1}
+arms: {snr_db: [0.0, 1.0, 2.0]}
+evm: {n_sym: 64, mc_packets: 4000, mc_seed: 7}
+ack_threshold: {between_arms: [0, 1], frac: 0.5}
+agents:
+  - {name: "UCB (naive, oracle sigma)", type: empirical_ucb, params: {sigma: oracle}}
+  - {name: "UCB (naive, tuned x0.25)", type: empirical_ucb, params: {sigma: oracle, sigma_scale: 0.25}}
+  - {name: "Catoni UCB (oracle)", type: catoni_ucb}
+  - {name: "Clipped UCB (b=2)", type: clipped_ucb, params: {b: 2.0}}
+  - {name: "Median-filter greedy (W=16)", type: median_greedy, params: {window: 16}}

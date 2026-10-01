@@ -369,3 +369,94 @@ class NIRUCB(_Agent):
         if not ready or np.any(self.n < 2):
             return (self.t - 1) % self.K          # round-robin until side information and 2 samples/arm
         return int(np.argmax(self.index()))
+
+
+# --- remaining plan §7 baselines ----------------------------------------------------------------
+def catoni_psi(x):
+    """Widest admissible influence function: sign(x) log(1 + |x| + x^2/2). It meets BCL's condition
+    -log(1 - x + x^2/2) <= psi(x) <= log(1 + x + x^2/2) (equality on one side for each sign,
+    since (1 - x + x^2/2)(1 + x + x^2/2) = 1 + x^4/4 >= 1); continuous, strictly increasing."""
+    x = np.asarray(x, dtype=float)
+    return np.sign(x) * np.log1p(np.abs(x) + 0.5 * x * x)
+
+
+def catoni_mean(x, v: float, log_inv_delta: float) -> float:
+    """Catoni's M-estimator as stated in BCL 2013 §2.3 (needs n > 2 log(1/delta)): the root mu of
+    sum_i psi(a (X_i - mu)) = 0 with a = sqrt(2 L / (n (v + 2 v L / (n - 2 L)))), L = log(1/delta).
+    The sum decreases strictly in mu and changes sign on [min X, max X]; solved by brentq."""
+    from scipy.optimize import brentq
+    x = np.asarray(x, dtype=float)
+    n, L = x.size, float(log_inv_delta)
+    if not n > 2.0 * L:
+        raise ValueError("Catoni's estimator needs n > 2 log(1/delta)")
+    a = math.sqrt(2.0 * L / (n * (v + 2.0 * v * L / (n - 2.0 * L))))
+    lo, hi = float(x.min()), float(x.max())
+    if lo == hi:
+        return lo
+    return float(brentq(lambda m: float(np.sum(catoni_psi(a * (x - m)))), lo, hi, xtol=1e-12))
+
+
+class CatoniUCB(TruncatedMeanUCB):
+    """BCL 2013 Fig. 2 'modified robust UCB' (Theorem 4; eps = 1 only, known variance bound v):
+    B = Catoni mean (delta = t^-2) + sqrt(4 v log(t^2) / s) if s >= 8 log t, else +inf.
+    Linear memory per arm (BCL §3); compared on regret and compute."""
+
+    def __init__(self, K, field="gamma_db", v=1.0):
+        super().__init__(K, field, eps=1.0, u=v)
+        self.v = self.u
+
+    def index(self) -> np.ndarray:
+        lt = math.log(max(self.t, 2))
+        L = 2.0 * lt                                   # log(1/delta), delta = t^-2
+        out = np.full(self.K, np.inf)
+        for a in range(self.K):
+            s = self.n[a]
+            if s >= 8.0 * lt:                          # also guarantees s > 2 L
+                out[a] = catoni_mean(self.x[a], self.v, L) + math.sqrt(4.0 * self.v * L / s)
+        return out
+
+
+class ClippedUCB(EmpiricalUCB):
+    """Fixed-clipping heuristic (plan §7; 'what deployed systems do'): UCB on the reward clipped to
+    [lo, hi]. The clipped reward is bounded, so the width is UCB1's with the range as scale
+    ((hi - lo) sqrt(2 log t / n); AckUCB1 is the range-1 case). Biased when the noise is
+    asymmetric; the clip level is swept by the experiment."""
+
+    def __init__(self, K, field="gamma_db", lo=-1.0, hi=1.0):
+        if not hi > lo:
+            raise ValueError("need hi > lo")
+        super().__init__(K, field, sigma=hi - lo)
+        self.lo, self.hi = float(lo), float(hi)
+
+    def observe(self, arm, tx_time_s, reward):
+        r = dict(reward)
+        r[self.field] = min(max(float(reward[self.field]), self.lo), self.hi)
+        super().observe(arm, tx_time_s, r)
+
+
+class MedianFilterGreedy(EmpiricalUCB):
+    """Comms-native proxy (plan §7 'threshold AMC on a median-filtered gamma-hat'): play the arm
+    with the largest median of its last `window` observations; no exploration beyond one initial
+    sample per arm. LAYER-1 PROXY: true threshold AMC maps the filtered SNR to an MCS through
+    calibrated thresholds, which needs the arm structure (group decision D-B6)."""
+
+    def __init__(self, K, field="gamma_db", window=16):
+        super().__init__(K, field, sigma=0.0)
+        if window < 1:
+            raise ValueError("window must be >= 1")
+        self.window = int(window)
+        self.hist = [[] for _ in range(K)]
+
+    def select(self, now_s):
+        self.t += 1
+        k = self._first_unpulled_or_pending()
+        if k is not None:
+            return k
+        return int(np.argmax([np.median(h) for h in self.hist]))
+
+    def observe(self, arm, tx_time_s, reward):
+        super().observe(arm, tx_time_s, reward)
+        h = self.hist[arm]
+        h.append(float(reward[self.field]))
+        if len(h) > self.window:
+            del h[0]

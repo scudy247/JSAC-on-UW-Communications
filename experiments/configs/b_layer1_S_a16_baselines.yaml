@@ -1,0 +1,70 @@
+# Remaining plan §7 baselines at the sweep anchor (alpha = 1.6, gap x1; same tables as b_l1sw_S_a1.6_g1).
+# Tuned-width naive UCB (sigma scale swept), fixed clipping (clip half-width b around the mid-range of the
+# true means, swept), median-filtered greedy (threshold-AMC proxy); Catoni needs a finite variance: E only.
+name: b_layer1_S_a16_baselines
+reward_model: sas
+seed: 20260930
+n_seeds: 50
+T: 10000
+nu: 200
+tau_rt_slots: 3
+noise:
+  alpha: 1.6
+  c: 1.0
+arms:
+  means:
+  - 0.0
+  - 0.5
+  - 0.75
+  - 1.0
+ack_threshold:
+  between_arms:
+  - 0
+  - 1
+  frac: 0.5
+agents:
+- name: UCB (naive, oracle sigma)
+  type: empirical_ucb
+  params:
+    sigma: oracle
+- name: UCB (naive, tuned x0.1)
+  type: empirical_ucb
+  params:
+    sigma: oracle
+    sigma_scale: 0.1
+- name: UCB (naive, tuned x0.25)
+  type: empirical_ucb
+  params:
+    sigma: oracle
+    sigma_scale: 0.25
+- name: UCB (naive, tuned x0.5)
+  type: empirical_ucb
+  params:
+    sigma: oracle
+    sigma_scale: 0.5
+- name: ACK Bernoulli TS
+  type: bernoulli_ts
+- name: Clipped UCB (b=0.5)
+  type: clipped_ucb
+  params:
+    b: 0.5
+- name: Clipped UCB (b=1)
+  type: clipped_ucb
+  params:
+    b: 1.0
+- name: Clipped UCB (b=2)
+  type: clipped_ucb
+  params:
+    b: 2.0
+- name: Clipped UCB (b=4)
+  type: clipped_ucb
+  params:
+    b: 4.0
+- name: Median-filter greedy (W=8)
+  type: median_greedy
+  params:
+    window: 8
+- name: Median-filter greedy (W=32)
+  type: median_greedy
+  params:
+    window: 32

@@ -31,7 +31,7 @@ import numpy as np
 import yaml
 
 from uwsb.bandits import robust as rb
-from uwsb.envs.table_env import OutcomeTable, TableEnv
+from uwsb.envs.table_env import OutcomeTable, TableEnv, best_fixed_arm_regret
 from uwsb.noise.stable import sas_complex_isotropic, sas_real
 from uwsb.runtime import config_hash, result_dir, run_metadata
 
@@ -128,6 +128,7 @@ def make_agent(spec, cfg, K, seed):
     rng = np.random.default_rng(seed)
     if t in ("empirical_ucb", "gaussian_ts"):
         sigma = oracle_sigma(cfg) if p.get("sigma") == "oracle" else float(p.get("sigma", 1.0))
+        sigma *= float(p.get("sigma_scale", 1.0))        # tuned-width variant (scale swept)
         return rb.EmpiricalUCB(K, sigma=sigma) if t == "empirical_ucb" else rb.GaussianTS(K, sigma=sigma, rng=rng)
     if t == "ack_ucb1":
         return rb.AckUCB1(K)
@@ -137,6 +138,14 @@ def make_agent(spec, cfg, K, seed):
         eps = float(p["eps"])
         u, v = oracle_moments(cfg, eps)
         return rb.TruncatedMeanUCB(K, eps=eps, u=u) if t == "trunc_ucb" else rb.MedianOfMeansUCB(K, eps=eps, v=v)
+    if t == "catoni_ucb":                                 # eps = 1: needs a finite variance
+        return rb.CatoniUCB(K, v=oracle_moments(cfg, 1.0)[1] if p.get("v", "oracle") == "oracle" else float(p["v"]))
+    if t == "clipped_ucb":                                # clip to centre +- b, centre = mid-range of the true means
+        mu = true_means(cfg)
+        centre = 0.5 * (float(mu.min()) + float(mu.max()))
+        return rb.ClippedUCB(K, lo=centre - float(p["b"]), hi=centre + float(p["b"]))
+    if t == "median_greedy":
+        return rb.MedianFilterGreedy(K, window=int(p.get("window", 16)))
     if t == "adar_ucb":
         return rb.AdaRUCB(K)
     if t == "nir_ucb":
@@ -150,7 +159,7 @@ def run_seed(args):
     seed = int(cfg["seed"]) + s
     tab = make_table(cfg, seed)
     idx = checkpoints(cfg)
-    out = {}
+    out = {"_best_fixed_arm_final": float(best_fixed_arm_regret(tab, int(cfg["T"])).sum())}
     for j, spec in enumerate(cfg["agents"]):
         agent = make_agent(spec, cfg, tab.n_arms, seed * 1000 + j)
         t0 = time.perf_counter()
@@ -167,7 +176,9 @@ def checkpoints(cfg):
 
 def summarise(cfg, per_seed):
     idx = checkpoints(cfg)
-    summary = {"checkpoints": (idx + 1).tolist(), "agents": {}}
+    summary = {"checkpoints": (idx + 1).tolist(), "agents": {},
+               # reference policies: dynamic oracle = 0 by definition (regret is measured against it)
+               "best_fixed_arm_final_mean": float(np.mean([ps["_best_fixed_arm_final"] for ps in per_seed]))}
     for spec in cfg["agents"]:
         R = np.array([ps[spec["name"]]["cum_regret"] for ps in per_seed])
         n = R.shape[0]
@@ -216,7 +227,7 @@ def dry_run(cfg, n_workers):
     times = []
     for Tp in probes:
         c2 = dict(cfg, T=Tp)
-        times.append({k: v["wall_s"] for k, v in run_seed((c2, 0)).items()})
+        times.append({k: v["wall_s"] for k, v in run_seed((c2, 0)).items() if not k.startswith("_")})
     T = int(cfg["T"])
     total = 0.0
     print(f"{'agent':28s} {'s at T=' + str(probes[0]):>12s} {'s at T=' + str(probes[1]):>12s} {'est s/seed':>11s}")

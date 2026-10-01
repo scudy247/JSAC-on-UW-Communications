@@ -113,3 +113,14 @@ class TableEnv:
             queue.append((t, k, {name: float(v[t, k]) for name, v in tab.fields.items()}))
         return TableRunResult(arms=arms, regret_inst=regret, n_delivered=n_deliv,
                               n_noise_delivered=n_noise, min_delivered_age_slots=min_age)
+
+
+def best_fixed_arm_regret(table: OutcomeTable, T: int | None = None) -> np.ndarray:
+    """Reference policies (plan §7). Regret is measured against the DYNAMIC oracle
+    (max_k truth[t] at every slot), whose regret is 0 by definition. The best fixed arm in
+    hindsight (argmax_k sum_t truth[t, k] over the first T slots) has instantaneous regret
+    max_k truth[t] - truth[t, k*]: identically 0 for stationary tables, > 0 under regime changes."""
+    T = table.n_slots if T is None else int(T)
+    tr = np.asarray(table.truth_mean)[:T]
+    k = int(np.argmax(tr.sum(axis=0)))
+    return tr.max(axis=1) - tr[:, k]
