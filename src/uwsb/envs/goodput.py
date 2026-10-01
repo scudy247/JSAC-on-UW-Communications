@@ -13,6 +13,10 @@ SaS(alpha, c); c = 0.5 makes alpha = 2 unit-power Gaussian, so SNR is the Gaussi
                                                                    MIESM link abstraction)
   success[t, j, m] = 1{C[t, j] >= rate_m},   goodput = rate_m * success,    S_j = snr_db + subband_gains_db[j].
   Which model holds is a modelling choice (receiver dependent); step 4's real receiver settles it.
+Slow fading (fading_db > 0): each sub-band's SNR gets an AR(1) term f[t, j] in dB (stationary sd fading_db,
+per-slot coefficient fading_corr), so S_tj = S_j + f[t, j]: success becomes probabilistic and gamma-hat follows the
+channel. truth_mean[t] is then the expected goodput GIVEN f[t] (regret against the per-slot oracle that knows the
+fading; summary.json's best-fixed-arm reference gives the regret of the best fixed arm against the same oracle).
 Broadband impulses (shared_impulses): the sub-Gaussian mixing variable of each symbol time is shared by all
 sub-bands (a snap hits the whole band). Arm index a = j * M + m. Noise stream between packets: real parts of
 the same law. truth_mean = expected goodput per arm (seeded Monte Carlo, `expected_goodput`).
@@ -27,6 +31,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import asdict, dataclass
+from functools import lru_cache
 
 import numpy as np
 
@@ -48,6 +53,8 @@ class GoodputModel:
     shared_impulses: bool = True
     success_model: str = "blanking"
     blank_db: float = 10.0
+    fading_db: float = 0.0
+    fading_corr: float = 0.0
 
     @property
     def J(self) -> int:
@@ -91,32 +98,81 @@ def achievable_rate(model: GoodputModel, s_lin, p2):
     raise ValueError(f"success_model must be mean_power, blanking or miesm, got {model.success_model!r}")
 
 
-def _packet_stats(model: GoodputModel, z):
-    """gamma_db (n, J) and achievable rate C (n, J) from packet noise z (n, J, n_pilot + n_data)."""
-    S = model.snr_j()
+def fading_path(model: GoodputModel, T: int, rng) -> np.ndarray:
+    """(T, J) AR(1) fading in dB, stationary sd fading_db, coefficient fading_corr; zeros if fading_db = 0."""
+    f = np.zeros((T, model.J))
+    if model.fading_db <= 0:
+        return f
+    r = float(model.fading_corr)
+    e = rng.normal(0.0, model.fading_db * np.sqrt(1 - r * r), (T, model.J))
+    f[0] = rng.normal(0.0, model.fading_db, model.J)
+    for t in range(1, T):
+        f[t] = r * f[t - 1] + e[t]
+    return f
+
+
+def success_curve(model: GoodputModel, s_grid, n_mc: int, seed: int) -> np.ndarray:
+    """P_m(S) at model.alpha on s_grid -> (n_S, M) (one sub-band, seeded Monte Carlo)."""
+    rng = np.random.default_rng(seed)
+    z = packet_noise(model.alpha, model.c, n_mc, 1, model.n_pilot + model.n_data, rng, False)[:, 0, model.n_pilot:]
+    p2 = np.abs(z) ** 2
+    rates = np.asarray(model.rates, float)
+    out = np.empty((len(s_grid), rates.size))
+    for i, sv in enumerate(s_grid):
+        cap = achievable_rate(model, np.full(n_mc, 10.0 ** ((sv - model.gap_db) / 10.0)), p2)
+        out[i] = np.mean(cap[:, None] >= rates[None, :], axis=0)
+    return out
+
+
+def _packet_stats(model: GoodputModel, z, f=None):
+    """gamma_db (n, J) and achievable rate C (n, J) from packet noise z (n, J, n_pilot + n_data); f = fading (n, J)."""
+    S = model.snr_j() if f is None else model.snr_j()[None, :] + f
     zp, zd = z[..., : model.n_pilot], z[..., model.n_pilot:]
     gamma = S - 10.0 * np.log10(np.mean(np.abs(zp) ** 2, axis=-1))
     s_lin = 10.0 ** ((S - model.gap_db) / 10.0)
     return gamma, achievable_rate(model, np.broadcast_to(s_lin, zd.shape[:-1]), np.abs(zd) ** 2)
 
 
+@lru_cache(maxsize=8)
+def _truth_curve(model: GoodputModel, n_mc: int, seed: int):
+    """Fine success curve at the true alpha over S_j +- 6 fading sd (computed once per process and model)."""
+    S = model.snr_j()
+    grid = np.arange(np.floor(S.min() - 6 * model.fading_db) - 1.0, np.ceil(S.max() + 6 * model.fading_db) + 1.0 + 1e-9, 0.1)
+    return grid, success_curve(model, grid, n_mc, seed)
+
+
+def conditional_truth(model: GoodputModel, f: np.ndarray, n_mc: int = 20_000, seed: int = 777) -> np.ndarray:
+    """E[goodput | f[t]] per slot and arm (T, J * M), from a fine success curve at the true alpha."""
+    S = model.snr_j()[None, :] + f
+    grid, P = _truth_curve(model, n_mc, seed)                                   # (n_grid, M)
+    S = np.clip(S, grid[0], grid[-1])
+    p = np.stack([np.interp(S, grid, P[:, m]) for m in range(model.M)], axis=-1)   # (T, J, M)
+    return (p * np.asarray(model.rates, float)).reshape(S.shape[0], -1)
+
+
 def make_goodput_table(model: GoodputModel, T: int, nu: int, seed: int, truth=None, chunk: int = 1000):
     rng = np.random.default_rng(seed)
     J, M = model.J, model.M
     rates = np.asarray(model.rates, float)
-    gamma = np.empty((T, J))
+    fading = model.fading_db > 0
+    f = fading_path(model, T, np.random.default_rng([seed, 1])) if fading else None   # own stream: no-fading
+    gamma = np.empty((T, J))                                                           # tables unchanged
     mi = np.empty((T, J))
     for s in range(0, T, chunk):                       # bounded memory
         n = min(chunk, T - s)
         z = packet_noise(model.alpha, model.c, n, J, model.n_pilot + model.n_data, rng, model.shared_impulses)
-        gamma[s:s + n], mi[s:s + n] = _packet_stats(model, z)
+        gamma[s:s + n], mi[s:s + n] = _packet_stats(model, z, None if f is None else f[s:s + n])
     stream = sas_complex_isotropic(model.alpha, model.c, (T, nu), rng).real
     succ = (mi[:, :, None] >= rates[None, None, :]).reshape(T, J * M).astype(float)
     g_arm = np.repeat(gamma, M, axis=1)
-    truth = expected_goodput(model) if truth is None else np.asarray(truth, float)
+    if fading:
+        truth_t = conditional_truth(model, f)
+    else:
+        truth = expected_goodput(model) if truth is None else np.asarray(truth, float)
+        truth_t = np.tile(truth, (T, 1))
     return OutcomeTable(fields={"gamma_db": g_arm, "ack": succ, "goodput": succ * model.arm_rates},
-                        truth_mean=np.tile(truth, (T, 1)), noise=stream,
-                        meta={"J": J, "M": M, "rates": list(model.rates)})
+                        truth_mean=truth_t, noise=stream,
+                        meta={"J": J, "M": M, "rates": list(model.rates), "fading": f})
 
 
 def expected_goodput(model: GoodputModel, n_mc: int = 100_000, seed: int = 12345) -> np.ndarray:
@@ -128,7 +184,8 @@ def expected_goodput(model: GoodputModel, n_mc: int = 100_000, seed: int = 12345
     while done < n_mc:
         n = min(10_000, n_mc - done)
         z = packet_noise(model.alpha, model.c, n, model.J, model.n_pilot + model.n_data, rng, model.shared_impulses)
-        _, mi = _packet_stats(model, z)
+        f = rng.normal(0.0, model.fading_db, (n, model.J)) if model.fading_db > 0 else None   # stationary marginal
+        _, mi = _packet_stats(model, z, f)
         tot += np.sum(mi[:, :, None] >= rates[None, None, :], axis=0)
         done += n
     return (tot / n_mc * rates[None, :]).ravel()
@@ -178,7 +235,8 @@ class SuccessTable:
 
 def cached_success_table(model: GoodputModel, alphas, s_grid, n_mc, seed, cache_dir=None) -> SuccessTable:
     from ..runtime import results_root
-    md = {k: v for k, v in asdict(model).items() if k not in ("alpha", "snr_db", "subband_gains_db", "shared_impulses")}
+    md = {k: v for k, v in asdict(model).items()
+          if k not in ("alpha", "snr_db", "subband_gains_db", "shared_impulses", "fading_db", "fading_corr")}
     key = json.dumps({"model": md, "alphas": [float(a) for a in sorted(alphas)], "s": [float(s) for s in s_grid],
                       "n_mc": int(n_mc), "seed": int(seed), "factors": NU2_FACTORS.tolist()}, sort_keys=True)
     path = (cache_dir or results_root() / "_cache") / f"success_table-{hashlib.sha1(key.encode()).hexdigest()[:10]}.npz"

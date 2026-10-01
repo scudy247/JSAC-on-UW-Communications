@@ -10,6 +10,9 @@ Structured on gamma-hat (gamma-hat of sub-band j is observed whatever MCS is pla
       calibration = "noise_stream"  NIR-UCB v1-goodput: alpha-hat from the noise stream sets the gamma-hat bias
                                     E[X], the width and the success curves (REAL_NOISE detector by default).
       width "gauss": sigma_X sqrt(2 log t / n_j); "bernstein": min_j max(sqrt(2 nu2 L / n), 2 b L / n).
+      fading_aware=True: estimates the fading variance as the pooled variance of gamma-hat beyond the noise law,
+      sf2 = max(0, var - sigma_X^2(alpha)), averages the success curves over N(0, sf2) (9-node Gauss-Hermite) and
+      widens the location width to sqrt(sigma_X^2 + sf2) (gauss). Off by default (no-fading runs unchanged).
   ThresholdAMC     comms-native: per sub-band median of the last `window` gamma-hats vs AWGN thresholds (the S
                    where P_m(S; 2) >= target, shifted by E[X; 2]); highest feasible rate, greedy; one initial probe
                    per sub-band at the lowest MCS.
@@ -46,8 +49,10 @@ class GoodputAckUCB1(EmpiricalUCB):
 
 
 class StructuredGoodputUCB:
+    GH_X, GH_W = np.polynomial.hermite_e.hermegauss(9)
+
     def __init__(self, J, M, rates, table, calibration="noise_stream", width="gauss", detector_params=None,
-                 inflate=2.0, inflate_window=100, min_noise_samples=1000):
+                 inflate=2.0, inflate_window=100, min_noise_samples=1000, fading_aware=False):
         from ..estimation.noise_state import LogMomentTracker, NoiseState
         from ..estimation.regime import RegimeDetector
         if width not in ("gauss", "bernstein"):
@@ -58,6 +63,8 @@ class StructuredGoodputUCB:
         self.t = 0
         self.nj = np.zeros(J, dtype=int)
         self.sj = np.zeros(J)
+        self.qj = np.zeros(J)                             # sum of gamma-hat^2 (fading-aware)
+        self.fading_aware = bool(fading_aware)
         self._pending = np.zeros(J, dtype=int)
         self.fixed_alpha = None if calibration == "noise_stream" else float(calibration)
         self.alpha = self.fixed_alpha
@@ -88,18 +95,41 @@ class StructuredGoodputUCB:
         self.nj[j] += 1
         self._pending[j] = max(self._pending[j] - 1, 0)
         self.sj[j] += reward["gamma_db"]
+        self.qj[j] += reward["gamma_db"] ** 2
 
     def sub_band_index(self) -> np.ndarray:
         """Optimistic location S_j + w_j per sub-band."""
         xmean, sigma, nu2, b = self.table.law(self.alpha)
         L = math.log(max(self.t, 2))
         n = self.nj.astype(float)
+        sf2 = self.fading_var(sigma) if self.fading_aware else 0.0
         if self.width == "gauss":
-            w = sigma * np.sqrt(2.0 * L / n)
+            w = math.sqrt(sigma ** 2 + sf2) * np.sqrt(2.0 * L / n)
         else:
-            w = np.min(np.maximum(np.sqrt(2.0 * np.outer(1.0 / n, nu2) * L), 2.0 * np.outer(1.0 / n, b) * L), axis=1)
+            w = np.min(np.maximum(np.sqrt(2.0 * np.outer(1.0 / n, nu2 + sf2) * L), 2.0 * np.outer(1.0 / n, b) * L), axis=1)
         w = w * (self.inflate if self.t <= self._inflate_until else 1.0)
         return self.sj / n - xmean + w
+
+    def fading_var(self, sigma_x) -> float:
+        """Pooled within-sub-band variance of gamma-hat minus the noise-law variance (>= 0)."""
+        n = self.nj.astype(float)
+        ok = n >= 2
+        if not np.any(ok):
+            return 0.0
+        ss = np.sum(self.qj[ok] - self.sj[ok] ** 2 / n[ok])
+        return max(0.0, ss / np.sum(n[ok] - 1) - sigma_x ** 2)
+
+    def expected_success(self, S) -> np.ndarray:
+        """P_m(S) (J, M), averaged over the estimated fading if fading-aware."""
+        if not self.fading_aware:
+            return self.table.psucc_at(self.alpha, S)
+        sf = math.sqrt(self.fading_var(self.table.law(self.alpha)[1]))
+        if sf == 0.0:
+            return self.table.psucc_at(self.alpha, S)
+        acc = 0.0
+        for x, wgt in zip(self.GH_X, self.GH_W):
+            acc = acc + wgt * self.table.psucc_at(self.alpha, np.asarray(S) + sf * x)
+        return acc / math.sqrt(2.0 * math.pi)
 
     def select(self, now_s):
         self.t += 1
@@ -110,7 +140,7 @@ class StructuredGoodputUCB:
         if np.any(self.nj == 0) or self.alpha is None:
             j = int(np.argmin(self.nj + self._pending)) if np.any(self.nj == 0) else (self.t - 1) % self.J
             return j * self.M
-        g = self.rates[None, :] * self.table.psucc_at(self.alpha, self.sub_band_index())   # (J, M)
+        g = self.rates[None, :] * self.expected_success(self.sub_band_index())             # (J, M)
         return int(np.argmax(g))                                                           # = j * M + m
 
 

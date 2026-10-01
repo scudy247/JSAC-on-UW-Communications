@@ -120,3 +120,18 @@ def test_layer1_runner_goodput_smoke(tmp_path, monkeypatch):
     summary = json.loads((runtime.result_dir(cfg) / "summary.json").read_text())
     assert set(summary["agents"]) == {a["name"] for a in cfg["agents"]}
     assert len(summary["true_means"]) == 15 and "ack_threshold" not in summary
+
+
+def test_fading_tables_and_fading_aware_learner(table):
+    m = GoodputModel(alpha=1.8, fading_db=3.0, fading_corr=0.9)
+    tab = make_goodput_table(m, 3000, 200, seed=7)
+    f = tab.meta["fading"]
+    assert f.std() == pytest.approx(3.0, rel=0.15) and np.corrcoef(f[1:, 0], f[:-1, 0])[0, 1] == pytest.approx(0.9, abs=0.05)
+    g = tab.fields["gamma_db"][:, 0]
+    assert np.corrcoef(g, f[:, 0])[0, 1] > 0.5                       # gamma-hat follows the channel
+    assert not np.allclose(tab.truth_mean[0], tab.truth_mean[1000])  # per-slot oracle
+    nofade = make_goodput_table(GoodputModel(alpha=1.8), 300, 20, seed=7)
+    assert np.array_equal(nofade.fields["ack"], make_goodput_table(GoodputModel(alpha=1.8), 300, 20, seed=7).fields["ack"])
+    ag = StructuredGoodputUCB(m.J, m.M, m.rates, table, calibration="noise_stream", fading_aware=True)
+    TableEnv(tab, 3).run(ag)
+    assert ag.fading_var(table.law(ag.alpha)[1]) == pytest.approx(9.0, rel=0.35)   # fading variance recovered

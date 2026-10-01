@@ -123,3 +123,37 @@ def test_debias_retroactively_corrects_early_observations(law):
     assert not ag._early and ag.n[0] == 1
     assert ag.s[0] == pytest.approx(5.0 - law.bias(ag._alpha, ag._c))
     assert ag.v[0] == pytest.approx(ag.params[0] ** 2)
+
+
+def test_redebias_after_alarm_uses_the_new_calibration(law):
+    ag = NIRUCBv1(2, law=law, debias=True, redebias_lookback=5, min_noise_samples=10)
+    ag.params, ag._alpha, ag._c = law(1.9), 1.9, 1.0
+    for t in range(1, 11):
+        ag.t = t
+        ag.observe(0, 0.0, {"gamma_db": 1.0})
+    stale = law.bias(1.9, 1.0)
+    assert ag.s[0] == pytest.approx(10 * (1.0 - stale))
+    ag._redebias_from = 10 - 5                                        # as set by an alarm at decision 10
+    ag._alpha, ag._c, ag.params = 1.3, 1.0, law(1.3)
+    ag._redebias(ag._redebias_from)
+    new = law.bias(1.3, 1.0)
+    assert ag.s[0] == pytest.approx(4 * (1.0 - stale) + 6 * (1.0 - new))  # decisions 5..10 re-debiased
+    assert ag.v[0] == pytest.approx(4 * law(1.9)[0] ** 2 + 6 * law(1.3)[0] ** 2)
+
+
+def test_inverse_variance_weighting(law):
+    ag = NIRUCBv1(2, law=law, debias=True, weighting="inverse_variance", redebias_lookback=5)
+    ag._alpha, ag._c = 2.0, 1.0
+    ag.params = law(2.0)                                                  # calm: small sigma
+    ag.t = 1
+    ag.observe(0, 0.0, {"gamma_db": 1.0})
+    ag.params, ag._alpha = law(1.4), 1.4                                  # impulsive: large sigma
+    ag.t = 2
+    ag.observe(0, 0.0, {"gamma_db": 9.0})
+    s1, s2 = law(2.0)[0] ** 2, law(1.4)[0] ** 2
+    y1, y2 = 1.0 - law.bias(2.0, 1.0), 9.0 - law.bias(1.4, 1.0)
+    assert ag.sw[0] / ag.W[0] == pytest.approx((y1 / s1 + y2 / s2) / (1 / s1 + 1 / s2))
+    ag.t = 10
+    assert ag.widths()[0] == pytest.approx(math.sqrt(2 * math.log(10) / (1 / s1 + 1 / s2)))
+    with pytest.raises(ValueError):
+        NIRUCBv1(2, law=law, weighting="inverse_variance")               # needs debias

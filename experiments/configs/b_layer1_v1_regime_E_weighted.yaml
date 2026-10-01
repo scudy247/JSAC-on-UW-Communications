@@ -1,0 +1,79 @@
+# Regime scenario, v1 with inverse-variance weighting of debiased observations (2026-10-01). Same tables and
+# reference agents as b_layer1_v1_regime_E.yaml.
+name: b_layer1_v1_regime_E_weighted
+reward_model: evm_db
+seed: 20261001
+n_seeds: 50
+T: 10000
+nu: 200
+tau_rt_slots: 3
+noise:
+  alpha: 1.9
+  c: 0.1
+regimes:
+  laws:
+  - alpha: 1.9
+    c: 0.1
+  - alpha: 1.3
+    c: 0.1
+  P:
+  - - 0.999
+    - 0.001
+  - - 0.001
+    - 0.999
+arms:
+  snr_db:
+  - 0.0
+  - 1.0
+  - 1.5
+  - 2.0
+evm:
+  n_sym: 256
+  mc_packets: 200000
+  mc_seed: 7
+ack_threshold:
+  between_arms:
+  - 0
+  - 1
+  frac: 0.5
+agent_seeding: name
+agents:
+- name: UCB (naive, calibrated at alpha=1.9)
+  type: empirical_ucb
+  params:
+    sigma:
+      law_alpha: 1.9
+- name: UCB (naive, calibrated at alpha=2)
+  type: empirical_ucb
+  params:
+    sigma:
+      law_alpha: 2.0
+- name: ACK Bernoulli TS
+  type: bernoulli_ts
+- name: NIR-UCB v1 (gauss, debiased, re-debias 20)
+  type: nir_ucb_v1
+  params:
+    width: gauss
+    debias: true
+    redebias_lookback: 20
+- name: NIR-UCB v1 (inverse-variance, re-debias 20)
+  type: nir_ucb_v1
+  params:
+    width: gauss
+    debias: true
+    redebias_lookback: 20
+    weighting: inverse_variance
+- name: NIR-UCB v1 (inverse-variance, re-debias 20, original detector)
+  type: nir_ucb_v1
+  params:
+    width: gauss
+    debias: true
+    redebias_lookback: 20
+    weighting: inverse_variance
+    detector: original
+- name: NIR-UCB v1 (inverse-variance, no re-debias)
+  type: nir_ucb_v1
+  params:
+    width: gauss
+    debias: true
+    weighting: inverse_variance

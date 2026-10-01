@@ -19,6 +19,14 @@ E[X](alpha-hat, c-hat) from the law (`law.bias`) at the time it is received, and
 each observation: gauss w = sqrt(2 L sum_i sigma_i^2) / n; bernstein w = min_j max(sqrt(2 L sum_i nu2_ij) / n,
 2 B_j L / n) with B_j = max_i b_ij. Observations received before the first calibration are debiased retroactively
 when it arrives. Off by default (stationary runs unchanged).
+redebias_lookback=D (debias mode): observations debiased with a stale calibration around a regime change (the
+detection delay, plus the time until the restarted tracker calibrates) are re-debiased with the new calibration:
+on the first calibration after an alarm, every observation received since (alarm decision - D) has its bias and
+variance terms replaced. 0 = off.
+weighting="inverse_variance" (debias mode, gauss widths): each debiased observation is weighted by 1/sigma_i^2 (the
+noise law at the time it was received): index = sum_i w_i y_i / W + sqrt(2 L / W), W = sum_i w_i (the weighted mean
+of independent observations with variances sigma_i^2 has variance 1/W). Packets received in impulsive regimes then
+count little: the noise stream says how much each packet can be trusted. Default "equal".
 """
 
 from __future__ import annotations
@@ -32,9 +40,20 @@ from .robust import EmpiricalUCB
 
 class NIRUCBv1(EmpiricalUCB):
     def __init__(self, K, field="gamma_db", law=None, width="gauss", forget=1.0, detector_params=None,
-                 inflate=2.0, inflate_window=100, min_noise_samples=1000, debias=False):
+                 inflate=2.0, inflate_window=100, min_noise_samples=1000, debias=False, redebias_lookback=0, weighting="equal"):
         super().__init__(K, field, sigma=1.0)
+        from collections import deque
         self.debias = bool(debias)
+        self.lookback = int(redebias_lookback)
+        if weighting not in ("equal", "inverse_variance"):
+            raise ValueError("weighting must be 'equal' or 'inverse_variance'")
+        if weighting == "inverse_variance" and (not debias or width != "gauss"):
+            raise ValueError("inverse-variance weighting needs debias=True and gauss widths")
+        self.weighted = weighting == "inverse_variance"
+        self.sw = np.zeros(K)                    # sum of w_i y_i (weighted mode)
+        self.W = np.zeros(K)                     # sum of w_i
+        self._hist = deque(maxlen=max(4 * self.lookback, 2000))   # [t, arm, raw, bias, sigma2, nu2] (debias mode)
+        self._redebias_from = None                                  # set by an alarm, consumed by the next calibration
         self._c = None                           # c-hat at the current calibration
         self._early = []                         # (arm, raw reward) received before the first calibration
         self.v = np.zeros(K)                     # debias mode: sum of sigma_i^2 per arm
@@ -66,6 +85,8 @@ class NIRUCBv1(EmpiricalUCB):
             self._inflate_until = self.t + self.inflate_window
             self.ns.tracker = self._new_tracker()    # follow the new regime; keep old params meanwhile
             self._since_reset = 0
+            if self.debias and self.lookback > 0:
+                self._redebias_from = self.t - self.lookback
             return
         if self._since_reset >= self.min_noise and np.isfinite(out["alpha"]):
             first = self.params is None
@@ -77,12 +98,35 @@ class NIRUCBv1(EmpiricalUCB):
                     self.n[arm] -= 1
                     self.s[arm] -= r
                     self._accumulate(arm, r)
+            elif self.debias and self._redebias_from is not None:
+                self._redebias(self._redebias_from)
+                self._redebias_from = None
+
+    def _redebias(self, t_from):
+        """Replace bias and variance terms of observations received at decisions >= t_from."""
+        bias = self.law.bias(self._alpha, self._c)
+        sigma, nu2, _ = self.params
+        for e in self._hist:
+            if e[0] < t_from:
+                continue
+            arm = e[1]
+            self.s[arm] += e[3] - bias
+            self.v[arm] += sigma ** 2 - e[4]
+            self.sw[arm] += (e[2] - bias) / sigma ** 2 - (e[2] - e[3]) / e[4]
+            self.W[arm] += 1.0 / sigma ** 2 - 1.0 / e[4]
+            if nu2 is not None and e[5] is not None:
+                self.vj[arm] += nu2 - e[5]
+            e[3], e[4], e[5] = bias, sigma ** 2, nu2
 
     def _accumulate(self, arm, r):
         sigma, nu2, b = self.params
         self.n[arm] += 1
-        self.s[arm] += r - self.law.bias(self._alpha, self._c)
+        bias = self.law.bias(self._alpha, self._c)
+        self.s[arm] += r - bias
         self.v[arm] += sigma ** 2
+        self.sw[arm] += (r - bias) / sigma ** 2
+        self.W[arm] += 1.0 / sigma ** 2
+        self._hist.append([self.t, arm, r, bias, sigma ** 2, nu2])
         if nu2 is not None:
             if self.vj is None:
                 self.vj = np.zeros((self.K, len(nu2)))
@@ -107,7 +151,10 @@ class NIRUCBv1(EmpiricalUCB):
         L = math.log(max(self.t, 2))
         n = self.n.astype(float)
         if self.debias:
-            if self.width == "gauss":
+            if self.weighted:
+                with np.errstate(divide="ignore"):
+                    w = np.where(self.W > 0, np.sqrt(2.0 * L / np.maximum(self.W, 1e-300)), np.inf)
+            elif self.width == "gauss":
                 w = np.sqrt(2.0 * L * self.v) / n
             else:
                 w = np.min(np.maximum(np.sqrt(2.0 * L * self.vj) / n[:, None], 2.0 * self.bj * L / n[:, None]), axis=1)
@@ -127,4 +174,5 @@ class NIRUCBv1(EmpiricalUCB):
             return k
         if self.params is None:
             return (self.t - 1) % self.K            # no side information yet
-        return int(np.argmax(self.s / self.n + self.widths()))
+        mean = self.sw / self.W if self.weighted else self.s / self.n
+        return int(np.argmax(mean + self.widths()))
