@@ -10,9 +10,13 @@ noise: {alpha: 1.6, c: 0.1}
 arms: {snr_db: [0.0, 1.0, 2.0]}
 evm: {n_sym: 64, mc_packets: 4000, mc_seed: 7}
 ack_threshold: {between_arms: [0, 1], frac: 0.5}
+law: {alphas: [1.4, 1.6, 1.8, 2.0], n_mc: 2000, seed: 11}
 agents:
   - {name: "UCB (naive, oracle sigma)", type: empirical_ucb, params: {sigma: oracle}}
   - {name: "UCB (naive, tuned x0.25)", type: empirical_ucb, params: {sigma: oracle, sigma_scale: 0.25}}
   - {name: "Catoni UCB (oracle)", type: catoni_ucb}
   - {name: "Clipped UCB (b=2)", type: clipped_ucb, params: {b: 2.0}}
   - {name: "Median-filter greedy (W=16)", type: median_greedy, params: {window: 16}}
+  - {name: "UCB (naive, calibrated at alpha=2)", type: empirical_ucb, params: {sigma: {law_alpha: 2.0}}}
+  - {name: "NIR-UCB v1 (gauss)", type: nir_ucb_v1, params: {width: gauss}}
+  - {name: "NIR-UCB v1 (bernstein)", type: nir_ucb_v1, params: {width: bernstein}}

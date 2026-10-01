@@ -32,6 +32,9 @@ import numpy as np
 import yaml
 
 from uwsb.bandits import robust as rb
+from uwsb.bandits.nir import NIRUCBv1
+from uwsb.estimation.regime import RegimeDetector
+from uwsb.estimation.reward_law import SasLaw, cached_evm_db_law
 from uwsb.envs.table_env import OutcomeTable, TableEnv, best_fixed_arm_regret
 from uwsb.noise.stable import sas_complex_isotropic, sas_real
 from uwsb.runtime import config_hash, result_dir, run_metadata
@@ -97,6 +100,25 @@ def make_table(cfg, seed):
                         noise=stream, T_slot_s=float(cfg.get("T_slot_s", 1.0)))
 
 
+# --- reward-noise law (NIR-UCB v1 side-information map; fixed-alpha naive calibration) -------------
+LAW_DEFAULTS = {"alphas": [1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0], "n_mc": 200_000, "seed": 11}
+
+
+def reward_law(cfg):
+    if cfg["reward_model"] == "sas":
+        return SasLaw()
+    lw = {**LAW_DEFAULTS, **cfg.get("law", {})}
+    key = ("law", int(cfg["evm"]["n_sym"]), tuple(lw["alphas"]), int(lw["n_mc"]), int(lw["seed"]))
+    if key not in _CACHE:
+        _CACHE[key] = cached_evm_db_law(cfg["evm"]["n_sym"], lw["alphas"], lw["n_mc"], lw["seed"])
+    return _CACHE[key]
+
+
+def _needs_law(cfg):
+    return any(a["type"] == "nir_ucb_v1" or isinstance(a.get("params", {}).get("sigma"), dict)
+               for a in cfg["agents"])
+
+
 # --- oracle parameters for the baselines ------------------------------------------------------
 def _evm_mc_samples(cfg):
     def draw():
@@ -128,7 +150,13 @@ def make_agent(spec, cfg, K, seed):
     t, p = spec["type"], dict(spec.get("params", {}))
     rng = np.random.default_rng(seed)
     if t in ("empirical_ucb", "gaussian_ts"):
-        sigma = oracle_sigma(cfg) if p.get("sigma") == "oracle" else float(p.get("sigma", 1.0))
+        sg_ = p.get("sigma", 1.0)
+        if sg_ == "oracle":
+            sigma = oracle_sigma(cfg)
+        elif isinstance(sg_, dict):                       # {law_alpha: a}: calibrated for alpha = a (mis-tuned
+            sigma = reward_law(cfg)(float(sg_["law_alpha"]), cfg["noise"]["c"])[0]   # when the true alpha differs)
+        else:
+            sigma = float(sg_)
         sigma *= float(p.get("sigma_scale", 1.0))        # tuned-width variant (scale swept)
         return rb.EmpiricalUCB(K, sigma=sigma) if t == "empirical_ucb" else rb.GaussianTS(K, sigma=sigma, rng=rng)
     if t == "ack_ucb1":
@@ -149,6 +177,10 @@ def make_agent(spec, cfg, K, seed):
         return rb.MedianFilterGreedy(K, window=int(p.get("window", 16)))
     if t == "adar_ucb":
         return rb.AdaRUCB(K)
+    if t == "nir_ucb_v1":
+        det = p.pop("detector", "real_noise")
+        dp = {"real_noise": RegimeDetector.REAL_NOISE, "original": {}}[det]
+        return NIRUCBv1(K, law=reward_law(cfg), detector_params=dp, **p)
     if t == "nir_ucb":
         return rb.NIRUCB(K, **p)
     raise ValueError(f"unknown agent type {t!r}")
@@ -232,6 +264,8 @@ def dry_run(cfg, n_workers):
     true_means(cfg)
     if cfg["reward_model"] == "evm_db":
         _evm_mc_samples(cfg)
+    if _needs_law(cfg):
+        reward_law(cfg)                                   # first call builds the disk-cached table
     t_mc = time.perf_counter() - t0
     t0 = time.perf_counter()
     make_table(cfg, 0)
@@ -276,6 +310,8 @@ def main(argv=None):
         return 0
     out_dir.mkdir(parents=True, exist_ok=True)
     t0 = time.perf_counter()
+    if _needs_law(cfg):
+        reward_law(cfg)                                   # build/load once; forked workers inherit it
     with Pool(args.n_workers) as pool:
         per_seed = pool.map(run_seed, [(cfg, s) for s in range(int(cfg["n_seeds"]))])
     summary = summarise(cfg, per_seed)
