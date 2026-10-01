@@ -74,3 +74,75 @@ def test_noise_state_reports_regime_changes():
     flags = [ns.update(x[i:i + B])["regime_change"] for i in range(0, x.size, B)]
     first = int(np.argmax(flags))
     assert any(flags) and 100 <= first <= 105
+
+
+# --- recalibration for real noise (2026-10-01) ---------------------------------------------------
+def _wander(n, sd_db, rho, rng, alpha=1.6):
+    """SaS blocks whose level (dB) follows a stationary AR(1): correlated slow wander, no regime change."""
+    lev = np.zeros(n)
+    e = rng.normal(0.0, sd_db * np.sqrt(1 - rho ** 2), n)
+    for i in range(1, n):
+        lev[i] = rho * lev[i - 1] + e[i]
+    return sas_real(alpha, 1.0, (n, B), rng) * 10 ** (lev[:, None] / 20)
+
+
+def test_recalibrated_detector_ignores_correlated_wander_that_storms_the_original():
+    # reproduces the real-noise failure (27-40 alarms/h on FK01/HI01): seeded regression facts,
+    # original 30 alarms in 2000 blocks, recalibrated 0
+    x = _wander(2000, 0.3, 0.9, np.random.default_rng(1))
+    orig, recal = RegimeDetector(), RegimeDetector.for_real_noise()
+    for blk in x:
+        orig.update(blk)
+        recal.update(blk)
+    assert len(orig.alarms) > 10 and len(recal.alarms) == 0
+
+
+@pytest.mark.parametrize("step_db, expect", [(0.5, False), (3.0, True)])
+def test_recalibrated_detector_respects_the_minimum_shift(step_db, expect):
+    rng = np.random.default_rng(5)
+    x = np.concatenate([sas_real(1.8, 1.0, 400 * B, rng),
+                        sas_real(1.8, 10 ** (step_db / 20), 400 * B, rng)])
+    det = _run(RegimeDetector.for_real_noise(), x)
+    if expect:
+        assert det.alarms and 400 <= det.alarms[0] <= 405 and det.alarm_stat[0] == "level"
+    else:
+        assert det.alarms == []
+
+
+def test_recalibrated_detector_still_sees_tail_changes_fast():
+    rng = np.random.default_rng(6)
+    x = np.concatenate([sas_real(1.8, 1.0, 400 * B, rng), sas_real(1.5, 1.0, 400 * B, rng)])
+    det = _run(RegimeDetector.for_real_noise(), x)
+    assert det.alarms and 400 <= det.alarms[0] <= 405 and det.alarm_stat[0] == "impuls"
+
+
+def test_long_run_scale_matches_ar1_theory():
+    rho, n = 0.8, 4000
+    rng = np.random.default_rng(8)
+    s = np.zeros((n, 2))
+    e = rng.normal(0, 1, (n, 2))
+    for i in range(1, n):
+        s[i] = rho * s[i - 1] + e[i]
+    plain, lr = RegimeDetector(warmup=n), RegimeDetector(warmup=n, long_run=True)
+    for v in s:
+        plain.update_stats(v)
+        lr.update_stats(v)
+    assert np.allclose(lr._sd / plain._sd, np.sqrt((1 + rho) / (1 - rho)), rtol=0.1)
+
+
+def test_defaults_unchanged_and_update_stats_equivalent():
+    x = sas_real(1.6, 1.0, 300 * B, np.random.default_rng(9))
+    a, b = RegimeDetector(), RegimeDetector()
+    for i in range(0, x.size, B):
+        assert a.update(x[i:i + B]) == b.update_stats(block_statistics(x[i:i + B]))
+    assert np.all(a._drift == a.k)                       # default: drift is k (original detector)
+    assert RegimeDetector.for_real_noise(h=5.0).h == 5.0
+    with pytest.raises(ValueError):
+        RegimeDetector(min_shift_db=-1.0)
+
+
+def test_nir_ucb_can_use_the_recalibrated_detector():
+    from uwsb.bandits.robust import NIRUCB
+    det = NIRUCB(2, detector_params=RegimeDetector.REAL_NOISE).ns.detector
+    assert det.long_run and det.warmup == 120 and det.min_shift[0] > 0
+    assert not NIRUCB(2).ns.detector.long_run                    # default unchanged

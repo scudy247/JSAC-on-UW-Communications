@@ -316,11 +316,12 @@ class NIRUCB(_Agent):
     EPS_GRID = np.linspace(0.02, 1.0, 50)
 
     def __init__(self, K, field="gamma_db", noise_state=None, noise_to_reward=None,
-                 inflate=2.0, inflate_window=100, min_noise_samples=1000):
+                 inflate=2.0, inflate_window=100, min_noise_samples=1000, detector_params=None):
         super().__init__(K, field)
         from ..estimation.noise_state import NoiseState
         from ..estimation.regime import RegimeDetector
-        self.ns = noise_state or NoiseState("log_moment", detector=RegimeDetector())
+        # detector_params: RegimeDetector options, e.g. RegimeDetector.REAL_NOISE (default: original detector)
+        self.ns = noise_state or NoiseState("log_moment", detector=RegimeDetector(**(detector_params or {})))
         self.map = noise_to_reward or (lambda a, c: (a, c))
         self.inflate, self.inflate_window = float(inflate), int(inflate_window)
         self.min_noise = int(min_noise_samples)
