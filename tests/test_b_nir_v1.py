@@ -84,3 +84,42 @@ def test_regime_alarm_restarts_tracker_and_keeps_params(law):
         ag.observe_noise(0.0, sas_real(1.8, 10.0, 200, rng))           # +20 dB level step
     assert ag.alarms == 1 and ag.ns.tracker.n_eff < 10 * 200
     assert ag._inflate_until > ag.t
+
+
+def test_law_bias_gaussian_limit_and_scale(law):
+    from scipy.special import digamma
+    # alpha = 2, c = 1: |z1|^2 / 4 ~ Exp(1); X1 = -10 log10(4 Gamma(n, 1) / n)
+    exact = -10 * math.log10(4) - (10 / math.log(10)) * (digamma(64) - math.log(64))
+    assert law.bias(2.0, 1.0) == pytest.approx(exact, abs=0.03)
+    assert law.bias(1.6, 0.1) == pytest.approx(law.bias(1.6, 1.0) + 20.0, abs=1e-9)
+    assert law.bias(1.6, 1.0) < law.bias(2.0, 1.0) - 2.0                 # impulsive noise lowers gamma-hat
+    assert SasLaw().bias(1.5, 2.0) == 0.0
+
+
+def test_debiased_means_recover_arm_snr_across_regimes(law):
+    from experiments import run_layer1_b as r
+    cfg = {"reward_model": "evm_db", "T": 4000, "nu": 200, "noise": {"alpha": 1.9, "c": 0.1},
+           "regimes": {"laws": [{"alpha": 1.9, "c": 0.1}, {"alpha": 1.5, "c": 0.1}],
+                       "P": [[0.998, 0.002], [0.002, 0.998]]},
+           "arms": {"snr_db": [0.0, 2.0]}, "evm": {"n_sym": 64, "mc_packets": 2000, "mc_seed": 7},
+           "ack_threshold": 0.0}
+    tab = r.make_table(cfg, 11)
+    assert len(set(tab.meta["regime"])) == 2
+    ag = NIRUCBv1(2, law=law, debias=True, detector_params={})
+    TableEnv(tab, 3).run(ag)
+    est = ag.s / ag.n
+    assert est[1] == pytest.approx(2.0, abs=0.5)                          # best arm: many samples
+    raw = NIRUCBv1(2, law=law)                                            # no debias: the average carries E[X]
+    TableEnv(tab, 3).run(raw)                                             # (+20 dB from c = 0.1, minus impulses)
+    assert abs((raw.s / raw.n)[1] - 2.0) > 3.0
+
+
+def test_debias_retroactively_corrects_early_observations(law):
+    ag = NIRUCBv1(2, law=law, debias=True, min_noise_samples=10)
+    ag.observe(0, 0.0, {"gamma_db": 5.0})                                 # before any calibration: raw
+    assert ag.s[0] == 5.0 and ag._early
+    from uwsb.noise.stable import sas_real
+    ag.observe_noise(0.0, sas_real(1.8, 1.0, 200, np.random.default_rng(0)))
+    assert not ag._early and ag.n[0] == 1
+    assert ag.s[0] == pytest.approx(5.0 - law.bias(ag._alpha, ag._c))
+    assert ag.v[0] == pytest.approx(ag.params[0] ** 2)

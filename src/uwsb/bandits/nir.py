@@ -12,6 +12,13 @@ Index: empirical mean + w (x `inflate` for `inflate_window` decisions after a re
 (detector: RegimeDetector.REAL_NOISE by default, G-4): the tracker restarts so alpha_hat follows the new regime;
 the last calibrated parameters are kept until the new tracker has `min_noise_samples` samples. Before any
 side information: round-robin. Delay-safe initialisation as EmpiricalUCB.
+
+debias=True (regime-switching noise, 2026-10-01): the reward-noise mean moves with the noise law (branch E: a 12 dB
+drop from alpha 1.9 to 1.3, while arm gaps are ~1 dB), so raw averages mix regimes. Each observation is debiased with
+E[X](alpha-hat, c-hat) from the law (`law.bias`) at the time it is received, and the width uses the noise scale of
+each observation: gauss w = sqrt(2 L sum_i sigma_i^2) / n; bernstein w = min_j max(sqrt(2 L sum_i nu2_ij) / n,
+2 B_j L / n) with B_j = max_i b_ij. Observations received before the first calibration are debiased retroactively
+when it arrives. Off by default (stationary runs unchanged).
 """
 
 from __future__ import annotations
@@ -25,8 +32,14 @@ from .robust import EmpiricalUCB
 
 class NIRUCBv1(EmpiricalUCB):
     def __init__(self, K, field="gamma_db", law=None, width="gauss", forget=1.0, detector_params=None,
-                 inflate=2.0, inflate_window=100, min_noise_samples=1000):
+                 inflate=2.0, inflate_window=100, min_noise_samples=1000, debias=False):
         super().__init__(K, field, sigma=1.0)
+        self.debias = bool(debias)
+        self._c = None                           # c-hat at the current calibration
+        self._early = []                         # (arm, raw reward) received before the first calibration
+        self.v = np.zeros(K)                     # debias mode: sum of sigma_i^2 per arm
+        self.vj = None                           # debias mode: sum of nu2_ij per arm (K, n_factors)
+        self.bj = None                           # debias mode: max b_ij per arm
         from ..estimation.noise_state import LogMomentTracker, NoiseState
         from ..estimation.regime import RegimeDetector
         if law is None:
@@ -55,12 +68,50 @@ class NIRUCBv1(EmpiricalUCB):
             self._since_reset = 0
             return
         if self._since_reset >= self.min_noise and np.isfinite(out["alpha"]):
+            first = self.params is None
             self.params = self.law(out["alpha"], out["c"])
+            self._alpha, self._c = float(out["alpha"]), float(out["c"])
+            if self.debias and first and self._early:
+                early, self._early = self._early, []
+                for arm, r in early:                 # undo the raw accumulation, redo it debiased
+                    self.n[arm] -= 1
+                    self.s[arm] -= r
+                    self._accumulate(arm, r)
+
+    def _accumulate(self, arm, r):
+        sigma, nu2, b = self.params
+        self.n[arm] += 1
+        self.s[arm] += r - self.law.bias(self._alpha, self._c)
+        self.v[arm] += sigma ** 2
+        if nu2 is not None:
+            if self.vj is None:
+                self.vj = np.zeros((self.K, len(nu2)))
+                self.bj = np.zeros((self.K, len(nu2)))
+            self.vj[arm] += nu2
+            self.bj[arm] = np.maximum(self.bj[arm], b)
+
+    def observe(self, arm, tx_time_s, reward):
+        if not self.debias:
+            return super().observe(arm, tx_time_s, reward)
+        self._pending[arm] = max(self._pending[arm] - 1, 0)
+        r = float(reward[self.field])
+        if self.params is None:                      # no calibration yet: keep raw, fix later
+            self.n[arm] += 1
+            self.s[arm] += r
+            self._early.append((arm, r))
+            return
+        self._accumulate(arm, r)
 
     def widths(self) -> np.ndarray:
         sigma, nu2, b = self.params
         L = math.log(max(self.t, 2))
         n = self.n.astype(float)
+        if self.debias:
+            if self.width == "gauss":
+                w = np.sqrt(2.0 * L * self.v) / n
+            else:
+                w = np.min(np.maximum(np.sqrt(2.0 * L * self.vj) / n[:, None], 2.0 * self.bj * L / n[:, None]), axis=1)
+            return w * (self.inflate if self.t <= self._inflate_until else 1.0)
         if self.width == "gauss":
             w = sigma * np.sqrt(2.0 * L / n)
         else:

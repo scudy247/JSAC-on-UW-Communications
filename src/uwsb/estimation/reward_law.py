@@ -14,6 +14,8 @@ the widths. EvmDbLaw tabulates, on a grid of alpha, by a seeded Monte Carlo of X
                         P(|mean_n - mu| >= w) <= 2 exp(-L) for w = max(sqrt(2 nu2 L / n), 2 b L / n).
                         lambda is also capped where the largest sample would carry > 1 % of the empirical
                         MGF (beyond that the Monte Carlo does not resolve the tail).
+  mean(alpha)           E[X1]; with scale c the reward-noise mean is E[X1] - 20 log10(c) (`bias`), used by
+                        NIR-UCB v1 to debias observations across noise regimes.
 Values at a given alpha are linearly interpolated (clipped to the grid).
 Branch S (reward = mean + SaS(alpha, c)): sigma = sqrt(2) c (the Gaussian-equivalent scale, as the naive
 baseline's oracle); no MGF exists for alpha < 2, so no sub-exponential pairs.
@@ -77,7 +79,12 @@ class EvmDbLaw:
         if self.alphas.size < 2 or self.alphas[0] <= 1.0 or self.alphas[-1] > 2.0:
             raise ValueError("need >= 2 grid values in (1, 2]")
         rng = np.random.default_rng(seed)
-        rows = [subexp_pairs(evm_db_noise(a, self.n_sym, int(n_mc), rng)) for a in self.alphas]
+        rows, means = [], []
+        for a in self.alphas:
+            x = evm_db_noise(a, self.n_sym, int(n_mc), rng)
+            rows.append(subexp_pairs(x))
+            means.append(float(x.mean()))
+        self.mean = np.array(means)
         self.sigma = np.array([r[0] for r in rows])
         self.nu2 = np.array([r[1] for r in rows])                # (n_alpha, n_factors)
         self.b = np.array([r[2] for r in rows])
@@ -89,12 +96,20 @@ class EvmDbLaw:
         lerp = lambda t: (1 - w) * t[i] + w * t[i + 1]
         return float(lerp(self.sigma)), lerp(self.nu2), lerp(self.b)
 
+    def bias(self, alpha: float, c: float) -> float:
+        """E[X] = E[X1](alpha) - 20 log10(c): the reward-noise mean in dB."""
+        a = float(np.clip(alpha, self.alphas[0], self.alphas[-1]))
+        return float(np.interp(a, self.alphas, self.mean)) - 20.0 * math.log10(float(c))
+
 
 class SasLaw:
     """Branch S: reward noise = the stream's SaS law; Gaussian-equivalent scale only."""
 
     def __call__(self, alpha: float, c: float):
         return math.sqrt(2.0) * float(c), None, None
+
+    def bias(self, alpha: float, c: float) -> float:
+        return 0.0                                      # symmetric noise: the reward mean is the arm mean
 
 
 def cached_evm_db_law(n_sym: int, alphas, n_mc: int, seed: int, cache_dir=None) -> EvmDbLaw:
@@ -103,16 +118,18 @@ def cached_evm_db_law(n_sym: int, alphas, n_mc: int, seed: int, cache_dir=None) 
     import json
     from ..runtime import results_root
     key = json.dumps({"n_sym": int(n_sym), "alphas": [float(a) for a in sorted(alphas)], "n_mc": int(n_mc),
-                      "seed": int(seed), "factors": NU2_FACTORS.tolist(), "cap": MGF_SHARE_CAP}, sort_keys=True)
+                      "seed": int(seed), "factors": NU2_FACTORS.tolist(), "cap": MGF_SHARE_CAP, "v": 2},
+                     sort_keys=True)
     path = (cache_dir or results_root() / "_cache") / f"evm_db_law-{hashlib.sha1(key.encode()).hexdigest()[:10]}.npz"
     law = EvmDbLaw.__new__(EvmDbLaw)
     if path.exists():
         z = np.load(path)
         law.n_sym, law.alphas, law.sigma, law.nu2, law.b = int(z["n_sym"]), z["alphas"], z["sigma"], z["nu2"], z["b"]
+        law.mean = z["mean"]
         return law
     law = EvmDbLaw(n_sym, alphas, n_mc, seed)
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(".tmp.npz")
-    np.savez(tmp, n_sym=law.n_sym, alphas=law.alphas, sigma=law.sigma, nu2=law.nu2, b=law.b)
+    np.savez(tmp, n_sym=law.n_sym, alphas=law.alphas, sigma=law.sigma, nu2=law.nu2, b=law.b, mean=law.mean)
     tmp.replace(path)
     return law
