@@ -678,3 +678,17 @@ wrong: it discards the motion statistics.) SIR bound at 30 dB, cfo+timing / +pil
   the right theory for the claim is a threshold analysis (Ziv-Zakai bound, or the probability that the uncorrected
   residual exceeds the measurement's linear range), where the sensor prior moves the receiver away from the
   threshold. Next for T3.
+
+## Threshold analysis, step 1 (12 Oct 2026; `scripts/b8_threshold.py calibrate`) — and a fairness correction
+Per packet of the b2 comparison (120 packets, 30 dB), x = largest |mean residual Doppler| over the data FFT windows,
+in subcarrier spacings, before fine estimation (signal-only: after the chirps' mean scale; sensor: after the
+industrial-MEMS prior). Failure (SINR > 3 dB below SNR): signal Kalman 1% for x <= 1.5, 100% for x > 2 (14 packets);
++ pFFT-8 0% / 64%. The sensor prior keeps x <= 0.6 on every packet.
+- **The threshold at x ~ 2 was the +-2-subcarrier search range of our null-subcarrier estimator (CFO_SPAN), not a
+  property of signal-only estimation.** With +-4, the four worst buoy-buoy 4 s packets (x 2.8-3.7) go from 10.4 /
+  11.6 / 26.6 / 24.8 dB to 28.1 / 28.9 / 29.4 / 29.4 dB (signal Kalman + pFFT-8; sensor fusion 29.3-29.7), with no
+  change at 0 / 5 / 10 dB SNR. CFO_SPAN is now 4.
+- **Consequence: every chain result with CFO_SPAN = 2 understates the signal-only receivers in rough seas** (e2_chain
+  SINR and PER tables, e2_imu_grades, b2 comparison, and the runs started today: high-statistics PER / multipath,
+  sea states, numerology, pilot tracking). The remaining sensor gain in the tail of buoy-buoy 4 s packets is likely
+  ~0.3-1.5 dB rather than ~5-6 dB; to be confirmed by reruns.

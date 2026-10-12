@@ -129,6 +129,262 @@
    "lags_full": 253,
    "lags_prior_industrial": 34,
    "lags_prior_old": 12
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 8.42872096942534e-05,
+    "old": 2e-05
+   },
+   "snr_db": -12,
+   "preamble_miss": 0.99,
+   "wrong_full": 1.0,
+   "wrong_prior_industrial": 1.0,
+   "wrong_prior_old": 0.5,
+   "lags_full": 829,
+   "lags_prior_industrial": 98,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 8.42872096942534e-05,
+    "old": 2e-05
+   },
+   "snr_db": -11,
+   "preamble_miss": 0.935,
+   "wrong_full": 0.8461538461538461,
+   "wrong_prior_industrial": 0.38461538461538464,
+   "wrong_prior_old": 0.07692307692307693,
+   "lags_full": 829,
+   "lags_prior_industrial": 98,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 8.42872096942534e-05,
+    "old": 2e-05
+   },
+   "snr_db": -10,
+   "preamble_miss": 0.845,
+   "wrong_full": 0.7096774193548387,
+   "wrong_prior_industrial": 0.12903225806451613,
+   "wrong_prior_old": 0.03225806451612903,
+   "lags_full": 829,
+   "lags_prior_industrial": 98,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 8.42872096942534e-05,
+    "old": 2e-05
+   },
+   "snr_db": -9,
+   "preamble_miss": 0.67,
+   "wrong_full": 0.36363636363636365,
+   "wrong_prior_industrial": 0.030303030303030304,
+   "wrong_prior_old": 0.0,
+   "lags_full": 829,
+   "lags_prior_industrial": 98,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 8.42872096942534e-05,
+    "old": 2e-05
+   },
+   "snr_db": -8,
+   "preamble_miss": 0.435,
+   "wrong_full": 0.10619469026548672,
+   "wrong_prior_industrial": 0.035398230088495575,
+   "wrong_prior_old": 0.008849557522123894,
+   "lags_full": 829,
+   "lags_prior_industrial": 98,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 8.42872096942534e-05,
+    "old": 2e-05
+   },
+   "snr_db": -7,
+   "preamble_miss": 0.145,
+   "wrong_full": 0.05263157894736842,
+   "wrong_prior_industrial": 0.005847953216374269,
+   "wrong_prior_old": 0.0,
+   "lags_full": 829,
+   "lags_prior_industrial": 98,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 8.42872096942534e-05,
+    "old": 2e-05
+   },
+   "snr_db": -6,
+   "preamble_miss": 0.035,
+   "wrong_full": 0.0051813471502590676,
+   "wrong_prior_industrial": 0.0,
+   "wrong_prior_old": 0.0,
+   "lags_full": 829,
+   "lags_prior_industrial": 98,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 8.42872096942534e-05,
+    "old": 2e-05
+   },
+   "snr_db": -4,
+   "preamble_miss": 0.0,
+   "wrong_full": 0.0,
+   "wrong_prior_industrial": 0.0,
+   "wrong_prior_old": 0.0,
+   "lags_full": 829,
+   "lags_prior_industrial": 98,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy -> seabed, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 6.884095518637628e-05,
+    "old": 2e-05
+   },
+   "snr_db": -12,
+   "preamble_miss": 0.98,
+   "wrong_full": 1.0,
+   "wrong_prior_industrial": 0.25,
+   "wrong_prior_old": 0.0,
+   "lags_full": 829,
+   "lags_prior_industrial": 80,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy -> seabed, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 6.884095518637628e-05,
+    "old": 2e-05
+   },
+   "snr_db": -11,
+   "preamble_miss": 0.925,
+   "wrong_full": 0.9333333333333333,
+   "wrong_prior_industrial": 0.4,
+   "wrong_prior_old": 0.0,
+   "lags_full": 829,
+   "lags_prior_industrial": 80,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy -> seabed, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 6.884095518637628e-05,
+    "old": 2e-05
+   },
+   "snr_db": -10,
+   "preamble_miss": 0.77,
+   "wrong_full": 0.5869565217391305,
+   "wrong_prior_industrial": 0.08695652173913043,
+   "wrong_prior_old": 0.0,
+   "lags_full": 829,
+   "lags_prior_industrial": 80,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy -> seabed, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 6.884095518637628e-05,
+    "old": 2e-05
+   },
+   "snr_db": -9,
+   "preamble_miss": 0.595,
+   "wrong_full": 0.2716049382716049,
+   "wrong_prior_industrial": 0.06172839506172839,
+   "wrong_prior_old": 0.0,
+   "lags_full": 829,
+   "lags_prior_industrial": 80,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy -> seabed, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 6.884095518637628e-05,
+    "old": 2e-05
+   },
+   "snr_db": -8,
+   "preamble_miss": 0.355,
+   "wrong_full": 0.1937984496124031,
+   "wrong_prior_industrial": 0.03875968992248062,
+   "wrong_prior_old": 0.007751937984496124,
+   "lags_full": 829,
+   "lags_prior_industrial": 80,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy -> seabed, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 6.884095518637628e-05,
+    "old": 2e-05
+   },
+   "snr_db": -7,
+   "preamble_miss": 0.115,
+   "wrong_full": 0.05084745762711865,
+   "wrong_prior_industrial": 0.011299435028248588,
+   "wrong_prior_old": 0.0,
+   "lags_full": 829,
+   "lags_prior_industrial": 80,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy -> seabed, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 6.884095518637628e-05,
+    "old": 2e-05
+   },
+   "snr_db": -6,
+   "preamble_miss": 0.005,
+   "wrong_full": 0.01507537688442211,
+   "wrong_prior_industrial": 0.005025125628140704,
+   "wrong_prior_old": 0.005025125628140704,
+   "lags_full": 829,
+   "lags_prior_industrial": 80,
+   "lags_prior_old": 26
+  },
+  {
+   "scenario": "buoy -> seabed, OOI Irminger",
+   "n_data": 27,
+   "prior_sigma": {
+    "industrial": 6.884095518637628e-05,
+    "old": 2e-05
+   },
+   "snr_db": -4,
+   "preamble_miss": 0.0,
+   "wrong_full": 0.0,
+   "wrong_prior_industrial": 0.0,
+   "wrong_prior_old": 0.0,
+   "lags_full": 829,
+   "lags_prior_industrial": 80,
+   "lags_prior_old": 26
   }
  ]
 }

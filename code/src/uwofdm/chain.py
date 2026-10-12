@@ -17,7 +17,9 @@ from . import estimators, fusion, header as hdr
 from .waveform import unwarp
 
 
-CFO_SPAN = 2.0  # residual-CFO search in subcarrier spacings (wide enough for rough-sea residuals)
+CFO_SPAN = 4.0  # residual-CFO search in subcarrier spacings. Was 2.0 until 12 Oct 2026: rough-sea residuals after the
+# chirps' mean scale reach 2-3.7 subcarriers on buoy-buoy 4 s packets and the +-2 search failed there (signal Kalman
+# + pFFT 10-27 dB -> 28-29 dB with +-4; no change at 0-10 dB SNR). Results with +-2 understate signal-only receivers.
 
 
 def _demod(z, F, cfo=True, backoff=0):
