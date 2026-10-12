@@ -788,3 +788,17 @@ the transmitter share seen by a receiver at azimuth a from the intended one, no 
 (up to 2x the Doppler at 180 deg). Side information carrying the transmitter's 3-D velocity serves every receiver
 (each projects it on its own path direction) at ~1.5-3x the bits of one component; it also needs no real-time
 resampling at the transmitter.
+
+## Header in multipath and cost of a wrong header (12 Oct 2026; Phase 4; `scripts/b12_header.py`)
+32 bits + CRC-8 in the header symbol (DBPSK across subcarriers, repetition), buoy-buoy OOI 1 s, industrial MEMS,
+100 packets per SNR; multipath = Bellhop isovelocity, rough surface, path clusters, fractional delays (direct +
+bottom bounce 10.7 ms). Accepted at -3 / 0 / 3 / 6 / 10 dB: single path 0.40 / 0.90 / 1.00 / 1.00 / 1.00;
+**multipath 0.21 / 0.46 / 0.80 / 0.91 / 0.97**; accepted-but-wrong 0 in 1000 reads.
+- Multipath costs the header ~4-6 dB: DBPSK between adjacent subcarriers suffers from the frequency selectivity of a
+  10.7 ms delay (0.5 rad between neighbours, deep fades). A coherent header (channel from the preamble or pilots) or
+  stronger coding would recover it. The receiver falls back to signal-only when the header fails.
+- **Wrong header accepted** (random quantiser indices; 20 packets, 30 dB; power avg / median / p10): 1 s: safe
+  fusion 28.6 / 29.4 / 26.7 = signal Kalman 28.5 / 29.3 / 26.7 (correct header 29.6 / 29.8 / 29.3); fixed-setting
+  fusion 0.4 / 0.9 / -18.1. 4 s: safe 27.1 / 27.5 / 25.6 vs signal 26.8 / 27.5 / 25.2; fixed 4.7 / 5.9 / -2.1.
+  **The prior-quality guard turns a wrong header into a signal-only packet; without it the packet is lost.**
+  With CRC-8 about 1 in 256 corrupted headers passes, so the guard is required.

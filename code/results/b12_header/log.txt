@@ -1,0 +1,21 @@
+queued Mon Oct 12 02:53:15 PM UTC 2026
+started Mon Oct 12 02:53:15 PM UTC 2026
+header, single path SNR  -3 dB: accepted 0.40, accepted but wrong 0.000
+header, single path SNR   0 dB: accepted 0.90, accepted but wrong 0.000
+header, single path SNR   3 dB: accepted 1.00, accepted but wrong 0.000
+header, single path SNR   6 dB: accepted 1.00, accepted but wrong 0.000
+header, single path SNR  10 dB: accepted 1.00, accepted but wrong 0.000
+header, multipath   SNR  -3 dB: accepted 0.21, accepted but wrong 0.000
+header, multipath   SNR   0 dB: accepted 0.46, accepted but wrong 0.000
+header, multipath   SNR   3 dB: accepted 0.80, accepted but wrong 0.000
+header, multipath   SNR   6 dB: accepted 0.91, accepted but wrong 0.000
+header, multipath   SNR  10 dB: accepted 0.97, accepted but wrong 0.000
+wrong header,  7 sym, 30 dB, signal_kalman             : power avg  28.5, median  29.3, p10  26.7
+wrong header,  7 sym, 30 dB, fusion_correct_header     : power avg  29.6, median  29.8, p10  29.3
+wrong header,  7 sym, 30 dB, fusion_wrong_header       : power avg  28.6, median  29.4, p10  26.7
+wrong header,  7 sym, 30 dB, fusion_fixed_wrong_header : power avg   0.4, median   0.9, p10 -18.1
+wrong header, 27 sym, 30 dB, signal_kalman             : power avg  26.8, median  27.5, p10  25.2
+wrong header, 27 sym, 30 dB, fusion_correct_header     : power avg  29.5, median  29.5, p10  29.1
+wrong header, 27 sym, 30 dB, fusion_wrong_header       : power avg  27.1, median  27.5, p10  25.6
+wrong header, 27 sym, 30 dB, fusion_fixed_wrong_header : power avg   4.7, median   5.9, p10  -2.1
+exit 0 Mon Oct 12 02:56:58 PM UTC 2026
