@@ -1,0 +1,974 @@
+[
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "own[none]+rx[none]",
+  "key": "rx_alone",
+  "sir_sim_db": 7.619348598196376,
+  "sir_time_domain_db": 7.124117231002449
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "own[tx]+rx[none]",
+  "key": "applied",
+  "sir_sim_db": 32.51837827037076,
+  "sir_time_domain_db": 32.35376013046124
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "si8+own[none]+rx[none]",
+  "key": 8,
+  "sir_sim_db": 21.918638150283094,
+  "sir_time_domain_db": 21.285584585636986
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "si16+own[none]+rx[none]",
+  "key": 16,
+  "sir_sim_db": 29.42640499628883,
+  "sir_time_domain_db": 29.777458827797712
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "si32+own[none]+rx[none]",
+  "key": 32,
+  "sir_sim_db": 32.466976278562186,
+  "sir_time_domain_db": 32.298484353132466
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "si64+own[none]+rx[none]",
+  "key": 64,
+  "sir_sim_db": 32.516453958058776,
+  "sir_time_domain_db": 32.35291243432472
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "own[none]+rx[line2]",
+  "key": "rx_alone",
+  "sir_sim_db": 21.86888963920562,
+  "sir_time_domain_db": 20.26321432729418
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "own[tx]+rx[line2]",
+  "key": "applied",
+  "sir_sim_db": 42.61990148810924,
+  "sir_time_domain_db": 39.773679769499125
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "si8+own[none]+rx[line2]",
+  "key": 8,
+  "sir_sim_db": 36.97471588873841,
+  "sir_time_domain_db": 37.294262109574376
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "si16+own[none]+rx[line2]",
+  "key": 16,
+  "sir_sim_db": 39.73322343207456,
+  "sir_time_domain_db": 39.616657567330066
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "si32+own[none]+rx[line2]",
+  "key": 32,
+  "sir_sim_db": 39.0226473086618,
+  "sir_time_domain_db": 39.75888871573255
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "si64+own[none]+rx[line2]",
+  "key": 64,
+  "sir_sim_db": 40.70468422837532,
+  "sir_time_domain_db": 39.7705770605299
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "own[none]+rx[sym]",
+  "key": "rx_alone",
+  "sir_sim_db": 35.44677366937579,
+  "sir_time_domain_db": 35.416694548740864
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "own[tx]+rx[sym]",
+  "key": "applied",
+  "sir_sim_db": 39.07072551975737,
+  "sir_time_domain_db": 38.89883216897938
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "si8+own[none]+rx[sym]",
+  "key": 8,
+  "sir_sim_db": 37.42353294653143,
+  "sir_time_domain_db": 38.24593337453702
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "si16+own[none]+rx[sym]",
+  "key": 16,
+  "sir_sim_db": 39.03925023775752,
+  "sir_time_domain_db": 38.81667139470106
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "si32+own[none]+rx[sym]",
+  "key": 32,
+  "sir_sim_db": 39.817566296281925,
+  "sir_time_domain_db": 38.897822517843146
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "si64+own[none]+rx[sym]",
+  "key": 64,
+  "sir_sim_db": 39.21341457260167,
+  "sir_time_domain_db": 38.89920602739593
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "own[none]+rx[none]",
+  "key": "rx_alone",
+  "sir_sim_db": 8.420842615630699,
+  "sir_time_domain_db": 7.23427769681717
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "own[tx]+rx[none]",
+  "key": "applied",
+  "sir_sim_db": 32.605032133568585,
+  "sir_time_domain_db": 31.98820139797627
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "si8+own[none]+rx[none]",
+  "key": 8,
+  "sir_sim_db": 12.569529929334177,
+  "sir_time_domain_db": 12.330784587752305
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "si16+own[none]+rx[none]",
+  "key": 16,
+  "sir_sim_db": 16.423675323021644,
+  "sir_time_domain_db": 16.194723876829492
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "si32+own[none]+rx[none]",
+  "key": 32,
+  "sir_sim_db": 24.92690825023283,
+  "sir_time_domain_db": 24.730701260082544
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "si64+own[none]+rx[none]",
+  "key": 64,
+  "sir_sim_db": 32.32907783508117,
+  "sir_time_domain_db": 31.719225624805667
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "own[none]+rx[line2]",
+  "key": "rx_alone",
+  "sir_sim_db": 10.283350168785317,
+  "sir_time_domain_db": 8.879536791528674
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "own[tx]+rx[line2]",
+  "key": "applied",
+  "sir_sim_db": 38.25656268302521,
+  "sir_time_domain_db": 39.20952973828061
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "si8+own[none]+rx[line2]",
+  "key": 8,
+  "sir_sim_db": 12.583623934259268,
+  "sir_time_domain_db": 12.786480450140177
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "si16+own[none]+rx[line2]",
+  "key": 16,
+  "sir_sim_db": 18.36094175466115,
+  "sir_time_domain_db": 18.54878288805851
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "si32+own[none]+rx[line2]",
+  "key": 32,
+  "sir_sim_db": 29.091083747312517,
+  "sir_time_domain_db": 30.255253643849326
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "si64+own[none]+rx[line2]",
+  "key": 64,
+  "sir_sim_db": 38.5906427827886,
+  "sir_time_domain_db": 38.87163367662894
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "own[none]+rx[sym]",
+  "key": "rx_alone",
+  "sir_sim_db": 35.57947073610527,
+  "sir_time_domain_db": 35.38439212550115
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "own[tx]+rx[sym]",
+  "key": "applied",
+  "sir_sim_db": 38.91335327134081,
+  "sir_time_domain_db": 39.01159857513494
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "si8+own[none]+rx[sym]",
+  "key": 8,
+  "sir_sim_db": 35.18338207293749,
+  "sir_time_domain_db": 34.754597495834936
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "si16+own[none]+rx[sym]",
+  "key": 16,
+  "sir_sim_db": 36.96417756342182,
+  "sir_time_domain_db": 36.63992199761433
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "si32+own[none]+rx[sym]",
+  "key": 32,
+  "sir_sim_db": 38.49616447911541,
+  "sir_time_domain_db": 38.51468218056632
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "si64+own[none]+rx[sym]",
+  "key": 64,
+  "sir_sim_db": 39.16167828467085,
+  "sir_time_domain_db": 39.004235793063295
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "own[none]+rx[none]",
+  "key": "rx_alone",
+  "sir_sim_db": -5.467100757315155,
+  "sir_time_domain_db": -5.118503252568859
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "own[tx]+rx[none]",
+  "key": "applied",
+  "sir_sim_db": 30.305823209915168,
+  "sir_time_domain_db": 31.392654283168998
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "si8+own[none]+rx[none]",
+  "key": 8,
+  "sir_sim_db": 11.803791370503443,
+  "sir_time_domain_db": 10.575834170287322
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "si16+own[none]+rx[none]",
+  "key": 16,
+  "sir_sim_db": 21.72228450820453,
+  "sir_time_domain_db": 21.824335708542964
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "si32+own[none]+rx[none]",
+  "key": 32,
+  "sir_sim_db": 29.765148884721462,
+  "sir_time_domain_db": 30.499640527988
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "si64+own[none]+rx[none]",
+  "key": 64,
+  "sir_sim_db": 30.30977293609888,
+  "sir_time_domain_db": 31.221797280584024
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "own[none]+rx[line2]",
+  "key": "rx_alone",
+  "sir_sim_db": 11.647277567883911,
+  "sir_time_domain_db": 9.896843232979748
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "own[tx]+rx[line2]",
+  "key": "applied",
+  "sir_sim_db": 38.18244263459908,
+  "sir_time_domain_db": 38.34861913582833
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "si8+own[none]+rx[line2]",
+  "key": 8,
+  "sir_sim_db": 30.005153721509185,
+  "sir_time_domain_db": 30.117863025576828
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "si16+own[none]+rx[line2]",
+  "key": 16,
+  "sir_sim_db": 36.72663283828166,
+  "sir_time_domain_db": 36.340076384120124
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "si32+own[none]+rx[line2]",
+  "key": 32,
+  "sir_sim_db": 36.38345522106252,
+  "sir_time_domain_db": 36.58562899769517
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "si64+own[none]+rx[line2]",
+  "key": 64,
+  "sir_sim_db": 37.18517133837449,
+  "sir_time_domain_db": 38.05575423918632
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "own[none]+rx[sym]",
+  "key": "rx_alone",
+  "sir_sim_db": 26.11095769971151,
+  "sir_time_domain_db": 25.844555755337673
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "own[tx]+rx[sym]",
+  "key": "applied",
+  "sir_sim_db": 37.88867406813471,
+  "sir_time_domain_db": 38.4626894108963
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "si8+own[none]+rx[sym]",
+  "key": 8,
+  "sir_sim_db": 35.48538779401885,
+  "sir_time_domain_db": 34.99685412494233
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "si16+own[none]+rx[sym]",
+  "key": 16,
+  "sir_sim_db": 38.015509585091614,
+  "sir_time_domain_db": 37.75893213337274
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "si32+own[none]+rx[sym]",
+  "key": 32,
+  "sir_sim_db": 38.02292795518745,
+  "sir_time_domain_db": 37.96095911633043
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "si64+own[none]+rx[sym]",
+  "key": 64,
+  "sir_sim_db": 38.86152953115784,
+  "sir_time_domain_db": 38.22377102040498
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "own[none]+rx[none]",
+  "key": "rx_alone",
+  "sir_sim_db": -2.635768962284674,
+  "sir_time_domain_db": -4.629039362343758
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "own[tx]+rx[none]",
+  "key": "applied",
+  "sir_sim_db": 30.685695678900533,
+  "sir_time_domain_db": 31.571074880183442
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "si8+own[none]+rx[none]",
+  "key": 8,
+  "sir_sim_db": 2.539869790882248,
+  "sir_time_domain_db": -0.1433936097892862
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "si16+own[none]+rx[none]",
+  "key": 16,
+  "sir_sim_db": 6.526283548676624,
+  "sir_time_domain_db": 5.773668635506695
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "si32+own[none]+rx[none]",
+  "key": 32,
+  "sir_sim_db": 16.46223092060523,
+  "sir_time_domain_db": 15.9314698109802
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "si64+own[none]+rx[none]",
+  "key": 64,
+  "sir_sim_db": 28.13530024129601,
+  "sir_time_domain_db": 27.97525045559405
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "own[none]+rx[line2]",
+  "key": "rx_alone",
+  "sir_sim_db": -0.8136427627500958,
+  "sir_time_domain_db": -4.4329586430284245
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "own[tx]+rx[line2]",
+  "key": "applied",
+  "sir_sim_db": 35.58977118024269,
+  "sir_time_domain_db": 36.42624630299603
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "si8+own[none]+rx[line2]",
+  "key": 8,
+  "sir_sim_db": 2.987036800902806,
+  "sir_time_domain_db": 0.5018037507585632
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "si16+own[none]+rx[line2]",
+  "key": 16,
+  "sir_sim_db": 10.11456596765025,
+  "sir_time_domain_db": 9.088757251184404
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "si32+own[none]+rx[line2]",
+  "key": 32,
+  "sir_sim_db": 21.83864045954231,
+  "sir_time_domain_db": 21.218157142360443
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "si64+own[none]+rx[line2]",
+  "key": 64,
+  "sir_sim_db": 31.589649180719373,
+  "sir_time_domain_db": 30.6176577589199
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "own[none]+rx[sym]",
+  "key": "rx_alone",
+  "sir_sim_db": 27.012262088355563,
+  "sir_time_domain_db": 25.735670207298853
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "own[tx]+rx[sym]",
+  "key": "applied",
+  "sir_sim_db": 38.45274079317545,
+  "sir_time_domain_db": 38.54488252256955
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "si8+own[none]+rx[sym]",
+  "key": 8,
+  "sir_sim_db": 26.710763330378136,
+  "sir_time_domain_db": 25.949602782909317
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "si16+own[none]+rx[sym]",
+  "key": 16,
+  "sir_sim_db": 30.982663250406848,
+  "sir_time_domain_db": 30.2893613857791
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "si32+own[none]+rx[sym]",
+  "key": 32,
+  "sir_sim_db": 35.64601292030774,
+  "sir_time_domain_db": 35.50644572976858
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "si64+own[none]+rx[sym]",
+  "key": 64,
+  "sir_sim_db": 38.17101987825034,
+  "sir_time_domain_db": 37.92964117442373
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "own[rx]+rx[none]",
+  "key": "rx_alone",
+  "sir_sim_db": -5.453976554071173,
+  "sir_time_domain_db": -4.160774721393729
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "own[tx+rx]+rx[none]",
+  "key": "applied",
+  "sir_sim_db": 29.46606972614221,
+  "sir_time_domain_db": 29.378474901102027
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "si8+own[rx]+rx[none]",
+  "key": 8,
+  "sir_sim_db": 11.742317217249038,
+  "sir_time_domain_db": 10.819411297305708
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "si16+own[rx]+rx[none]",
+  "key": 16,
+  "sir_sim_db": 22.072999248049253,
+  "sir_time_domain_db": 21.727297598713598
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "si32+own[rx]+rx[none]",
+  "key": 32,
+  "sir_sim_db": 28.62757011843964,
+  "sir_time_domain_db": 28.765864746154847
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "strategy": "si64+own[rx]+rx[none]",
+  "key": 64,
+  "sir_sim_db": 29.4502515643806,
+  "sir_time_domain_db": 29.03893123178236
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "own[rx]+rx[line2]",
+  "key": "rx_alone",
+  "sir_sim_db": 11.884243122016622,
+  "sir_time_domain_db": 10.220823747320262
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "own[tx+rx]+rx[line2]",
+  "key": "applied",
+  "sir_sim_db": 36.352892822645224,
+  "sir_time_domain_db": 36.33127514549273
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "si8+own[rx]+rx[line2]",
+  "key": 8,
+  "sir_sim_db": 29.73935811627015,
+  "sir_time_domain_db": 29.30357713092488
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "si16+own[rx]+rx[line2]",
+  "key": 16,
+  "sir_sim_db": 35.467915488941834,
+  "sir_time_domain_db": 34.776284039246214
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "si32+own[rx]+rx[line2]",
+  "key": 32,
+  "sir_sim_db": 35.69167673883288,
+  "sir_time_domain_db": 34.47720260935721
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "strategy": "si64+own[rx]+rx[line2]",
+  "key": 64,
+  "sir_sim_db": 35.819317482589945,
+  "sir_time_domain_db": 35.70634301385997
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "own[rx]+rx[sym]",
+  "key": "rx_alone",
+  "sir_sim_db": 26.13604774930802,
+  "sir_time_domain_db": 26.13556094711705
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "own[tx+rx]+rx[sym]",
+  "key": "applied",
+  "sir_sim_db": 37.51650638986608,
+  "sir_time_domain_db": 38.494917551380475
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "si8+own[rx]+rx[sym]",
+  "key": 8,
+  "sir_sim_db": 35.51192988894927,
+  "sir_time_domain_db": 34.88189352968373
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "si16+own[rx]+rx[sym]",
+  "key": 16,
+  "sir_sim_db": 37.66267720713238,
+  "sir_time_domain_db": 37.77387076873195
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "si32+own[rx]+rx[sym]",
+  "key": 32,
+  "sir_sim_db": 37.71311957521525,
+  "sir_time_domain_db": 37.555804041624874
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "strategy": "si64+own[rx]+rx[sym]",
+  "key": 64,
+  "sir_sim_db": 38.441992771322084,
+  "sir_time_domain_db": 37.81426697129362
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "own[rx]+rx[none]",
+  "key": "rx_alone",
+  "sir_sim_db": -2.653677504323298,
+  "sir_time_domain_db": -4.529805530644593
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "own[tx+rx]+rx[none]",
+  "key": "applied",
+  "sir_sim_db": 29.42302757082438,
+  "sir_time_domain_db": 29.489605488504967
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "si8+own[rx]+rx[none]",
+  "key": 8,
+  "sir_sim_db": 2.713004722774992,
+  "sir_time_domain_db": 0.36750945271801894
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "si16+own[rx]+rx[none]",
+  "key": 16,
+  "sir_sim_db": 6.717440680809195,
+  "sir_time_domain_db": 6.027310662848292
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "si32+own[rx]+rx[none]",
+  "key": 32,
+  "sir_sim_db": 16.207415835020363,
+  "sir_time_domain_db": 15.903067753194108
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "strategy": "si64+own[rx]+rx[none]",
+  "key": 64,
+  "sir_sim_db": 27.467419881111724,
+  "sir_time_domain_db": 26.912535940049494
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "own[rx]+rx[line2]",
+  "key": "rx_alone",
+  "sir_sim_db": -0.5030468042031403,
+  "sir_time_domain_db": -4.163658612323707
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "own[tx+rx]+rx[line2]",
+  "key": "applied",
+  "sir_sim_db": 33.42761111842989,
+  "sir_time_domain_db": 33.646945229980794
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "si8+own[rx]+rx[line2]",
+  "key": 8,
+  "sir_sim_db": 2.819553450916896,
+  "sir_time_domain_db": 1.4840997879343703
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "si16+own[rx]+rx[line2]",
+  "key": 16,
+  "sir_sim_db": 10.306049884182343,
+  "sir_time_domain_db": 9.38857382475652
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "si32+own[rx]+rx[line2]",
+  "key": 32,
+  "sir_sim_db": 20.66751252765213,
+  "sir_time_domain_db": 21.458358958431454
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "strategy": "si64+own[rx]+rx[line2]",
+  "key": 64,
+  "sir_sim_db": 31.061515473746223,
+  "sir_time_domain_db": 29.038958328769414
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "own[rx]+rx[sym]",
+  "key": "rx_alone",
+  "sir_sim_db": 27.13846133187941,
+  "sir_time_domain_db": 26.087789605783627
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "own[tx+rx]+rx[sym]",
+  "key": "applied",
+  "sir_sim_db": 38.062025189911296,
+  "sir_time_domain_db": 38.32282858897892
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "si8+own[rx]+rx[sym]",
+  "key": 8,
+  "sir_sim_db": 26.54031024785074,
+  "sir_time_domain_db": 26.04361403471347
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "si16+own[rx]+rx[sym]",
+  "key": 16,
+  "sir_sim_db": 30.203729004532477,
+  "sir_time_domain_db": 30.25258626184324
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "si32+own[rx]+rx[sym]",
+  "key": 32,
+  "sir_sim_db": 35.644213149015826,
+  "sir_time_domain_db": 35.379827126031564
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "strategy": "si64+own[rx]+rx[sym]",
+  "key": 64,
+  "sir_sim_db": 37.60863674705612,
+  "sir_time_domain_db": 37.6222744405526
+ }
+]

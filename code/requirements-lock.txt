@@ -1,0 +1,8 @@
+# Versions the code was developed and tested with (Windows, Python 3.12.10, 5 Oct 2026).
+# Install with: pip install -r requirements-lock.txt   (optional; pyproject.toml has the minimum versions)
+numpy==2.5.3
+scipy==1.18.1
+matplotlib==3.9.1.post1
+h5py==3.11.0
+PyYAML==6.0.2
+pytest==9.1.1

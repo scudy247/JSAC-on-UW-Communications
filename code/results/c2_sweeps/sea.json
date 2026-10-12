@@ -1,0 +1,962 @@
+[
+ {
+  "day": "cdip:029p1_mixed_2022-03-20",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 27.04217679034916,
+  "sir_sim_p10_db": 22.58791961148049,
+  "sir_theory_db": 19.72770404210861
+ },
+ {
+  "day": "cdip:029p1_mixed_2022-03-20",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 27.64493919378197,
+  "sir_sim_p10_db": 25.522462377157147,
+  "sir_theory_db": 28.460921840985023
+ },
+ {
+  "day": "cdip:029p1_mixed_2022-03-20",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 32.02632115840014,
+  "sir_sim_p10_db": 29.13839787541946,
+  "sir_theory_db": 31.874298981039246
+ },
+ {
+  "day": "cdip:029p1_mixed_2022-03-20",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 39.34871785793226,
+  "sir_sim_p10_db": 36.15116691550189,
+  "sir_theory_db": 38.940166821253904
+ },
+ {
+  "day": "cdip:029p1_mixed_2022-03-20",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 26.935378766990272,
+  "sir_sim_p10_db": 23.12329659811696,
+  "sir_theory_db": 19.72770404210861
+ },
+ {
+  "day": "cdip:029p1_mixed_2022-03-20",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 4.992167223851627,
+  "sir_sim_p10_db": -0.5167839668386742,
+  "sir_theory_db": 3.281010588259581
+ },
+ {
+  "day": "cdip:029p1_mixed_2022-03-20",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 31.47957431677606,
+  "sir_sim_p10_db": 29.643410156972163,
+  "sir_theory_db": 31.874298981039246
+ },
+ {
+  "day": "cdip:029p1_mixed_2022-03-20",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 37.65344867574771,
+  "sir_sim_p10_db": 34.66367987648024,
+  "sir_theory_db": 37.46561061320796
+ },
+ {
+  "day": "cdip:029p1_swell_2022-01-27",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 35.462679898228735,
+  "sir_sim_p10_db": 33.00129113522371,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "day": "cdip:029p1_swell_2022-01-27",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 36.9295689334971,
+  "sir_sim_p10_db": 33.941204935946146,
+  "sir_theory_db": 35.61797816471068
+ },
+ {
+  "day": "cdip:029p1_swell_2022-01-27",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 30.475206072092128,
+  "sir_sim_p10_db": 27.619495737752764,
+  "sir_theory_db": 32.09702798014265
+ },
+ {
+  "day": "cdip:029p1_swell_2022-01-27",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 37.923669026594084,
+  "sir_sim_p10_db": 35.11960425578825,
+  "sir_theory_db": 39.01163960668389
+ },
+ {
+  "day": "cdip:029p1_swell_2022-01-27",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 35.93764682989324,
+  "sir_sim_p10_db": 34.22694204615293,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "day": "cdip:029p1_swell_2022-01-27",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 15.273418502356183,
+  "sir_sim_p10_db": 11.40672042407022,
+  "sir_theory_db": 13.97268452974238
+ },
+ {
+  "day": "cdip:029p1_swell_2022-01-27",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 34.19124939541378,
+  "sir_sim_p10_db": 33.92791371395347,
+  "sir_theory_db": 32.09702798014265
+ },
+ {
+  "day": "cdip:029p1_swell_2022-01-27",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 36.93768253140298,
+  "sir_sim_p10_db": 33.70376392924232,
+  "sir_theory_db": 38.1915435200742
+ },
+ {
+  "day": "cdip:029p1_wind_2022-07-08",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 29.867560066288963,
+  "sir_sim_p10_db": 27.698764414132086,
+  "sir_theory_db": 23.068512300846606
+ },
+ {
+  "day": "cdip:029p1_wind_2022-07-08",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 28.097457965786408,
+  "sir_sim_p10_db": 26.175154796698738,
+  "sir_theory_db": 29.67716357254213
+ },
+ {
+  "day": "cdip:029p1_wind_2022-07-08",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 32.01720935435067,
+  "sir_sim_p10_db": 28.507491792779152,
+  "sir_theory_db": 31.96116967288504
+ },
+ {
+  "day": "cdip:029p1_wind_2022-07-08",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 36.993927984993185,
+  "sir_sim_p10_db": 32.41976943795406,
+  "sir_theory_db": 38.95683509162174
+ },
+ {
+  "day": "cdip:029p1_wind_2022-07-08",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 30.026275335583637,
+  "sir_sim_p10_db": 28.325367597124202,
+  "sir_theory_db": 23.068512300846606
+ },
+ {
+  "day": "cdip:029p1_wind_2022-07-08",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 6.722467928868787,
+  "sir_sim_p10_db": 4.261268545946692,
+  "sir_theory_db": 5.834130199830243
+ },
+ {
+  "day": "cdip:029p1_wind_2022-07-08",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 31.226788531863555,
+  "sir_sim_p10_db": 28.614323576061857,
+  "sir_theory_db": 31.96116967288504
+ },
+ {
+  "day": "cdip:029p1_wind_2022-07-08",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 36.09732344220642,
+  "sir_sim_p10_db": 33.586021061859384,
+  "sir_theory_db": 37.71277288801383
+ },
+ {
+  "day": "cdip:067p1_mixed_2024-06-12",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 35.485402719849105,
+  "sir_sim_p10_db": 33.51409739295181,
+  "sir_theory_db": 31.59317447544047
+ },
+ {
+  "day": "cdip:067p1_mixed_2024-06-12",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 38.78957407957773,
+  "sir_sim_p10_db": 37.10926082231837,
+  "sir_theory_db": 37.755006532371894
+ },
+ {
+  "day": "cdip:067p1_mixed_2024-06-12",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 39.238424930951986,
+  "sir_sim_p10_db": 34.91672103729774,
+  "sir_theory_db": 32.112319765878794
+ },
+ {
+  "day": "cdip:067p1_mixed_2024-06-12",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 41.550125632191246,
+  "sir_sim_p10_db": 38.925309600305965,
+  "sir_theory_db": 39.01941144108426
+ },
+ {
+  "day": "cdip:067p1_mixed_2024-06-12",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 35.74706492353488,
+  "sir_sim_p10_db": 34.36624152110897,
+  "sir_theory_db": 31.59317447544047
+ },
+ {
+  "day": "cdip:067p1_mixed_2024-06-12",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 16.159561974112137,
+  "sir_sim_p10_db": 12.880042505686653,
+  "sir_theory_db": 16.029456822552067
+ },
+ {
+  "day": "cdip:067p1_mixed_2024-06-12",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 30.083197396742865,
+  "sir_sim_p10_db": 26.76473134923865,
+  "sir_theory_db": 32.112319765878794
+ },
+ {
+  "day": "cdip:067p1_mixed_2024-06-12",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 40.200520132724826,
+  "sir_sim_p10_db": 37.41740482487045,
+  "sir_theory_db": 38.25098326134694
+ },
+ {
+  "day": "cdip:067p1_swell_2024-12-14",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 32.18096240390074,
+  "sir_sim_p10_db": 27.69698398001123,
+  "sir_theory_db": 28.11662842821672
+ },
+ {
+  "day": "cdip:067p1_swell_2024-12-14",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 31.80452053852847,
+  "sir_sim_p10_db": 27.2540422956726,
+  "sir_theory_db": 33.89384833659894
+ },
+ {
+  "day": "cdip:067p1_swell_2024-12-14",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 33.9869545655021,
+  "sir_sim_p10_db": 31.323050358571493,
+  "sir_theory_db": 32.07543217777633
+ },
+ {
+  "day": "cdip:067p1_swell_2024-12-14",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 40.91670116522533,
+  "sir_sim_p10_db": 37.50384602454293,
+  "sir_theory_db": 39.00209547386218
+ },
+ {
+  "day": "cdip:067p1_swell_2024-12-14",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 33.606037859253,
+  "sir_sim_p10_db": 30.32402237853049,
+  "sir_theory_db": 28.11662842821672
+ },
+ {
+  "day": "cdip:067p1_swell_2024-12-14",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 11.195221864159816,
+  "sir_sim_p10_db": 7.3429676975434415,
+  "sir_theory_db": 11.508343512213102
+ },
+ {
+  "day": "cdip:067p1_swell_2024-12-14",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 35.87028107473593,
+  "sir_sim_p10_db": 33.13171093099468,
+  "sir_theory_db": 32.07543217777633
+ },
+ {
+  "day": "cdip:067p1_swell_2024-12-14",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 39.093249291532636,
+  "sir_sim_p10_db": 38.220569520798406,
+  "sir_theory_db": 38.11185220802129
+ },
+ {
+  "day": "cdip:067p1_wind_2024-09-10",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 28.541267588675012,
+  "sir_sim_p10_db": 24.518575515324773,
+  "sir_theory_db": 22.65263296545877
+ },
+ {
+  "day": "cdip:067p1_wind_2024-09-10",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 28.65451621852282,
+  "sir_sim_p10_db": 25.66702448930932,
+  "sir_theory_db": 29.516197066638647
+ },
+ {
+  "day": "cdip:067p1_wind_2024-09-10",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 30.02669503668873,
+  "sir_sim_p10_db": 29.872000269875425,
+  "sir_theory_db": 31.95198664913635
+ },
+ {
+  "day": "cdip:067p1_wind_2024-09-10",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 39.23571310889535,
+  "sir_sim_p10_db": 36.10039012722194,
+  "sir_theory_db": 38.95491824945796
+ },
+ {
+  "day": "cdip:067p1_wind_2024-09-10",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 30.510591906266345,
+  "sir_sim_p10_db": 28.03152435394924,
+  "sir_theory_db": 22.65263296545877
+ },
+ {
+  "day": "cdip:067p1_wind_2024-09-10",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 6.841351177683944,
+  "sir_sim_p10_db": 3.3482005278938423,
+  "sir_theory_db": 5.528649564449042
+ },
+ {
+  "day": "cdip:067p1_wind_2024-09-10",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 34.92405376791859,
+  "sir_sim_p10_db": 32.856593465902264,
+  "sir_theory_db": 31.95198664913635
+ },
+ {
+  "day": "cdip:067p1_wind_2024-09-10",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 35.22927932515658,
+  "sir_sim_p10_db": 32.36734863341185,
+  "sir_theory_db": 37.6849767030081
+ },
+ {
+  "day": "cdip:100p1_mixed_2023-02-22",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 27.766469491313565,
+  "sir_sim_p10_db": 24.847922577747706,
+  "sir_theory_db": 21.728177702323634
+ },
+ {
+  "day": "cdip:100p1_mixed_2023-02-22",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 29.650961774790687,
+  "sir_sim_p10_db": 27.409532835361848,
+  "sir_theory_db": 28.61040744697908
+ },
+ {
+  "day": "cdip:100p1_mixed_2023-02-22",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 33.430965503094974,
+  "sir_sim_p10_db": 29.881479866399815,
+  "sir_theory_db": 31.908700890215087
+ },
+ {
+  "day": "cdip:100p1_mixed_2023-02-22",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 39.955984625902595,
+  "sir_sim_p10_db": 38.03441344850316,
+  "sir_theory_db": 38.93811189765834
+ },
+ {
+  "day": "cdip:100p1_mixed_2023-02-22",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 28.257239414314416,
+  "sir_sim_p10_db": 25.710621507143667,
+  "sir_theory_db": 21.728177702323634
+ },
+ {
+  "day": "cdip:100p1_mixed_2023-02-22",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 4.7880074330918205,
+  "sir_sim_p10_db": 0.7907901047334202,
+  "sir_theory_db": 4.519586990666794
+ },
+ {
+  "day": "cdip:100p1_mixed_2023-02-22",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 29.026570544609275,
+  "sir_sim_p10_db": 26.33086818855156,
+  "sir_theory_db": 31.908700890215087
+ },
+ {
+  "day": "cdip:100p1_mixed_2023-02-22",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 38.56539670546351,
+  "sir_sim_p10_db": 35.108414246283104,
+  "sir_theory_db": 37.53718566468709
+ },
+ {
+  "day": "cdip:100p1_swell_2023-07-10",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 35.182736916115346,
+  "sir_sim_p10_db": 33.818102896181706,
+  "sir_theory_db": 29.623758341324383
+ },
+ {
+  "day": "cdip:100p1_swell_2023-07-10",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 35.608847988359884,
+  "sir_sim_p10_db": 32.16169360045821,
+  "sir_theory_db": 35.32366130092567
+ },
+ {
+  "day": "cdip:100p1_swell_2023-07-10",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 31.684038679975433,
+  "sir_sim_p10_db": 26.963692926582507,
+  "sir_theory_db": 32.09195276161959
+ },
+ {
+  "day": "cdip:100p1_swell_2023-07-10",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 41.46589047964205,
+  "sir_sim_p10_db": 38.37949509424748,
+  "sir_theory_db": 39.01104850197887
+ },
+ {
+  "day": "cdip:100p1_swell_2023-07-10",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 34.99668703542595,
+  "sir_sim_p10_db": 33.55367821484167,
+  "sir_theory_db": 29.623758341324383
+ },
+ {
+  "day": "cdip:100p1_swell_2023-07-10",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 13.001169257380482,
+  "sir_sim_p10_db": 10.600705340222035,
+  "sir_theory_db": 12.7256374855373
+ },
+ {
+  "day": "cdip:100p1_swell_2023-07-10",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 35.08706752904124,
+  "sir_sim_p10_db": 31.59857923909283,
+  "sir_theory_db": 32.09195276161959
+ },
+ {
+  "day": "cdip:100p1_swell_2023-07-10",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 36.04505422232644,
+  "sir_sim_p10_db": 32.89775587145973,
+  "sir_theory_db": 38.172926265452766
+ },
+ {
+  "day": "cdip:100p1_wind_2025-02-13",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 29.669966641803043,
+  "sir_sim_p10_db": 27.557480699423905,
+  "sir_theory_db": 21.949683097314775
+ },
+ {
+  "day": "cdip:100p1_wind_2025-02-13",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 27.99449978110801,
+  "sir_sim_p10_db": 23.10914845210545,
+  "sir_theory_db": 29.383699879969384
+ },
+ {
+  "day": "cdip:100p1_wind_2025-02-13",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 29.41635584462661,
+  "sir_sim_p10_db": 26.50881929282932,
+  "sir_theory_db": 31.936384479521806
+ },
+ {
+  "day": "cdip:100p1_wind_2025-02-13",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 40.3344933815771,
+  "sir_sim_p10_db": 37.505368511126605,
+  "sir_theory_db": 38.95538550351294
+ },
+ {
+  "day": "cdip:100p1_wind_2025-02-13",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 29.060226870364954,
+  "sir_sim_p10_db": 27.778508044379798,
+  "sir_theory_db": 21.949683097314775
+ },
+ {
+  "day": "cdip:100p1_wind_2025-02-13",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 5.919585212179586,
+  "sir_sim_p10_db": 2.0665113235755057,
+  "sir_theory_db": 4.755750021539539
+ },
+ {
+  "day": "cdip:100p1_wind_2025-02-13",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 32.829397090082665,
+  "sir_sim_p10_db": 30.142048381370323,
+  "sir_theory_db": 31.936384479521806
+ },
+ {
+  "day": "cdip:100p1_wind_2025-02-13",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 38.127102896080196,
+  "sir_sim_p10_db": 35.24843440036827,
+  "sir_theory_db": 37.639295463735024
+ },
+ {
+  "day": "ooi:CE04OSSM/20230325",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 21.718175834219725,
+  "sir_sim_p10_db": 19.165424744684913,
+  "sir_theory_db": 17.177003188964388
+ },
+ {
+  "day": "ooi:CE04OSSM/20230325",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 22.29310617092966,
+  "sir_sim_p10_db": 19.260362488602755,
+  "sir_theory_db": 25.292856199071583
+ },
+ {
+  "day": "ooi:CE04OSSM/20230325",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 30.817403643009243,
+  "sir_sim_p10_db": 28.224872092217264,
+  "sir_theory_db": 30.11471717737434
+ },
+ {
+  "day": "ooi:CE04OSSM/20230325",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 37.85421165217591,
+  "sir_sim_p10_db": 36.1751284610289,
+  "sir_theory_db": 37.71539748875067
+ },
+ {
+  "day": "ooi:CE04OSSM/20230325",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 21.764555453064872,
+  "sir_sim_p10_db": 20.076966513890273,
+  "sir_theory_db": 17.177003188964388
+ },
+ {
+  "day": "ooi:CE04OSSM/20230325",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": -2.451571625943023,
+  "sir_sim_p10_db": -5.5260964880454475,
+  "sir_theory_db": -0.7856280714578319
+ },
+ {
+  "day": "ooi:CE04OSSM/20230325",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 33.51275387763929,
+  "sir_sim_p10_db": 30.79168160169728,
+  "sir_theory_db": 30.11471717737434
+ },
+ {
+  "day": "ooi:CE04OSSM/20230325",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 34.313015904761706,
+  "sir_sim_p10_db": 31.8683221697327,
+  "sir_theory_db": 35.796356713519955
+ },
+ {
+  "day": "ooi:CE04OSSM/20230317",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 26.0965514583706,
+  "sir_sim_p10_db": 22.87491778249891,
+  "sir_theory_db": 20.95823583402808
+ },
+ {
+  "day": "ooi:CE04OSSM/20230317",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 28.23804013626961,
+  "sir_sim_p10_db": 25.625251015344965,
+  "sir_theory_db": 28.82458208026124
+ },
+ {
+  "day": "ooi:CE04OSSM/20230317",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 33.32528408075436,
+  "sir_sim_p10_db": 28.287598667451228,
+  "sir_theory_db": 30.349840850090914
+ },
+ {
+  "day": "ooi:CE04OSSM/20230317",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 39.85342679258874,
+  "sir_sim_p10_db": 37.166286616525625,
+  "sir_theory_db": 37.95058191021478
+ },
+ {
+  "day": "ooi:CE04OSSM/20230317",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 27.009987966685426,
+  "sir_sim_p10_db": 24.84135077873079,
+  "sir_theory_db": 20.95823583402808
+ },
+ {
+  "day": "ooi:CE04OSSM/20230317",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 3.017539816183609,
+  "sir_sim_p10_db": -0.8239476863338213,
+  "sir_theory_db": 2.711035263489172
+ },
+ {
+  "day": "ooi:CE04OSSM/20230317",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 34.215016892253644,
+  "sir_sim_p10_db": 30.58231334444558,
+  "sir_theory_db": 30.349840850090914
+ },
+ {
+  "day": "ooi:CE04OSSM/20230317",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 35.27736209207124,
+  "sir_sim_p10_db": 33.340405589457454,
+  "sir_theory_db": 36.65336798461731
+ },
+ {
+  "day": "ooi:CE04OSSM/20230731",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 27.22129222846373,
+  "sir_sim_p10_db": 24.83833628423035,
+  "sir_theory_db": 20.877749447634663
+ },
+ {
+  "day": "ooi:CE04OSSM/20230731",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 31.418493932058908,
+  "sir_sim_p10_db": 29.50253785066428,
+  "sir_theory_db": 29.269168139861396
+ },
+ {
+  "day": "ooi:CE04OSSM/20230731",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 34.704638572582766,
+  "sir_sim_p10_db": 32.30110769536351,
+  "sir_theory_db": 30.27178326158913
+ },
+ {
+  "day": "ooi:CE04OSSM/20230731",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 38.671365843143015,
+  "sir_sim_p10_db": 35.106337315003564,
+  "sir_theory_db": 37.787961149636075
+ },
+ {
+  "day": "ooi:CE04OSSM/20230731",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 26.595909410337157,
+  "sir_sim_p10_db": 25.17542725767422,
+  "sir_theory_db": 20.877749447634663
+ },
+ {
+  "day": "ooi:CE04OSSM/20230731",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 2.0202435059309427,
+  "sir_sim_p10_db": -1.890706489809755,
+  "sir_theory_db": 2.536082002584852
+ },
+ {
+  "day": "ooi:CE04OSSM/20230731",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 31.248391935498624,
+  "sir_sim_p10_db": 28.039645051135277,
+  "sir_theory_db": 30.27178326158913
+ },
+ {
+  "day": "ooi:CE04OSSM/20230731",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 35.87332493183113,
+  "sir_sim_p10_db": 32.00882543660782,
+  "sir_theory_db": 36.341842327177154
+ },
+ {
+  "day": "ooi:GI01SUMO/20230919",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 24.996212767879054,
+  "sir_sim_p10_db": 21.836315626409228,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "day": "ooi:GI01SUMO/20230919",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 25.226509932862008,
+  "sir_sim_p10_db": 22.951913567633806,
+  "sir_theory_db": 27.58954593791996
+ },
+ {
+  "day": "ooi:GI01SUMO/20230919",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 29.640512278885236,
+  "sir_sim_p10_db": 26.191986788364996,
+  "sir_theory_db": 30.255274069574483
+ },
+ {
+  "day": "ooi:GI01SUMO/20230919",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 39.19426752801875,
+  "sir_sim_p10_db": 36.90760219837439,
+  "sir_theory_db": 37.414294168993436
+ },
+ {
+  "day": "ooi:GI01SUMO/20230919",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 24.822112057782896,
+  "sir_sim_p10_db": 23.030695193948894,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "day": "ooi:GI01SUMO/20230919",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 1.7393672168269771,
+  "sir_sim_p10_db": -2.328787020122765,
+  "sir_theory_db": 2.1569275401631254
+ },
+ {
+  "day": "ooi:GI01SUMO/20230919",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 30.768409559104306,
+  "sir_sim_p10_db": 26.25248945173677,
+  "sir_theory_db": 30.255274069574483
+ },
+ {
+  "day": "ooi:GI01SUMO/20230919",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 35.066117937089544,
+  "sir_sim_p10_db": 33.026489114612076,
+  "sir_theory_db": 36.296407204398086
+ },
+ {
+  "day": "ooi:GI01SUMO/20231005",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 24.328570226482537,
+  "sir_sim_p10_db": 22.315549685548394,
+  "sir_theory_db": 19.88342933028388
+ },
+ {
+  "day": "ooi:GI01SUMO/20231005",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 27.441414639769658,
+  "sir_sim_p10_db": 24.500834376794902,
+  "sir_theory_db": 28.17777108064795
+ },
+ {
+  "day": "ooi:GI01SUMO/20231005",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 34.64105964125368,
+  "sir_sim_p10_db": 32.262906401419876,
+  "sir_theory_db": 30.275239036231238
+ },
+ {
+  "day": "ooi:GI01SUMO/20231005",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 37.540424610796336,
+  "sir_sim_p10_db": 35.177680677567366,
+  "sir_theory_db": 37.476469020117136
+ },
+ {
+  "day": "ooi:GI01SUMO/20231005",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 26.745894587190968,
+  "sir_sim_p10_db": 25.150242440137898,
+  "sir_theory_db": 19.88342933028388
+ },
+ {
+  "day": "ooi:GI01SUMO/20231005",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 3.2989230457512386,
+  "sir_sim_p10_db": 0.1231993273966552,
+  "sir_theory_db": 2.3316969439082422
+ },
+ {
+  "day": "ooi:GI01SUMO/20231005",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 32.51589089665416,
+  "sir_sim_p10_db": 29.09660531840253,
+  "sir_theory_db": 30.275239036231238
+ },
+ {
+  "day": "ooi:GI01SUMO/20231005",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 34.77999453113206,
+  "sir_sim_p10_db": 32.536703113896465,
+  "sir_theory_db": 36.36678309095004
+ },
+ {
+  "day": "ooi:GI01SUMO/20230915",
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 29.150406292377525,
+  "sir_sim_p10_db": 25.848581553209563,
+  "sir_theory_db": 20.519007652004944
+ },
+ {
+  "day": "ooi:GI01SUMO/20230915",
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 30.100287763296592,
+  "sir_sim_p10_db": 27.38679130245826,
+  "sir_theory_db": 30.4713063738399
+ },
+ {
+  "day": "ooi:GI01SUMO/20230915",
+  "packet_s": 1.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 31.576993295598037,
+  "sir_sim_p10_db": 28.009237318688225,
+  "sir_theory_db": 30.276081316772405
+ },
+ {
+  "day": "ooi:GI01SUMO/20230915",
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 38.19320664341258,
+  "sir_sim_p10_db": 36.61498610421917,
+  "sir_theory_db": 37.40790588286305
+ },
+ {
+  "day": "ooi:GI01SUMO/20230915",
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 27.17334048810681,
+  "sir_sim_p10_db": 24.059748971788622,
+  "sir_theory_db": 20.519007652004944
+ },
+ {
+  "day": "ooi:GI01SUMO/20230915",
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 5.995654642877193,
+  "sir_sim_p10_db": 1.5770871820013908,
+  "sir_theory_db": 3.6648932675254193
+ },
+ {
+  "day": "ooi:GI01SUMO/20230915",
+  "packet_s": 4.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 29.46750976987831,
+  "sir_sim_p10_db": 27.602597115825354,
+  "sir_theory_db": 30.276081316772405
+ },
+ {
+  "day": "ooi:GI01SUMO/20230915",
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 36.571255717780474,
+  "sir_sim_p10_db": 35.110111528187744,
+  "sir_theory_db": 36.37780940318323
+ }
+]

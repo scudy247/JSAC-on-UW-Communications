@@ -1,0 +1,38 @@
+{
+  "029p1": {
+    "xyzStartTime": 1643230800.0,
+    "xyzSampleRate": 1.2799999713897705,
+    "xyzFilterDelay": 133.3000030517578,
+    "metaDeployLatitude": 37.94032287597656,
+    "metaDeployLongitude": -123.46499633789062,
+    "metaWaterDepth": 600.0,
+    "station": "029p1",
+    "name": "Point Reyes",
+    "deployment": "d25",
+    "n_wave": 61394
+  },
+  "067p1": {
+    "xyzStartTime": 1710622800.0,
+    "xyzSampleRate": 1.2799999713897705,
+    "xyzFilterDelay": 133.3000030517578,
+    "metaDeployLatitude": 33.22549819946289,
+    "metaDeployLongitude": -119.8915023803711,
+    "metaWaterDepth": 315.0,
+    "station": "067p1",
+    "name": "San Nicolas Island",
+    "deployment": "d30",
+    "n_wave": 42134
+  },
+  "100p1": {
+    "xyzStartTime": 1674853200.0,
+    "xyzSampleRate": 1.2799999713897705,
+    "xyzFilterDelay": 133.3000030517578,
+    "metaDeployLatitude": 32.93000030517578,
+    "metaDeployLongitude": -117.39199829101562,
+    "metaWaterDepth": 571.9600219726562,
+    "station": "100p1",
+    "name": "Torrey Pines Outer",
+    "deployment": "d19",
+    "n_wave": 56922
+  }
+}

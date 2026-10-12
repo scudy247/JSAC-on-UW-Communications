@@ -1,0 +1,417 @@
+"""
+End-to-end receivers (PLAN: Phase 5). Both take the received baseband y (unknown start, unknown Doppler) and return
+the demodulated data symbols with what they estimated.
+
+receive_signal_only  the signal-only front end of Li et al. 2008 / Lee et al. 2026: find the preamble, search the
+                     postamble over the full Doppler range, one scale per packet from their gap, resample, then remove
+                     a residual frequency offset per OFDM symbol from the null subcarriers.
+receive_aided        sensor-aided: find the preamble (the chirp tolerates Doppler), resample along the sensor prior
+                     (side information + own IMU, as a Doppler trajectory over the frame), then estimate only what the
+                     prior missed: a residual scale from preamble/postamble in a narrow window, and the per-symbol
+                     residual offset as above. Steps can be switched off to measure what each source contributes.
+The prior is given per emitted sample of the frame (index 0 = start of the preamble).
+"""
+import numpy as np
+
+from . import estimators, fusion, header as hdr
+from .waveform import unwarp
+
+
+CFO_SPAN = 2.0  # residual-CFO search in subcarrier spacings (wide enough for rough-sea residuals)
+
+
+def _demod(z, F, cfo=True, backoff=0):
+    """Data symbols of a resampled frame z (index 0 = preamble), with optional per-symbol residual-CFO removal."""
+    o = F.o
+    Y, offsets = np.empty((F.n_data, o.n_sc), complex), []
+    for k in range(F.n_data):
+        a = F.data_start + k * o.n_symbol + o.n_cp - backoff
+        seg = z[a:a + o.n_fft]
+        if len(seg) < o.n_fft:
+            seg = np.pad(seg, (0, o.n_fft - len(seg)))
+        d = estimators.residual_cfo(seg, o, span=CFO_SPAN, n_grid=81, null_bins=F.null_bins()) if cfo else 0.0
+        seg = seg * np.exp(-2j * np.pi * d * np.arange(o.n_fft) / o.fs)
+        Y[k] = np.fft.fft(seg)[o.bins()] * np.sqrt(o.n_sc) / o.n_fft
+        offsets.append(d)
+    return Y, offsets
+
+
+def _post_window(n_pre, F, eps_max):
+    """Search window for the postamble when the scale is within +-eps_max."""
+    lo = n_pre + F.gap / (1 + eps_max)
+    hi = n_pre + F.gap / (1 - eps_max)
+    return int(np.floor(lo)) - 2, int(np.ceil(hi)) + 2
+
+
+def receive_signal_only(y, F, search=(0, None), eps_max=3e-3, cfo=True, backoff=0):
+    o, c = F.o, F.chirp()
+    n_pre, _ = estimators.detect_chirp(y, F, *search)
+    n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
+    eps = estimators.scale_pre_post(n_pre, n_post, F.gap)
+    i0 = int(round(n_pre))
+    seg = y[i0:i0 + int(F.length * (1 + 2 * eps_max)) + 4096]
+    z = unwarp(seg, o.fs, np.full(len(seg), eps), o.fc)
+    Y, offs = _demod(z, F, cfo, backoff)
+    return Y, dict(n_pre=n_pre, eps=eps, cfo=offs, post_window=_post_window(n_pre, F, eps_max))
+
+
+def receive_aided(y, F, prior, search=(0, None), eps_res_max=3e-4, prepost=True, cfo=True, backoff=0):
+    """prior: Doppler trajectory for emitted samples 0 .. len(prior)-1 of the frame (side information + own IMU)."""
+    o, c = F.o, F.chirp()
+    n_pre, _ = estimators.detect_chirp(y, F, *search)
+    i0 = int(round(n_pre))
+    seg = y[i0:i0 + len(prior)]
+    z = unwarp(seg, o.fs, prior[:len(seg)], o.fc)
+    eps_r = 0.0
+    if prepost:
+        m_pre, _ = estimators.detect_chirp(z, F, 0, 8)
+        m_post, _ = estimators.detect_chirp(z, F, *_post_window(m_pre, F, eps_res_max))
+        eps_r = estimators.scale_pre_post(m_pre, m_post, F.gap)
+        z = unwarp(z, o.fs, np.full(len(z), eps_r), o.fc)
+    Y, offs = _demod(z, F, cfo, backoff)
+    return Y, dict(n_pre=n_pre, eps_residual=eps_r, cfo=offs, post_window=_post_window(0, F, eps_res_max))
+
+
+def receive_with_header(y, F, rx_prior, alloc, ranges, basis_fn, search=(0, None), eps_max=3e-3, backoff=0):
+    """Full sensor-aided chain with a real header. rx_prior: the receiver's own IMU share per emitted sample of the
+    frame; alloc / ranges: the side-information quantiser (known to both ends); basis_fn(c, m): rebuild the
+    transmitter's share at emitted samples m from coefficients c. Returns data symbols, info (header ok, bits, ...).
+    Order: own IMU -> mean scale from preamble / postamble -> residual CFO of the header symbol -> header bits -> CRC;
+    if it passes, resample along side information + own IMU and run receive_aided, else fall back to
+    receive_signal_only."""
+    o, c = F.o, F.chirp()
+    n_pre, _ = estimators.detect_chirp(y, F, *search)
+    i0 = int(round(n_pre))
+    seg = y[i0:i0 + len(rx_prior)]
+    z = unwarp(seg, o.fs, rx_prior[:len(seg)], o.fc)
+    m_pre, _ = estimators.detect_chirp(z, F, 0, 8)
+    m_post, _ = estimators.detect_chirp(z, F, *_post_window(m_pre, F, eps_max))
+    eps_mean = estimators.scale_pre_post(m_pre, m_post, F.gap)
+    z = unwarp(z, o.fs, np.full(len(z), eps_mean), o.fc)
+    a = F.header_start + o.n_cp - backoff
+    hseg = z[a:a + o.n_fft]
+    d = estimators.residual_cfo(hseg, o, span=CFO_SPAN, n_grid=81, null_bins=F.null_bins())
+    hseg = hseg * np.exp(-2j * np.pi * d * np.arange(o.n_fft) / o.fs)
+    Yh = np.fft.fft(hseg)[o.bins()] * np.sqrt(o.n_sc) / o.n_fft
+    n_bits = int(np.sum(alloc)) + 8
+    bits, soft = hdr.demodulate(Yh, n_bits, o, F.used)
+    payload, ok = hdr.check(bits)
+    info = dict(header_ok=ok, header_margin=float(np.min(np.abs(soft))), eps_mean=eps_mean, header_cfo=d)
+    if not ok:
+        Y, inf2 = receive_signal_only(y, F, search, eps_max=eps_max, backoff=backoff)
+        info.update(inf2, fallback=True)
+        return Y, info
+    coef = hdr.unpack(payload, alloc, ranges)
+    prior = basis_fn(coef, np.arange(len(rx_prior))) + rx_prior
+    Y, inf2 = receive_aided(y, F, prior, search, backoff=backoff)
+    info.update(inf2, fallback=False, coefficients=coef)
+    return Y, info
+
+
+FUSION = dict(sigma_r0=3e-4, sigma_dr0=3e-4, q=(2e-4) ** 2, cfo_std_0db=0.5, timing_std_samples=0.3)
+
+
+def symbol_snr(seg, o, F):
+    """Per-subcarrier SNR of one FFT window: power on used subcarriers vs power on in-band nulls."""
+    Yk = np.fft.fft(seg)[o.bins()] * np.sqrt(o.n_sc) / o.n_fft
+    pn = max(float(np.mean(np.abs(Yk[F.nulls]) ** 2)), 1e-12)
+    ps = float(np.mean(np.abs(Yk[F.used]) ** 2))
+    return max(ps / pn - 1.0, 1e-3)
+
+
+def receive_signal_fused(y, F, search=(0, None), eps_max=3e-3, params=None, backoff=0):
+    """Signal-only Kalman baseline (fair counterpart of receive_fused): the same smoother, but the 'prior' is only
+    the mean scale from preamble / postamble searched over +-eps_max, with wide uncertainty and fast dynamics, since
+    nothing is known about the motion inside the packet."""
+    o, c = F.o, F.chirp()
+    n_pre, _ = estimators.detect_chirp(y, F, *search)
+    n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
+    eps = estimators.scale_pre_post(n_pre, n_post, F.gap)
+    i0 = int(round(n_pre))
+    prior = np.full(int(F.length * (1 + 2 * eps_max)) + 4096, eps)
+    p = dict(SIGNAL_FUSION, **(params or {}))
+    Y, info = receive_fused(y[i0 - 64:], F, prior, (0, 200), eps_res_max=3e-4, params=p, backoff=backoff)
+    info.update(eps_mean=eps)
+    return Y, info
+
+
+SIGNAL_FUSION = dict(sigma_r0=2e-4, sigma_dr0=2e-3, q=(4e-3) ** 2)
+
+
+def receive_fused(y, F, prior, search=(0, None), eps_res_max=3e-4, params=None, backoff=0):
+    """Sensor-aided receiver with Kalman fusion: resample along the prior, measure the postamble timing and each
+    symbol's residual frequency offset (with SNR-dependent variance), smooth the residual Doppler over the packet
+    (fusion.smooth), resample once along it, demodulate without per-symbol corrections."""
+    p = dict(FUSION, **(params or {}))
+    o, c = F.o, F.chirp()
+    n_pre, _ = estimators.detect_chirp(y, F, *search)
+    i0 = int(round(n_pre))
+    seg = y[i0:i0 + len(prior)]
+    z0 = unwarp(seg, o.fs, prior[:len(seg)], o.fc)
+    m_pre, _ = estimators.detect_chirp(z0, F, 0, 8)
+    m_post, _ = estimators.detect_chirp(z0, F, *_post_window(m_pre, F, eps_res_max))
+    events = []
+    tau_post = (F.gap - (m_post - m_pre)) / o.fs  # y(t) = s(t + tau): a feature arrives tau earlier
+    events.append((F.post_start / o.fs, "tau", tau_post, (p["timing_std_samples"] / o.fs) ** 2))
+    starts = [F.header_start] + [F.data_start + k * o.n_symbol for k in range(F.n_data)]
+    snrs = []
+    for a0 in starts:
+        a = a0 + o.n_cp - backoff
+        w = z0[a:a + o.n_fft]
+        d = estimators.residual_cfo(w, o, span=CFO_SPAN, n_grid=81, null_bins=F.null_bins())
+        snr = symbol_snr(w * np.exp(-2j * np.pi * d * np.arange(o.n_fft) / o.fs), o, F)
+        var = (p["cfo_std_0db"] ** 2 / snr + 0.01 ** 2) / o.fc ** 2
+        events.append(((a + o.n_fft / 2) / o.fs, "r", d / o.fc, var))
+        snrs.append(snr)
+    t_grid = np.arange(0, len(z0), 160) / o.fs  # every 5 ms
+    r_hat, r_std = fusion.smooth(events, t_grid, p["sigma_r0"], p["sigma_dr0"], p["q"])
+    r_full = np.interp(np.arange(len(z0)) / o.fs, t_grid, r_hat)
+    z = unwarp(z0, o.fs, r_full, o.fc)
+    Y, _ = _demod(z, F, cfo=False, backoff=backoff)
+    return Y, dict(n_pre=n_pre, tau_post=tau_post, snr_est_db=10 * np.log10(np.mean(snrs)), r_hat=r_hat,
+                   r_std=r_std, t_grid=t_grid)
+
+
+def receive_cho_kim(y, F, search=(0, None), eps_max=3e-3, rho_min=0.4, backoff=0):
+    """Cho and Kim (IET Commun. 2026) baseline: constant velocity + constant acceleration over the frame. Velocity
+    (mean scale) from preamble / postamble; acceleration from the per-symbol frequency offsets given by the
+    cyclic-prefix correlation (symbols with normalised correlation below rho_min discarded), fitted as a line over
+    the symbol centres (slope = acceleration; the intercept also corrects the mean, which gives the baseline its best
+    version); one resampling along the resulting linear Doppler trajectory, no per-symbol correction."""
+    o, c = F.o, F.chirp()
+    n_pre, _ = estimators.detect_chirp(y, F, *search)
+    n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
+    eps = estimators.scale_pre_post(n_pre, n_post, F.gap)
+    i0 = int(round(n_pre))
+    seg = y[i0:i0 + int(F.length * (1 + 2 * eps_max)) + 4096]
+    z0 = unwarp(seg, o.fs, np.full(len(seg), eps), o.fc)
+    starts = [F.header_start] + [F.data_start + k * o.n_symbol for k in range(F.n_data)]
+    t_c, r = [], []
+    for a in starts:
+        d, rho = estimators.cp_offset(z0, a, o)
+        if rho >= rho_min:
+            t_c.append((a + o.n_symbol / 2) / o.fs)
+            r.append(d / o.fc)
+    t_mid = F.gap / 2 / o.fs
+    slope, icpt = np.polyfit(np.array(t_c) - t_mid, r, 1) if len(t_c) >= 2 else (0.0, 0.0)
+    t = np.arange(len(z0)) / o.fs
+    z = unwarp(z0, o.fs, icpt + slope * (t - t_mid), o.fc)  # line about the frame centre (intercept: best version)
+    Y, _ = _demod(z, F, cfo=False, backoff=backoff)
+    return Y, dict(n_pre=n_pre, eps=eps + icpt, accel_scale_per_s=slope, accel_m_s2=slope * 1500.0, n_used=len(t_c))
+
+
+def receive_branches(y, F, trajectories, search=(0, None), backoff=0):
+    """Multi-branch front end (Tu et al. 2013, multiple resampling): one resampling per Doppler trajectory (each a
+    full trajectory per emitted sample of the frame, index 0 = preamble), each branch demodulated without per-symbol
+    corrections. Returns the list of branch outputs (combine with receiver.combine / decode_combined)."""
+    o = F.o
+    n_pre, _ = estimators.detect_chirp(y, F, *search)
+    i0 = int(round(n_pre))
+    out = []
+    for tr in trajectories:
+        seg = y[i0:i0 + len(tr)]
+        z = unwarp(seg, o.fs, tr[:len(seg)], o.fc)
+        out.append(_demod(z, F, cfo=False, backoff=backoff)[0])
+    return out
+
+
+def grid_trajectories(y, F, offsets=(-1.5e-4, 0.0, 1.5e-4), search=(0, None), eps_max=3e-3):
+    """Signal-only branch set (Tu-like): the signal-only Kalman bulk trajectory plus fixed scale offsets."""
+    o = F.o
+    _, info = receive_signal_fused(y, F, search, eps_max=eps_max)
+    n = int(F.length * (1 + 2 * eps_max)) + 4096
+    t = np.arange(n) / o.fs
+    bulk = info["eps_mean"] + np.interp(t, info["t_grid"], info["r_hat"])
+    return [bulk + d for d in offsets]
+
+
+def receive_sic(y, F, trajectories, rel_delays, search=(0, None), iters=3, mod="qpsk", backoff=0, decisions=None,
+                refine_common=False, eps_res_max=3e-4):
+    """Per-path interference cancellation. trajectories[p]: Doppler trajectory of path p per emitted sample of the
+    frame (index 0 = preamble; path 0 = the path the receiver locks on), rel_delays[p]: its delay relative to path 0 [s]
+    (from the link geometry, e.g. Bellhop). Each iteration: decisions on the data (decoder-aided by default: decode,
+    re-encode), regenerate every path from them with its own Doppler and delay, fit the path gains by least squares
+    on the data part, and for every path p subtract all the others and resample along p's Doppler (one cleaned
+    branch per path); the branches are combined (MRC) for the next decisions and the output. With trajectories from
+    sensors (own motion, side information, path angles) only the gains are estimated from the signal.
+    decisions: None = decoder-aided on the combined branches (hard slicing does not converge at 2-6 dB SINR; decisions
+    from path 0 alone locked in at 9 bit errors on a two-path test, from the combined branches they keep improving),
+    "hard", or a callable branches -> X. Returns (branches, info); decode with receiver.decode_combined."""
+    from .receiver import build_data, combine, decode_combined, hard_decisions
+    from .waveform import warp
+    o = F.o
+    n_pre, _ = estimators.detect_chirp(y, F, *search)
+    i0 = int(round(n_pre))
+    n = min(len(trajectories[0]), len(y) - i0)
+    seg = y[i0:i0 + n]
+    common = 0.0
+    if refine_common:  # sensor drift is common to all paths: measure it once from preamble / postamble along path 0
+        z0 = unwarp(seg, o.fs, trajectories[0][:n], o.fc)
+        m_pre, _ = estimators.detect_chirp(z0, F, 0, 8)
+        m_post, _ = estimators.detect_chirp(z0, F, *_post_window(m_pre, F, eps_res_max))
+        common = estimators.scale_pre_post(m_pre, m_post, F.gap)
+        trajectories = [tr + common for tr in trajectories]
+    branches = [_demod(unwarp(seg, o.fs, tr[:n], o.fc), F, cfo=False, backoff=backoff)[0] for tr in trajectories]
+    a, b = F.header_start, F.post_start - F.n_guard
+    gains, cleaned = None, []
+    for _ in range(iters):
+        if decisions == "hard":
+            Z, _ = combine(branches, F)
+            Xh = hard_decisions(Z, F, mod)
+        elif decisions is None:
+            Xh = build_data(decode_combined(branches, F, mod), F, mod)
+        else:
+            Xh = decisions(branches)
+        s_hat = F.build(np.zeros((F.n_header, o.n_sc), complex), Xh)
+        s_hat = np.pad(s_hat, (0, max(0, n - len(s_hat))))[:n]
+        regen = []
+        for tr, d in zip(trajectories, rel_delays):
+            k = int(round(d * o.fs))
+            sp = np.concatenate([np.zeros(k, complex), s_hat])[:n]
+            regen.append(warp(sp, o.fs, tr[:n], o.fc))
+        A = np.stack([r[a:b] for r in regen], axis=1)
+        gains = np.linalg.lstsq(A, seg[a:b], rcond=None)[0]
+        branches, cleaned = [], []
+        for p, tr in enumerate(trajectories):
+            clean_p = seg - sum(g * r for q, (g, r) in enumerate(zip(gains, regen)) if q != p)
+            zp = unwarp(clean_p, o.fs, tr[:n], o.fc)
+            cleaned.append(zp)
+            branches.append(_demod(zp, F, cfo=False, backoff=backoff)[0])
+    return branches, dict(n_pre=n_pre, gains=gains, common_correction=common, cleaned=cleaned,
+                          trajectories=trajectories)
+
+
+def signal_path_estimates(y, F, search=(0, None), max_delay=0.025, thresh=0.3, eps_max=3e-3):
+    """Signal-only multipath description for cancellation (baseline for the sensor-aided version):
+    delays: local peaks of the preamble's up-sweep correlation within max_delay of the first arrival, above thresh of
+    the strongest; per-path mean Doppler: each path's own preamble-to-postamble gap (multi-scale estimate);
+    within-packet variation: the signal-only Kalman trajectory, shared by all paths.
+    Returns (trajectories per emitted sample of the frame, relative delays [s], per-path mean scales)."""
+    o = F.o
+    n0, _ = estimators.detect_chirp(y, F, *search)
+    up = F.chirp_up()
+    lo = max(int(n0) - 32, 0)
+    hi = int(n0 + max_delay * o.fs) + 32
+    seg = y[lo:hi + len(up)]
+    corr = np.abs(np.correlate(seg, up, mode="valid"))
+    peaks = [i for i in range(1, len(corr) - 1) if corr[i] >= corr[i - 1] and corr[i] >= corr[i + 1]
+             and corr[i] >= thresh * corr.max()]
+    sel = []
+    for i in sorted(peaks, key=lambda k: -corr[k]):  # strongest first, at least 1 ms apart
+        if all(abs(i - j) > 0.001 * o.fs for j in sel):
+            sel.append(i)
+    sel = sorted(sel)
+    pos = [lo + i for i in sel]
+    pos = [p for p in pos if p >= n0 - 8] or [int(n0)]
+    eps0 = None
+    scales = []
+    for p in pos:
+        n_pre, _ = estimators.detect_chirp(y, F, p - 6, p + 6)
+        if eps0 is None:
+            n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
+            eps0 = estimators.scale_pre_post(n_pre, n_post, F.gap)
+        guess = n_pre + F.gap / (1 + eps0)
+        win = int(4e-4 * F.gap) + 8  # +-4e-4 around the first path's scale
+        n_post, _ = estimators.detect(y, F.chirp_up(), int(guess) - win, int(guess) + win, first_path=None)
+        n_post_d, _ = estimators.detect(y, F.chirp_down(), int(n_post + F.n_half) - 16, int(n_post + F.n_half) + 17,
+                                        first_path=None)
+        scales.append(estimators.scale_pre_post(n_pre, 0.5 * (n_post + n_post_d - F.n_half), F.gap))
+    rel = [(p - pos[0]) / o.fs for p in pos]
+    _, info = receive_signal_fused(y, F, search, eps_max=eps_max)
+    n = int(F.length * (1 + 2 * eps_max)) + 4096
+    t = np.arange(n) / o.fs
+    shape = np.interp(t, info["t_grid"], info["r_hat"])
+    shape = shape - np.mean(shape[:F.length])
+    trajectories = [sc + shape for sc in scales]
+    return trajectories, rel, scales
+
+
+def _refine_path(z, F, tr, p):
+    """Per-path residual Doppler from a cleaned, resampled branch: per-symbol offsets on the nulls (with SNR-dependent
+    variance), smoothed by the Kalman smoother; returns the corrected trajectory."""
+    o = F.o
+    events = []
+    for a0 in [F.header_start] + [F.data_start + k * o.n_symbol for k in range(F.n_data)]:
+        a = a0 + o.n_cp
+        w = z[a:a + o.n_fft]
+        if len(w) < o.n_fft:
+            continue
+        d = estimators.residual_cfo(w, o, span=CFO_SPAN, n_grid=81, null_bins=F.null_bins())
+        snr = symbol_snr(w * np.exp(-2j * np.pi * d * np.arange(o.n_fft) / o.fs), o, F)
+        events.append(((a + o.n_fft / 2) / o.fs, "r", d / o.fc, (p["cfo_std_0db"] ** 2 / snr + 0.01 ** 2) / o.fc ** 2))
+    t_grid = np.arange(0, len(tr), 160) / o.fs
+    r_hat, _ = fusion.smooth(events, t_grid, p["sigma_r0"], p["sigma_dr0"], p["q"])
+    return tr + np.interp(np.arange(len(tr)) / o.fs, t_grid, r_hat)
+
+
+def _fit_residual(seg, regen, a, b):
+    A = np.stack([r[a:b] for r in regen], axis=1)
+    g = np.linalg.lstsq(A, seg[a:b], rcond=None)[0]
+    return float(np.sum(np.abs(seg[a:b] - A @ g) ** 2))
+
+
+def refine_paths_by_search(y, F, trs, rel, search=(0, None), grid=np.linspace(-6e-5, 6e-5, 9), passes=2,
+                           mod="qpsk", backoff=0):
+    """Correct each path's Doppler trajectory by the constant offset in `grid` that best explains the received signal
+    (least-squares fit of the paths regenerated from decoder-aided decisions), every path in turn, `passes` times with
+    fresh decisions. Used by the signal-only cancellation (wide grid around chirp estimates) and, around a sensor
+    prediction with a narrow grid, to absorb path-angle errors."""
+    from .receiver import build_data, decode_combined
+    from .waveform import warp
+    o = F.o
+    trs = [np.array(t, float) for t in trs]
+    n_pre, _ = estimators.detect_chirp(y, F, *search)
+    i0 = int(round(n_pre))
+    n = min(len(trs[0]), len(y) - i0)
+    seg = y[i0:i0 + n]
+    a, b = F.header_start, F.post_start - F.n_guard
+    for _pass in range(passes):
+        br, _ = receive_sic(y, F, trs, rel, search, iters=1, mod=mod, backoff=backoff)
+        Xh = build_data(decode_combined(br, F, mod), F, mod)
+        s_hat = F.build(np.zeros((F.n_header, o.n_sc), complex), Xh)
+        s_hat = np.pad(s_hat, (0, max(0, n - len(s_hat))))[:n]
+        shifted = [np.concatenate([np.zeros(int(round(d * o.fs)), complex), s_hat])[:n] for d in rel]
+        regen = [warp(sp, o.fs, tr[:n], o.fc) for sp, tr in zip(shifted, trs)]
+        for p in range(len(trs)):
+            best = None
+            for dlt in grid:
+                cand = warp(shifted[p], o.fs, trs[p][:n] + dlt, o.fc)
+                res = _fit_residual(seg, regen[:p] + [cand] + regen[p + 1:], a, b)
+                if best is None or res < best[0]:
+                    best = (res, dlt, cand)
+            trs[p] = trs[p] + best[1]
+            regen[p] = best[2]
+    return trs
+
+
+def receive_signal_sic(y, F, search=(0, None), iters=3, mod="qpsk", backoff=0, outer=0,
+                       grid=np.linspace(-6e-5, 6e-5, 9), passes=2, **kw):
+    """Signal-only per-path cancellation (fair counterpart of the sensor-aided one). Path delays and mean Doppler
+    from the chirps (signal_path_estimates; under overlapping chirps the means are off by ~3e-5 while cancellation
+    needs ~5e-6), then refine_paths_by_search (wide grid, every path, two passes), then the full cancellation.
+    outer > 0 adds rounds of per-path refinement from the cleaned branches (it degraded results when the first decode
+    failed, so it is off by default)."""
+    trs, rel, scales = signal_path_estimates(y, F, search, **kw)
+    if len(trs) == 1:
+        return receive_branches(y, F, trs, search, backoff), dict(rel=rel, scales=scales)
+    trs = refine_paths_by_search(y, F, trs, rel, search, grid, passes, mod, backoff)
+    br, info = receive_sic(y, F, trs, rel, search, iters=iters, mod=mod, backoff=backoff)
+    pp = dict(FUSION)
+    for _ in range(outer):
+        trs = [_refine_path(z, F, tr, pp) for z, tr in zip(info["cleaned"], info["trajectories"])]
+        br, info = receive_sic(y, F, trs, rel, search, iters=iters, mod=mod, backoff=backoff)
+    info.update(rel=rel, scales=scales)
+    return br, info
+
+
+def receive_sensor_sic(y, F, trs, rel, search=(0, None), iters=3, mod="qpsk", backoff=0, refine_common=True,
+                       grid=np.linspace(-2e-5, 2e-5, 9), passes=1):
+    """Sensor-aided per-path cancellation with a narrow signal search around the sensor prediction (absorbs path-angle
+    and geometry errors): common residual from preamble / postamble, refine_paths_by_search on `grid`, cancellation.
+    grid None: no search (receive_sic only)."""
+    if refine_common:
+        _, inf0 = receive_sic(y, F, trs, rel, search, iters=0, refine_common=True)
+        trs = inf0["trajectories"]
+    if grid is not None and len(trs) > 1:
+        trs = refine_paths_by_search(y, F, trs, rel, search, grid, passes, mod, backoff)
+    return receive_sic(y, F, trs, rel, search, iters=iters, mod=mod, backoff=backoff)

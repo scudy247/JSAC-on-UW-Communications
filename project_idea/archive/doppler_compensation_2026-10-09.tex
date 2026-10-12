@@ -1,0 +1,536 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme[progressbar=frametitle,numbering=fraction,block=fill]{metropolis}
+\usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric,decorations.pathreplacing}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tcolorbox}
+
+% Palette: deep sea navy, teal, amber accent
+\definecolor{sea}{HTML}{0B2545}
+\definecolor{teal}{HTML}{13838F}
+\definecolor{foam}{HTML}{E6F2F3}
+\definecolor{amber}{HTML}{E09F3E}
+\definecolor{mute}{HTML}{8A9BA8}
+\setbeamercolor{normal text}{fg=sea!90!black,bg=white}
+\setbeamercolor{alerted text}{fg=amber!85!black}
+\setbeamercolor{frametitle}{bg=sea,fg=white}
+\setbeamercolor{progress bar}{fg=teal,bg=foam}
+\setbeamercolor{title separator}{fg=teal}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{block title}{bg=foam,fg=sea}
+\setbeamercolor{block body}{bg=foam!45}
+\setbeamercolor{section in toc}{fg=sea}
+\makeatletter\setlength{\metropolis@frametitle@padding}{1.6ex}\makeatother
+
+\newcommand{\gapbox}[3]{%
+  \begin{tcolorbox}[colback=foam!60,colframe=foam!60,arc=2mm,boxrule=0pt,left=2mm,right=2mm,top=0.6mm,bottom=0.6mm,before skip=0.8mm,after skip=0.8mm]
+  {\bfseries\color{teal}#1}\hspace{1mm}{\small\bfseries #2}\\
+  {\footnotesize #3}
+  \end{tcolorbox}}
+\newcommand{\stat}[2]{%
+  \begin{minipage}[t]{\linewidth}\centering
+  {\fontsize{22}{24}\selectfont\bfseries\color{teal}#1}\\[1mm]
+  {\small #2}
+  \end{minipage}}
+
+% Evidence labels: what each statement rests on
+\newcommand{\evtag}[2]{\tikz[baseline=(t.base)]\node[fill=#1,text=white,rounded corners=0.7mm,inner xsep=1mm,inner ysep=0.35mm,font=\tiny\bfseries](t){#2};}
+\newcommand{\claim}{\evtag{sea!75}{CLAIM}}
+\newcommand{\sugg}{\evtag{teal}{SUGGESTED}}
+\newcommand{\open}{\evtag{amber}{OPEN}}
+\newcommand{\src}{\evtag{mute}{SOURCE}}
+\newcommand{\simres}{\evtag{teal!55!sea}{SIMULATED}}
+
+% Symbols used throughout
+\newcommand{\Nsym}{N_{\mathrm{sym}}}
+\newcommand{\Kup}{K_{\mathrm{upd}}}
+\newcommand{\dtol}{d_{\mathrm{tol}}}
+\newcommand{\etol}{e_{\mathrm{tol}}}
+\newcommand{\Pset}{\mathcal{P}}
+
+\newcommand{\eps}{\epsilon}
+
+\title{Doppler Compensation\\for Underwater Acoustic Links}
+\subtitle{Who removes which Doppler, where and when --- for group discussion}
+\date{9 October 2026}
+\institute{Target: IEEE JSAC special issue on Next-Generation Underwater Acoustic Communication Systems (deadline 31 March 2027)\\[1mm]
+\claim\ to be shown \quad \simres\ simulation result \quad \sugg\ design proposal \quad \open\ needs material, a proof or an experiment \quad \src\ found by search, not yet checked in full}
+
+\begin{document}
+
+\maketitle
+
+% ===========================================================
+\section{Main idea}
+
+\begin{frame}{The ground rule: a great coffee machine, given good coffee}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\small
+\textbf{Contribution:} the \alert{compensation} --- where, when and how a known Doppler is removed, how much of it remains, at what cost.
+
+\medskip
+\textbf{Taken as given:} the \alert{estimation}. It enters only as an input model:
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item own velocity from an IMU: error $\sigma_{\mathrm{imu}}$, no delay
+\item slow part (geometry, drift, path direction $u$) from the link: error $\sigma_{\mathrm{slow}}$, age $\Delta$
+\item residual inside the packet, at the receiver: error $\sigma_{\mathrm{rx}}$
+\end{itemize}
+No new estimator is developed.
+\end{column}
+\begin{column}{0.41\textwidth}
+\begin{tcolorbox}[colback=sea,colframe=sea,arc=2mm,coltext=white,before skip=0pt]
+\footnotesize\raggedright
+\textbf{Doppler of a link}\\[1mm]
+$\eps(t)=\dfrac{\big(v_A(t)-v_B(t)\big)\cdot u(t)}{c}$\\[2mm]
+$v_A,v_B$: transducer velocities\\
+$u$: direction of the path\\[1mm]
+fast part: wave-driven motion of each node\\
+slow part: drift, cruise, geometry
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Phase 0: a good estimate goes stale in about a second}
+\begin{columns}[T]
+\begin{column}{0.56\textwidth}
+\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}L{0.42\textwidth}L{0.25\textwidth}L{0.25\textwidth}@{}}
+\toprule
+\textbf{Real buoy motion} & \textbf{2.3--2.4\,s ahead} & \textbf{share $<$10\,s waves}\\
+\midrule
+CDIP Waverider (0.9\,m), 3 Pacific sites & 0.77--1.08 & 45--95\%\\
+OOI surface buoys (3.3\,m, 4\,t), Oregon, Irminger & 0.76--0.93 & 70--94\%\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+{\scriptsize Normalised error of the best linear prediction of velocity (1 = no better than the mean), from noisy per-packet measurements every 2.3--2.4\,s; swell, mixed and wind-sea days. Every 0.8\,s, 0.8\,s ahead: 0.27--0.47.}
+\end{column}
+\begin{column}{0.40\textwidth}
+\footnotesize
+\textbf{Consequences}
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item the far end's fast motion \alert{cannot cross a round trip} (2--3\,s at 2\,km)
+\item fast motion must be compensated \alert{where it is measured, when it is measured}
+\item only the slow part can be shared and predicted
+\end{itemize}
+{\color{mute}Hs from the reconstructed motion matches each buoy's own wave sensor within 1--5\%. Details: \texttt{code/PLAN.md}.}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{The proposal: split compensation \sugg}
+\begin{columns}[T]
+\begin{column}{0.52\textwidth}
+\small
+\textbf{Each Doppler component is removed by the node that knows it:}
+\begin{enumerate}\setlength{\itemsep}{1pt}
+\item the \textbf{transmitter} removes its own motion, measured live, while it emits
+\item the \textbf{receiver} removes its own motion while it receives
+\item the \textbf{slow part} is exchanged over the link and predicted
+\item the \textbf{receiver} removes what remains, inside the packet
+\end{enumerate}
+\end{column}
+\begin{column}{0.44\textwidth}
+\footnotesize
+\textbf{Candidate claim} \sugg: decide, for each component, \emph{who} removes it and \emph{how} (trajectory resampling, frequency correction, per-user branches), from the accuracy and age of the estimate at that node; with closed-form residuals and real motion data, on single links and multi-user up- and downlinks.
+
+\medskip
+\textbf{Scope:} OFDM; mobile or surface-coupled nodes; one link, or $K$ nodes and a gateway. Bulk Doppler resampled; path-specific Doppler counted as residual.
+\end{column}
+\end{columns}
+\end{frame}
+
+% ===========================================================
+\section{Gaps with the literature}
+
+\begin{frame}{Related work (1): compensating a time-varying Doppler in the receiver}
+\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{0.95}
+\begin{tabular}{@{}L{0.30\textwidth}L{0.36\textwidth}L{0.30\textwidth}@{}}
+\toprule
+\textbf{Work} & \textbf{Compensation} & \textbf{Limit for us}\\
+\midrule
+Sharif et al., JOE 2000 & Resampling with velocity and acceleration & One trajectory per packet\\
+Li et al., JOE 2008 & Resampling + residual frequency offset (nonuniform Doppler) & Constant scale per block\\
+Zakharov et al., JOE 2019 & Packet designed for a motion range & Fixed offline\\
+Abdelkareem et al., Ad Hoc Netw.\ 2016 & Time-varying Doppler, previous packet gates the search & Receiver only\\
+Yoshizawa et al., 2018 & Parallel resampling for fluctuating Doppler & Receiver only\\
+Cho--Kim, IET Commun.\ 2026 & Constant acceleration from the cyclic prefix & $\approx$1\,s frames; jerk ignored\\
+\bottomrule
+\end{tabular}
+
+\vspace{1mm}
+\footnotesize All compensate at the receiver, after reception; compared by BER in chosen scenarios. Analyses exist for a constant-scale error (Mason 2008) and thresholds (rate $<10^{-5}$, Stojanovic 2006; scale spread $<10^{-3}$, Yerramalli--Mitra 2011).
+\end{frame}
+
+\begin{frame}{Related work (2): several Doppler, transmit side, sensors}
+\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{0.92}
+\begin{tabular}{@{}L{0.33\textwidth}L{0.33\textwidth}L{0.30\textwidth}@{}}
+\toprule
+\textbf{Work} & \textbf{Mechanism} & \textbf{What it lacks}\\
+\midrule
+Tu, Duman, Stojanovic, Proakis 2011, 2013 & OFDMA; one resampling branch per user at the receiver & $K$ estimated branches; interference remains\\
+Daoud et al., IEEE TVT 2015 & Multiple resampling, multiple-access channel & Receiver only\\
+Hasan et al., Ad Hoc Netw.\ 2025 & Guard bands adapted to mobility & Not to the residual\\
+Oiwa et al., IEICE Tech.\ Rep.\ 2020 & Accelerometer-aided compensation & One end; not peer reviewed\\
+Choi et al.\ 2022; Aubry 2019 & Modem Doppler into navigation filters & Not used to compensate\\
+3GPP NTN (TS 38.300) & UE pre-compensates Doppler before sending & From ephemeris\\
+Cuji Dut\'an 2025 (thesis) & Stale feedback at the transmitter (beamforming) & Solved with slow angles\\
+\bottomrule
+\end{tabular}
+
+\vspace{1mm}
+\footnotesize Library, web, Scholar and 159 citing works checked: no UWA transmitter compensates Doppler. Say ``transmit-side'': UWA papers use ``Doppler pre-compensation'' for a receiver step.
+\end{frame}
+
+\begin{frame}{Candidate gaps}
+\gapbox{G1}{Partly open: no design rule for intra-packet compensation}{Constant-scale error (Mason 2008) and ICI of scaling or linear drift (Stojanovic et al.\ 2012; radio closed forms) are analysed; no rule combines estimate errors, model order, packet length and real motion statistics. Supporting result.}
+\gapbox{G2}{No UWA transmitter compensates Doppler; placement vs estimate age not analysed}{Only NTN pre-compensates at the transmitter, from ephemeris. Phase 0 gives the age limits.}
+\gapbox{G3}{Several Doppler handled only at the receiver}{One estimated branch per user (Tu et al.\ 2011, 2013); no split between users and gateway; guard bands follow mobility (Hasan 2025).}
+\gapbox{G4}{Sensors drive navigation, not compensation}{Only Oiwa et al.\ 2020, at one end, in a technical report.}
+\end{frame}
+
+% ===========================================================
+\section{Proposed methodology}
+
+\begin{frame}{C1: compensation inside the packet (receiver) \sugg}
+\begin{columns}[T]
+\begin{column}{0.52\textwidth}
+\small
+Resample along an estimated trajectory $\hat\eps(t)$, then correct the frequency, in baseband:
+\[
+r(t)\approx s\Big(t+\textstyle\int_0^t\eps\Big)
+\ \longrightarrow\
+s\Big(t+\textstyle\int_0^t(\eps-\hat\eps)\Big)
+\]
+Trajectory models: constant, linear, quadratic, piecewise.
+
+\medskip
+\textbf{Output:} residual interference between subcarriers and SINR loss vs estimate error, model order, packet length; complexity.
+\end{column}
+\begin{column}{0.44\textwidth}
+\footnotesize
+\textbf{Baselines}
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item one scale per packet (pre/postamble)
+\item Cho--Kim: constant acceleration
+\item per-symbol correction
+\end{itemize}
+\textbf{Theory target (R1):} closed-form residual; design rule for the model order given packet length and motion.
+
+\medskip
+{\color{mute}For an 8\,s swell, a constant-acceleration fit leaves 3\% of a subcarrier spacing over 0.9\,s, 46\% over 4\,s (\texttt{literature/baseline\_cho\_kim\_2026.md}).}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{C2: where to compensate --- transmitter, receiver or split \sugg}
+\begin{columns}[T]
+\begin{column}{0.52\textwidth}
+\footnotesize
+\textbf{Split compensation}
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item transmitter: own motion projected on $u$, measured live, applied while emitting (real-time resampling of the outgoing waveform)
+\item receiver: own motion, live, applied while receiving
+\item slow part: exchanged and predicted (age $\Delta$ tolerable)
+\item remainder: C1 at the receiver
+\end{itemize}
+\textbf{Compared with} receiver-only compensation, vs estimate age, sea state, packet length; measured buoy motion as input.
+\end{column}
+\begin{column}{0.44\textwidth}
+\footnotesize
+\textbf{Theory target (R2): staleness}
+\[
+\mathbb E\big[(v(t{+}H)-v(t))^2\big]
+\]
+\[
+=2\!\int\! S_v(f)\,\big(1-\cos2\pi fH\big)\,df
+\]
+and its prediction counterpart: when transmit-side, receive-side or split compensation is best.
+
+\medskip
+IMU error, latency, lever arm and accuracy of $u$: now modelled and swept (C2 results).
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{C3: several Doppler at once \sugg}
+\begin{columns}[T]
+\begin{column}{0.52\textwidth}
+\footnotesize
+\textbf{Uplink, $K$ nodes to a gateway}
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item each node removes its own motion before sending (C2)
+\item users then differ only by the gateway's motion projected on their directions, and by slow terms
+\item a moving gateway still needs one branch per user for its own motion, but \alert{set from its IMU and $u_k$}, not estimated; users in similar directions can share a branch
+\end{itemize}
+\textbf{Downlink:} the gateway knows its own motion live, so it pre-compensates each user's subband before sending, with no prediction.
+\end{column}
+\begin{column}{0.44\textwidth}
+\footnotesize
+\textbf{Guard bands} sized by the residual after compensation, not by the raw mobility.
+
+\medskip
+\textbf{Baseline:} multiple-resampling receiver (Tu et al.\ 2011, 2013), contiguous and interleaved allocation.
+
+\medskip
+\textbf{Theory target (R3):} interference between users vs residuals and guard bands; users supported vs number of branches and per-user estimation.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Evaluation}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\footnotesize
+\textbf{Inputs}
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item motion: \alert{measured} buoy records (CDIP, OOI) replayed; AUV and seabed nodes from models
+\item channel: Bellhop geometry along the trajectories (binary in the DESERT build); Channel Library records if needed
+\item estimates: true Doppler + error with the stated $\sigma$ and age
+\end{itemize}
+\end{column}
+\begin{column}{0.46\textwidth}
+\footnotesize
+\textbf{Two levels}
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item waveform simulation (Python): residual, interference, BER/PER, complexity
+\item network level (DESERT Doppler extension): many nodes, MAC, traffic, with the residual tables from the waveform level
+\end{itemize}
+{\color{mute}Code plan: \texttt{code/PLAN.md}.}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ===========================================================
+\section{C2 results (preliminary)}
+
+\begin{frame}{C2: split wins on all three links \simres}
+\begin{columns}[T]
+\begin{column}{0.63\textwidth}
+\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.0}
+\begin{tabular}{@{}L{0.43\textwidth}L{0.16\textwidth}L{0.16\textwidth}L{0.16\textwidth}@{}}
+\toprule
+\textbf{SIR between subcarriers [dB]} & \textbf{Buoy$\to$ seabed} & \textbf{Buoy--buoy} & \textbf{AUV$\to$ buoy}\\
+\midrule
+Receiver, previous packet's estimate & $-5$ to 6 & $-5$ to 2 & $-4$ to 4\\
+Receiver, quadratic, 1\,s packet & $\le$36 & $\le$34 & $\le$35\\
+Receiver, per symbol & 27--36 & 24--33 & 26--35\\
+One end's IMU only & 30--34 & $-4$ to 7 & $-2$ to 7\\
+Both IMUs, no receiver estimate & --- & 28--29 & 28--30\\
+\textbf{Split}: both IMUs + receiver line from 2 estimates & \textbf{37--41} & \textbf{32--38} & \textbf{33--40}\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+{\scriptsize Three days (CDIP swell, CDIP wind sea, OOI Irminger swell), 1 and 4\,s packets.}
+
+\medskip
+\footnotesize\textbf{15 sea-state days:} split best in all 30 cases, median \alert{9\,dB} above the per-symbol receiver.
+\end{column}
+\begin{column}{0.33\textwidth}
+\scriptsize
+\textbf{Setting}
+\begin{itemize}\setlength{\itemsep}{0pt}
+\item OFDM: 16\,kHz carrier, 8\,kHz band, 1024 subcarriers
+\item real buoy motion (CDIP, OOI with gyro); AUV from a model
+\item IMU drift 0.01\,m/s, 50\,ms latency bridged by the accelerometer, lever arm corrected
+\item receiver estimate error $3\cdot10^{-6}$
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Longer packets favour split; stale estimates fail at any range \simres}
+\begin{columns}[T]
+\begin{column}{0.52\textwidth}
+\begin{tikzpicture}
+\begin{axis}[width=\linewidth,height=5.2cm,xmode=log,log basis x=2,xtick={0.5,1,2,4,8},xticklabels={0.5,1,2,4,8},
+  xlabel={\scriptsize packet length [s]},ylabel={\scriptsize SIR [dB]},ymin=-5,ymax=42,
+  tick label style={font=\scriptsize},legend style={font=\tiny,at={(0.02,0.02)},anchor=south west,draw=none,fill=white,fill opacity=0.8},grid=major,grid style={mute!25}]
+\addplot[teal,very thick,mark=*] coordinates {(0.5,38.1)(1,35.4)(2,34.1)(4,33.4)(8,32.4)};
+\addlegendentry{split}
+\addplot[sea,thick,mark=square*] coordinates {(0.5,21.5)(1,21.1)(2,21.7)(4,21.6)(8,21.9)};
+\addlegendentry{receiver per symbol}
+\addplot[amber,thick,mark=triangle*] coordinates {(0.5,38.7)(1,23.0)(2,8.6)(4,0.5)(8,-3.2)};
+\addlegendentry{receiver quadratic per packet}
+\end{axis}
+\end{tikzpicture}
+
+{\scriptsize Buoy--buoy, OOI Irminger swell, 1\,km.}
+\end{column}
+\begin{column}{0.44\textwidth}
+\footnotesize
+\begin{itemize}\setlength{\itemsep}{2pt}
+\item below $\approx$0.5\,s the receiver alone matches split; beyond, \alert{one model per packet cannot follow the waves}
+\item split keeps 32--38\,dB up to 8\,s: the IMUs remove the waves, the receiver line only the slow rest
+\item \textbf{range} 0.5--4\,km: split 35--37\,dB at every range; the estimate from the previous round trip (1.7--6.3\,s old) gives $-12$ to $-5$\,dB --- Phase 0 confirmed on links
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{What split needs from the sensors \simres}
+\begin{columns}[T]
+\begin{column}{0.56\textwidth}
+\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{0.95}
+\begin{tabular}{@{}L{0.30\textwidth}L{0.33\textwidth}L{0.30\textwidth}@{}}
+\toprule
+\textbf{Factor} & \textbf{Split} & \textbf{IMU only}\\
+\midrule
+IMU drift 0.005 $\to$ 0.1\,m/s & 38--41 $\to$ 28--32 & 29--39 $\to$ 11\\
+Latency 0 / 50 / 100 / 200\,ms & 42 / 37 / 30 / 20 & 32 / 33 / 28 / 16\\
+\quad 50\,ms, not extrapolated & 25 & 17\\
+Lever arm 2\,m, corrected / not & 38 / 13 & 31 / 3\\
+Path direction error 0 / 5 / 20$^\circ$ & 37 / 30 / 18 & 30 / 13 / 0\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+{\scriptsize dB; buoy$\to$seabed on the OOI buoy (direction: buoy--buoy gives 37 / 26 / 15 for split).}
+\end{column}
+\begin{column}{0.40\textwidth}
+\footnotesize
+\textbf{Requirements}
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item an IMU about \alert{ten times worse} is tolerated: the receiver line removes its slow drift
+\item latency below $\approx$100\,ms, \alert{bridged by the accelerometer}
+\item lever-arm correction from the gyro is \alert{mandatory} on a large buoy
+\item path direction within $\approx$5$^\circ$ (IMU alone: $\approx$2$^\circ$, the 4\,t buoy moves 1\,m/s across the path)
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{A floor no endpoint can remove: surface paths with their own Doppler \simres}
+\begin{columns}[T]
+\begin{column}{0.54\textwidth}
+\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{0.95}
+\begin{tabular}{@{}L{0.30\textwidth}L{0.20\textwidth}L{0.20\textwidth}L{0.20\textwidth}@{}}
+\toprule
+\textbf{Channel} & \textbf{Seabed CDIP} & \textbf{Seabed OOI} & \textbf{Buoy--buoy}\\
+\midrule
+single path (split) & 34 & 33 & 33\\
+5 paths, common Doppler & 34 & 31 & 30\\
++ surface-path Doppler (all strategies) & 11--12 & 4 & 4\\
+closed-form floor & 14 & 4 & ---\\
+\bottomrule
+\end{tabular}
+
+\smallskip
+{\scriptsize dB, 1\,s packets, receiver estimating the channel from pilots (ceiling $\approx$40\,dB).}
+\end{column}
+\begin{column}{0.42\textwidth}
+\footnotesize
+Each surface bounce adds $2\sin\theta_k\,w(t)/c$ ($w$: vertical velocity of the surface). Interference floor:
+\[
+\textstyle\sum_k p_k\,\big(\tfrac{2\sin\theta_k}{c}\big)^2\,\mathrm{var}(w)
+\]
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item \alert{placement matters only above this floor}
+\item our model is a worst case: mirror-like bounces, the buoy's full heave, 40\% of the power
+\item several Doppler on one link: the motivation for C3
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Toward the placement rule \sugg}
+\begin{columns}[T]
+\begin{column}{0.52\textwidth}
+\footnotesize
+\textbf{Evaluator:} for every placement (IMU stage at each end on/off $\times$ receiver stage: none, per symbol, constant or line from 2 estimates, quadratic from all), the interference from
+\begin{itemize}\setlength{\itemsep}{0pt}
+\item motion spectra through each node's stage (latency, lever arm, direction, with cross terms)
+\item the fit the receiver really makes (line through 2 estimates: 2.7$\times$ the best line's error)
+\item the phase within each FFT window (a residual ramp: \alert{5$\times$ less} interference than an offset)
+\end{itemize}
+\simres\ 85 points: same winner at 81 (misses $\le$0.6\,dB); all strategies within $\pm$0.7\,dB (median).
+\end{column}
+\begin{column}{0.44\textwidth}
+\footnotesize
+\textbf{First reading of the rule}
+\begin{itemize}\setlength{\itemsep}{0pt}
+\item a node removes its own fast motion if its latency, bridged, is $\lesssim$0.01 wave periods
+\item a static node runs no IMU stage (it only adds drift)
+\item the receiver's role depends on its \alert{estimate budget}: 2 per packet $\to$ split; one per symbol $\to$ IMU + per-symbol receiver, predicted higher
+\end{itemize}
+\open\ maps for both budgets (packet, latency, IMU quality in wave units); new placements being simulated.
+\end{column}
+\end{columns}
+\end{frame}
+
+% ===========================================================
+\section{Theoretical objectives and risks}
+
+\begin{frame}{Theory: three results}
+\small
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.32\textwidth}
+\begin{block}{R1 Inside the packet}
+\scriptsize
+Residual interference and SINR loss vs estimate error, trajectory model order, packet length; design rule for the model order
+\end{block}
+\end{column}
+\begin{column}{0.32\textwidth}
+\begin{block}{R2 Staleness and placement}
+\scriptsize
+Compensation error vs age of the estimate, from the motion spectrum; when transmit, receive or split compensation is best; validated on buoy data
+\end{block}
+\end{column}
+\begin{column}{0.32\textwidth}
+\begin{block}{R3 Several Doppler}
+\scriptsize
+Interference between users vs residuals and guard bands; users supported vs branches and per-user estimation
+\end{block}
+\end{column}
+\end{columns}
+
+\medskip
+\footnotesize
+\textbf{Weight:} R2 carries the main message and rests on real data; R1 and R3 make it a design. R1 and R2 share one tool \sugg: errors of representing $v(t)$ (old sample; polynomial over the packet) as integrals of the motion spectrum. Closed forms for R1 and R2 now match the simulation (C2 results); \open\ not yet proved or written up.
+\end{frame}
+
+\begin{frame}{Risks}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\footnotesize
+\textbf{Compensation is a classic topic.} Novelty must lie in placement and splitting (G2, G3), backed by the staleness analysis (R2), not in a new resampler.
+
+\medskip
+\textbf{Sensors.} IMU error, lever arm and path direction enter the transmit-side correction; their accuracy must be modelled. ``Why not an IMU?'' becomes part of the design.
+\end{column}
+\begin{column}{0.46\textwidth}
+\footnotesize
+\textbf{Path-specific Doppler} cannot be removed by one resampling per link. Simulated: surface paths with their own Doppler set a floor for every strategy (C2 results); placement matters only above it.
+
+\medskip
+\textbf{Data.} Motion is real; channel and multi-node geometry are simulated. AUV and seabed scenarios need models or logs.
+
+\medskip
+\open\ Search for split or sensor-driven compensation beyond the local library; read Mason 2008 and Tanash 2026 before R1.
+\end{column}
+\end{columns}
+\end{frame}
+
+% ===========================================================
+\section{Questions for the group}
+
+\begin{frame}{Questions for the group}
+\small
+\begin{itemize}
+\item {\color{mute}Decided: scenarios buoy $\to$ seabed, buoy--buoy, buoy--AUV; a node's own IMU counts as a good estimate; SIR now, coded BER/PER later.}
+\item Can the modem resample the outgoing waveform in real time from the IMU, or only per packet?
+\item How many Doppler estimates per packet can the receiver afford (preamble/postamble only, or pilots in every symbol)?
+\item Is the downlink (gateway pre-compensating each user) in scope for the first paper?
+\end{itemize}
+\end{frame}
+
+\end{document}

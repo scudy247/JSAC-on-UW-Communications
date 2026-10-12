@@ -1,0 +1,42 @@
+{
+  "CE04OSSM": {
+    "swell": {
+      "day": "20230325",
+      "tp_median": 14.3,
+      "hs_median": 4.3149999999999995,
+      "bursts": 24
+    },
+    "mixed": {
+      "day": "20230317",
+      "tp_median": 9.5,
+      "hs_median": 1.26,
+      "bursts": 22
+    },
+    "wind": {
+      "day": "20230731",
+      "tp_median": 4.7,
+      "hs_median": 0.92,
+      "bursts": 24
+    }
+  },
+  "GI01SUMO": {
+    "swell": {
+      "day": "20230919",
+      "tp_median": 14.3,
+      "hs_median": 6.445,
+      "bursts": 24
+    },
+    "mixed": {
+      "day": "20231005",
+      "tp_median": 9.5,
+      "hs_median": 3.675,
+      "bursts": 24
+    },
+    "wind": {
+      "day": "20230915",
+      "tp_median": 7.0,
+      "hs_median": 2.3049999999999997,
+      "bursts": 24
+    }
+  }
+}

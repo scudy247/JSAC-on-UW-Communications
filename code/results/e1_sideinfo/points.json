@@ -1,0 +1,8192 @@
+[
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 6.8967716972790996,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.15685697276152,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 32.07354345765789,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 39.929234894907005,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.829451910833676,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 10.78589756684245,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.15685697276152,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 13.407718926850073,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.15685697276152,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 14.435850684723523,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.15685697276152,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 14.81474952775372,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.15685697276152,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 14.895248949496228,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.15685697276152,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 14.916771983741594,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.15685697276152,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 14.918600784611156,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.15685697276152,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 11.883393868267174,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.99325282782131,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.055248900214014,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.54411259334079,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 20.671883147696356,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.67749398924141,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 22.847689200682403,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.700175172508324,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 23.502008576931395,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.69934355000427,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 23.687193621143017,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.69802477387188,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 23.69905951350217,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.8535512533827,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.6972600398828,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.030640442461829,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 24.15904069088676,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.73987658134274,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.774242084690997,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 28.465992684286213,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.85237257269041,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 22.79984480168668,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 31.736750635137902,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.23239001194997,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 27.450546929549425,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 32.99281246824829,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.311351387197575,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 29.741911786837854,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 33.410064846080914,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.32028079629823,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 30.613913896531606,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 33.59230183948654,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.31957172799769,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 30.665212203367098,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 33.60708893511145,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.31802472628347,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.031393005765858,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 24.399489610739813,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.93534074824544,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.828333960625898,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 29.491182462210865,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.17927076594814,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 22.986039407058072,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 34.52848571863094,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.65844369212954,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 28.0385487123528,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 37.466591648440215,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.77296525268413,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 30.80044198977299,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 38.81317285186718,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.78351922887111,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 31.962549887130912,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 39.49120115825753,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.778650133336136,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 32.03697467606514,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 39.55206616230609,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.777244055174826,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.032071759296826,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 24.400811181862323,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.973642631772805,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.832404161437164,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 29.52140360417514,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.227153764240136,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 22.994089547438882,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 34.64122025983939,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.7060670309085,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 28.05976941978762,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 37.67961994072936,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.82125575106172,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 30.841694345832696,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 39.09404280907158,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.83471446833642,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 32.01254509879907,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 39.815142624578876,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.83029223371235,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 32.0887618866256,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 39.8843770292823,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.82837339545416,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.032194333229803,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 24.397474050496704,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.978431758553995,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.832345245286522,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 29.521093440789453,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.22992048386395,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 22.99449657094049,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 34.640469165947586,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.70700776557842,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 28.061747348239415,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 37.679469965193896,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.821536814181094,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 30.844817351517083,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 39.09519569448886,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.835116092335355,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 32.01600160312395,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 39.8174524605841,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.83082371595657,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 32.092166870634905,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 39.88678226920997,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.82887640671689,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.032193659143164,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 24.398623516379097,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.976863665417106,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.832264116120623,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 29.51941010061612,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.2285155056463,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 22.994556582219452,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 34.64227686217734,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.706413699614316,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 28.061893180707965,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 37.689020040844454,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.82125721355954,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 30.845123831333318,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 39.11377410794792,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.83485094676415,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 32.016680184223716,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 39.84073333166648,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.830566148842706,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 32.09284785896688,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 39.90940628588821,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.82861688471722,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 6.918656370345305,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949247,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.99454146417902,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 31.907648285547708,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 38.482012104095766,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 38.860975227454034,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 8.371222098169163,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.99454146417902,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 9.00913007903672,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.99454146417902,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 9.179742876620606,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.99454146417902,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 9.229238587837173,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.99454146417902,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 9.242872724752178,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.99454146417902,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 9.247766685177417,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.99454146417902,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 9.247989774208435,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.99454146417902,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 9.40162548307072,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.00715813081099,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 10.975866224541445,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.075096861418324,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 11.47618790289939,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.09006211928935,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 11.61156916321408,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.0962286982545,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 11.647592282931654,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.09692398925183,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 11.65986321110578,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.09701489030473,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 11.660571674853813,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.220966411949245,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.09719422022584,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 10.130049572251473,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.909773271196713,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.95021126890621,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 12.471579816267695,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 10.18775553506303,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.16464922068916,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 13.3149988908694,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 10.536801047310343,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.21542992319625,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 13.559121213094794,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 10.63629189849699,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.230378181610334,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 13.623543745717539,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 10.716274106425852,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.24116745561301,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 13.645478819626689,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 10.711853654187655,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.240810526337526,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 13.646597758522706,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 10.7128577582512,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.2406875368093,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 10.493696660872729,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.966218916164701,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.54533262973353,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 13.47109358681177,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 10.844252211738697,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.02403501189211,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 14.688489823306664,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 11.453628992083127,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.17153127831841,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 15.058567734241848,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 11.638600940090079,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.219646356412404,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 15.157062737020109,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 11.741260499637441,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.22906702803776,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 15.190744156668995,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 11.742309299655545,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.23473864710875,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 15.192679832925444,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 11.744717881229437,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.2352670967447,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 11.035221262871515,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 9.562439775076092,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.13612238770909,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 15.049187168416102,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 13.187930355895547,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.08061855268772,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 17.126743820778582,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 14.82693591194337,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.37304328229584,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 17.846960160370543,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 15.271011937589666,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.42400534936884,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 18.056802303445934,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 15.375191743734273,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.44572156030071,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 18.12490466775476,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 15.431712679880087,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.45661767434821,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 18.128535315242274,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 15.443974151492913,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.460300717127964,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 11.311934928869283,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 10.03257923692733,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.13321826346918,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 16.180034347483097,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 14.587964788962184,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.51144410757636,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 19.330598124006425,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 17.069932539175927,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.919471645407214,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 20.684500915903005,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 17.82395214664674,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.9912067331268,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 21.10790165915741,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 18.058193103911204,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 36.01473078407914,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 21.25711874981399,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 18.150375203038212,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 36.02932233209414,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 21.265339752129297,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 18.16817850953561,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 36.03190504312686,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 11.562638026449953,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 10.701979829691377,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.112824039956124,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 17.38976075863359,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 16.991089215001576,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 37.193080299837625,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 22.625972731608513,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 22.43054525257216,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 37.91393332578878,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 26.416543349074924,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 27.14786776402405,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 38.12266079564967,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 28.321177840096272,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 29.931671294939342,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 38.1756000824612,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 29.20058055258504,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 31.26925250301637,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 38.18089910509023,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 29.26020990988284,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 31.418628137193686,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 38.18068518368884,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": -4.357693461954031,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991652,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 26.098383589088144,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 31.901423968633456,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 37.682694785603495,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.79412865247368,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": -1.0286706339924507,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 26.098383589088144,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 2.1405856067904057,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 26.098383589088144,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 3.259104129588507,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 26.098383589088144,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 3.6461408980309553,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 26.098383589088144,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 3.734780642387039,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 26.09838358908814,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 3.768053045174809,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 26.09838358908814,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 3.7707081734614496,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 26.09838358908814,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": -0.1616283985452966,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 27.55565895940071,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 5.665569990330055,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.11245498032383,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 9.868260341045893,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.539484310744427,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.475385753443986,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.64781323627408,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 13.408362222705048,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.671445178964817,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 13.805060077990294,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.6743117553104,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 13.829768982240406,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.285266520991653,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.675517920866625,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": -0.03710852506540492,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 14.565605405130599,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.27736344961852,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 6.293815702600957,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.515276747141776,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 33.0950324447294,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 11.89893240201207,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 23.06941931375333,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 34.885655267253284,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.529822873636263,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 25.02858861418316,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.480558763445686,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 21.80933821635001,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 25.609379768374055,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.61342949964065,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 25.9022645088167,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 25.755670179242625,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.63279332910592,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 26.250171181675853,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 25.761690999443854,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.628991015180745,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": -0.03585252101119063,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 14.74031040645663,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.70332280472904,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 6.323257880680093,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 20.41728062173586,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 34.03798828213661,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.011500676829103,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 25.715386439127087,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.58511980212751,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.95882294611221,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 30.719540488461355,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.591674105257596,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 23.00927119478804,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 33.51868010599029,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.80895595109414,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 30.00337720471908,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 34.54625203063513,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.90524911539994,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 30.991654362925594,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 34.59255322800687,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.90937623094748,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": -0.0357154328820229,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 14.745948325843038,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.748509283226458,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 6.3252209074454715,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 20.45828657107307,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 34.1864711591536,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.016846754963877,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 25.881870796800023,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.83288364005809,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.98762544420875,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 31.32545563964141,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.89434888232065,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 23.107533854164764,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 34.7138669551752,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.13691581727342,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 30.494980609395515,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 36.112641071434886,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.24860809675951,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 31.62600263864913,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 36.16322201275977,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.259689098876464,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": -0.03551410159222582,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 14.744525649609766,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.719001245838882,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 6.325552122128558,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 20.462245103079574,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 34.16955002739126,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.017873819388145,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 25.89891049860722,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.86520332163492,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.99193934440375,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 31.382731801132984,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.91330910041686,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 23.117790216674834,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 34.80389643749029,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.16793693231879,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 30.568552613006162,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 36.22725413806842,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.274246933173316,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 31.72559638225613,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 36.2844642449364,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.28385802045219,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": -0.037046225254780595,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 14.791402096305452,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.66874898688612,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 6.32436394795902,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 20.47450539540094,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 34.17923536152355,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.01691393846563,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 25.831050426922452,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.9186087897435,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.994125292643155,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 31.27574096799838,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.995508784655726,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 23.128110407287267,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 35.0564792132057,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.25683740598191,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 30.657322770757073,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 36.737320556381874,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.368481458711635,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 31.863405242484617,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 36.8371700484599,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.376965231051656,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -4.483043325700544,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.177467108422049,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.264974005623007,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 31.600723848348473,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 35.94674762231577,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 38.647995287247085,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.723731140577738,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.177467108422052,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.264974005623007,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.262142374163828,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.177467108422049,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.264974005623007,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.163216647401121,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.17746710842205,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.264974005623007,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.133253877070464,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.17746710842205,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.264974005623007,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.126166604337883,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.17746710842205,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.264974005623007,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.1236968852957823,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.17746710842205,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.264974005623007,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.123473351669114,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.17746710842205,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.264974005623007,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -2.3361886655437263,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.177467108422052,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.271343053792137,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -1.0260613288428848,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.177467108422052,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.402559275907855,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -0.6295821107867836,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.177467108422052,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.433879200641965,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -0.5268921866177758,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.177467108422052,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.438888926474576,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -0.5004246220617646,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.17746710842205,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.44013921811744,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -0.49207485885052665,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.177467108422052,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.438973165088896,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -0.4914452234041675,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.17746710842205,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.439124445944433,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -1.2845008629905852,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -3.873729384949711,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.917962890536984,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 1.3058106423644023,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -1.8628807266362855,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.547799987860014,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 2.233484229196664,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -1.3696633996217467,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.684020478708845,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 2.5002485780136388,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -1.2002889251345927,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.72339407125644,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 2.5713766778156537,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -1.1450265236601522,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.735486040373317,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 2.5951075094561116,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -1.1501395660795106,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.732106856161153,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 2.596856463724157,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -1.1407973445722444,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.734697587829096,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -0.7265712501315186,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -3.5734864049646147,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.56760729184888,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 3.234403098405627,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -0.423852953656546,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.94040082081376,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 5.117318696692248,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 0.58953800510921,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 27.318208166941275,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 5.74170106351291,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 0.9459419006917053,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 27.450940784031786,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 5.919756006351587,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 1.055302889266831,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 27.478776798858963,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 5.977996898630402,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 1.0528038547378866,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 27.483646265211558,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 5.982179738879787,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 1.0691040099754272,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 27.487846139377055,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -0.2917236550901161,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -2.5875340907931976,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.94414950243212,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 4.951525756043081,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 2.4526360084370054,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 28.293592811429686,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 8.4953907565307,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 5.759411873261025,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 29.210003225294365,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 10.097001960979686,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 7.44554484508088,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 29.560075657097997,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 10.638055968308464,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 7.824938863912504,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 29.61262036834634,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 10.819205782866955,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 7.989913354302066,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 29.639656787819163,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 10.833397900740769,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 7.975371681208566,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 29.63666313669038,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -0.14243087738295565,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -2.4361163982807548,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.08917439282792,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 5.723694861449873,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 3.2588953589179335,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 29.654387100149332,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 10.713710077605539,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 7.9983724995877665,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 31.46651326186147,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 13.959943294370195,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 11.305149718968615,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 32.03367286201308,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 15.43909296164897,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 12.330085171346191,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 32.13313082900424,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 16.026430763210005,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 12.82461495816763,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 32.167230476771394,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 16.074500743708114,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 12.778392522159812,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 32.16468849279403,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -0.09728138438775075,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -2.412425195945262,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.37742420646142,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 6.048308099436888,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 3.7360544627722385,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 31.217979771428034,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 11.931462936568558,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 9.673930547161826,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.48367625780334,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 17.24835554125027,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 15.584542562833049,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.8061462491876,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 21.47678165080943,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 20.14619083874138,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 36.22000246538353,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 24.679524534591557,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 24.8579959440453,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 36.384475209653104,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 25.041755543979228,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 25.376995406370245,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 36.39015438112264,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": -4.902020182908919,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.165592851371306,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 25.609335514785904,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 28.048987931246657,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 36.22371580846563,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.0322894604365,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": -1.1690378493610347,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.165592851371308,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 25.609335514785904,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 1.574133304384027,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.165592851371308,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 25.609335514785904,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 2.572158962172171,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.165592851371308,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 25.609335514785904,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 2.8990571042168574,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.165592851371308,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 25.609335514785904,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 2.986526037173325,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.165592851371308,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 25.609335514785904,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 3.014285841454763,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.165592851371308,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 25.609335514785904,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 3.0149450790637395,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.165592851371308,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 25.609335514785904,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 0.0701879095779251,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.16559285137131,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 27.73591263749084,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 5.624835806107815,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.16559285137131,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.011980684170116,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 9.857565772606296,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.165592851371308,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.444785279306345,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.307405254894299,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.165592851371308,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.567881395042516,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 13.296481416379752,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.165592851371308,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.597616269513047,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 13.636860252770104,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.16559285137131,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.611992921691094,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 13.654010045511527,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 9.165592851371308,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.611057231143043,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 0.19434462161078336,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 14.307479490448973,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.35201434863523,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 6.233508327495368,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 19.52933190536963,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 32.75196284420124,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 11.900188734078066,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 23.097805500778872,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 34.47548221874395,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.1406669315939,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 24.56783952077371,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.0040471928233,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 21.379392570376726,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 25.122129147340118,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.16201420541912,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 24.289658961161,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 25.255814420588404,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.22345954688458,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 24.495473722864524,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 25.272585153840133,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 35.223484493400974,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 0.1998088256265439,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 14.518622189224414,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.7018259295239,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 6.264452549944236,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 20.581861946405716,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 33.97389889526324,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.006969722369703,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 26.264742691984306,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.38232365154031,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.556525546863902,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 30.34679380930404,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.18398530457908,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 22.614009951020016,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 33.05622479492969,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.46152145430352,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 27.226856914441356,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 34.00933985326314,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.540919961495106,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 27.62929467483599,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 34.14363234562103,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.550104476798964,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 0.19912911532749683,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 14.513166582746187,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.78819574917596,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 6.26546908397633,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 20.615733338644034,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 34.175878426823935,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.015593539412013,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 26.45748406067286,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.666469584480595,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.580201544229944,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 30.819374129002263,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.58162011458775,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 22.70336837541766,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 34.03675155457147,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.86644507881672,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 27.47978570773114,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 35.256871686297174,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.96036783857496,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 27.91098293094322,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 35.43958019941241,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.97025174977783,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 0.1987074080824735,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 14.50941526746385,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.747878741669695,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 6.265686151208082,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 20.614381145346353,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 34.14742337363656,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.018902527238474,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 26.47033926226172,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.64102800065331,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.589421926883148,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 30.872560026377315,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.54487529949975,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 22.72245593860233,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 34.13115517934952,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.83196941795309,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 27.51992966909045,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 35.375107427123396,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.93934825878776,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 27.951634591549592,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 35.56278374560734,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.95105635959823,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 0.19825033120096228,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 14.449236453217665,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 29.7669241860224,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 6.266173212300111,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 20.62162779942806,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 34.16343281404221,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 12.018261583350832,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 26.470332245224398,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 36.682115363820465,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 17.59527025092585,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 31.014075318956614,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.61943259625694,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 22.74339654615369,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 34.563430572100984,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 37.91147649087331,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 27.583417857268223,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 36.14811393744044,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.01815378184151,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "none",
+  "sir_db": 28.020134866815575,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "line2",
+  "sir_db": 36.36215673805992,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 1.0,
+  "stage": "sym",
+  "sir_db": 38.03076959637699,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -4.640343887197897,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507094,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.76237935546354,
+  "reference": "rx_alone"
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 27.873584355702622,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 33.546871548489065,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 38.29408894605918,
+  "reference": "applied"
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.93856761944668,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507096,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.76237935546354,
+  "K": 1,
+  "b": 2,
+  "bits": 2
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.503616025222218,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507094,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.76237935546354,
+  "K": 1,
+  "b": 3,
+  "bits": 3
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.4064579786607796,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507096,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.76237935546354,
+  "K": 1,
+  "b": 4,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.378583752699952,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507096,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.76237935546354,
+  "K": 1,
+  "b": 5,
+  "bits": 5
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.37089590638368,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507096,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.76237935546354,
+  "K": 1,
+  "b": 6,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.3686225142446653,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507096,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.76237935546354,
+  "K": 1,
+  "b": 8,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -3.3686512724742763,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507096,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.76237935546354,
+  "K": 1,
+  "b": 10,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -2.70389715020731,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507096,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.79346962237654,
+  "K": 2,
+  "b": 2,
+  "bits": 4
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -1.5384954660794192,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507096,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.87059515300828,
+  "K": 2,
+  "b": 3,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -1.2014987964390513,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507096,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.89947587861741,
+  "K": 2,
+  "b": 4,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -1.109233005101394,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507096,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.900878420102558,
+  "K": 2,
+  "b": 5,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -1.0846002998588846,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507096,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.899154131850235,
+  "K": 2,
+  "b": 6,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -1.0775855526342708,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507096,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.899107994503154,
+  "K": 2,
+  "b": 8,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -1.077369679277569,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -4.441136807507096,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.89952031549291,
+  "K": 2,
+  "b": 10,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -1.5215383854178188,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -3.689745957279562,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.560649304584615,
+  "K": 3,
+  "b": 2,
+  "bits": 6
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 0.7171260000257365,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -2.2675187625914424,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.940237555074496,
+  "K": 3,
+  "b": 3,
+  "bits": 9
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 1.4659013627955861,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -2.036742801590497,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.99936983780042,
+  "K": 3,
+  "b": 4,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 1.6904245809992058,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -1.90820396922162,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.0267252906187,
+  "K": 3,
+  "b": 5,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 1.748784812069084,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -1.9349034486302257,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.014289816527842,
+  "K": 3,
+  "b": 6,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 1.766884960669166,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -1.9254495649806707,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.01606065828882,
+  "K": 3,
+  "b": 8,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 1.767515774738958,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -1.9261291580884243,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.01629307874719,
+  "K": 3,
+  "b": 10,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -0.6660695485610235,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -2.931958423772392,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.522551542012877,
+  "K": 4,
+  "b": 2,
+  "bits": 8
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 2.9480852086590175,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -0.408532058791125,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.540446736798373,
+  "K": 4,
+  "b": 3,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 4.542066822346697,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 0.14406351320066238,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.694189957341163,
+  "K": 4,
+  "b": 4,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 5.087607525337569,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 0.42858176506732903,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.790336689242867,
+  "K": 4,
+  "b": 5,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 5.233986068648418,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 0.3944924642288297,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.786852629204333,
+  "K": 4,
+  "b": 6,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 5.2795696537431835,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 0.4182674779671577,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.795028474591952,
+  "K": 4,
+  "b": 8,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 5.281192872385567,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 0.417425762424669,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.794475881682985,
+  "K": 4,
+  "b": 10,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": -0.11838833016672336,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -2.031319820730813,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 25.905373319239203,
+  "K": 5,
+  "b": 2,
+  "bits": 10
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 4.883304489586924,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 2.689799666730774,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 28.00250185065961,
+  "K": 5,
+  "b": 3,
+  "bits": 15
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 8.024294529129184,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 5.549598926468892,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 28.585843014047075,
+  "K": 5,
+  "b": 4,
+  "bits": 20
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 9.458705178741756,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 6.644093920019757,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 28.793379436170078,
+  "K": 5,
+  "b": 5,
+  "bits": 25
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 9.896918063678905,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 7.018979016706188,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 28.829021588520245,
+  "K": 5,
+  "b": 6,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 10.042375105711294,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 7.176430311422295,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 28.8585690555381,
+  "K": 5,
+  "b": 8,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 10.048031709922107,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 7.186730839291531,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 28.86383773972552,
+  "K": 5,
+  "b": 10,
+  "bits": 50
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 0.0825225444124808,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -1.878452263843751,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.19712445031455,
+  "K": 6,
+  "b": 2,
+  "bits": 12
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 5.791040982002187,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 3.5630058879204958,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 29.382170708445457,
+  "K": 6,
+  "b": 3,
+  "bits": 18
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 10.33737231864473,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 8.04294065755011,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 30.87573420350385,
+  "K": 6,
+  "b": 4,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 13.255759657032694,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 10.306120644940954,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 31.28432539377357,
+  "K": 6,
+  "b": 5,
+  "bits": 30
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 14.423046998813145,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 11.298469973731311,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 31.399409714045493,
+  "K": 6,
+  "b": 6,
+  "bits": 36
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 14.86585516005184,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 11.705164711489884,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 31.443364239332507,
+  "K": 6,
+  "b": 8,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 14.88437500503613,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 11.733790130050828,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 31.449537668487537,
+  "K": 6,
+  "b": 10,
+  "bits": 60
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 0.1573929300507148,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": -1.6690112059896238,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 26.686301901768267,
+  "K": 8,
+  "b": 2,
+  "bits": 16
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 6.222127025522299,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 4.254652450093326,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 31.23376802071284,
+  "K": 8,
+  "b": 3,
+  "bits": 24
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 11.823283999929085,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 10.459229879820446,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 34.219387325294115,
+  "K": 8,
+  "b": 4,
+  "bits": 32
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 16.992223325602097,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 15.708544745418877,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.29524081846748,
+  "K": 8,
+  "b": 5,
+  "bits": 40
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 20.588399232922843,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 19.814977158291022,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.60412226960147,
+  "K": 8,
+  "b": 6,
+  "bits": 48
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 22.826518598577064,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 23.309902753090324,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.72879111792548,
+  "K": 8,
+  "b": 8,
+  "bits": 64
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "none",
+  "sir_db": 22.942137498805728,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "line2",
+  "sir_db": 23.71768226505473,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "packet_s": 4.0,
+  "stage": "sym",
+  "sir_db": 35.72753829999649,
+  "K": 8,
+  "b": 10,
+  "bits": 80
+ }
+]

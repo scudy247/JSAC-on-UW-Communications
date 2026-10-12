@@ -1,0 +1,812 @@
+[
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "rx_sym",
+  "sir_sim_db": 31.31165016761284,
+  "sir_sim_p10_db": 29.845827439805966,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 32.27176772116549,
+  "sir_sim_p10_db": 29.878217050214015,
+  "sir_theory_db": 35.61797816471068
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 29.625950018505954,
+  "sir_sim_p10_db": 26.597913985328518,
+  "sir_theory_db": 32.09702798014265
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "both_0.01",
+  "sir_sim_db": 26.42299068458744,
+  "sir_sim_p10_db": 22.8882494488547,
+  "sir_theory_db": 29.103519149436053
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "split_0.01",
+  "sir_sim_db": 34.34084405959584,
+  "sir_sim_p10_db": 33.0933439836349,
+  "sir_theory_db": 39.01163960668389
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "rx_sym",
+  "sir_sim_db": 31.807701415789357,
+  "sir_sim_p10_db": 29.914024049143617,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 32.52271564230824,
+  "sir_sim_p10_db": 30.741391661279913,
+  "sir_theory_db": 35.61797816471068
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 28.26066391516417,
+  "sir_sim_p10_db": 27.42521648415961,
+  "sir_theory_db": 32.09702798014265
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "both_0.01",
+  "sir_sim_db": 26.48033500680802,
+  "sir_sim_p10_db": 22.473433739318487,
+  "sir_theory_db": 29.103519149436053
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "split_0.01",
+  "sir_sim_db": 34.22110397032094,
+  "sir_sim_p10_db": 32.45256699901388,
+  "sir_theory_db": 39.01163960668389
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "rx_sym",
+  "sir_sim_db": 11.620129201784277,
+  "sir_sim_p10_db": 10.519213975590429,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 11.641359159674547,
+  "sir_sim_p10_db": 10.554939343731803,
+  "sir_theory_db": 35.61797816471068
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 11.723335024404584,
+  "sir_sim_p10_db": 10.1593081532474,
+  "sir_theory_db": 32.09702798014265
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "both_0.01",
+  "sir_sim_db": 11.515931954812725,
+  "sir_sim_p10_db": 9.774116872433277,
+  "sir_theory_db": 29.103519149436053
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "split_0.01",
+  "sir_sim_db": 11.733690658802054,
+  "sir_sim_p10_db": 10.619677572803909,
+  "sir_theory_db": 39.01163960668389
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "rx_sym",
+  "sir_sim_db": 32.009965233955434,
+  "sir_sim_p10_db": 30.503287619559064,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 12.417743398845243,
+  "sir_sim_p10_db": 8.832911828091566,
+  "sir_theory_db": 13.97268452974238
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 26.13794170273649,
+  "sir_sim_p10_db": 21.972390896669268,
+  "sir_theory_db": 32.09702798014265
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "both_0.01",
+  "sir_sim_db": 25.620384120832988,
+  "sir_sim_p10_db": 22.253828985475234,
+  "sir_theory_db": 29.103519149436053
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "split_0.01",
+  "sir_sim_db": 31.385524148338583,
+  "sir_sim_p10_db": 28.404568297212364,
+  "sir_theory_db": 38.1915435200742
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "rx_sym",
+  "sir_sim_db": 31.8643172085471,
+  "sir_sim_p10_db": 30.698608275028757,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 12.476455209685957,
+  "sir_sim_p10_db": 8.909370523639165,
+  "sir_theory_db": 13.97268452974238
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 31.52175782594211,
+  "sir_sim_p10_db": 29.025954491629598,
+  "sir_theory_db": 32.09702798014265
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "both_0.01",
+  "sir_sim_db": 26.157434001816284,
+  "sir_sim_p10_db": 22.602964183568222,
+  "sir_theory_db": 29.103519149436053
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "split_0.01",
+  "sir_sim_db": 33.25222962979773,
+  "sir_sim_p10_db": 31.10432363999251,
+  "sir_theory_db": 38.1915435200742
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "rx_sym",
+  "sir_sim_db": 10.64943791374196,
+  "sir_sim_p10_db": 8.335872318904594,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 8.54696759203306,
+  "sir_sim_p10_db": 6.647195836509521,
+  "sir_theory_db": 13.97268452974238
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 10.566611060841788,
+  "sir_sim_p10_db": 7.868045801962506,
+  "sir_theory_db": 32.09702798014265
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "both_0.01",
+  "sir_sim_db": 10.640903351144201,
+  "sir_sim_p10_db": 7.939798884686363,
+  "sir_theory_db": 29.103519149436053
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "split_0.01",
+  "sir_sim_db": 10.64889455677215,
+  "sir_sim_p10_db": 8.194001129074376,
+  "sir_theory_db": 38.1915435200742
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "rx_sym",
+  "sir_sim_db": 22.150205891098693,
+  "sir_sim_p10_db": 19.01902585442372,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 22.078987059006533,
+  "sir_sim_p10_db": 20.156527644725845,
+  "sir_theory_db": 27.58954593791996
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 29.11561136689049,
+  "sir_sim_p10_db": 27.53464366978582,
+  "sir_theory_db": 30.255274069574483
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "both_0.01",
+  "sir_sim_db": 27.821891850926743,
+  "sir_sim_p10_db": 24.874777587315926,
+  "sir_theory_db": 27.44123507789366
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "split_0.01",
+  "sir_sim_db": 32.45680784622738,
+  "sir_sim_p10_db": 29.341327295525325,
+  "sir_theory_db": 37.414294168993436
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "rx_sym",
+  "sir_sim_db": 22.159628445360436,
+  "sir_sim_p10_db": 18.740656131067336,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 22.10644937145976,
+  "sir_sim_p10_db": 20.146908154462864,
+  "sir_theory_db": 27.58954593791996
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 25.998077381348445,
+  "sir_sim_p10_db": 22.719252856300475,
+  "sir_theory_db": 30.255274069574483
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "both_0.01",
+  "sir_sim_db": 22.655641357628177,
+  "sir_sim_p10_db": 18.39619303958992,
+  "sir_theory_db": 27.44123507789366
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "split_0.01",
+  "sir_sim_db": 30.454843286381625,
+  "sir_sim_p10_db": 28.183236887674298,
+  "sir_theory_db": 37.414294168993436
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "rx_sym",
+  "sir_sim_db": 4.13581708154022,
+  "sir_sim_p10_db": 2.572981544757151,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 4.139877123730397,
+  "sir_sim_p10_db": 2.4456729914000612,
+  "sir_theory_db": 27.58954593791996
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 4.1816875667029985,
+  "sir_sim_p10_db": 2.6214863930005032,
+  "sir_theory_db": 30.255274069574483
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "both_0.01",
+  "sir_sim_db": 4.179385201134379,
+  "sir_sim_p10_db": 2.593572009343129,
+  "sir_theory_db": 27.44123507789366
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "split_0.01",
+  "sir_sim_db": 4.140920976789505,
+  "sir_sim_p10_db": 2.6114585271655693,
+  "sir_theory_db": 37.414294168993436
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "rx_sym",
+  "sir_sim_db": 21.926842388781846,
+  "sir_sim_p10_db": 20.452339671177562,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 1.022205114016196,
+  "sir_sim_p10_db": -0.9719240451359035,
+  "sir_theory_db": 2.1569275401631254
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 27.177074678405077,
+  "sir_sim_p10_db": 24.790936197125724,
+  "sir_theory_db": 30.255274069574483
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "both_0.01",
+  "sir_sim_db": 26.333524454550044,
+  "sir_sim_p10_db": 21.891919907828548,
+  "sir_theory_db": 27.44123507789366
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "split_0.01",
+  "sir_sim_db": 30.764227728205235,
+  "sir_sim_p10_db": 29.85481267839578,
+  "sir_theory_db": 36.296407204398086
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "rx_sym",
+  "sir_sim_db": 22.08102864126547,
+  "sir_sim_p10_db": 20.737996039144498,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 1.0721890466138282,
+  "sir_sim_p10_db": -0.9090263764173305,
+  "sir_theory_db": 2.1569275401631254
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 26.832423420283238,
+  "sir_sim_p10_db": 23.380941532754616,
+  "sir_theory_db": 30.255274069574483
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "both_0.01",
+  "sir_sim_db": 24.886107831342443,
+  "sir_sim_p10_db": 21.97486106859713,
+  "sir_theory_db": 27.44123507789366
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "split_0.01",
+  "sir_sim_db": 29.943820108524033,
+  "sir_sim_p10_db": 27.865485477929,
+  "sir_theory_db": 36.296407204398086
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "rx_sym",
+  "sir_sim_db": 4.587609278076914,
+  "sir_sim_p10_db": 3.5174860598211253,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 0.45134433185918177,
+  "sir_sim_p10_db": -0.9719574940148946,
+  "sir_theory_db": 2.1569275401631254
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 4.578955578038036,
+  "sir_sim_p10_db": 3.405446256360087,
+  "sir_theory_db": 30.255274069574483
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "both_0.01",
+  "sir_sim_db": 4.541281443840081,
+  "sir_sim_p10_db": 3.4051578792827333,
+  "sir_theory_db": 27.44123507789366
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "split_0.01",
+  "sir_sim_db": 4.610802433226454,
+  "sir_sim_p10_db": 3.4785825462297053,
+  "sir_theory_db": 36.296407204398086
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "rx_sym",
+  "sir_sim_db": 18.720956842640113,
+  "sir_sim_p10_db": 15.750900004827889,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 20.01570926264291,
+  "sir_sim_p10_db": 16.914947240166143,
+  "sir_theory_db": 24.349941264721778
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": -1.3931544385723649,
+  "sir_sim_p10_db": -3.058090231637996,
+  "sir_theory_db": -4.949293541685729
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "both_0.01",
+  "sir_sim_db": 24.727644949120275,
+  "sir_sim_p10_db": 22.220445115920175,
+  "sir_theory_db": 27.226945450825276
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "single",
+  "strategy": "split_0.01",
+  "sir_sim_db": 32.7358296176249,
+  "sir_sim_p10_db": 31.230989842687755,
+  "sir_theory_db": 36.326479203949624
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "rx_sym",
+  "sir_sim_db": 18.629792861661244,
+  "sir_sim_p10_db": 15.865669269521591,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 20.04146003442177,
+  "sir_sim_p10_db": 17.00190357191354,
+  "sir_theory_db": 24.349941264721778
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": -1.2953042235548269,
+  "sir_sim_p10_db": -2.9807753170040505,
+  "sir_theory_db": -4.949293541685729
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "both_0.01",
+  "sir_sim_db": 25.35284536605207,
+  "sir_sim_p10_db": 23.270013304403506,
+  "sir_theory_db": 27.226945450825276
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "split_0.01",
+  "sir_sim_db": 30.31531439920499,
+  "sir_sim_p10_db": 28.151670072772525,
+  "sir_theory_db": 36.326479203949624
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "rx_sym",
+  "sir_sim_db": 4.151825395906276,
+  "sir_sim_p10_db": 2.6001761688650293,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 4.1741807454765665,
+  "sir_sim_p10_db": 2.564040398469989,
+  "sir_theory_db": 24.349941264721778
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": -1.572714052154337,
+  "sir_sim_p10_db": -2.761215375866478,
+  "sir_theory_db": -4.949293541685729
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "both_0.01",
+  "sir_sim_db": 4.128413242007752,
+  "sir_sim_p10_db": 2.7730123649272014,
+  "sir_theory_db": 27.226945450825276
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "channel": "multi_path_doppler",
+  "strategy": "split_0.01",
+  "sir_sim_db": 4.206528628475393,
+  "sir_sim_p10_db": 2.763963863396985,
+  "sir_theory_db": 36.326479203949624
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "rx_sym",
+  "sir_sim_db": 18.941745568767388,
+  "sir_sim_p10_db": 16.39326931429591,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 0.3124431580810809,
+  "sir_sim_p10_db": -1.939858704312763,
+  "sir_theory_db": -0.9468344273947465
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": -1.5456679085965084,
+  "sir_sim_p10_db": -2.538141591148723,
+  "sir_theory_db": -4.949293541685729
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "both_0.01",
+  "sir_sim_db": 24.708769889647986,
+  "sir_sim_p10_db": 22.81163877541421,
+  "sir_theory_db": 27.226945450825276
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "single",
+  "strategy": "split_0.01",
+  "sir_sim_db": 30.069880058921903,
+  "sir_sim_p10_db": 28.346776427422277,
+  "sir_theory_db": 34.93813981841684
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "rx_sym",
+  "sir_sim_db": 19.00579825578895,
+  "sir_sim_p10_db": 16.412284531961163,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 0.32541774128991807,
+  "sir_sim_p10_db": -1.8708079179122066,
+  "sir_theory_db": -0.9468344273947465
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": -1.5716615453170448,
+  "sir_sim_p10_db": -2.6247244420141778,
+  "sir_theory_db": -4.949293541685729
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "both_0.01",
+  "sir_sim_db": 25.67432373954029,
+  "sir_sim_p10_db": 23.112366269539322,
+  "sir_theory_db": 27.226945450825276
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_no_path_doppler",
+  "strategy": "split_0.01",
+  "sir_sim_db": 29.661629708310848,
+  "sir_sim_p10_db": 27.81092760756915,
+  "sir_theory_db": 34.93813981841684
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "rx_sym",
+  "sir_sim_db": 4.5053413041618935,
+  "sir_sim_p10_db": 3.1855883883736493,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "rx_pkt2",
+  "sir_sim_db": -0.13000894173858196,
+  "sir_sim_p10_db": -1.7422324136655076,
+  "sir_theory_db": -0.9468344273947465
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": -1.7257976641201531,
+  "sir_sim_p10_db": -2.5311874423827097,
+  "sir_theory_db": -4.949293541685729
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "both_0.01",
+  "sir_sim_db": 4.559190483765447,
+  "sir_sim_p10_db": 3.464502751337577,
+  "sir_theory_db": 27.226945450825276
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "channel": "multi_path_doppler",
+  "strategy": "split_0.01",
+  "sir_sim_db": 4.584849243282275,
+  "sir_sim_p10_db": 3.421165821209374,
+  "sir_theory_db": 34.93813981841684
+ }
+]

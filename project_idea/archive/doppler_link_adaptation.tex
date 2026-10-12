@@ -1,0 +1,608 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme[progressbar=frametitle,numbering=fraction,block=fill]{metropolis}
+\usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric,decorations.pathreplacing}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{tcolorbox}
+
+% Palette: deep sea navy, teal, amber accent
+\definecolor{sea}{HTML}{0B2545}
+\definecolor{teal}{HTML}{13838F}
+\definecolor{foam}{HTML}{E6F2F3}
+\definecolor{amber}{HTML}{E09F3E}
+\definecolor{mute}{HTML}{8A9BA8}
+\setbeamercolor{normal text}{fg=sea!90!black,bg=white}
+\setbeamercolor{alerted text}{fg=amber!85!black}
+\setbeamercolor{frametitle}{bg=sea,fg=white}
+\setbeamercolor{progress bar}{fg=teal,bg=foam}
+\setbeamercolor{title separator}{fg=teal}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{block title}{bg=foam,fg=sea}
+\setbeamercolor{block body}{bg=foam!45}
+\setbeamercolor{section in toc}{fg=sea}
+\makeatletter\setlength{\metropolis@frametitle@padding}{1.6ex}\makeatother
+
+\newcommand{\gapbox}[3]{%
+  \begin{tcolorbox}[colback=foam!60,colframe=foam!60,arc=2mm,boxrule=0pt,left=2mm,right=2mm,top=0.6mm,bottom=0.6mm,before skip=0.8mm,after skip=0.8mm]
+  {\bfseries\color{teal}#1}\hspace{1mm}{\small\bfseries #2}\\
+  {\footnotesize #3}
+  \end{tcolorbox}}
+\newcommand{\stat}[2]{%
+  \begin{minipage}[t]{\linewidth}\centering
+  {\fontsize{22}{24}\selectfont\bfseries\color{teal}#1}\\[1mm]
+  {\small #2}
+  \end{minipage}}
+
+% Evidence labels: what each statement rests on
+\newcommand{\evtag}[2]{\tikz[baseline=(t.base)]\node[fill=#1,text=white,rounded corners=0.7mm,inner xsep=1mm,inner ysep=0.35mm,font=\tiny\bfseries](t){#2};}
+\newcommand{\claim}{\evtag{sea!75}{CLAIM}}
+\newcommand{\sugg}{\evtag{teal}{SUGGESTED}}
+\newcommand{\open}{\evtag{amber}{OPEN}}
+\newcommand{\src}{\evtag{mute}{SOURCE}}
+
+% Symbols used throughout
+\newcommand{\Nsym}{N_{\mathrm{sym}}}
+\newcommand{\Kup}{K_{\mathrm{upd}}}
+\newcommand{\dtol}{d_{\mathrm{tol}}}
+\newcommand{\etol}{e_{\mathrm{tol}}}
+\newcommand{\Pset}{\mathcal{P}}
+
+\title{Doppler-Aided Link Adaptation\\for Underwater Acoustic Links}
+\subtitle{Main idea, gaps, methodology and theoretical objectives --- for group discussion}
+\date{8 October 2026}
+\institute{Target: IEEE JSAC special issue on Next-Generation Underwater Acoustic Communication Systems (deadline 31 March 2027)\\[1mm]
+\claim\ stated in the idea document, not yet established \quad \sugg\ design option added after review \quad \open\ needs material, a proof or an experiment \quad \src\ found by targeted search, not yet checked}
+
+\begin{document}
+
+\maketitle
+
+% ===========================================================
+\section{Main idea}
+
+\begin{frame}{The proposal in one slide}
+\begin{columns}[T]
+\begin{column}{0.61\textwidth}
+\small
+Every packet, data or ACK, carries a free measurement of the \alert{Doppler scale} $\epsilon=v_{\mathrm{rel}}/c$, the same at both ends of a common path. Both ends fuse them into one \alert{kinematic forecast} of the drift $d=\dot\epsilon$ and its uncertainty, which drives three blocks:
+{\footnotesize
+\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\topsep}{2pt}
+\item \textbf{frame}: pilots placed where the forecast is uncertain; packet length, modulation
+\item \textbf{receiver}: compensation pre-warped along the forecast, tracking only its error
+\item \textbf{learner}: a contextual bandit that calibrates PER online under delayed ACKs
+\end{itemize}}
+
+{\footnotesize \textbf{Candidate claim} \sugg: One kinematic forecast, shared by both ends, drives frame design and receiver compensation, calibrated online; PER control is a safety layer.}
+\end{column}
+\begin{column}{0.36\textwidth}
+\begin{tcolorbox}[colback=sea,colframe=sea,arc=2mm,coltext=white,before skip=0pt]
+\footnotesize\raggedright
+\textbf{Scope}\\[1mm]
+Delay-tolerant traffic\\
+Mobile or surface-coupled nodes\\
+Seas with a swell component\\
+Paths resolvable in delay or Doppler\\[1mm]
+\textit{Still, fixed links: fall back to the baseline; ``no harm'' once overheads are counted is still to be shown.}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ===========================================================
+\section{Gaps with the literature}
+
+\begin{frame}{Related work (1): adapting the link despite stale feedback}
+\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{0.92}
+\begin{tabular}{@{}L{0.21\textwidth}L{0.46\textwidth}L{0.29\textwidth}@{}}
+\toprule
+\textbf{Line of work} & \textbf{Representative papers} & \textbf{Difference (abstract level)}\\
+\midrule
+Physics-informed, uncertainty-aware AMC (closest) & Anjangi et al., UComms 2018 (Doppler spread as AMC feature); Wu, Chitre, Anjangi, JOE 2025 (GP interval BER + feedback scheduling) & MCS only; no kinematic forecast, packet layout or timing\\
+Channel prediction for AMC & Radosevic et al., OCEANS 2011, JOE 2014; Tian et al., OCEANS 2026; Wang, OCEANS 2022; Jing, IoT-J 2025 (delay-Doppler) & Predict the channel, not the motion; MCS or bit loading\\
+Doppler-indexed AMC & Park et al., Remote Sens.\ 2026 (MDPI, not in library) \src & Doppler as a table index; MCS only\\
+Feedback timing & AoI-aware hierarchical bandit (Busacca et al., GLOBECOM 2025) & No physical model\\
+Error control under delay & OLLA (LTE/5G); ACI (Gibbs--Cand\`es 2021); delayed ACI (El Halabi--Brandt 2026) & \textcolor{amber!85!black}{Same update rule as our margin}; new: action-dependent delay, service accounting\\
+AMC survey and benchmark & Cooper-Baldock et al., Appl.\ Ocean Res.\ 2026 (open-data benchmark) & Baselines to compare against\\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5mm}
+{\color{mute} Differences read from abstracts; full scope still to be checked. \src: found on the web only.}
+\end{frame}
+
+\begin{frame}{Related work (2): Doppler is compensated, and packets are designed offline}
+\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{0.9}
+\begin{tabular}{@{}L{0.21\textwidth}L{0.45\textwidth}L{0.30\textwidth}@{}}
+\toprule
+\textbf{Line of work} & \textbf{Representative papers} & \textbf{Use of Doppler}\\
+\midrule
+Physics of wave-induced Doppler & Walstead, JASA 2016--17; Rawat, IEEE TAES 2021 (Doppler spectrum from sea-surface motion); Li et al., JOE 2008 (residual offset varies with waves) & Characterisation; design of compensation\\
+Packet structure for a motion range & Zakharov et al., JOE 2019 ($|v|\le5$\,m/s, $|a|\le1$\,m/s$^2$, $\approx$1\,s packets) & \textcolor{amber!85!black}{Fixed offline design}, not adapted online\\
+Acceleration-aware compensation & Abdelkareem et al., Ad Hoc Netw.\ 2015; Cho and Kim, IET Commun.\ 2026; Kalman Doppler tracking (Hu et al., MSN 2024, FH-FSK) & Receiver absorbs constant drift; residual comes from jerk\\
+Doppler prediction in the receiver & Ceballos Carrascosa and Stojanovic, JOE 2010 (Doppler predicted across OFDM blocks) & In the receiver; \textcolor{amber!85!black}{not used by the transmitter}\\
+Two-way Doppler & UWGS time sync (2024); geo-Doppler ranging (OCEANS 2026) & Timing, position\\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5mm}
+\scriptsize\textbf{Enablers now public:} Underwater Acoustic Channel Library (Li et al., 2026; bulk drift kept, one-way, $\approx$50--60\,s records), Qarabaqi--Stojanovic simulator, NOAA NDBC wave spectra. \alert{Caution:} Watermark may remove bulk Doppler.
+\end{frame}
+
+\begin{frame}{Candidate gaps, re-ranked after the library check}
+\gapbox{G1}{Pilot layout and packet length are fixed offline for an assumed motion range}{Zakharov et al.\ 2019, Hong et al.\ 2025, acceleration-aware receivers: designed once for $|a|\le1$\,m/s$^2$. Pilot design $\times$ Doppler: 4 papers, none forecast-driven (closest: Van der Werf et al.\ 2024, OTFS).}
+\gapbox{G2}{Receivers re-estimate Doppler on every packet, without a kinematic prior}{Closest: Doppler predicted across OFDM blocks inside the receiver (Ceballos Carrascosa--Stojanovic 2010).}
+\gapbox{G3}{Doppler measured at both ends is not fused for the link}{Two-way Doppler serves time sync and ranging (UWGS 2024, geo-Doppler 2026) only.}
+\gapbox{G4}{Learning link adaptation ignores kinematic context and arm-dependent delay}{UWA contextual bandits: 3 papers, band or relay selection (Schutz et al.\ 2023); AMC learners use no kinematic context.}
+{\tiny\color{mute} Dropped: send timing to the swell (high risk for acceleration-aware receivers). Counts: regex on title+abstract, cat.\ 01--13, 8 Oct 2026.}
+\end{frame}
+
+% ===========================================================
+\section{Proposed methodology}
+
+\begin{frame}{System at a glance}
+\centering
+\begin{tikzpicture}[
+  box/.style={fill=foam,rounded corners=2mm,minimum height=10mm,text width=2.9cm,align=center,font=\small},
+  key/.style={fill=teal,text=white,rounded corners=2mm,minimum height=12mm,text width=3.0cm,align=center,font=\small},
+  arr/.style={-{Stealth[length=2.5mm]},thick,sea},
+]
+\node[box] (tx) at (0,0) {\textbf{Node A}\\ \scriptsize measures $\hat\epsilon$ on ACKs};
+\node[box] (rx) at (9.2,0) {\textbf{Node B}\\ \scriptsize pre-warp (1); $\hat\epsilon$ on data};
+\draw[arr] ([yshift=2.5mm]tx.east) -- node[above,font=\scriptsize]{data: $a=(M,\Nsym,\Pset)$ + forecast} ([yshift=2.5mm]rx.west);
+\draw[arr,teal] ([yshift=-2.5mm]rx.west) -- node[below,font=\scriptsize,align=center]{ACK: outcome of an earlier packet\\B's time-stamped $\hat\epsilon$ ($\approx$20 bits)} ([yshift=-2.5mm]tx.east);
+\node[key] (kf) at (0,-2.9) {Kalman filter (3)\\ \scriptsize EKF; Doppler from both ends};
+\node[key] (cfg) at (4.6,-2.9) {Pilot placement (2)\\ + bandit (4)};
+\node[key] (mg) at (9.2,-2.9) {Safety layer\\ \scriptsize PER margin $m_t$ from ACKs};
+\draw[arr] (tx.south) -- node[left,font=\scriptsize,align=right]{both\\series} (kf.north);
+\draw[arr] (kf) -- node[above,font=\scriptsize,align=center]{forecast\\$\hat d$, $\sigma_e$} (cfg);
+\draw[arr] (mg) -- node[above,font=\scriptsize]{$m_t$} (cfg);
+\draw[arr] (rx.south) ++(0,-0.15) -- node[right,font=\scriptsize]{outcomes} (mg.north);
+\draw[arr,amber] (cfg.north) -- ++(0,0.75) -| ([xshift=6mm]tx.south);
+\end{tikzpicture}
+
+\medskip
+\footnotesize\raggedright
+Numbers in brackets: the four blocks on the following slides. \open\ For the technical specification: header fields and quantisation; out-of-sequence measurements; SNR source; NACK or timeout, packet matching, ACK vs data loss; whether $\hat\epsilon$ needs payload decoding or only preamble acquisition.
+\end{frame}
+
+\begin{frame}{Two quantities that must not be confused}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\small\setlength{\abovedisplayskip}{3pt}\setlength{\belowdisplayskip}{3pt}
+\textbf{Doppler scale} (dimensionless)
+\[
+\epsilon(t)=\frac{v_{\mathrm{rel}}(t)}{c}
+\]
+\textbf{Physical Doppler drift} (units s$^{-1}$)
+\[
+d(t)=\dot\epsilon(t)=\frac{\dot v_{\mathrm{rel}}(t)}{c}
+\]
+{\footnotesize Some papers call $\epsilon$ the ``Doppler rate''. Here $d$ is always the \emph{physical} drift, never the receiver's residual.}
+\end{column}
+\begin{column}{0.46\textwidth}
+\small
+\begin{itemize}
+\item What harms a packet is what \alert{remains after compensation}: it depends on receiver and action, not on $d$ alone:\\
+{\footnotesize forecast error $e$ $\to$ receiver, action $a$ $\to$ residual impairment $\phi_a(e)$ $\to$ PER}
+\item Example: $|d|=10^{-4}\,$s$^{-1}$ is a relative acceleration of 0.15\,m/s$^2$ at $c=1500$\,m/s.
+\item One \alert{common (bulk)} component is an initial restriction. If path powers, delay spread, differential Doppler or tracking state change PER at equal $d$, that is a model limitation \open.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Model}
+\footnotesize\setlength{\abovedisplayskip}{1pt}\setlength{\belowdisplayskip}{1pt}
+\textbf{Motion} \claim: $v_{\mathrm{rel}}(t)=$ slow platform drift $+$ damped oscillators (swell, wind sea) learned online.
+
+\vspace{0.6mm}
+\textbf{Physical drift} $d=\dot v_{\mathrm{rel}}/c$ in s$^{-1}$, common (bulk) component only: an initial restriction \open.
+
+\vspace{0.6mm}
+\textbf{Observations:} time-stamped $\hat\epsilon$ on the preamble of every packet received at \emph{either} end (accuracy set by preamble length and bandwidth); ACK or timeout for earlier packets.
+
+\vspace{0.6mm}
+\textbf{Forecast error} $e(u)=d(u)-\hat d(u)$ over the receive interval, standard deviation $\sigma_e(u)$ from the estimator. A receiver without the prior has $\hat d=0$, so $e=d$ (the baseline).
+
+\vspace{0.6mm}
+\textbf{Failure} \claim: the receiver turns $e$ into a residual impairment $\phi_a(e)\ge0$, depending on $(M,\Nsym,\Pset)$; a monotone scalar curve is a hypothesis, checked by calibrating each receiver in simulation:
+\[
+\mathrm{SNR}_{\mathrm{eff}}=\frac{\mathrm{SNR}}{1+\mathrm{SNR}\,\phi_a(e)}<\gamma_a
+\iff
+\phi_a(e)>\frac{1}{\gamma_a}-\frac{1}{\mathrm{SNR}},
+\qquad
+\etol(a,\mathrm{SNR})=\sup\Big\{|e|:\phi_a(|e|)\le\tfrac{1}{\gamma_a}-\tfrac{1}{\mathrm{SNR}}\Big\}
+\]
+Empty set (e.g.\ $\mathrm{SNR}<\gamma_a$): $a$ excluded; unbounded: $\etol=\infty$; non-monotone $\phi_a$: use the set itself. $\gamma_a$: SNR at which $a$ meets the PER target, a measured threshold \sugg.
+
+\vspace{0.6mm}
+\textbf{Traffic:} bursty arrivals; waiting $h\le h_{\max}$ set by the MAC; a delay budget per packet.
+\end{frame}
+
+\begin{frame}{A minimal action space \sugg}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\small
+\[
+a=(M,\ \Nsym,\ \Pset)
+\]
+\begin{itemize}
+\item $M$: modulation order, QPSK or 16-QAM
+\item $\Nsym$: OFDM symbols in the packet
+\item $\Pset\subset\{1,\dots,\Nsym\}$: positions of full training symbols, $N_{\mathrm{tr}}=|\Pset|$
+\end{itemize}
+\footnotesize
+The receiver pre-warp is not an action: it always follows the forecast. Fixed in the first paper: useful symbol duration $T_s$, cyclic prefix $T_{cp}$, code. Waiting time $h$: set by the MAC.
+\end{column}
+\begin{column}{0.46\textwidth}
+\small
+\textbf{Packet duration}
+\[
+T_a=T_{\mathrm{pre}}+\Nsym\,(T_s+T_{cp})
+\]
+\textbf{Payload}
+\[
+B_a=\big(\Nsym-|\Pset|\big)\,N_{\mathrm{sc}}\,\log_2 M\,R_c
+\]
+{\footnotesize Uniform $\Pset$ with spacing $\Kup$ is the baseline. Exact count from the frame (first estimate from the preamble? final training symbol?) \open. $B_a$: information bits before header, CRC, termination; split messages count every segment and its delay.}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{When the packet is received, and what is known then}
+\centering
+\begin{tikzpicture}[x=1.3cm,y=1cm,
+  lab/.style={font=\scriptsize,align=center},
+  arr/.style={-{Stealth[length=2mm]},thick}]
+\draw[mute,thick] (-0.3,1.6) -- (9.6,1.6) node[right,font=\scriptsize,text=sea]{Tx};
+\draw[mute,thick] (-0.3,0) -- (9.6,0) node[right,font=\scriptsize,text=sea]{Rx};
+% ACK
+\draw[arr,teal] (0,0) -- (1.6,1.6);
+\node[lab,below] at (0,0) {ACK sent};
+\node[lab,above left] at (1.7,1.6) {ACK received:\\$\hat\epsilon$ on preamble,\\outcome of earlier packet};
+% processing + wait
+\draw[amber,very thick] (1.6,1.6) -- (2.0,1.6);
+\draw[sea,very thick,dashed] (2.0,1.6) -- (4.0,1.6);
+\node[lab,below] at (3.0,1.6) {wait $h$};
+% data packet
+\fill[sea!80] (4.0,1.52) rectangle (5.6,1.68);
+\node[lab,above] at (4.8,1.6) {data, duration $T_a$};
+\fill[teal!25] (4.0,1.6) -- (5.6,1.6) -- (7.2,0) -- (5.6,0) -- cycle;
+\fill[sea!80] (5.6,-0.08) rectangle (7.2,0.08);
+\node[lab,below] at (6.4,0) {received in\\$[t+h+\tau,\ t+h+\tau+T_a]$};
+% horizon brace
+\draw[decorate,decoration={brace,mirror,amplitude=4pt}] (2.0,-1.0) -- (7.2,-1.0) node[midway,below=4pt,lab]{forecast beyond the decision time $t$: $h+\tau+T_a$};
+\draw[mute,dotted] (2.0,1.6) -- (2.0,-1.0);
+\draw[mute,dotted] (7.2,0) -- (7.2,-1.0);
+\node[lab,text=amber!85!black,above right] at (1.9,1.6) {$t$: decide $a$};
+\end{tikzpicture}
+
+\medskip
+\footnotesize\raggedright
+$\tau$: one-way propagation time ($\approx$0.67\,s/km). $t_{\mathrm{obs}}$: epoch of the physical state that $\hat\epsilon$ represents, fixed by the measurement equation \open. From an estimate at $t_{\mathrm{obs}}$ the horizon is $H=(t-t_{\mathrm{obs}})+h+\tau+T_a$; if the filter is already propagated to $t$, $h+\tau+T_a$ remains. The ACK of this packet arrives $\ge h+2\tau+T_a$ after the decision, so the margin reacts to old outcomes.
+\end{frame}
+
+\begin{frame}{Shorter packets or more frequent tracking?}
+\begin{columns}[T]
+\begin{column}{0.52\textwidth}
+\small
+Doppler perfectly corrected at the start of an interval, then held fixed; roughly constant drift, narrowband around $f_c$:
+\[
+|\Delta f(T)|\approx f_c\,|d|\,T
+\quad\Rightarrow\quad
+T\le\frac{\Delta f_{\max}}{f_c\,|d|}
+\]
+$T$ is the interval \alert{without a compensation update}:
+\footnotesize
+\begin{itemize}
+\item blockwise receiver: $T=$ whole packet $\Rightarrow$ shorten $\Nsym$
+\item tracking receiver: $T=T_{\mathrm{upd}}=\Kup(T_s+T_{cp})$ $\Rightarrow$ reduce $\Kup$, keep $\Nsym$
+\item forecast-aided (Block 1): $|d|\to|d-\hat d|$
+\end{itemize}
+\end{column}
+\begin{column}{0.44\textwidth}
+\begin{tcolorbox}[colback=foam!60,colframe=foam!60,arc=2mm,boxrule=0pt]
+\footnotesize
+\textbf{Illustration only} \sugg\\[1mm]
+$f_c=20$\,kHz, assumed $\Delta f_{\max}=2$\,Hz:\\
+$|d|=10^{-4}\,$s$^{-1}$ $\Rightarrow$ $T\le1$\,s\\
+$|d|=2\times10^{-4}\,$s$^{-1}$ $\Rightarrow$ $T\le0.5$\,s\\[1mm]
+$\Delta f_{\max}$ is not a measured receiver threshold.
+\end{tcolorbox}
+\footnotesize
+\textbf{Left out:} wideband resampling effects, differential path Doppler, accumulated phase error, estimator noise, the actual detector. Valid only for fixed correction and roughly constant drift: it explains the mechanism, it is not a reliability guarantee.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Block 1: receiver pre-warped along the forecast \sugg}
+\begin{columns}[T]
+\begin{column}{0.52\textwidth}
+\small\setlength{\abovedisplayskip}{3pt}\setlength{\belowdisplayskip}{3pt}
+Motion time-warps the received signal: $r(t)\approx s\big(t+\int_0^t\epsilon(u)\,du\big)$.
+
+\medskip
+\textbf{Today:} estimate $\epsilon$ on the preamble (constant, or constant + acceleration), resample, track.
+
+\smallskip
+\textbf{Here:} resample along the \alert{forecast} $\hat\epsilon(t)$ over the whole packet; the tracker sees only the residual warp $\int(\epsilon-\hat\epsilon)$:
+\[
+|\Delta f(T)|\approx f_c\,|d-\hat d|\,T
+\quad\Rightarrow\quad
+T\le\frac{\Delta f_{\max}}{f_c\,|d-\hat d|}
+\]
+{\footnotesize Same simplified model as before, with the drift replaced by the forecast error. Closest: Ceballos Carrascosa--Stojanovic, JOE 2010.}
+\end{column}
+\begin{column}{0.44\textwidth}
+\footnotesize
+\textbf{What it buys}
+\begin{itemize}
+\item fewer pilots at equal PER, or longer packets, even if acceleration-aware receivers absorb the drift
+\item PER now depends on the \alert{forecast uncertainty} $\sigma_e$, which the estimator reports
+\end{itemize}
+\textbf{What it needs} \open
+\begin{itemize}
+\item the forecast at node B: a few header bits, or the same filter running there
+\item a fallback if the forecast is wrong: residual test, preamble-only
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{``More pilots'' made explicit}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\small
+Five different things are called pilots:
+\begin{enumerate}
+\item more frequent \alert{temporal} tracking observations
+\item more pilot subcarriers inside one OFDM symbol
+\item periodic full training symbols or midambles
+\item known preambles at packet boundaries
+\item decision-directed observations, if the receiver supports them
+\end{enumerate}
+\end{column}
+\begin{column}{0.46\textwidth}
+\footnotesize
+Against \emph{temporal} drift the variable that matters is the \alert{spacing between usable tracking observations}, $\Kup$.
+
+\medskip
+Baseline: uniform spacing $\Kup\in\{8,4,2\}$, test points, not thresholds. Proposed: a uniform grid at the largest spacing $K_{\max}$ that channel estimation allows, plus extra positions from the forecast uncertainty (Block 2) \sugg. Per-symbol tracking needs embedded pilots and its own overhead model \open.
+
+\medskip
+An observation and a receiver update are not the same operation: each receiver must state its estimator and what it needs from an observation \open.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Block 2: pilots where the forecast is uncertain \sugg}
+\begin{columns}[T]
+\begin{column}{0.52\textwidth}
+\small\setlength{\abovedisplayskip}{3pt}\setlength{\belowdisplayskip}{3pt}
+The estimator predicts how the error variance $\sigma_e^2(u)$ grows over the packet, $u\in[0,T_a]$; each training symbol resets it locally.
+
+\smallskip
+\textbf{Placement problem}
+\[
+\min_{\Pset\supseteq\Pset_0:\ |\Pset|\le N_{\mathrm{tr}}}\ \int_0^{T_a}\sigma^2_{e\mid\Pset}(u)\,du
+\]
+\footnotesize
+$\Pset_0$: uniform grid at the largest spacing $K_{\max}$ the tap coherence time allows, so equalisation never loses the channel; the forecast adds only the \alert{extra} pilots. Baseline: $\Pset=\Pset_0$.
+
+\smallskip
+\open\ $K_{\max}$ is receiver-dependent (comb pilots relax it; $K_{\max}\ge\Nsym$: $\Pset_0=\emptyset$, the unconstrained problem); integral or max over $u$; submodularity for greedy (Krause et al.\ 2008).
+\end{column}
+\begin{column}{0.44\textwidth}
+\footnotesize
+\textbf{Expected structure} \claim\ (to derive)\\
+For a swell $d=A\sin(\omega t+\varphi)$, a phase error $\delta\varphi$ gives a drift error $A\,\delta\varphi\cos(\omega t+\varphi)$: largest where $d$ crosses zero, where the jerk peaks. Phase error grows with the horizon, so it dominates.
+
+\medskip
+$\Rightarrow$ extra pilots cluster around the zero crossings of $d$. The jerk, which hurts acceleration-aware receivers most, decides \alert{where the extra pilots go}.
+
+\smallskip
+\textbf{Theory target (R3):} closed-form placement for one swell component; greedy with a bound in general; overhead saved vs uniform spacing.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Block 3: both ends measure Doppler \sugg}
+\begin{columns}[T]
+\begin{column}{0.52\textwidth}
+\small
+Node B measures $\hat\epsilon$ on each data packet, node A on each ACK. Both see the same range rate, so a \alert{Kalman filter} on the drift-plus-oscillators model fuses the two interleaved series (an EKF while the sea parameters are learned) \sugg.
+
+\medskip
+Largest gap between samples (stop-and-wait):
+\[
+\Delta_{\text{one-way}}\ge2\tau+T_a,\qquad \Delta_{\text{two-way}}\approx\tau+T_a
+\]
+No aliasing for a swell of period $P$ ($\Delta<P/2$):
+\[
+R<\tfrac c2\big(\tfrac P2-T_a\big)\ \longrightarrow\ R<c\big(\tfrac P2-T_a\big)
+\]
+{\footnotesize $P=8$\,s, $T_a=1$\,s: 2.25\,km $\to$ 4.5\,km.}
+\end{column}
+\begin{column}{0.44\textwidth}
+\footnotesize
+\textbf{Cost and open points} \open
+\begin{itemize}
+\item B's estimate returns in the ACK header: value + time stamp, $\approx$20 bits \sugg
+\item it arrives late: out-of-sequence measurements in the filter
+\item holds both ends' motion projected on the path, unlike one IMU
+\item assumes both directions share the bulk Doppler (to check in calibration)
+\end{itemize}
+\textbf{Theory target (R2):} observability and forecast error vs range, one- vs two-way sampling.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Block 4: a contextual bandit that knows the physics \sugg}
+\begin{columns}[T]
+\begin{column}{0.52\textwidth}
+\footnotesize
+\textbf{Context} $x_t$: forecast over the candidate receive interval ($\hat d$, $\sigma_e$), $\widehat{\mathrm{SNR}}$, range.
+
+\medskip
+\textbf{Arms} $a=(M,\Nsym)$; for each arm, $\Pset$ comes from Block 2.
+
+\medskip
+\textbf{Reward}: delivered bits per unit airtime, $B_a\,\mathbf 1\{\text{success}\}/T_a$ (one objective, fixed before the comparison).
+
+\medskip
+\textbf{Model}: failure probability monotone in forecast error and action; generalised linear in physical features,
+\[
+p_{\mathrm{fail}}(a,x)=g\big(\theta_a^\top\psi(x)\big),
+\]
+$\theta_a$ initialised from the calibration curves, learned online (UCB or Thompson sampling).
+\end{column}
+\begin{column}{0.44\textwidth}
+\footnotesize
+\textbf{What is new for the theory (R4)}
+\begin{itemize}
+\item feedback for arm $a$ arrives $D_a\ge h+2\tau+T_a$ later: the delay \alert{depends on the arm}
+\item short packets return feedback sooner, biasing a naive learner towards them \open
+\item target \claim: regret $\tilde O(\sqrt{T})$ + delay term, extending fixed-delay results (Joulani et al., ICML 2013)
+\end{itemize}
+\textbf{Safety layer}: only arms meeting the PER target with margin $m_t$.
+
+{\color{mute} Builds on AMUSE, POSEIDON, AoI bandit (Busacca et al.).}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Safe set and decision, written out}
+\begin{columns}[T]
+\begin{column}{0.54\textwidth}
+\small\setlength{\abovedisplayskip}{3pt}\setlength{\belowdisplayskip}{3pt}
+\textbf{A threshold rule as a constraint.} The learner plays only arms in the safe set
+\[
+\mathcal S_t=\big\{a:\ \hat p^{\,\mathrm{up}}_{\mathrm{fail}}(a,x_t)\le\alpha-m_t\big\}
+\]
+\footnotesize
+$\hat p^{\,\mathrm{up}}$: upper confidence bound of the bandit model; $\alpha$: PER target; $m_t$: margin from delayed ACKs (theoretical objectives). Without the prior and with a deterministic threshold this reduces to a plain threshold rule, predicted drift + margin $\le\dtol$.
+
+\vspace{0.5mm}
+The bound must hold over the \emph{whole} receive interval: a pointwise quantile does not bound the maximum. Tracking may make cumulative phase error the better statistic; calibration decides.
+
+\vspace{0.5mm}
+\open\ $\widehat{\mathrm{SNR}}$: who measures it, which link, feedback bits, age at reception. In first simulations it is an oracle.
+\end{column}
+\begin{column}{0.42\textwidth}
+\footnotesize
+\textbf{Procedure per packet} \sugg
+\begin{enumerate}
+\item fuse both ends' time-stamped Doppler
+\item forecast $\hat d$, $\sigma_e$ per receive interval
+\item place pilots for each arm (Block 2)
+\item safe set from predicted PER and $m_t$; if empty: fallback, wait or drop
+\item the bandit picks an arm in it
+\item send frame + forecast; B pre-warps
+\item update $\theta$, $m_t$ from delayed ACKs
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ===========================================================
+\section{Theoretical objectives}
+
+\begin{frame}{Theory: four core results, the rest as extensions}
+\small
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.24\textwidth}
+\begin{block}{R1 Predictability}
+\scriptsize
+How long Doppler stays predictable (L1; idea document: $\approx$13\,s for an 8\,s swell vs $\approx$1\,s for fading); mixed seas degrade gracefully (P2)
+\end{block}
+\end{column}
+\begin{column}{0.24\textwidth}
+\begin{block}{R2 Sampling}
+\scriptsize
+Forecast error vs range, one- vs two-way ($\times$2 samples per round trip); observability with delayed, irregular samples (L3--L4)
+\end{block}
+\end{column}
+\begin{column}{0.24\textwidth}
+\begin{block}{R3 Pilots}
+\scriptsize
+Optimal extra positions on top of the grid $\Pset_0$ for one swell component; greedy with a bound in general (from P7)
+\end{block}
+\end{column}
+\begin{column}{0.24\textwidth}
+\begin{block}{R4 Learning}
+\scriptsize
+Regret of the physics-informed bandit with arm-dependent feedback delay (from T12)
+\end{block}
+\end{column}
+\end{columns}
+
+\smallskip
+\footnotesize
+\textbf{Supporting:} T10--T11, PER safety layer and its stability (known structure: OLLA / ACI).\\
+\textbf{Extensions:} T8 quiet windows, T9 range of Doppler vs SNR feedback, L3--L4 path separation, P5 safe identification, P6 optimal action.
+
+\smallskip
+\open\ For each result: proved, partial proof, conjecture or planned? Not yet listed. Known hard parts: out-of-sequence samples in R2, submodularity under the grid in R3, arm-dependent delay in R4. {\color{mute}L/P/T: lemma, proposition, theorem of the idea document.}
+\end{frame}
+
+\begin{frame}{Safety layer: what makes the PER claim non-vacuous}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\footnotesize
+\textbf{Deck claim} \claim: long-run PER below target for any channel, predictor and estimate.
+
+\medskip
+\textbf{Margin update.} The deck's verbal rule, written as
+\[
+m_{k+1}=m_k+\eta\,(e_k-\alpha),\quad e_k=\mathbf 1\{\text{failure}\}
+\]
+per processed outcome ($\alpha$: PER target). Unprojected, $\frac1N\sum_k e_k=\alpha+\frac{m_{N+1}-m_1}{\eta N}$: calibration only if $m$ grows sublinearly (if all fail, it does not). \open\ Signed correction or buffer $m\ge0$? (projection changes the proof); outcome vs packet index.
+
+\medskip
+\textbf{Which guarantee?} Long-run frequency, finite-horizon, or per-packet. Report it with goodput, drops, deadline misses, retransmissions.
+\end{column}
+\begin{column}{0.46\textwidth}
+\footnotesize
+\textbf{To fix before proving Thm.\ 10} \open
+\begin{itemize}
+\item PER denominator: packets sent? with retransmissions? deadline expiries?
+\item missing ACK or timeout: failure, or excluded?
+\item empty feasible set: fallback action, wait, or drop, and how each is counted
+\item minimum service required, e.g.\ a bound on the dropped or delayed fraction
+\item feasibility assumption, e.g.\ some action always meets the target with slack
+\item action-dependent delay: outcomes arrive $\ge h+2\tau+T_a$ late
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ===========================================================
+\section{Questions for the group}
+
+\begin{frame}{Questions for the group}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\small
+\begin{itemize}
+\item Is the scope right for one paper, or should the bandit (Block 4) be a follow-up?
+\item Can the target modem or simulator carry $\approx$20 header bits for the forecast and the far end's Doppler?
+\item What is already implemented, and which results are proved?
+\end{itemize}
+\end{column}
+\begin{column}{0.46\textwidth}
+\small
+\begin{itemize}
+\item May the policy abstain, drop packets or use a fallback, and how is service counted?
+\item How much time and theory/simulation support is available?
+\item First test: does a forecast prior still help acceleration-aware receivers, in PER or in pilots saved?
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\end{document}

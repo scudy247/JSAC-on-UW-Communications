@@ -1,0 +1,10 @@
+# Replay diagnostic on Red segments (canonical results/diagnostic/<file>/).
+name: diagnostic
+script: scripts/replay_diagnostic.py
+versioned: false
+parallel: 4
+runs:
+  - [red_1, red_noise, --elements, 0, 1, 2, --frame_step, 2.0, --fs, 96000, --N, 1024]
+  - [red_2, red_noise, --elements, 0, 1, 2, --frame_step, 2.0, --fs, 96000, --N, 1024]
+  - [red_3, red_noise, --elements, 0, 1, 2, --frame_step, 2.0, --fs, 96000, --N, 1024]
+  - [red_4, red_noise, --elements, 0, 1, 2, --frame_step, 2.0, --fs, 96000, --N, 1024]

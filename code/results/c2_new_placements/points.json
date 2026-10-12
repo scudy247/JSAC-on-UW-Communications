@@ -1,0 +1,1136 @@
+[
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 35.33321385458527,
+  "sir_sim_p10_db": 33.076893698124046,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 33.957091285612876,
+  "sir_sim_p10_db": 30.041972525903255,
+  "sir_theory_db": 35.61797816471068
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 39.751464749320206,
+  "sir_sim_p10_db": 36.68191025288439,
+  "sir_theory_db": 39.01163960668389
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 38.54320778174684,
+  "sir_sim_p10_db": 36.972463975585505,
+  "sir_theory_db": 38.927922993896765
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 41.888512655380914,
+  "sir_sim_p10_db": 38.249768015355436,
+  "sir_theory_db": 42.55563023680743
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx]+rx[line2]_0.01",
+  "sir_sim_db": 40.48267770631949,
+  "sir_sim_p10_db": 36.80081655492062,
+  "sir_theory_db": 40.19660935748309
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx]+rx[sym]_0.01",
+  "sir_sim_db": 39.27998456009657,
+  "sir_sim_p10_db": 37.052298788362876,
+  "sir_theory_db": 38.92899204802987
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx]+rx[quad]_0.01",
+  "sir_sim_db": 43.939608001555584,
+  "sir_sim_p10_db": 40.75313919682241,
+  "sir_theory_db": 42.5582646577108
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 35.33321385458527,
+  "sir_sim_p10_db": 33.076893698124046,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 33.957091285612876,
+  "sir_sim_p10_db": 30.041972525903255,
+  "sir_theory_db": 35.61797816471068
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 38.90875470302913,
+  "sir_sim_p10_db": 35.3850847186074,
+  "sir_theory_db": 38.31377423709354
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 38.48990541716188,
+  "sir_sim_p10_db": 36.94434652947,
+  "sir_theory_db": 38.871094048461124
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 41.81237632996074,
+  "sir_sim_p10_db": 38.1050659496373,
+  "sir_theory_db": 42.44749256355589
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx]+rx[line2]_0.01",
+  "sir_sim_db": 39.52133523258952,
+  "sir_sim_p10_db": 37.03515943855392,
+  "sir_theory_db": 37.79969983245714
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx]+rx[sym]_0.01",
+  "sir_sim_db": 39.22470094007492,
+  "sir_sim_p10_db": 36.911301636788906,
+  "sir_theory_db": 38.87214920308736
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx]+rx[quad]_0.01",
+  "sir_sim_db": 43.837454191402685,
+  "sir_sim_p10_db": 40.666275077367395,
+  "sir_theory_db": 42.450062179133795
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 35.33321385458527,
+  "sir_sim_p10_db": 33.076893698124046,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 33.957091285612876,
+  "sir_sim_p10_db": 30.041972525903255,
+  "sir_theory_db": 35.61797816471068
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 31.4103684663378,
+  "sir_sim_p10_db": 28.248461002513235,
+  "sir_theory_db": 33.169447068172595
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 37.9848584837089,
+  "sir_sim_p10_db": 36.24083124050968,
+  "sir_theory_db": 38.083839191466296
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 41.00125103858297,
+  "sir_sim_p10_db": 37.581236093907684,
+  "sir_theory_db": 41.026297598416974
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx]+rx[line2]_0.01",
+  "sir_sim_db": 31.428312367607177,
+  "sir_sim_p10_db": 28.648152514438472,
+  "sir_theory_db": 28.98897043396502
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx]+rx[sym]_0.01",
+  "sir_sim_db": 38.67151768493499,
+  "sir_sim_p10_db": 36.698119440684216,
+  "sir_theory_db": 38.08471939250019
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx]+rx[quad]_0.01",
+  "sir_sim_db": 42.64797146520003,
+  "sir_sim_p10_db": 40.164832278214014,
+  "sir_theory_db": 41.02814990469001
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 35.55371496257882,
+  "sir_sim_p10_db": 33.600335690604325,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 14.43206661991185,
+  "sir_sim_p10_db": 11.095743200749862,
+  "sir_theory_db": 13.97268452974238
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 38.32564094811945,
+  "sir_sim_p10_db": 35.991195825278126,
+  "sir_theory_db": 38.1915435200742
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 38.756946501641416,
+  "sir_sim_p10_db": 37.52162409062029,
+  "sir_theory_db": 38.92856094800429
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 44.39769023963072,
+  "sir_sim_p10_db": 42.18839154241892,
+  "sir_theory_db": 45.17645881601215
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx]+rx[line2]_0.01",
+  "sir_sim_db": 39.50327409754009,
+  "sir_sim_p10_db": 37.862894220760644,
+  "sir_theory_db": 38.98117875091505
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx]+rx[sym]_0.01",
+  "sir_sim_db": 39.23280116811061,
+  "sir_sim_p10_db": 38.06659425408765,
+  "sir_theory_db": 38.92962833440049
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx]+rx[quad]_0.01",
+  "sir_sim_db": 45.14365336983667,
+  "sir_sim_p10_db": 43.294827873925165,
+  "sir_theory_db": 46.136772030965155
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 35.55371496257882,
+  "sir_sim_p10_db": 33.600335690604325,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 14.43206661991185,
+  "sir_sim_p10_db": 11.095743200749862,
+  "sir_theory_db": 13.97268452974238
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 27.63391497679578,
+  "sir_sim_p10_db": 24.88253053975598,
+  "sir_theory_db": 31.060260488020297
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 38.68708914045831,
+  "sir_sim_p10_db": 37.40613605057427,
+  "sir_theory_db": 38.87182021171818
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 35.33649966751503,
+  "sir_sim_p10_db": 31.21597980055351,
+  "sir_theory_db": 34.47929998774529
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx]+rx[line2]_0.01",
+  "sir_sim_db": 27.840508185475233,
+  "sir_sim_p10_db": 24.747350643782156,
+  "sir_theory_db": 27.27710160181019
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx]+rx[sym]_0.01",
+  "sir_sim_db": 39.189374082097345,
+  "sir_sim_p10_db": 37.935626222333674,
+  "sir_theory_db": 38.87287374169406
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx]+rx[quad]_0.01",
+  "sir_sim_db": 35.7771714623706,
+  "sir_sim_p10_db": 31.72878948423223,
+  "sir_theory_db": 34.55330493684224
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 35.55371496257882,
+  "sir_sim_p10_db": 33.600335690604325,
+  "sir_theory_db": 30.320986838395605
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 14.43206661991185,
+  "sir_sim_p10_db": 11.095743200749862,
+  "sir_theory_db": 13.97268452974238
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 16.292197430207924,
+  "sir_sim_p10_db": 13.669677549257363,
+  "sir_theory_db": 19.843403326215224
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 38.05929547040161,
+  "sir_sim_p10_db": 36.69865888879178,
+  "sir_theory_db": 38.085675567757235
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 24.04389197126664,
+  "sir_sim_p10_db": 20.23198469316191,
+  "sir_theory_db": 22.686928423743087
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx]+rx[line2]_0.01",
+  "sir_sim_db": 16.328232922370447,
+  "sir_sim_p10_db": 13.257378694581698,
+  "sir_theory_db": 15.455777102958184
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx]+rx[sym]_0.01",
+  "sir_sim_db": 38.57081694740652,
+  "sir_sim_p10_db": 37.55805633879995,
+  "sir_theory_db": 38.08655463826493
+ },
+ {
+  "scenario": "seabed_cdip",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx]+rx[quad]_0.01",
+  "sir_sim_db": 24.147426356436682,
+  "sir_sim_p10_db": 20.148279997457198,
+  "sir_theory_db": 22.69178769961856
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 26.185354477174535,
+  "sir_sim_p10_db": 23.059118874161413,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 27.583240196554506,
+  "sir_sim_p10_db": 22.81723072686338,
+  "sir_theory_db": 27.58954593791996
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 37.125138931621215,
+  "sir_sim_p10_db": 34.51741891123946,
+  "sir_theory_db": 37.414294168993436
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 38.97238429563062,
+  "sir_sim_p10_db": 36.53383982462108,
+  "sir_theory_db": 38.483566449712406
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 40.283533894087746,
+  "sir_sim_p10_db": 37.91842439005694,
+  "sir_theory_db": 40.40134545301596
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx]+rx[line2]_0.01",
+  "sir_sim_db": 38.60740210990838,
+  "sir_sim_p10_db": 35.38134638813821,
+  "sir_theory_db": 37.745662558017955
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx]+rx[sym]_0.01",
+  "sir_sim_db": 38.43187765543902,
+  "sir_sim_p10_db": 36.181148344045646,
+  "sir_theory_db": 38.49118200081627
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx]+rx[quad]_0.01",
+  "sir_sim_db": 40.987408512933825,
+  "sir_sim_p10_db": 38.676755561791126,
+  "sir_theory_db": 40.49033302920566
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 26.185354477174535,
+  "sir_sim_p10_db": 23.059118874161413,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 27.583240196554506,
+  "sir_sim_p10_db": 22.81723072686338,
+  "sir_theory_db": 27.58954593791996
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 29.866712200537137,
+  "sir_sim_p10_db": 27.8879863732476,
+  "sir_theory_db": 33.40411924754071
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 37.96186542291703,
+  "sir_sim_p10_db": 36.10790364333674,
+  "sir_theory_db": 37.71939987976367
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 39.68498534933621,
+  "sir_sim_p10_db": 37.4111151607135,
+  "sir_theory_db": 39.65118931999954
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx]+rx[line2]_0.01",
+  "sir_sim_db": 30.262628034531968,
+  "sir_sim_p10_db": 27.209370536216603,
+  "sir_theory_db": 29.618931614202005
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx]+rx[sym]_0.01",
+  "sir_sim_db": 37.72218033769265,
+  "sir_sim_p10_db": 35.76041644307377,
+  "sir_theory_db": 37.72578579595496
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx]+rx[quad]_0.01",
+  "sir_sim_db": 40.24318146998343,
+  "sir_sim_p10_db": 38.34466323733398,
+  "sir_theory_db": 39.725938091778715
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 26.185354477174535,
+  "sir_sim_p10_db": 23.059118874161413,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 27.583240196554506,
+  "sir_sim_p10_db": 22.81723072686338,
+  "sir_theory_db": 27.58954593791996
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 18.82175569587401,
+  "sir_sim_p10_db": 16.00000698326223,
+  "sir_theory_db": 23.465132999361558
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 32.362844841082406,
+  "sir_sim_p10_db": 29.587260855045045,
+  "sir_theory_db": 32.47317976985778
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 34.23154115472742,
+  "sir_sim_p10_db": 30.80432025336468,
+  "sir_theory_db": 34.48388880554592
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx]+rx[line2]_0.01",
+  "sir_sim_db": 18.89136544051378,
+  "sir_sim_p10_db": 15.208507391810656,
+  "sir_theory_db": 18.369730203622023
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx]+rx[sym]_0.01",
+  "sir_sim_db": 32.48381451773471,
+  "sir_sim_p10_db": 28.69795845047751,
+  "sir_theory_db": 32.475086886689944
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx]+rx[quad]_0.01",
+  "sir_sim_db": 34.36116687544332,
+  "sir_sim_p10_db": 30.72021721874267,
+  "sir_theory_db": 34.506497311646655
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 27.039829480023883,
+  "sir_sim_p10_db": 24.875809903317503,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 4.861244502296076,
+  "sir_sim_p10_db": -0.9805931873050434,
+  "sir_theory_db": 2.1569275401631254
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 35.96699573334236,
+  "sir_sim_p10_db": 32.78089359864469,
+  "sir_theory_db": 36.296407204398086
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 38.36681144982392,
+  "sir_sim_p10_db": 36.98888454457095,
+  "sir_theory_db": 38.48425984294257
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 40.88079730684855,
+  "sir_sim_p10_db": 39.58740358587695,
+  "sir_theory_db": 40.02998104131167
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx]+rx[line2]_0.01",
+  "sir_sim_db": 36.46026208537582,
+  "sir_sim_p10_db": 33.4854069376969,
+  "sir_theory_db": 35.94866939614131
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx]+rx[sym]_0.01",
+  "sir_sim_db": 38.84483396072463,
+  "sir_sim_p10_db": 37.376912070481325,
+  "sir_theory_db": 38.49186919137796
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx]+rx[quad]_0.01",
+  "sir_sim_db": 41.20727164936707,
+  "sir_sim_p10_db": 39.996725331638174,
+  "sir_theory_db": 40.49076594645663
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 27.039829480023883,
+  "sir_sim_p10_db": 24.875809903317503,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 4.861244502296076,
+  "sir_sim_p10_db": -0.9805931873050434,
+  "sir_theory_db": 2.1569275401631254
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 14.78224685459232,
+  "sir_sim_p10_db": 11.243981432216149,
+  "sir_theory_db": 18.960069423275627
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 37.675134862279435,
+  "sir_sim_p10_db": 36.71152947911341,
+  "sir_theory_db": 37.72116036247206
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 22.279665707437815,
+  "sir_sim_p10_db": 18.813985510034495,
+  "sir_theory_db": 22.39318190732932
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx]+rx[line2]_0.01",
+  "sir_sim_db": 14.767820868785375,
+  "sir_sim_p10_db": 10.776066872862124,
+  "sir_theory_db": 14.35169145621594
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx]+rx[sym]_0.01",
+  "sir_sim_db": 38.164279658078485,
+  "sir_sim_p10_db": 37.097773033207154,
+  "sir_theory_db": 37.72754264736466
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx]+rx[quad]_0.01",
+  "sir_sim_db": 22.27758735334246,
+  "sir_sim_p10_db": 18.743985434600404,
+  "sir_theory_db": 22.400721705243612
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 27.039829480023883,
+  "sir_sim_p10_db": 24.875809903317503,
+  "sir_theory_db": 19.499054797762433
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 4.861244502296076,
+  "sir_sim_p10_db": -0.9805931873050434,
+  "sir_theory_db": 2.1569275401631254
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 4.110384394252296,
+  "sir_sim_p10_db": -0.35111410411824096,
+  "sir_theory_db": 7.108972643269241
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 32.66594806314822,
+  "sir_sim_p10_db": 30.9075830000376,
+  "sir_theory_db": 32.47885646254093
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 10.528727419162642,
+  "sir_sim_p10_db": 6.8992693336079585,
+  "sir_theory_db": 10.583947314842575
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx]+rx[line2]_0.01",
+  "sir_sim_db": 4.100092409005626,
+  "sir_sim_p10_db": -0.42804464467272435,
+  "sir_theory_db": 2.4636537002903403
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx]+rx[sym]_0.01",
+  "sir_sim_db": 32.88372680250727,
+  "sir_sim_p10_db": 30.858139641277678,
+  "sir_theory_db": 32.48076421536594
+ },
+ {
+  "scenario": "seabed_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx]+rx[quad]_0.01",
+  "sir_sim_db": 10.528552426808947,
+  "sir_sim_p10_db": 6.9123293318478956,
+  "sir_theory_db": 10.584444003389095
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 22.95991406932128,
+  "sir_sim_p10_db": 18.666483017227335,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 24.134126584106216,
+  "sir_sim_p10_db": 21.679204103462023,
+  "sir_theory_db": 24.349941264721778
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 36.02133808691907,
+  "sir_sim_p10_db": 34.29029722178419,
+  "sir_theory_db": 36.326479203949624
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 37.84271456026521,
+  "sir_sim_p10_db": 35.76472338536449,
+  "sir_theory_db": 38.18610774778254
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 39.62986747149187,
+  "sir_sim_p10_db": 37.319050661058405,
+  "sir_theory_db": 39.272473500946084
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 22.95991406932128,
+  "sir_sim_p10_db": 18.666483017227335,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 24.134126584106216,
+  "sir_sim_p10_db": 21.679204103462023,
+  "sir_theory_db": 24.349941264721778
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 26.360074827930305,
+  "sir_sim_p10_db": 21.868045552299595,
+  "sir_theory_db": 31.05191873738513
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 36.442867806813084,
+  "sir_sim_p10_db": 34.42893609698479,
+  "sir_theory_db": 36.87702954785849
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 38.31708627394051,
+  "sir_sim_p10_db": 36.48411261639579,
+  "sir_theory_db": 38.093133104517925
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 22.95991406932128,
+  "sir_sim_p10_db": 18.666483017227335,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 24.134126584106216,
+  "sir_sim_p10_db": 21.679204103462023,
+  "sir_theory_db": 24.349941264721778
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 15.056198534371838,
+  "sir_sim_p10_db": 10.47251489231152,
+  "sir_theory_db": 20.53442808412637
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 29.652161248925793,
+  "sir_sim_p10_db": 26.800437101548997,
+  "sir_theory_db": 30.071421211480065
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 1.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 31.940955643062047,
+  "sir_sim_p10_db": 28.12090323251277,
+  "sir_theory_db": 31.716271976293356
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 23.348763864159828,
+  "sir_sim_p10_db": 19.895898532087525,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 1.4600408386023713,
+  "sir_sim_p10_db": -3.7324253964666196,
+  "sir_theory_db": -0.9468344273947465
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 33.47030948073521,
+  "sir_sim_p10_db": 30.78992045403083,
+  "sir_theory_db": 34.93813981841684
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 37.99468840450688,
+  "sir_sim_p10_db": 36.868852116079765,
+  "sir_theory_db": 38.186848293829875
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 0.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 38.03272845187048,
+  "sir_sim_p10_db": 35.84099495457915,
+  "sir_theory_db": 37.78993962243698
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 23.348763864159828,
+  "sir_sim_p10_db": 19.895898532087525,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 1.4600408386023713,
+  "sir_sim_p10_db": -3.7324253964666196,
+  "sir_theory_db": -0.9468344273947465
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 12.633051781404843,
+  "sir_sim_p10_db": 9.165413992296939,
+  "sir_theory_db": 16.2052892966206
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 36.941631153103735,
+  "sir_sim_p10_db": 35.828560114780906,
+  "sir_theory_db": 36.87948063015983
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 5.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 19.605842005420577,
+  "sir_sim_p10_db": 16.315895653978757,
+  "sir_theory_db": 19.567017363388626
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 23.348763864159828,
+  "sir_sim_p10_db": 19.895898532087525,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 1.4600408386023713,
+  "sir_sim_p10_db": -3.7324253964666196,
+  "sir_theory_db": -0.9468344273947465
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 2.7136062994478145,
+  "sir_sim_p10_db": -1.4285427152354002,
+  "sir_theory_db": 4.322982261422194
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx+rx]+rx[sym]_0.01",
+  "sir_sim_db": 30.422507868139522,
+  "sir_sim_p10_db": 28.322850773712165,
+  "sir_theory_db": 30.077747965326402
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "packet_s": 4.0,
+  "u_error_deg": 20.0,
+  "strategy": "own[tx+rx]+rx[quad]_0.01",
+  "sir_sim_db": 7.993881640202195,
+  "sir_sim_p10_db": 4.835553156320556,
+  "sir_theory_db": 7.749247504561467
+ }
+]

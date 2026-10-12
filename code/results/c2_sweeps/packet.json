@@ -1,0 +1,177 @@
+[
+ {
+  "packet_s": 0.5,
+  "strategy": "rx_sym",
+  "sir_sim_db": 21.484472474155822,
+  "sir_sim_p10_db": 17.273863294824988,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "packet_s": 0.5,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 38.66206777305291,
+  "sir_sim_p10_db": 38.116798930852895,
+  "sir_theory_db": 34.518402512965736
+ },
+ {
+  "packet_s": 0.5,
+  "strategy": "both_0.01",
+  "sir_sim_db": 30.176083070055707,
+  "sir_sim_p10_db": 27.744650276960268,
+  "sir_theory_db": 27.226945450825276
+ },
+ {
+  "packet_s": 0.5,
+  "strategy": "split_0.01",
+  "sir_sim_db": 38.119908078688226,
+  "sir_sim_p10_db": 34.94997652292037,
+  "sir_theory_db": 36.60145019240161
+ },
+ {
+  "packet_s": 0.5,
+  "strategy": "split0_0.01",
+  "sir_sim_db": 39.44215656537227,
+  "sir_sim_p10_db": 36.78613937607628,
+  "sir_theory_db": 37.50576410572247
+ },
+ {
+  "packet_s": 1.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 21.12882232759139,
+  "sir_sim_p10_db": 17.955818428358363,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "packet_s": 1.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 23.00089865191776,
+  "sir_sim_p10_db": 19.80055522859435,
+  "sir_theory_db": 24.349941264721778
+ },
+ {
+  "packet_s": 1.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 27.612950574522745,
+  "sir_sim_p10_db": 22.04363765491698,
+  "sir_theory_db": 27.226945450825276
+ },
+ {
+  "packet_s": 1.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 35.40884671544621,
+  "sir_sim_p10_db": 32.30759990265626,
+  "sir_theory_db": 36.326479203949624
+ },
+ {
+  "packet_s": 1.0,
+  "strategy": "split0_0.01",
+  "sir_sim_db": 35.17012358318357,
+  "sir_sim_p10_db": 32.40954730902097,
+  "sir_theory_db": 36.758154258006165
+ },
+ {
+  "packet_s": 2.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 21.707795976340595,
+  "sir_sim_p10_db": 18.857900480114782,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "packet_s": 2.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 8.57809112042916,
+  "sir_sim_p10_db": 4.514446366924775,
+  "sir_theory_db": 9.520597574262098
+ },
+ {
+  "packet_s": 2.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 31.17297757578246,
+  "sir_sim_p10_db": 27.30565315703289,
+  "sir_theory_db": 27.226945450825276
+ },
+ {
+  "packet_s": 2.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 34.1145812829201,
+  "sir_sim_p10_db": 30.770451726970094,
+  "sir_theory_db": 35.70646293590521
+ },
+ {
+  "packet_s": 2.0,
+  "strategy": "split0_0.01",
+  "sir_sim_db": 33.67679011454698,
+  "sir_sim_p10_db": 31.596827419692612,
+  "sir_theory_db": 35.79205971923777
+ },
+ {
+  "packet_s": 4.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 21.62643094741332,
+  "sir_sim_p10_db": 19.047048399444957,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "packet_s": 4.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": 0.543218433307482,
+  "sir_sim_p10_db": -5.1278038310958625,
+  "sir_theory_db": -0.9468344273947465
+ },
+ {
+  "packet_s": 4.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 30.809854031193925,
+  "sir_sim_p10_db": 28.95233287974735,
+  "sir_theory_db": 27.226945450825276
+ },
+ {
+  "packet_s": 4.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 33.41378263503038,
+  "sir_sim_p10_db": 31.970239330580593,
+  "sir_theory_db": 34.93813981841684
+ },
+ {
+  "packet_s": 4.0,
+  "strategy": "split0_0.01",
+  "sir_sim_db": 33.2062819756409,
+  "sir_sim_p10_db": 31.631033727883928,
+  "sir_theory_db": 35.07817439398566
+ },
+ {
+  "packet_s": 8.0,
+  "strategy": "rx_sym",
+  "sir_sim_db": 21.89220323023388,
+  "sir_sim_p10_db": 20.47278425032335,
+  "sir_theory_db": 16.437221087283145
+ },
+ {
+  "packet_s": 8.0,
+  "strategy": "rx_pkt2",
+  "sir_sim_db": -3.244145700083993,
+  "sir_sim_p10_db": -5.989304627948621,
+  "sir_theory_db": -4.819487755786782
+ },
+ {
+  "packet_s": 8.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 27.260101402435538,
+  "sir_sim_p10_db": 24.509461710227512,
+  "sir_theory_db": 27.226945450825276
+ },
+ {
+  "packet_s": 8.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 32.352822235609565,
+  "sir_sim_p10_db": 32.3204629121133,
+  "sir_theory_db": 34.43437949747637
+ },
+ {
+  "packet_s": 8.0,
+  "strategy": "split0_0.01",
+  "sir_sim_db": 31.933696039523735,
+  "sir_sim_p10_db": 31.57200611019217,
+  "sir_theory_db": 34.168247901999855
+ }
+]

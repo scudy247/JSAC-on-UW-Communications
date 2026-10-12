@@ -1,0 +1,98 @@
+[
+ {
+  "latency_s": 0.0,
+  "extrapolate": true,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 32.33442447280446,
+  "sir_sim_p10_db": 29.053605329590518,
+  "sir_theory_db": 30.657086690258552
+ },
+ {
+  "latency_s": 0.0,
+  "extrapolate": true,
+  "strategy": "split_0.01",
+  "sir_sim_db": 41.817425863411835,
+  "sir_sim_p10_db": 39.66493924318548,
+  "sir_theory_db": 38.823096894203246
+ },
+ {
+  "latency_s": 0.05,
+  "extrapolate": true,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 33.234984529298764,
+  "sir_sim_p10_db": 30.92741939161943,
+  "sir_theory_db": 30.255274069574483
+ },
+ {
+  "latency_s": 0.05,
+  "extrapolate": true,
+  "strategy": "split_0.01",
+  "sir_sim_db": 37.41080736261299,
+  "sir_sim_p10_db": 35.619284431291035,
+  "sir_theory_db": 37.414294168993436
+ },
+ {
+  "latency_s": 0.1,
+  "extrapolate": true,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 27.82458943368502,
+  "sir_sim_p10_db": 25.311903636871655,
+  "sir_theory_db": 26.99600955185803
+ },
+ {
+  "latency_s": 0.1,
+  "extrapolate": true,
+  "strategy": "split_0.01",
+  "sir_sim_db": 29.694367109529995,
+  "sir_sim_p10_db": 27.23565569553548,
+  "sir_theory_db": 31.289640824693183
+ },
+ {
+  "latency_s": 0.2,
+  "extrapolate": true,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 15.953800022116301,
+  "sir_sim_p10_db": 13.232023657641257,
+  "sir_theory_db": 18.919606829575773
+ },
+ {
+  "latency_s": 0.2,
+  "extrapolate": true,
+  "strategy": "split_0.01",
+  "sir_sim_db": 19.989460188994418,
+  "sir_sim_p10_db": 18.426950617426204,
+  "sir_theory_db": 24.139864783552866
+ },
+ {
+  "latency_s": 0.05,
+  "extrapolate": false,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 17.101818769163156,
+  "sir_sim_p10_db": 13.528783735748911,
+  "sir_theory_db": 18.48921333340855
+ },
+ {
+  "latency_s": 0.05,
+  "extrapolate": false,
+  "strategy": "split_0.01",
+  "sir_sim_db": 25.15292301372424,
+  "sir_sim_p10_db": 23.230562809404063,
+  "sir_theory_db": 31.691886864895956
+ },
+ {
+  "latency_s": 0.1,
+  "extrapolate": false,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 10.755650884422996,
+  "sir_sim_p10_db": 7.239231949664446,
+  "sir_theory_db": 12.695072435068846
+ },
+ {
+  "latency_s": 0.1,
+  "extrapolate": false,
+  "strategy": "split_0.01",
+  "sir_sim_db": 19.28387489645405,
+  "sir_sim_p10_db": 15.930826788390789,
+  "sir_theory_db": 26.67845221943167
+ }
+]

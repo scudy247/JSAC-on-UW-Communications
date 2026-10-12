@@ -1,0 +1,2690 @@
+[
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_16",
+  "sinr_db": 4.9346194169868065
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_16_prior",
+  "sinr_db": 4.941740572495968
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_32",
+  "sinr_db": 4.935082169517338
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_32_prior",
+  "sinr_db": 4.958520522179305
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_64",
+  "sinr_db": 4.935090528778295
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_64_prior",
+  "sinr_db": 4.959002187959347
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_exact",
+  "sinr_db": 4.93509254190985
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 4.958976302479774
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "cho_kim",
+  "sinr_db": 4.8744212922257555
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "fused_16",
+  "sinr_db": 4.977686782831402
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "fused_32",
+  "sinr_db": 4.981392762644074
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "fused_64",
+  "sinr_db": 4.981525218831232
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "fused_exact",
+  "sinr_db": 4.9815339810875585
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "signal_kalman",
+  "sinr_db": 4.948383512782209
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "signal_only",
+  "sinr_db": 4.926731895808459
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "signal_scale_only",
+  "sinr_db": 4.641173998121443
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_16",
+  "sinr_db": 9.95957469262753
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_16_prior",
+  "sinr_db": 9.875798407595383
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_32",
+  "sinr_db": 9.960101732099579
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_32_prior",
+  "sinr_db": 9.920130349305152
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_64",
+  "sinr_db": 9.960168750044842
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_64_prior",
+  "sinr_db": 9.92131077692388
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_exact",
+  "sinr_db": 9.96017480920748
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 9.921276325806339
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "cho_kim",
+  "sinr_db": 9.810093653909492
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "fused_16",
+  "sinr_db": 9.982419658353871
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "fused_32",
+  "sinr_db": 9.988651735633772
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "fused_64",
+  "sinr_db": 9.98875982128231
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "fused_exact",
+  "sinr_db": 9.988755880782668
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "signal_kalman",
+  "sinr_db": 9.965427346659634
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "signal_only",
+  "sinr_db": 9.939788001775474
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "signal_scale_only",
+  "sinr_db": 9.116587878438162
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_16",
+  "sinr_db": 19.957253067078362
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_16_prior",
+  "sinr_db": 18.911759473247244
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_32",
+  "sinr_db": 19.967159959680213
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_32_prior",
+  "sinr_db": 19.238024894992275
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_64",
+  "sinr_db": 19.967494539669893
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_64_prior",
+  "sinr_db": 19.24469735474474
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_exact",
+  "sinr_db": 19.967491258379262
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 19.24423235642488
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "cho_kim",
+  "sinr_db": 18.551545784449985
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "fused_16",
+  "sinr_db": 19.977212409875584
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "fused_32",
+  "sinr_db": 19.98160512358249
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "fused_64",
+  "sinr_db": 19.981799498365916
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "fused_exact",
+  "sinr_db": 19.981768878552387
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "signal_kalman",
+  "sinr_db": 19.967278535974515
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "signal_only",
+  "sinr_db": 19.765926160899895
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "signal_scale_only",
+  "sinr_db": 15.165443422277384
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_16",
+  "sinr_db": 29.878831239667598
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_16_prior",
+  "sinr_db": 24.195329487957444
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_32",
+  "sinr_db": 29.98403618427688
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_32_prior",
+  "sinr_db": 25.418936726482716
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_64",
+  "sinr_db": 29.986447404587643
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_64_prior",
+  "sinr_db": 25.448311318126756
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_exact",
+  "sinr_db": 29.98645822915181
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 25.44660403220176
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "cho_kim",
+  "sinr_db": 23.08494747022714
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "fused_16",
+  "sinr_db": 29.9888110189576
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "fused_32",
+  "sinr_db": 29.997343771122303
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "fused_64",
+  "sinr_db": 29.997363794761114
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "fused_exact",
+  "sinr_db": 29.997309140527868
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "signal_kalman",
+  "sinr_db": 29.967097634487097
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "signal_only",
+  "sinr_db": 28.28165590012467
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "signal_scale_only",
+  "sinr_db": 16.714183168263897
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_16",
+  "sinr_db": 4.945413214000686
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_16_prior",
+  "sinr_db": 4.60750609920905
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_32",
+  "sinr_db": 4.952574307506884
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_32_prior",
+  "sinr_db": 4.933554307306972
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_64",
+  "sinr_db": 4.95377618692263
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_64_prior",
+  "sinr_db": 4.9837591906735135
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_exact",
+  "sinr_db": 4.9537831400610575
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 4.984192223300646
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "cho_kim",
+  "sinr_db": 4.288060109808581
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "fused_16",
+  "sinr_db": 4.990527460381683
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "fused_32",
+  "sinr_db": 4.998349727323765
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "fused_64",
+  "sinr_db": 5.0021805977409874
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "fused_exact",
+  "sinr_db": 5.00198583870054
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "signal_kalman",
+  "sinr_db": 4.963661371852361
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "signal_only",
+  "sinr_db": 4.91570468206722
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "signal_scale_only",
+  "sinr_db": 3.6588487789786885
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_16",
+  "sinr_db": 9.938593550073305
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_16_prior",
+  "sinr_db": 9.005758717499027
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_32",
+  "sinr_db": 9.957741861105683
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_32_prior",
+  "sinr_db": 9.797710986567573
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_64",
+  "sinr_db": 9.96043015641726
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_64_prior",
+  "sinr_db": 9.926815889348903
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_exact",
+  "sinr_db": 9.960523683306224
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 9.928934657142406
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "cho_kim",
+  "sinr_db": 8.21381960982997
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "fused_16",
+  "sinr_db": 9.985244541413982
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "fused_32",
+  "sinr_db": 9.98811860058616
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "fused_64",
+  "sinr_db": 9.992740541737756
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "fused_exact",
+  "sinr_db": 9.993201501379435
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "signal_kalman",
+  "sinr_db": 9.966831523286302
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "signal_only",
+  "sinr_db": 9.865495386833821
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "signal_scale_only",
+  "sinr_db": 7.091312558092819
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_16",
+  "sinr_db": 19.782538763125658
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_16_prior",
+  "sinr_db": 14.751447402459718
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_32",
+  "sinr_db": 19.949981730763977
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_32_prior",
+  "sinr_db": 18.424022646142497
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_64",
+  "sinr_db": 19.976751673823475
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_64_prior",
+  "sinr_db": 19.362415993647282
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_exact",
+  "sinr_db": 19.97746795350012
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 19.37623798608715
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "cho_kim",
+  "sinr_db": 12.479015859136657
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "fused_16",
+  "sinr_db": 19.986220649414015
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "fused_32",
+  "sinr_db": 19.988632415388523
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "fused_64",
+  "sinr_db": 19.992548738022617
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "fused_exact",
+  "sinr_db": 19.992699174447303
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "signal_kalman",
+  "sinr_db": 19.972183555368655
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "signal_only",
+  "sinr_db": 19.193769892223827
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "signal_scale_only",
+  "sinr_db": 10.123923564243702
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_16",
+  "sinr_db": 28.333071302771966
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_16_prior",
+  "sinr_db": 16.14436905032952
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_32",
+  "sinr_db": 29.69804978697219
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_32_prior",
+  "sinr_db": 22.71699081652414
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_64",
+  "sinr_db": 29.95674746942193
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_64_prior",
+  "sinr_db": 25.897299186657886
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_exact",
+  "sinr_db": 29.964278285287264
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 25.952290051436048
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "cho_kim",
+  "sinr_db": 13.268168392668588
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "fused_16",
+  "sinr_db": 29.947763446474475
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "fused_32",
+  "sinr_db": 29.96592362573738
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "fused_64",
+  "sinr_db": 29.98151460606647
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "fused_exact",
+  "sinr_db": 29.98214729059867
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "signal_kalman",
+  "sinr_db": 29.901148330434747
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "signal_only",
+  "sinr_db": 25.268850712303284
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "signal_scale_only",
+  "sinr_db": 10.58687907118371
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_16",
+  "sinr_db": 4.917914312834752
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_16_prior",
+  "sinr_db": 4.843332434591611
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_32",
+  "sinr_db": 4.922269923943342
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_32_prior",
+  "sinr_db": 4.96271830196945
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_64",
+  "sinr_db": 4.922171665303246
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_64_prior",
+  "sinr_db": 4.969291086257174
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_exact",
+  "sinr_db": 4.922196075713577
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 4.969936742630622
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "cho_kim",
+  "sinr_db": 3.3651536504963744
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "fused_16",
+  "sinr_db": 4.935017321834335
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "fused_32",
+  "sinr_db": 4.961686553331076
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "fused_64",
+  "sinr_db": 4.96433775240342
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "fused_exact",
+  "sinr_db": 4.964541702621612
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "signal_kalman",
+  "sinr_db": 4.931010382814643
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "signal_only",
+  "sinr_db": 4.738575896114302
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "signal_scale_only",
+  "sinr_db": 1.4422765601739074
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_16",
+  "sinr_db": 9.949592993739277
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_16_prior",
+  "sinr_db": 9.633106880155912
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_32",
+  "sinr_db": 9.959108287255285
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_32_prior",
+  "sinr_db": 9.950260579545608
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_64",
+  "sinr_db": 9.959534041451052
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_64_prior",
+  "sinr_db": 9.965122950183263
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_exact",
+  "sinr_db": 9.959734895853439
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 9.966302864057566
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "cho_kim",
+  "sinr_db": 4.31849137640209
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "fused_16",
+  "sinr_db": 9.948203024018175
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "fused_32",
+  "sinr_db": 9.979811917331297
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "fused_64",
+  "sinr_db": 9.983998040339529
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "fused_exact",
+  "sinr_db": 9.98575013274692
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "signal_kalman",
+  "sinr_db": 9.960711220338878
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "signal_only",
+  "sinr_db": 9.500671561756826
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "signal_scale_only",
+  "sinr_db": 3.6346796185527
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_16",
+  "sinr_db": 19.87431617640159
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_16_prior",
+  "sinr_db": 17.50044457896852
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_32",
+  "sinr_db": 19.948542050223093
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_32_prior",
+  "sinr_db": 19.56545061885957
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_64",
+  "sinr_db": 19.95352820441118
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_64_prior",
+  "sinr_db": 19.69155604475576
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_exact",
+  "sinr_db": 19.95547671509819
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 19.69977433233246
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "cho_kim",
+  "sinr_db": 5.827467995706028
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "fused_16",
+  "sinr_db": 19.933057604231013
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "fused_32",
+  "sinr_db": 19.94878163118547
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "fused_64",
+  "sinr_db": 19.95916525497551
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "fused_exact",
+  "sinr_db": 19.96367914440808
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "signal_kalman",
+  "sinr_db": 19.912708645850408
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "signal_only",
+  "sinr_db": 16.936101623142427
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "signal_scale_only",
+  "sinr_db": 5.04860964333575
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_16",
+  "sinr_db": 29.128357246084317
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_16_prior",
+  "sinr_db": 20.61034421228492
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_32",
+  "sinr_db": 29.82514485799925
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_32_prior",
+  "sinr_db": 26.97128362321989
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_64",
+  "sinr_db": 29.87310441921725
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_64_prior",
+  "sinr_db": 27.710586520568825
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_exact",
+  "sinr_db": 29.886545216616263
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 27.758297140783284
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "cho_kim",
+  "sinr_db": 6.208862920909771
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "fused_16",
+  "sinr_db": 29.793510512077965
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "fused_32",
+  "sinr_db": 29.82900252638843
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "fused_64",
+  "sinr_db": 29.859681314323726
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "fused_exact",
+  "sinr_db": 29.885090871284437
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "signal_kalman",
+  "sinr_db": 29.410261645370426
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "signal_only",
+  "sinr_db": 19.53719411179742
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "signal_scale_only",
+  "sinr_db": 5.2191497110392255
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_16",
+  "sinr_db": 4.841062122354568
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_16_prior",
+  "sinr_db": 1.497783986632916
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_32",
+  "sinr_db": 4.926008615035947
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_32_prior",
+  "sinr_db": 4.427355229039965
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_64",
+  "sinr_db": 4.937627935115839
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_64_prior",
+  "sinr_db": 4.95583378750732
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_exact",
+  "sinr_db": 4.9385368133376595
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 4.975046245140386
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "cho_kim",
+  "sinr_db": -3.4133277974105676
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "fused_16",
+  "sinr_db": 4.908449760801799
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "fused_32",
+  "sinr_db": 4.94796307262137
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "fused_64",
+  "sinr_db": 4.982714487405451
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "fused_exact",
+  "sinr_db": 4.987079845220436
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "signal_kalman",
+  "sinr_db": 4.911367644044085
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "signal_only",
+  "sinr_db": 4.082264926672354
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "signal_scale_only",
+  "sinr_db": -4.321186718745368
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_16",
+  "sinr_db": 9.717611645000959
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_16_prior",
+  "sinr_db": 3.7143252893662817
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_32",
+  "sinr_db": 9.93301503967542
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_32_prior",
+  "sinr_db": 8.633194908193948
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_64",
+  "sinr_db": 9.963191612692837
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_64_prior",
+  "sinr_db": 9.890554185039198
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_exact",
+  "sinr_db": 9.963771943602827
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 9.940203919289084
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "cho_kim",
+  "sinr_db": -3.2283516818383227
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "fused_16",
+  "sinr_db": 9.91332535534498
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "fused_32",
+  "sinr_db": 9.947275534980589
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "fused_64",
+  "sinr_db": 9.983048659458332
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "fused_exact",
+  "sinr_db": 9.989676115600615
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "signal_kalman",
+  "sinr_db": 9.885057492414592
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "signal_only",
+  "sinr_db": 8.012775136645814
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "signal_scale_only",
+  "sinr_db": -3.186114191420218
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_16",
+  "sinr_db": 18.14092724947806
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_16_prior",
+  "sinr_db": 5.134109950414834
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_32",
+  "sinr_db": 19.703424914088107
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_32_prior",
+  "sinr_db": 13.579288903589573
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_64",
+  "sinr_db": 19.962647214165006
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_64_prior",
+  "sinr_db": 19.057372281700744
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_exact",
+  "sinr_db": 19.9747650133899
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 19.44554103526492
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "cho_kim",
+  "sinr_db": -2.621164539871131
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "fused_16",
+  "sinr_db": 19.84527953405022
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "fused_32",
+  "sinr_db": 19.924446874570556
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "fused_64",
+  "sinr_db": 19.966082144534617
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "fused_exact",
+  "sinr_db": 19.985134290913326
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "signal_kalman",
+  "sinr_db": 19.333846702007243
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "signal_only",
+  "sinr_db": 12.082152141188745
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "signal_scale_only",
+  "sinr_db": -2.601375028801357
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_16",
+  "sinr_db": 22.049930400226387
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_16_prior",
+  "sinr_db": 5.301899894106439
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_32",
+  "sinr_db": 27.775910042336495
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_32_prior",
+  "sinr_db": 14.617417385069466
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_64",
+  "sinr_db": 29.788071093929904
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_64_prior",
+  "sinr_db": 24.64578058155474
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_exact",
+  "sinr_db": 29.90896860566926
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 26.253340970250328
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "cho_kim",
+  "sinr_db": -2.5586865248900663
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "fused_16",
+  "sinr_db": 29.068601998771694
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "fused_32",
+  "sinr_db": 29.685955161426676
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "fused_64",
+  "sinr_db": 29.85371891065394
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "fused_exact",
+  "sinr_db": 29.89809920848627
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "signal_kalman",
+  "sinr_db": 25.84248127481395
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "signal_only",
+  "sinr_db": 12.813923698973834
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "signal_scale_only",
+  "sinr_db": -2.5408399876666876
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_16",
+  "sinr_db": 4.9425544608490215
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_16_prior",
+  "sinr_db": 4.802933295627821
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_32",
+  "sinr_db": 4.947967388550772
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_32_prior",
+  "sinr_db": 4.990000802023804
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_64",
+  "sinr_db": 4.948003864458715
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_64_prior",
+  "sinr_db": 4.993195553924938
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_exact",
+  "sinr_db": 4.947941603971699
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 4.993353947351768
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "cho_kim",
+  "sinr_db": 0.5676289842959749
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "fused_16",
+  "sinr_db": 4.943717506082711
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "fused_32",
+  "sinr_db": 4.994504203069882
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "fused_64",
+  "sinr_db": 4.995461414136937
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "fused_exact",
+  "sinr_db": 4.995216685279732
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "signal_kalman",
+  "sinr_db": 4.897039865927634
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "signal_only",
+  "sinr_db": 4.343582950472092
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 5,
+  "receiver": "signal_scale_only",
+  "sinr_db": -1.7694972630640213
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_16",
+  "sinr_db": 9.951109853040327
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_16_prior",
+  "sinr_db": 9.508577774297272
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_32",
+  "sinr_db": 9.962167680949221
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_32_prior",
+  "sinr_db": 9.954735092838522
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_64",
+  "sinr_db": 9.962738088943148
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_64_prior",
+  "sinr_db": 9.963317812090756
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_exact",
+  "sinr_db": 9.9629650169156
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 9.963987327002853
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "cho_kim",
+  "sinr_db": -0.3367920008859886
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "fused_16",
+  "sinr_db": 9.938269886824978
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "fused_32",
+  "sinr_db": 9.982710337541743
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "fused_64",
+  "sinr_db": 9.985905773130886
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "fused_exact",
+  "sinr_db": 9.9865389449109
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "signal_kalman",
+  "sinr_db": 9.8119526873181
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "signal_only",
+  "sinr_db": 8.54628396642787
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 10,
+  "receiver": "signal_scale_only",
+  "sinr_db": -0.3601949808925036
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_16",
+  "sinr_db": 19.86087987919201
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_16_prior",
+  "sinr_db": 16.76323967551369
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_32",
+  "sinr_db": 19.98054944039145
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_32_prior",
+  "sinr_db": 19.564815824428997
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_64",
+  "sinr_db": 19.98449303947188
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_64_prior",
+  "sinr_db": 19.64317941879364
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_exact",
+  "sinr_db": 19.984983274295626
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 19.648868875929708
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "cho_kim",
+  "sinr_db": 0.5601963160168709
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "fused_16",
+  "sinr_db": 19.940994089772623
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "fused_32",
+  "sinr_db": 19.983765949968987
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "fused_64",
+  "sinr_db": 19.990428896951016
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "fused_exact",
+  "sinr_db": 19.992292852254277
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "signal_kalman",
+  "sinr_db": 18.77476458052585
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "signal_only",
+  "sinr_db": 13.417226502330958
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 20,
+  "receiver": "signal_scale_only",
+  "sinr_db": 0.41447599287459663
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_16",
+  "sinr_db": 28.755770562265475
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_16_prior",
+  "sinr_db": 19.1766536470312
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_32",
+  "sinr_db": 29.815067179515765
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_32_prior",
+  "sinr_db": 26.751934309697653
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_64",
+  "sinr_db": 29.849283033984516
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_64_prior",
+  "sinr_db": 27.157361762170183
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_exact",
+  "sinr_db": 29.86444929408332
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 27.200360875035926
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "cho_kim",
+  "sinr_db": 0.6429335188626839
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "fused_16",
+  "sinr_db": 29.728073967549015
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "fused_32",
+  "sinr_db": 29.819462450865274
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "fused_64",
+  "sinr_db": 29.837937134333007
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "fused_exact",
+  "sinr_db": 29.854297360623416
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "signal_kalman",
+  "sinr_db": 23.846681999869755
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "signal_only",
+  "sinr_db": 14.401915102856943
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 7,
+  "snr_db": 30,
+  "receiver": "signal_scale_only",
+  "sinr_db": 0.4907609050068282
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_16",
+  "sinr_db": 4.878656628972438
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_16_prior",
+  "sinr_db": 2.3320432980355803
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_32",
+  "sinr_db": 4.947201278023136
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_32_prior",
+  "sinr_db": 4.552138443340321
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_64",
+  "sinr_db": 4.956190264169701
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_64_prior",
+  "sinr_db": 4.973247938113814
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_exact",
+  "sinr_db": 4.956585628606344
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 4.996556065378005
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "cho_kim",
+  "sinr_db": -3.210740080140548
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "fused_16",
+  "sinr_db": 4.940125220885049
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "fused_32",
+  "sinr_db": 4.9778495226143935
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "fused_64",
+  "sinr_db": 4.996601535141957
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "fused_exact",
+  "sinr_db": 5.002318219384618
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "signal_kalman",
+  "sinr_db": 4.3675221647984985
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "signal_only",
+  "sinr_db": 3.4215240881987863
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 5,
+  "receiver": "signal_scale_only",
+  "sinr_db": -4.56808149469094
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_16",
+  "sinr_db": 9.78649555040475
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_16_prior",
+  "sinr_db": 4.918330639345613
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_32",
+  "sinr_db": 9.950853619936149
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_32_prior",
+  "sinr_db": 8.887005798277585
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_64",
+  "sinr_db": 9.975537842662991
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_64_prior",
+  "sinr_db": 9.911447918038467
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_exact",
+  "sinr_db": 9.976872749330042
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 9.967800758170071
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "cho_kim",
+  "sinr_db": -3.479584896857681
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "fused_16",
+  "sinr_db": 9.945905083426538
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "fused_32",
+  "sinr_db": 9.974478008310477
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "fused_64",
+  "sinr_db": 9.993336894283908
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "fused_exact",
+  "sinr_db": 10.000237005561253
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "signal_kalman",
+  "sinr_db": 8.641376848016826
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "signal_only",
+  "sinr_db": 6.719705747679814
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 10,
+  "receiver": "signal_scale_only",
+  "sinr_db": -3.460432973144718
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_16",
+  "sinr_db": 18.49139298372188
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_16_prior",
+  "sinr_db": 6.721334101250188
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_32",
+  "sinr_db": 19.744482718192863
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_32_prior",
+  "sinr_db": 14.363388532194193
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_64",
+  "sinr_db": 19.953791196373324
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_64_prior",
+  "sinr_db": 19.142469049296555
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_exact",
+  "sinr_db": 19.967644891605016
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 19.60392740165656
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "cho_kim",
+  "sinr_db": -2.8767887229429663
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "fused_16",
+  "sinr_db": 19.878151580720328
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "fused_32",
+  "sinr_db": 19.9341996431963
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "fused_64",
+  "sinr_db": 19.9562616399301
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "fused_exact",
+  "sinr_db": 19.97117471826078
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "signal_kalman",
+  "sinr_db": 14.016160449104952
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "signal_only",
+  "sinr_db": 9.54810272651674
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 20,
+  "receiver": "signal_scale_only",
+  "sinr_db": -2.886117175467583
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_16",
+  "sinr_db": 22.969786321096382
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_16_prior",
+  "sinr_db": 6.946496622636133
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_32",
+  "sinr_db": 28.086507637877887
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_32_prior",
+  "sinr_db": 15.620626440098773
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_64",
+  "sinr_db": 29.759643696235962
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_64_prior",
+  "sinr_db": 24.98908786890228
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_exact",
+  "sinr_db": 29.886960915063785
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "aided_exact_prior",
+  "sinr_db": 27.063787741231316
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "cho_kim",
+  "sinr_db": -2.8022920610813107
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "fused_16",
+  "sinr_db": 29.231464221601414
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "fused_32",
+  "sinr_db": 29.73154898902522
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "fused_64",
+  "sinr_db": 29.81920851684332
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "fused_exact",
+  "sinr_db": 29.84111605852671
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "signal_kalman",
+  "sinr_db": 15.131494573112969
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "signal_only",
+  "sinr_db": 9.958844053970871
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "n_data": 27,
+  "snr_db": 30,
+  "receiver": "signal_scale_only",
+  "sinr_db": -2.8232953879205436
+ }
+]

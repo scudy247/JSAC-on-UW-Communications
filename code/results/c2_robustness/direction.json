@@ -1,0 +1,362 @@
+[
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 0.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 33.09387901728066,
+  "sir_sim_p10_db": 29.513419422636034,
+  "sir_theory_db": 32.09702798014265
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 0.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 29.672448272106067,
+  "sir_sim_p10_db": 25.930095437755522,
+  "sir_theory_db": 29.103519149436053
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 0.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 39.40278151975238,
+  "sir_sim_p10_db": 37.355333347152055,
+  "sir_theory_db": 39.01163960668389
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 2.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 29.677967466494945,
+  "sir_sim_p10_db": 27.650144859133036,
+  "sir_theory_db": 28.672920827107873
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 2.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 28.510318814614376,
+  "sir_sim_p10_db": 24.889579237693766,
+  "sir_theory_db": 27.056097501915097
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 2.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 39.83868219137796,
+  "sir_sim_p10_db": 37.039789991168895,
+  "sir_theory_db": 38.89276293103335
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 5.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 24.262115357099336,
+  "sir_sim_p10_db": 20.65967510460336,
+  "sir_theory_db": 22.7975637772596
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 5.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 23.961424334529795,
+  "sir_sim_p10_db": 21.74907146697194,
+  "sir_theory_db": 22.318597684789335
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 5.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 35.7790014132559,
+  "sir_sim_p10_db": 34.62833806762499,
+  "sir_theory_db": 38.31377423709354
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 10.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 21.46553358069508,
+  "sir_sim_p10_db": 18.552389869214295,
+  "sir_theory_db": 17.181000513316732
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 10.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 22.48956411211925,
+  "sir_sim_p10_db": 20.29509749058095,
+  "sir_theory_db": 17.044239959615556
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 10.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 33.468378107738495,
+  "sir_sim_p10_db": 30.712451312203108,
+  "sir_theory_db": 36.70145549667744
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 20.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 14.258937718997117,
+  "sir_sim_p10_db": 11.652087997314542,
+  "sir_theory_db": 11.324603601118612
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 20.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 14.208317152416512,
+  "sir_sim_p10_db": 11.067871375953692,
+  "sir_theory_db": 11.288680012573561
+ },
+ {
+  "scenario": "seabed_cdip",
+  "u_error_deg": 20.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 31.253878779272554,
+  "sir_sim_p10_db": 29.222263514255104,
+  "sir_theory_db": 33.169447068172595
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 0.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 30.36766219617807,
+  "sir_sim_p10_db": 29.533567967379636,
+  "sir_theory_db": 30.255274069574483
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 0.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 28.338246703167982,
+  "sir_sim_p10_db": 26.134743828147588,
+  "sir_theory_db": 27.44123507789366
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 0.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 36.72375548343045,
+  "sir_sim_p10_db": 34.677438139730064,
+  "sir_theory_db": 37.414294168993436
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 2.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 20.805010909003027,
+  "sir_sim_p10_db": 18.209311778441382,
+  "sir_theory_db": 20.598643271927347
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 2.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 19.925268678017567,
+  "sir_sim_p10_db": 16.691442261000045,
+  "sir_theory_db": 20.189997078287952
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 2.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 33.65787355364319,
+  "sir_sim_p10_db": 30.559646474469165,
+  "sir_theory_db": 36.467685993356895
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 5.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 12.880004188981857,
+  "sir_sim_p10_db": 10.219872571882176,
+  "sir_theory_db": 13.023153963014238
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 5.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 12.827931966744696,
+  "sir_sim_p10_db": 11.063376641927718,
+  "sir_theory_db": 12.948907897103027
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 5.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 29.558590808041934,
+  "sir_sim_p10_db": 25.098331410994135,
+  "sir_theory_db": 33.40411924754071
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 10.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 6.552334295469592,
+  "sir_sim_p10_db": 4.134925234954112,
+  "sir_theory_db": 7.025196771149847
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 10.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 6.875053565656546,
+  "sir_sim_p10_db": 4.777450879009356,
+  "sir_theory_db": 7.006418480078357
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 10.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 24.487757415060262,
+  "sir_sim_p10_db": 20.801589326012508,
+  "sir_theory_db": 28.936706851340755
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 20.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 0.18505909918594202,
+  "sir_sim_p10_db": -6.17940331370704,
+  "sir_theory_db": 0.9882792887015972
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 20.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": -0.06603795745386677,
+  "sir_sim_p10_db": -6.18159183798467,
+  "sir_theory_db": 0.9835947231353599
+ },
+ {
+  "scenario": "seabed_ooi",
+  "u_error_deg": 20.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 18.219846411086593,
+  "sir_sim_p10_db": 14.90680828200202,
+  "sir_theory_db": 23.465132999361558
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 0.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": -3.1810048217035023,
+  "sir_sim_p10_db": -19.602854193331172,
+  "sir_theory_db": -4.949293541685729
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 0.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 31.610510448600976,
+  "sir_sim_p10_db": 27.666448705876338,
+  "sir_theory_db": 27.226945450825276
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 0.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 36.70949828113319,
+  "sir_sim_p10_db": 34.29465221199057,
+  "sir_theory_db": 36.326479203949624
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 2.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": -3.0621485878870693,
+  "sir_sim_p10_db": -19.766493097758644,
+  "sir_theory_db": -4.960183274259223
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 2.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 15.72914026454032,
+  "sir_sim_p10_db": 11.300748653129848,
+  "sir_theory_db": 17.420362051537722
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 2.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 32.38388458774051,
+  "sir_sim_p10_db": 28.514737227718715,
+  "sir_theory_db": 34.925023213824026
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 5.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": -3.038691858502996,
+  "sir_sim_p10_db": -19.925326864883708,
+  "sir_theory_db": -5.017395040181334
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 5.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 7.3863785078917825,
+  "sir_sim_p10_db": 1.210555237077215,
+  "sir_theory_db": 9.82802841016158
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 5.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 26.41189912450757,
+  "sir_sim_p10_db": 21.213521781573142,
+  "sir_theory_db": 31.05191873738513
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 10.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": -2.563508390808618,
+  "sir_sim_p10_db": -19.58520650867503,
+  "sir_theory_db": -5.2178823453672285
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 10.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 3.4182950300345816,
+  "sir_sim_p10_db": -8.577551626289532,
+  "sir_theory_db": 3.824127769238464
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 10.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 20.947238804889142,
+  "sir_sim_p10_db": 16.02357157417007,
+  "sir_theory_db": 26.153507372306898
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 20.0,
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": -2.8336149747181816,
+  "sir_sim_p10_db": -19.153043180171856,
+  "sir_theory_db": -5.942883703458919
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 20.0,
+  "strategy": "both_0.01",
+  "sir_sim_db": 0.5102838113289566,
+  "sir_sim_p10_db": -17.244773094329954,
+  "sir_theory_db": -2.2206928396420307
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "u_error_deg": 20.0,
+  "strategy": "split_0.01",
+  "sir_sim_db": 14.700630292108103,
+  "sir_sim_p10_db": 9.787743039545235,
+  "sir_theory_db": 20.53442808412637
+ }
+]

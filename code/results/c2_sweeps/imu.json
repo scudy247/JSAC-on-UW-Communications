@@ -1,0 +1,422 @@
+[
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "tx_own_0.005",
+  "sir_sim_db": 38.93164788335153,
+  "sir_sim_p10_db": 35.7474478612854,
+  "sir_theory_db": 38.01822202819264
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "both_0.005",
+  "sir_sim_db": 34.03965307950921,
+  "sir_sim_p10_db": 30.558746552783084,
+  "sir_theory_db": 35.073939197404755
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "split_0.005",
+  "sir_sim_db": 38.68669136448303,
+  "sir_sim_p10_db": 36.130791159241326,
+  "sir_theory_db": 39.03495515702895
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "split0_0.005",
+  "sir_sim_db": 40.016226042309746,
+  "sir_sim_p10_db": 37.01716471525476,
+  "sir_theory_db": 41.710100990853945
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 29.532725768714137,
+  "sir_sim_p10_db": 26.109302935129975,
+  "sir_theory_db": 32.09702798014265
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "both_0.01",
+  "sir_sim_db": 26.27098628779898,
+  "sir_sim_p10_db": 23.781623389978964,
+  "sir_theory_db": 29.103519149436053
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "split_0.01",
+  "sir_sim_db": 40.716911178176396,
+  "sir_sim_p10_db": 37.038234699797705,
+  "sir_theory_db": 39.01163960668389
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "split0_0.01",
+  "sir_sim_db": 41.448574721345395,
+  "sir_sim_p10_db": 37.56999115420845,
+  "sir_theory_db": 41.215834679136535
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "tx_own_0.02",
+  "sir_sim_db": 28.361910145198543,
+  "sir_sim_p10_db": 24.173825132001564,
+  "sir_theory_db": 26.10163916350117
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "both_0.02",
+  "sir_sim_db": 25.7993628055005,
+  "sir_sim_p10_db": 21.719597850415546,
+  "sir_theory_db": 23.095555321781358
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "split_0.02",
+  "sir_sim_db": 39.787061587380045,
+  "sir_sim_p10_db": 35.580292863259,
+  "sir_theory_db": 38.919609321793565
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "split0_0.02",
+  "sir_sim_db": 39.32325737044442,
+  "sir_sim_p10_db": 35.966198105334094,
+  "sir_theory_db": 39.661604246404
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "tx_own_0.05",
+  "sir_sim_db": 20.220775090357378,
+  "sir_sim_p10_db": 17.620610816127652,
+  "sir_theory_db": 18.14992440282818
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "both_0.05",
+  "sir_sim_db": 14.172058661999415,
+  "sir_sim_p10_db": 10.037977158870161,
+  "sir_theory_db": 15.140299850680945
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "split_0.05",
+  "sir_sim_db": 40.483087704579816,
+  "sir_sim_p10_db": 36.90976335104548,
+  "sir_theory_db": 38.32482841270546
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "split0_0.05",
+  "sir_sim_db": 36.046210322861995,
+  "sir_sim_p10_db": 32.78373286437598,
+  "sir_theory_db": 34.73976356064826
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "tx_own_0.1",
+  "sir_sim_db": 11.066929597619175,
+  "sir_sim_p10_db": 9.739942848509077,
+  "sir_theory_db": 12.130337635680494
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "both_0.1",
+  "sir_sim_db": 7.917047710177576,
+  "sir_sim_p10_db": 3.8042907441852747,
+  "sir_theory_db": 9.12020655971042
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "split_0.1",
+  "sir_sim_db": 32.21605085813283,
+  "sir_sim_p10_db": 28.521922921562826,
+  "sir_theory_db": 36.689923025596144
+ },
+ {
+  "scenario": "seabed_cdip",
+  "strategy": "split0_0.1",
+  "sir_sim_db": 27.250089400381352,
+  "sir_sim_p10_db": 25.072112439668384,
+  "sir_theory_db": 29.397554545526283
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "tx_own_0.005",
+  "sir_sim_db": 36.18353678625496,
+  "sir_sim_p10_db": 35.35339458393304,
+  "sir_theory_db": 35.2545938938469
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "both_0.005",
+  "sir_sim_db": 34.71479813596378,
+  "sir_sim_p10_db": 33.12720740781253,
+  "sir_theory_db": 32.89780948685473
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "split_0.005",
+  "sir_sim_db": 38.18626463694829,
+  "sir_sim_p10_db": 35.69078311562213,
+  "sir_theory_db": 37.540715558264495
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "split0_0.005",
+  "sir_sim_db": 38.4468046431495,
+  "sir_sim_p10_db": 35.41701354058302,
+  "sir_theory_db": 38.86814203416152
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": 31.762708594658694,
+  "sir_sim_p10_db": 28.12465956403662,
+  "sir_theory_db": 30.255274069574483
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "both_0.01",
+  "sir_sim_db": 30.508322207594926,
+  "sir_sim_p10_db": 26.048039179057596,
+  "sir_theory_db": 27.44123507789366
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "split_0.01",
+  "sir_sim_db": 37.154953625732176,
+  "sir_sim_p10_db": 34.16043521166143,
+  "sir_theory_db": 37.414294168993436
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "split0_0.01",
+  "sir_sim_db": 36.604261999980636,
+  "sir_sim_p10_db": 33.9064674270839,
+  "sir_theory_db": 38.41689556885393
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "tx_own_0.02",
+  "sir_sim_db": 26.743992579698805,
+  "sir_sim_p10_db": 23.91359274337936,
+  "sir_theory_db": 24.532494967166954
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "both_0.02",
+  "sir_sim_db": 26.170052226385497,
+  "sir_sim_p10_db": 22.27482035700324,
+  "sir_theory_db": 21.573879662394763
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "split_0.02",
+  "sir_sim_db": 36.46502820560348,
+  "sir_sim_p10_db": 33.81171493395033,
+  "sir_theory_db": 36.94248043802271
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "split0_0.02",
+  "sir_sim_db": 35.83135754815301,
+  "sir_sim_p10_db": 33.37444559245146,
+  "sir_theory_db": 36.971930815388994
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "tx_own_0.05",
+  "sir_sim_db": 19.969792867665745,
+  "sir_sim_p10_db": 14.766916436350197,
+  "sir_theory_db": 16.660879670596746
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "both_0.05",
+  "sir_sim_db": 15.964616643293239,
+  "sir_sim_p10_db": 13.14194192089791,
+  "sir_theory_db": 13.658975050206381
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "split_0.05",
+  "sir_sim_db": 33.57643046583619,
+  "sir_sim_p10_db": 31.268541553159203,
+  "sir_theory_db": 34.58562717630369
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "split0_0.05",
+  "sir_sim_db": 31.887936193116737,
+  "sir_sim_p10_db": 29.85736885517777,
+  "sir_theory_db": 32.22804789413644
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "tx_own_0.1",
+  "sir_sim_db": 10.931780132291715,
+  "sir_sim_p10_db": 6.316513535462841,
+  "sir_theory_db": 10.652878855421458
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "both_0.1",
+  "sir_sim_db": 10.18356338176549,
+  "sir_sim_p10_db": 6.102965926404187,
+  "sir_theory_db": 7.6446823065841905
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "split_0.1",
+  "sir_sim_db": 29.91354152315699,
+  "sir_sim_p10_db": 27.15238541664814,
+  "sir_theory_db": 30.613587607692164
+ },
+ {
+  "scenario": "seabed_ooi",
+  "strategy": "split0_0.1",
+  "sir_sim_db": 27.04398877595707,
+  "sir_sim_p10_db": 25.414688839244306,
+  "sir_theory_db": 26.947321548866746
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "tx_own_0.005",
+  "sir_sim_db": -3.181673412335531,
+  "sir_sim_p10_db": -19.60319344546682,
+  "sir_theory_db": -4.948397656521068
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "both_0.005",
+  "sir_sim_db": 31.50656612776733,
+  "sir_sim_p10_db": 27.391562622119476,
+  "sir_theory_db": 32.18754513531984
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "split_0.005",
+  "sir_sim_db": 36.790520673371454,
+  "sir_sim_p10_db": 34.97769842915893,
+  "sir_theory_db": 36.42457008581899
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "split0_0.005",
+  "sir_sim_db": 36.81705124853741,
+  "sir_sim_p10_db": 35.203932062566565,
+  "sir_theory_db": 37.06100399058931
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "tx_own_0.01",
+  "sir_sim_db": -3.171489879828581,
+  "sir_sim_p10_db": -19.6039065345532,
+  "sir_theory_db": -4.949293541685729
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "both_0.01",
+  "sir_sim_db": 31.454281611817873,
+  "sir_sim_p10_db": 27.48813172135498,
+  "sir_theory_db": 27.226945450825276
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "split_0.01",
+  "sir_sim_db": 35.20489294028304,
+  "sir_sim_p10_db": 31.576348779468496,
+  "sir_theory_db": 36.326479203949624
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "split0_0.01",
+  "sir_sim_db": 35.369101814535526,
+  "sir_sim_p10_db": 33.53486877821918,
+  "sir_theory_db": 36.758154258006165
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "tx_own_0.02",
+  "sir_sim_db": -3.075635443799187,
+  "sir_sim_p10_db": -19.597025799476295,
+  "sir_theory_db": -4.95287523540893
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "both_0.02",
+  "sir_sim_db": 20.173858808351717,
+  "sir_sim_p10_db": 16.21807666162134,
+  "sir_theory_db": 21.51736057703548
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "split_0.02",
+  "sir_sim_db": 34.52496314916127,
+  "sir_sim_p10_db": 32.387404408971975,
+  "sir_theory_db": 35.9548749900295
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "split0_0.02",
+  "sir_sim_db": 34.4173457450681,
+  "sir_sim_p10_db": 33.738392366746915,
+  "sir_theory_db": 35.722061527513006
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "tx_own_0.05",
+  "sir_sim_db": -3.0638057931096503,
+  "sir_sim_p10_db": -19.595785348496747,
+  "sir_theory_db": -4.977864722365583
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "both_0.05",
+  "sir_sim_db": 18.892770102672543,
+  "sir_sim_p10_db": 15.50950823420798,
+  "sir_theory_db": 13.649790151798403
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "split_0.05",
+  "sir_sim_db": 33.34442822371507,
+  "sir_sim_p10_db": 31.250367571060792,
+  "sir_theory_db": 33.98470104587085
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "split0_0.05",
+  "sir_sim_db": 30.710501251207553,
+  "sir_sim_p10_db": 29.18408418768184,
+  "sir_theory_db": 31.767538404084025
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "tx_own_0.1",
+  "sir_sim_db": -2.8840487989217762,
+  "sir_sim_p10_db": -19.555384186406837,
+  "sir_theory_db": -5.065957107516956
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "both_0.1",
+  "sir_sim_db": 10.906709189617922,
+  "sir_sim_p10_db": 6.269581052695223,
+  "sir_theory_db": 7.642380921287058
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "split_0.1",
+  "sir_sim_db": 28.14811806427762,
+  "sir_sim_p10_db": 25.27227012740404,
+  "sir_theory_db": 30.362741613185285
+ },
+ {
+  "scenario": "buoy_buoy_ooi",
+  "strategy": "split0_0.1",
+  "sir_sim_db": 25.707916910696174,
+  "sir_sim_p10_db": 22.749742570708566,
+  "sir_theory_db": 26.805646985902797
+ }
+]
