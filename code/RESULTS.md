@@ -765,3 +765,15 @@ uniform quantiser closed form / simulated:
   ~7 dB per coefficient vs Gaussian R(D)): entropy coding or Lloyd-Max would save ~25-40 % of the bits.
 - **Scaling:** rate-distortion minimum ~ 15-30 bits per second of packet on the rough OOI links (4-16 on CDIP),
   growing with packet length roughly linearly (more wave content per packet) and with sea state.
+
+## Side-information ranges per sea-state class (12 Oct 2026; Phase 4; `scripts/b11_sea_classes.py`)
+Ranges and allocation from the tested record (in-sample, as before) vs from the other days of its Hs class
+(leave-one-out; calm < 1.6 m, moderate 1.6-3 m, rough > 3 m; 15 days, buoy -> seabed, industrial MEMS), mean or
+maximum coefficient spread; quantisation interference with the T2 structure (Monte Carlo coefficient errors, clipping
+included), 32 bits on 1 s and 96 on 4 s packets, combined with the E1 floors (32 dB no stage, 38.5 dB per symbol).
+Total-SIR loss vs in-sample, median / p90: class maximum 0.15 / 0.45 (1 s, none), 0.28 / 0.45 (1 s, per symbol),
+0.44 / 1.73 (4 s, none), 0.18 / 0.36 dB (4 s, per symbol); class mean worse in the tail (p90 up to 5.5 dB).
+- **Class ranges work if they are conservative (class maximum) and per platform type:** the one outlier (11.8 /
+  12.7 dB loss) is the large OOI Irminger buoy on its moderate day, the only OOI buoy in a class of small CDIP
+  Waveriders, whose class ranges clip its coefficients. Classes by Hs alone are not enough; per-platform classes, or
+  a few bits per packet carrying a range scale, fix it.

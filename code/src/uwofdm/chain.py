@@ -74,16 +74,10 @@ def receive_aided(y, F, prior, search=(0, None), eps_res_max=3e-4, prepost=True,
     return Y, dict(n_pre=n_pre, eps_residual=eps_r, cfo=offs, post_window=_post_window(0, F, eps_res_max))
 
 
-def receive_with_header(y, F, rx_prior, alloc, ranges, basis_fn, search=(0, None), eps_max=3e-3, backoff=0,
-                        receiver="aided"):
-    """Full sensor-aided chain with a real header. rx_prior: the receiver's own IMU share per emitted sample of the
-    frame; alloc / ranges: the side-information quantiser (known to both ends); basis_fn(c, m): rebuild the
-    transmitter's share at emitted samples m from coefficients c. Returns data symbols, info (header ok, bits, ...).
-    Order: own IMU -> mean scale from preamble / postamble -> residual CFO of the header symbol -> header bits -> CRC;
-    if it passes, resample along side information + own IMU and run receive_aided, else fall back to
-    receive_signal_only. receiver="safe": receive_fused_safe after the header, and the signal-only Kalman
-    (receive_signal_fused) as the fallback."""
-    o, c = F.o, F.chirp()
+def read_header(y, F, rx_prior, alloc, search=(0, None), eps_max=3e-3, backoff=0):
+    """Side-information header only: own IMU -> mean scale from preamble / postamble -> residual CFO of the header
+    symbol -> soft DBPSK bits -> CRC. Returns (ok, payload bits, info)."""
+    o = F.o
     n_pre, _ = estimators.detect_chirp(y, F, *search)
     i0 = int(round(n_pre))
     seg = y[i0:i0 + len(rx_prior)]
@@ -97,10 +91,21 @@ def receive_with_header(y, F, rx_prior, alloc, ranges, basis_fn, search=(0, None
     d = estimators.residual_cfo(hseg, o, span=CFO_SPAN, n_grid=81, null_bins=F.null_bins())
     hseg = hseg * np.exp(-2j * np.pi * d * np.arange(o.n_fft) / o.fs)
     Yh = np.fft.fft(hseg)[o.bins()] * np.sqrt(o.n_sc) / o.n_fft
-    n_bits = int(np.sum(alloc)) + 8
-    bits, soft = hdr.demodulate(Yh, n_bits, o, F.used)
+    bits, soft = hdr.demodulate(Yh, int(np.sum(alloc)) + 8, o, F.used)
     payload, ok = hdr.check(bits)
-    info = dict(header_ok=ok, header_margin=float(np.min(np.abs(soft))), eps_mean=eps_mean, header_cfo=d)
+    return ok, payload, dict(header_ok=ok, header_margin=float(np.min(np.abs(soft))), eps_mean=eps_mean, header_cfo=d)
+
+
+def receive_with_header(y, F, rx_prior, alloc, ranges, basis_fn, search=(0, None), eps_max=3e-3, backoff=0,
+                        receiver="aided"):
+    """Full sensor-aided chain with a real header. rx_prior: the receiver's own IMU share per emitted sample of the
+    frame; alloc / ranges: the side-information quantiser (known to both ends); basis_fn(c, m): rebuild the
+    transmitter's share at emitted samples m from coefficients c. Returns data symbols, info (header ok, bits, ...).
+    Order: own IMU -> mean scale from preamble / postamble -> residual CFO of the header symbol -> header bits -> CRC;
+    if it passes, resample along side information + own IMU and run receive_aided, else fall back to
+    receive_signal_only. receiver="safe": receive_fused_safe after the header, and the signal-only Kalman
+    (receive_signal_fused) as the fallback."""
+    ok, payload, info = read_header(y, F, rx_prior, alloc, search, eps_max, backoff)
     if not ok:
         fall = receive_signal_fused if receiver == "safe" else receive_signal_only
         Y, inf2 = fall(y, F, search, eps_max=eps_max, backoff=backoff)
