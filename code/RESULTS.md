@@ -692,3 +692,13 @@ industrial-MEMS prior). Failure (SINR > 3 dB below SNR): signal Kalman 1% for x 
   SINR and PER tables, e2_imu_grades, b2 comparison, and the runs started today: high-statistics PER / multipath,
   sea states, numerology, pilot tracking). The remaining sensor gain in the tail of buoy-buoy 4 s packets is likely
   ~0.3-1.5 dB rather than ~5-6 dB; to be confirmed by reruns.
+
+## Acquisition with the sensor prior (12 Oct 2026; `scripts/b6_acquisition.py`, `results/b6_acquisition/`)
+Postamble search over the full +-3e-3 Doppler range (signal-only) vs a window centred on the sensor prior (+-4 sigma),
+200 packets per point, real motion. Wrong acquisition = |scale error| > 1e-4 among packets whose preamble was found.
+buoy-buoy 4 s, -10 / -9 / -8 / -7 dB: preamble miss 85 / 67 / 44 / 15%; wrong lock full search 71 / 36 / 11 / 5%,
+industrial prior 13 / 3 / 4 / 0.6%, old IMU model 3 / 0 / 1 / 0%. Seabed OOI 4 s similar (full 59 / 27 / 19 / 5%,
+industrial 9 / 6 / 4 / 1%); buoy-buoy 1 s smaller gains. Search cost: 829 -> 98 / 26 lags (4 s), 253 -> 34 / 12 (1 s).
+- The prior cuts wrong postamble locks 3-10x and the search 8-30x, but preamble detection fails in the same SNR band,
+  so packet acquisition improves by ~1 dB of SNR only (the preamble is detected without the prior). A Doppler-
+  sensitive preamble (searched over a Doppler grid) would gain more; with chirps the gain is mostly computational.
