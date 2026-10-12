@@ -635,3 +635,18 @@ packets (same packets for all; choice per packet f = fused, s = signal):
   23.8 / 34.9 / 33.5 (16 segments: pFFT 36.3, ICI-aware 34.7; 4 iterations no better). Gains much over the
   Kalman alone but stays ~1.4 dB below partial FFT: **partial FFT is the strongest signal-only baseline we have**;
   ICI-aware receivers with per-path Doppler or polynomial bases (literature) are not implemented.
+- **Comparison with the strongest signal-only receiver** (`scripts/b2_baselines.py`, 30 packets per case, same packets
+  for all; power average / median / 10th percentile SINR at 30 dB):
+
+| Case | signal Kalman | signal Kalman + pFFT-8 | sensor fusion, old IMU | sensor fusion, industrial MEMS (+ pFFT-8) |
+|---|---|---|---|---|
+| buoy-buoy OOI 1 s | 29.1 / 29.4 / 28.3 | 29.8 / 29.9 / 29.6 | 29.8 / 29.8 / 29.5 | 29.7 / 29.8 / 29.4 (29.8 / 29.9 / 29.6) |
+| buoy-buoy OOI 4 s | 14.1 / 27.7 / 11.5 | 23.6 / 29.7 / 24.0 | 29.6 / 29.7 / 29.3 | 29.6 / 29.6 / 29.3 (29.8 / 29.8 / 29.5) |
+| seabed OOI 4 s | 24.8 / 28.2 / 22.4 | 29.5 / 29.8 / 29.1 | 29.8 / 29.8 / 29.6 | 29.7 / 29.7 / 29.5 (29.8 / 29.9 / 29.7) |
+| seabed CDIP 1 s | 29.9 / 29.9 / 29.8 | 29.9 / 29.9 / 29.8 | 29.9 / 30.0 / 29.8 | 29.9 / 29.9 / 29.8 (29.9 / 29.9 / 29.8) |
+
+  At 20 dB, buoy-buoy 4 s: signal Kalman 13.2 / 19.7 / 11.0, + pFFT-8 18.3 / 19.6 / 18.3, sensor fusion (old)
+  19.9 / 19.9 / 19.9. **Against the best signal-only receiver the sensor gain remains only with both ends moving,
+  rough sea and long packets, and there only in the tail (worst packets): +5.5 dB at the 10th percentile, +6 dB
+  power average, 0 dB median.** Partial FFT closes the seabed and short-packet cases. The earlier +14.6 dB was
+  against a weaker baseline on 20 packets. Claim to reframe: robustness / outage, not average SINR.

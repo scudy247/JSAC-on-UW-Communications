@@ -10,15 +10,23 @@ cd "$(dirname "$0")"
 here=$(pwd)
 name=$1
 shift
-running=$(pgrep -u "$USER" -fc "^/home/dario/Underwater/dario/bin/python scripts/" || true)
+pattern="^/home/dario/Underwater/dario/bin/python scripts/"
+running=$(pgrep -u "$USER" -fc "$pattern" || true)
+wait_cmd=""
 if [ "$running" -ge "$MAX_JOBS" ]; then
-    echo "not started: $running experiments already running (MAX_JOBS=$MAX_JOBS)" >&2
-    exit 1
+    if [ "${WAIT:-0}" != "1" ]; then
+        echo "not started: $running experiments already running (MAX_JOBS=$MAX_JOBS); WAIT=1 queues it" >&2
+        exit 1
+    fi
+    # queued: the tmux window polls every 2 min and starts the job when a slot is free
+    wait_cmd="while [ \$(pgrep -u $USER -fc '$pattern') -ge $MAX_JOBS ]; do sleep 120; done; "
+    echo "queued: $running experiments running, $name starts when one finishes"
 fi
 mkdir -p results/logs
 log=results/logs/$name.log
-cmd="cd $here && OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=$here/src:$here/scripts \
-nice -n 19 /home/dario/Underwater/dario/bin/python scripts/$* > $log 2>&1; echo \"exit \$? \$(date)\" >> $log"
+cmd="cd $here && echo \"queued \$(date)\" > $log && ${wait_cmd}echo \"started \$(date)\" >> $log && \
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=$here/src:$here/scripts \
+nice -n 19 /home/dario/Underwater/dario/bin/python scripts/$* >> $log 2>&1; echo \"exit \$? \$(date)\" >> $log"
 tmux has-session -t doppler 2>/dev/null || tmux new-session -d -s doppler -n idle
 tmux new-window -d -t doppler -n "$name" "$cmd"
 echo "started $name -> code/$log"

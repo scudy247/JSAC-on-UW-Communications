@@ -38,10 +38,10 @@ def run_case(label, n_data, n, seed, sk_params):
     return run_link(tx_track, rx_track, n_data, n, seed, sk_params)
 
 
-def run_link(tx_track, rx_track, n_data, n, seed, sk_params, grades=GRADES, n_seg=N_SEG, snrs=SNRS_DB):
+def run_link(tx_track, rx_track, n_data, n, seed, sk_params, grades=GRADES, n_seg=N_SEG, snrs=SNRS_DB, ofdm=None):
     """Per-packet SINR of every receiver on one link (tracks), n packets; returns {(snr, receiver): stats}."""
     d = motion.link_doppler(tx_track, rx_track)
-    F = frame.Frame(n_data=n_data)
+    F = frame.Frame(n_data=n_data) if ofdm is None else frame.Frame(o=ofdm, n_data=n_data)
     o = F.o
     T = F.length / o.fs
     nodes = {g: (node(tx_track, d["u"], +1, 0.0, g, seed + 1), node(rx_track, d["u"], -1, d["tau"], g, seed + 2))
