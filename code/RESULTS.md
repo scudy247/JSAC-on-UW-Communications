@@ -742,3 +742,26 @@ buoy-buoy 4 s 23.7 / 26.6 / 19.4 (26.1); + pFFT-8 29.3 / 29.6 / 28.5 (29.6); sen
 for sensor fusion on buoy-buoy 4 s). Likely cause: one oscillator with the half-power bandwidth of the spectral peak
 is too rigid for broad-band residuals (several wave components, the sensor residual is not wave-shaped). Not pursued:
 the tuned random walk stays the default; a multi-oscillator model is possible but has no remaining gain to recover.
+
+## T2: closed form for the side-information bits (12 Oct 2026; Phase 4; `sideinfo.predicted_interference`, `rd_bits`, `scripts/b10_t2_bits.py`)
+I(B) = I_floor + sum_k w_k D_k(b_k): std_k of the transmitter's Legendre coefficients from its motion spectrum, w_k
+the interference of a unit coefficient error after the receiver's stage (exact), D_k = std_k^2 if not sent, else
+(2 LOAD std_k)^2 / 12 / 4^b_k; I_floor = the "transmitter applies its estimate" level. Against the E1 simulations
+(198 points: 3 links x 1 / 4 s x 3 receiver stages x 4-192 bits, 200 packets each): **prediction - simulation
+median -0.05 dB, |.| p90 1.1 dB, max 3.1 dB** (the largest misses: per-symbol stage at 12-48 bits, closed form
+~1 dB pessimistic; line2 at 4 s, 1-1.7 dB pessimistic at high bits).
+Bits to come within 1 dB of applying the estimate, rate-distortion limit (reverse water-filling, ideal quantiser) /
+uniform quantiser closed form / simulated:
+
+| Link | 1 s: none / line2 / per symbol | 4 s: none / line2 / per symbol |
+|---|---|---|
+| seabed CDIP | 16 / 21 / 24; 8 / 11 / 12; 4 / 7 / 8 | 42 / 56 / 64; 45 / 57 / 64; 16 / 27 / 32 |
+| seabed OOI | 27 / 34 / 32; 32 / 48 / 48; 20 / 35 / 16 | 77 / 99 / 96; 115 / 162 / >192; 55 / 85 / 64 |
+| buoy-buoy OOI | 23 / 30 / 32; 27 / 43 / 64; 21 / 35 / 16 | 67 / 85 / 96; 98 / 139 / 192; 54 / 83 / 48 |
+
+- The closed form reproduces the bit counts within one budget step in most cases; it overestimates for the
+  per-symbol stage (35 vs 16 bits), where it is ~1 dB pessimistic at mid budgets.
+- The uniform quantiser needs ~1.3-1.7x the rate-distortion minimum (granular loss of a +-4 sigma uniform quantiser,
+  ~7 dB per coefficient vs Gaussian R(D)): entropy coding or Lloyd-Max would save ~25-40 % of the bits.
+- **Scaling:** rate-distortion minimum ~ 15-30 bits per second of packet on the rough OOI links (4-16 on CDIP),
+  growing with packet length roughly linearly (more wave content per packet) and with sea state.

@@ -114,3 +114,36 @@ def allocate_weighted(std, weights, total_bits, load=LOAD):
         bits[best[0]] += best[1]
         left -= best[1]
     return bits
+
+
+# --------------------------------------------------------------------------- T2: closed form for the bits (PLAN: Phase 4)
+def coefficient_distortion(std, bits, load=LOAD):
+    """Mean-square error of each coefficient: std^2 if it gets no bits (rebuilt as 0), else the uniform quantiser's
+    (2 load std)^2 / 12 / 4^b (granular noise; overload neglected at load = 4)."""
+    std, bits = np.asarray(std, float), np.asarray(bits, int)
+    return np.where(bits > 0, (2 * load * std) ** 2 / 12 / 4.0 ** bits, std ** 2)
+
+
+def predicted_interference(std, weights, bits, floor, load=LOAD):
+    """T2 closed form: interference after the receiver's stage when the transmitter's share is sent with the bit
+    allocation `bits`: floor (what remains when the transmitter applies its estimate exactly) + sum_k w_k D_k."""
+    return float(floor + np.sum(np.asarray(weights) * coefficient_distortion(std, bits, load)))
+
+
+def rd_bits(std, weights, target):
+    """Rate-distortion (reverse water-filling) minimum bits for sum_k w_k E[e_k^2] <= target with Gaussian
+    coefficients and ideal vector quantisation: lam_k = w_k std_k^2, D = sum min(theta, lam_k),
+    B = sum max(0, log2(lam_k / theta) / 2). Returns (bits, theta); bits = 0 if the target needs nothing."""
+    lam = np.sort(np.asarray(weights, float) * np.asarray(std, float) ** 2)[::-1]
+    lam = lam[lam > 0]  # coefficients the receiver's stage removes cost nothing
+    if np.sum(lam) <= target:
+        return 0.0, float(lam[0]) if len(lam) else 0.0
+    lo, hi = 0.0, float(lam[0])
+    for _ in range(200):  # bisection on theta: D(theta) increasing
+        th = 0.5 * (lo + hi)
+        if np.sum(np.minimum(th, lam)) > target:
+            hi = th
+        else:
+            lo = th
+    th = lo
+    return float(np.sum(np.maximum(0.0, 0.5 * np.log2(lam / th)))), float(th)

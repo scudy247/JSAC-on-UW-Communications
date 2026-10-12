@@ -69,3 +69,18 @@ def test_stage_aware_allocation():
     b_none = sideinfo.allocate_weighted(std, w_none, 16)
     assert b_line[0] == 0 and b_none[0] > 0 and b_line.sum() <= 16
     assert all(b != 1 for b in b_line) and all(b != 1 for b in b_none)
+
+
+def test_t2_closed_form_and_rate_distortion():
+    """T2: predicted interference is the floor plus weighted coefficient errors; reverse water-filling needs no more
+    bits than the uniform quantiser with greedy allocation for the same target, and zero bits if the target is loose."""
+    std = np.array([1e-4, 5e-5, 2e-5, 5e-6])
+    w = np.array([1.0, 2.0, 3.0, 4.0]) * 1e6
+    none = sideinfo.predicted_interference(std, w, np.zeros(4, int), 0.0)
+    assert abs(none - np.sum(w * std ** 2)) < 1e-12
+    target = 0.01 * none
+    b_rd, _ = sideinfo.rd_bits(std, w, target)
+    b_un = next(b for b in range(1, 200)
+                if sideinfo.predicted_interference(std, w, sideinfo.allocate_weighted(std, w, b), 0.0) <= target)
+    assert 0 < b_rd <= b_un
+    assert sideinfo.rd_bits(std, w, 2 * none)[0] == 0.0
