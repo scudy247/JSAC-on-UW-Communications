@@ -5,8 +5,11 @@ Frame: chirp | header (side information, 32 bits + CRC) | 7 data symbols (rate-1
 pilot channel estimate, LLRs weighted by the noise + interference measured on in-band nulls) | chirp; 4768 info
 bits per packet (≈ 4.5 kbit/s). Link Doppler of real buoy motion, unknown start, complex noise.
 Receivers: signal_only (Li et al. 2008 / Lee et al. 2026 front end), signal_kalman (signal-only Kalman smoother),
-full_chain (sensor-aided with the real header, fallback to signal-only if the CRC fails), ideal_side_info
-(sensor-aided with the side information delivered), fused (ideal side information + Kalman fusion).
+full_chain (real header, then the prior-quality-aware Kalman fusion chain.receive_fused_safe; fallback to the
+signal-only Kalman if the CRC fails; before 12 Oct 2026: receive_aided, fallback Li/Lee), ideal_side_info
+(sensor-aided with the side information delivered, receive_aided), fused (ideal side information +
+receive_fused_safe; before 12 Oct: fixed-setting receive_fused). Channel estimate: receiver.channel_estimates (sparse
+SOMP since 12 Oct 2026; the earlier per-symbol LS lost ~4 dB).
 Scenarios: buoy -> seabed (CDIP swell, OOI Irminger), buoy -> buoy (OOI); per-subcarrier SNR 0 ... 25 dB;
 100 packets per point (PER resolution 0.01).
 Output: results/e2_chain/per.json; printed table.
@@ -56,17 +59,17 @@ def run_per(mod="qpsk", n_data=7, bits=BITS, snrs=SNRS_DB, n_packets=N_PACKETS, 
                 sig = np.sqrt(4.0 / 10 ** (snr / 10) / 2)
                 y = y0 + sig * (rp.standard_normal(len(y0)) + 1j * rp.standard_normal(len(y0)))
                 search = (0, lead + 1500)
-                Yf, inf = chain.receive_with_header(y, F, rx_est, a, ranges, basis_fn, search)
+                Yf, inf = chain.receive_with_header(y, F, rx_est, a, ranges, basis_fn, search, receiver="safe")
                 outs = {"signal_only": chain.receive_signal_only(y, F, search)[0], "full_chain": Yf,
                         "ideal_side_info": chain.receive_aided(y, F, ideal, search)[0],
                         "signal_kalman": chain.receive_signal_fused(y, F, search)[0],
                         "cho_kim": chain.receive_cho_kim(y, F, search)[0],
-                        "fused": chain.receive_fused(y, F, ideal, search)[0]}
+                        "fused": chain.receive_fused_safe(y, F, ideal, search)[0]}
                 for k, Y in outs.items():
                     err.setdefault((snr, k), []).append(not np.array_equal(receiver.decode(Y, F, mod), info))
                 hdr_ok.setdefault(snr, []).append(inf["header_ok"])
         for snr in snrs:
-            row = dict(scenario=label, modulation=mod, n_data=n_data, side_info_bits=bits, snr_db=snr, header_success=float(np.mean(hdr_ok[snr])),
+            row = dict(receiver_version="somp+safe_fusion", scenario=label, modulation=mod, n_data=n_data, side_info_bits=bits, snr_db=snr, header_success=float(np.mean(hdr_ok[snr])),
                        **{f"per_{k}": float(np.mean(err[(snr, k)])) for k in ("signal_only", "full_chain",
                                                                                "ideal_side_info", "signal_kalman",
                                                                                "cho_kim", "fused")})

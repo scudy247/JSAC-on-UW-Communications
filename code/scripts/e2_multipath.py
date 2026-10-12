@@ -95,7 +95,7 @@ def main(out_name="multipath.json"):
                             "signal_kalman": [chain.receive_signal_fused(y, F, search)[0]],
                             "cho_kim": [chain.receive_cho_kim(y, F, search)[0]],
                             "aided_32": [chain.receive_aided(y, F, prior, search)[0]],
-                            "fused_32": [chain.receive_fused(y, F, prior, search)[0]],
+                            "fused_32": [chain.receive_fused_safe(y, F, prior, search)[0]],  # safe since 12 Oct
                             "tu_grid": chain.receive_branches(y, F, chain.grid_trajectories(y, F, search=search),
                                                               search)}
                     coh = paths[:len(L.coh)]  # per-path Doppler from ideal sensors (own motion + path angles)
@@ -122,7 +122,7 @@ def main(out_name="multipath.json"):
                         e["err"].append(not np.array_equal(receiver.decode_combined(Ys, F), info))
             for (snr, k), e in sorted(acc.items()):
                 pw = np.array(e["pw"])
-                row = dict(scenario=label, rho_db=rho, snr_db=snr, receiver=k,
+                row = dict(receiver_version="somp+safe_fusion", scenario=label, rho_db=rho, snr_db=snr, receiver=k,
                            sinr_db=float(10 * np.log10(pw[:, 0].sum() / pw[:, 1].sum())), per=float(np.mean(e["err"])))
                 rows.append(row)
             for snr in SNRS:
