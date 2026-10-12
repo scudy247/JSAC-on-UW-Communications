@@ -4,17 +4,12 @@ __pycache__/
 .pytest_cache/
 *.egg-info/
 
-# Raw motion data (157 MB): re-download with code/scripts/fetch_cdip.py and fetch_ooi.py
-# (chosen days listed in code/data/buoy/cdip/meta.json and code/data/buoy/ooi/chosen_days.json, kept below)
-code/data/buoy/cdip/*.npz
-code/data/buoy/ooi/*/
-
-# LaTeX build files
-*.aux
-*.log
-*.nav
-*.out
-*.snm
-*.toc
-*.vrb
-*.synctex.gz
+# LaTeX build files of the decks (OOI motion records are *.log files and are kept)
+project_idea/**/*.aux
+project_idea/**/*.log
+project_idea/**/*.nav
+project_idea/**/*.out
+project_idea/**/*.snm
+project_idea/**/*.toc
+project_idea/**/*.vrb
+project_idea/**/*.synctex.gz
