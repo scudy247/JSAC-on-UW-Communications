@@ -1,0 +1,250 @@
+{
+ "n_packets": 20,
+ "snrs_db": [
+  20,
+  30
+ ],
+ "bits": 32,
+ "grades": [
+  "old",
+  "nav",
+  "industrial",
+  "consumer",
+  "nav_unaided",
+  "industrial_unaided"
+ ],
+ "rows": [
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "fused_consumer",
+   "sinr_db": 19.947779462881048
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "fused_industrial",
+   "sinr_db": 19.98328897751493
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "fused_industrial_unaided",
+   "sinr_db": 19.924831761164377
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "fused_nav",
+   "sinr_db": 19.988450794260263
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "fused_nav_unaided",
+   "sinr_db": 19.988799478956274
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "fused_old",
+   "sinr_db": 19.988253289563854
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "prior_consumer",
+   "sinr_db": 3.167573438098552
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "prior_industrial",
+   "sinr_db": 10.212119320182342
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "prior_industrial_unaided",
+   "sinr_db": 2.7496718445414583
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "prior_nav",
+   "sinr_db": 19.782405690951414
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "prior_nav_unaided",
+   "sinr_db": 13.270594455997472
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "prior_old",
+   "sinr_db": 19.738580561375592
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "signal_kalman",
+   "sinr_db": 19.97456352573535
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 20,
+   "receiver": "signal_only",
+   "sinr_db": 19.764266046656818
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "fused_consumer",
+   "sinr_db": 29.602949320070202
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "fused_industrial",
+   "sinr_db": 29.878848706196003
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "fused_industrial_unaided",
+   "sinr_db": 29.555702187595216
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "fused_nav",
+   "sinr_db": 29.964985681955767
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "fused_nav_unaided",
+   "sinr_db": 29.930671763271434
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "fused_old",
+   "sinr_db": 29.966381759884012
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "prior_consumer",
+   "sinr_db": 3.292554562991116
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "prior_industrial",
+   "sinr_db": 10.672647661760482
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "prior_industrial_unaided",
+   "sinr_db": 2.867587352452665
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "prior_nav",
+   "sinr_db": 28.132337279843007
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "prior_nav_unaided",
+   "sinr_db": 14.23073053406032
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "prior_old",
+   "sinr_db": 27.843378455615575
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "signal_kalman",
+   "sinr_db": 29.92720575762176
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "snr_db": 30,
+   "receiver": "signal_only",
+   "sinr_db": 28.19792067131783
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "grade": "old",
+   "prior_rms_eps": 7.047793572294323e-06
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "grade": "nav",
+   "prior_rms_eps": 6.331914688958865e-06
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "grade": "industrial",
+   "prior_rms_eps": 7.932555971025177e-05
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "grade": "consumer",
+   "prior_rms_eps": 0.0001870441926156288
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "grade": "nav_unaided",
+   "prior_rms_eps": 5.2923191850444766e-05
+  },
+  {
+   "scenario": "buoy -> seabed, CDIP swell",
+   "n_data": 7,
+   "grade": "industrial_unaided",
+   "prior_rms_eps": 0.00021662957352796243
+  }
+ ]
+}

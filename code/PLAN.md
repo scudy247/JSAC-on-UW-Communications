@@ -39,7 +39,7 @@ code/
     fusion.py            ⬜ E2: Kalman / RTS smoother fusing side information, own IMU and signal measurements
     receiver.py, per.py  ⬜ channel estimation, equalisation, LLR weighting, coded PER
   scripts/               one script per analysis or figure
-  tests/                 pytest (33 passing on 11 Oct 2026)
+  tests/                 pytest (68 passing on 12 Oct 2026)
 ```
 
 ---
@@ -62,6 +62,7 @@ code/
 |---|---|---|
 | `motion.*` | Tracks (buoy, static, AUV leg, manoeuvring AUV), lever arm, link Doppler split | ✅ |
 | `estimates.*`, `placement.NodeSensors` | Sensor error model: Gauss–Markov drift, latency (+ accelerometer bridge), lever arm, direction error | ✅ |
+| `imu.py` | Realistic sensor error model: accelerometer noise / bias / scale, attitude leakage, complementary filter with or without GNSS / DVL aiding, timing error; grades nav / industrial / consumer (± aiding); optional `grade=` in `NodeIMU`, `IMU3` | ✅ 12 Oct; grade experiment `scripts/e2_imu_grades.py` 🔄 |
 | `waveform.*`, `channel.*` | OFDM, Doppler warp / unwarp, multipath with per-path Doppler | ✅ |
 | `bellhop.py` | Arrivals, coherent rough-surface loss, scattered-surface floor (swept) | 🟡 ✅ Bellhop paths in the chain (`multipath.py`: per-path Doppler from angles, diffuse scattering; first-arrival detection); experiment `scripts/e2_multipath.py` ⏳; open: literature value for scattered power; per-path compensation 🟡: Tu-like multi-branch MRC ✅, sensor-aided decoder-aided per-path cancellation ✅ (decodes real buoy–buoy two-path packets where all others fail); realistic per-path prediction ✅ (`sensors.py`: 3-axis IMU, two-component side information 64 bits, Bellhop angles; still decodes); signal-only cancellation baseline ✅ (`receive_signal_sic`: chirp delays + per-path search; decodes 1/3 real buoy–buoy packets vs 3/3 with sensors); angle errors ✅ (sensors alone ≤ 0.5°, with a narrow search ≈ 1°; delays must come from the signal: a 0.15 ms geometric delay error broke the search); next: statistics from `scripts/e2_multipath.py` |
 | synthetic spectra | JONSWAP motion for sea-state sweeps (exists in `scripts/c2_map.py`; move to `motion`) | 🟡 |
@@ -77,7 +78,7 @@ code/
 | `theory.kernel_ici` | Interference = phase variance within each FFT window, for any linear estimator; offset and ramp limits | ✅ |
 | `theory.kernel_samples`, `noise_samples` | Error of the fit the receiver really makes (estimates at given instants) | ✅ |
 | `experiment.genie_powers`, `pilot_powers` | Genie (ML phase ramp) and pilot-based (delay-domain LS) SIR | ✅ |
-| `receiver.py` | Pilot channel estimate, channel-estimate smoothing, per-subcarrier LLR weighting (as in Lee et al. 2026), equalisation | ✅ pilot delay-domain LS channel, noise + ICI from in-band nulls, exact QPSK LLRs, deinterleave, Viterbi (12 Oct); smoothing beyond the LS fit ⬜ |
+| `receiver.py` | Pilot channel estimate, channel-estimate smoothing, per-subcarrier LLR weighting (as in Lee et al. 2026), equalisation | ✅ noise + ICI from in-band nulls, exact QPSK LLRs, deinterleave, Viterbi; ✅ sparse channel estimate (SOMP over the packet, 12 Oct: removes the ≈ 4 dB loss of the per-symbol LS, within ≈ 0.3 dB of a genie; PER / multipath results to rerun) |
 | `per.py` | Convolutional / LDPC-like code, soft decoding; PER vs residual Doppler and SNR; tables for DESERT | 🟡 `coding.py` ✅ (rate 1/2 K=7, Viterbi, interleaver, Gray QPSK); PER on real motion `scripts/e2_per.py` 🔄; 16-QAM, longer packets, tables ⬜ |
 | complexity counters | Operations per packet: resampling, search, fusion | ⬜ |
 

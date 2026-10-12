@@ -70,3 +70,29 @@ def test_coded_16qam_packet_through_chain():
     y = y + np.sqrt(4.0 / 10 ** 2.2 / 2) * (rng.standard_normal(len(y)) + 1j * rng.standard_normal(len(y)))  # 22 dB
     Y, _ = chain.receive_signal_only(y, F, search=(0, lead + 1500))
     assert np.array_equal(receiver.decode(Y, F, "16qam"), info)
+
+
+def test_sparse_channel_estimate_close_to_genie():
+    """SOMP channel estimate (receiver.channel_estimates): on a static 5-path channel (15 ms spread) its error is a
+    small fraction of the noise, and rate-1/2 QPSK decodes at 6 dB per-subcarrier SNR (the old per-symbol LS
+    estimate had an error equal to the noise: about 4 dB lost)."""
+    from uwofdm import channel, frame, receiver
+    rng = np.random.default_rng(5)
+    F = frame.Frame()
+    o = F.o
+    data, _ = receiver.masks(F)
+    f = (np.arange(o.n_sc) - o.n_sc // 2) * o.df
+    nv = 10 ** (-6 / 10)
+    ok = 0
+    for _ in range(4):
+        paths = channel.exponential_paths(5, 0.015, rng)
+        Ht = sum(p.gain * np.exp(-2j * np.pi * f * p.delay) for p in paths)
+        info = rng.integers(0, 2, receiver.n_info_bits(F))
+        X = receiver.build_data(info, F)
+        Y = X * Ht + np.sqrt(nv / 2) * (rng.standard_normal(X.shape) + 1j * rng.standard_normal(X.shape))
+        H, _ = receiver.channel_estimates(Y, F, method="somp")
+        assert np.mean(np.abs(H[:, data] - Ht[data]) ** 2) < 0.2 * nv
+        H_ls, _ = receiver.channel_estimates(Y, F, method="ls")
+        assert np.mean(np.abs(H_ls[:, data] - Ht[data]) ** 2) > 0.5 * nv
+        ok += np.array_equal(receiver.decode(Y, F), info)
+    assert ok >= 3

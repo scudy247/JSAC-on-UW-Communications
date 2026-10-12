@@ -4,15 +4,90 @@ decoded bits / packet error.
 
 Transmitter: info bits -> convolutional code (coding.py) -> interleaver -> Gray QPSK or 16-QAM on the data subcarriers
 (used subcarriers minus pilots); pilots: a fixed QPSK sequence; in-band nulls empty (frame.Frame).
-Receiver, per OFDM symbol: channel on all subcarriers from the pilots (delay-domain least squares,
-experiment._estimator); noise + inter-carrier interference power measured on the in-band nulls (so the LLRs carry
-the Doppler residual as noise: the per-subcarrier LLR weighting of Lee et al. 2026); exact QPSK / 16-QAM LLRs; deinterleave;
-Viterbi. A packet is in error if any decoded info bit is wrong.
+Receiver, per OFDM symbol: channel on all subcarriers from the pilots (channel_estimates); noise + inter-carrier
+interference power measured on the in-band nulls (so the LLRs carry the Doppler residual as noise: the per-subcarrier
+LLR weighting of Lee et al. 2026); exact QPSK / 16-QAM LLRs; deinterleave; Viterbi. A packet is in error if any
+decoded info bit is wrong.
+
+Channel estimators (CHANNEL_ESTIMATOR):
+  'somp'  sparse delay-domain estimate shared by the packet (default from 12 Oct 2026): simultaneous orthogonal
+          matching pursuit over the symbols of the packet (Berger et al., IEEE TSP 2010, sparse UWA channels) on the
+          twice-oversampled delay grid of experiment._estimator; the delay support is common to all symbols, the tap
+          gains are refitted per symbol (residual Doppler phase and drift change them). A tap is kept only while it
+          explains more than TAP_GAIN times the noise energy it adds (noise from the in-band nulls), at most MAX_TAPS.
+          The old estimator fitted ~390 taps from 248 pilots per symbol (regularised), so its error was about as large
+          as the noise: ~4 dB lost (static AWGN, rate-1/2 QPSK: PER 0.15 at 9 dB vs error-free at 5 dB with a genie).
+  'ls'    the old per-symbol regularised least squares on the whole delay span (experiment._estimator).
 """
 import numpy as np
 
 from . import coding
-from .experiment import _estimator
+from .experiment import MAX_DELAY, MIN_DELAY, _estimator
+
+CHANNEL_ESTIMATOR = "somp"
+MAX_TAPS = 40
+TAP_GAIN = 4.0  # a tap must remove more than TAP_GAIN x (noise variance x symbols) of pilot residual energy
+_DICT = {}
+
+
+def _dictionary(o):
+    """Pilot and active-subcarrier steering matrices on the delay grid of experiment._estimator (cached)."""
+    key = (o.n_sc, o.pilot_spacing, o.guard_sc, o.bandwidth)
+    if key not in _DICT:
+        act = np.where(o.active)[0]
+        pil = act[o.pilots()[act]]
+        dtau = 0.5 / (len(pil) * o.pilot_spacing * o.df)
+        taus = np.arange(int(np.floor(MIN_DELAY / dtau)), int(np.ceil(MAX_DELAY / dtau))) * dtau
+        f = lambda idx: (idx - pil[0]) * o.df
+        _DICT[key] = (pil, act, np.exp(-2j * np.pi * np.outer(f(pil), taus)), np.exp(-2j * np.pi * np.outer(f(act), taus)))
+    return _DICT[key]
+
+
+def somp(R, nv, A, max_taps=MAX_TAPS, tap_gain=TAP_GAIN):
+    """Simultaneous OMP. R: (n_sym, n_pilots) pilot observations (y / x), nv: noise variance per observation,
+    A: (n_pilots, n_grid) dictionary. Returns (support indices, coefficients (len(support), n_sym))."""
+    n_sym = len(R)
+    S, coef = [], np.zeros((0, n_sym), complex)
+    res, e_prev = R.copy(), float(np.sum(np.abs(R) ** 2))
+    An = A / np.linalg.norm(A, axis=0)
+    while len(S) < max_taps:
+        j = int(np.argmax(np.sum(np.abs(res @ np.conj(An)) ** 2, axis=0)))
+        if j in S:
+            break
+        c = np.linalg.lstsq(A[:, S + [j]], R.T, rcond=None)[0]
+        r = R - (A[:, S + [j]] @ c).T
+        e = float(np.sum(np.abs(r) ** 2))
+        if e_prev - e < tap_gain * nv * n_sym:
+            break
+        S, coef, res, e_prev = S + [j], c, r, e
+    return S, coef
+
+
+def channel_estimates(Y, F, P=None, method=None):
+    """Channel on every subcarrier for each symbol of Y (n_sym, n_sc) from the pilots P (default: the frame's pilot
+    symbols), and the noise + interference variance per symbol from the in-band nulls. Returns (H, NV)."""
+    o = F.o
+    method = method or CHANNEL_ESTIMATOR
+    _, pil_mask = masks(F)
+    P = pilot_symbols(F) if P is None else P
+    NV = np.array([max(float(np.mean(np.abs(y[F.nulls]) ** 2)), 1e-12) for y in Y])
+    H = np.zeros(Y.shape, complex)
+    if method == "ls":
+        p_idx, d_idx, M = _estimator(o)
+        sel = np.isin(p_idx, np.where(pil_mask)[0])
+        for k, y in enumerate(Y):
+            ratio = np.zeros(len(p_idx), complex)
+            ratio[sel] = y[p_idx[sel]] / P[k]
+            H[k, d_idx] = M @ ratio
+            H[k, p_idx] = ratio
+        return H, NV
+    pil, act, A_p, A_a = _dictionary(o)
+    sel = np.isin(pil, np.where(pil_mask)[0])
+    R = np.stack([y[pil[sel]] / P[k] for k, y in enumerate(Y)])
+    S, coef = somp(R, float(np.mean(NV)), A_p[sel])
+    if S:
+        H[:, act] = (A_a[:, S] @ coef).T
+    return H, NV
 
 
 def masks(F):
@@ -47,22 +122,9 @@ def build_data(info, F, mod="qpsk"):
 
 def decode(Y, F, mod="qpsk"):
     """Decoded info bits from demodulated data symbols Y (n_data, n_sc)."""
-    o = F.o
-    data, pil = masks(F)
-    p_idx, d_idx, M = _estimator(o)  # pilots of the numerology (every 4th active) -> other active subcarriers
-    P = pilot_symbols(F)
-    pil_pos = np.where(pil)[0]
-    llrs = []
-    for k in range(F.n_data):
-        y = Y[k]
-        h_all = np.zeros(o.n_sc, complex)
-        ratio = np.zeros(len(p_idx), complex)
-        sel = np.isin(p_idx, pil_pos)
-        ratio[sel] = y[p_idx[sel]] / P[k]
-        h_all[d_idx] = M @ ratio
-        h_all[p_idx] = ratio
-        nv = max(float(np.mean(np.abs(y[F.nulls]) ** 2)), 1e-12)
-        llrs.append(coding.MODS[mod][2](y[data], h_all[data], nv))
+    data, _ = masks(F)
+    H, NV = channel_estimates(Y, F)
+    llrs = [coding.MODS[mod][2](Y[k][data], H[k][data], NV[k]) for k in range(F.n_data)]
     llr = np.concatenate(llrs)
     perm = coding.interleaver(len(llr))
     deint = np.empty_like(llr)
@@ -73,17 +135,10 @@ def decode(Y, F, mod="qpsk"):
 def sinr(Y, X, F):
     """SINR on the data subcarriers after the receiver's own pilot channel estimate (no genie): signal power of
     h x vs power of y - h x, accumulated over the packet."""
-    o = F.o
     data, pil = masks(F)
-    p_idx, d_idx, M = _estimator(o)
-    pil_pos = np.where(pil)[0]
-    sel = np.isin(p_idx, pil_pos)
+    H, _ = channel_estimates(Y, F, P=X[:, pil])
     sig = err = 0.0
-    for y, x in zip(Y, X):
-        ratio = np.zeros(len(p_idx), complex)
-        ratio[sel] = y[p_idx[sel]] / x[p_idx[sel]]
-        h = np.zeros(o.n_sc, complex)
-        h[d_idx] = M @ ratio
+    for y, x, h in zip(Y, X, H):
         sig += np.sum(np.abs(h[data] * x[data]) ** 2)
         err += np.sum(np.abs(y[data] - h[data] * x[data]) ** 2)
     return sig, err
@@ -91,21 +146,7 @@ def sinr(Y, X, F):
 
 def _branch_terms(Y, X_pilots_known, F):
     """Per-symbol channel on all subcarriers (pilots) and noise + interference power (nulls) of one branch."""
-    o = F.o
-    data, pil = masks(F)
-    p_idx, d_idx, M = _estimator(o)
-    P = pilot_symbols(F)
-    sel = np.isin(p_idx, np.where(pil)[0])
-    H, NV = [], []
-    for k, y in enumerate(Y):
-        ratio = np.zeros(len(p_idx), complex)
-        ratio[sel] = y[p_idx[sel]] / P[k]
-        h = np.zeros(o.n_sc, complex)
-        h[d_idx] = M @ ratio
-        h[p_idx] = ratio
-        H.append(h)
-        NV.append(max(float(np.mean(np.abs(y[F.nulls]) ** 2)), 1e-12))
-    return np.array(H), np.array(NV)
+    return channel_estimates(Y, F)
 
 
 def combine(Ys, F):

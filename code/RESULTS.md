@@ -555,3 +555,19 @@ PER Li/Lee / signal-only Kalman / Cho–Kim / full sensor chain (real header) / 
 - Header with 96 bits: read in 90–100% of packets at ≥ 3 dB, 35–55% at 0 dB (fewer repetitions per bit).
 - Reading: the PER confirms the SINR regime map — sensors matter in a rough sea with both ends moving and long
   packets, where they remove the error floor that even the best signal-only receiver keeps.
+
+## Channel-estimator loss fixed (12 Oct 2026; `receiver.channel_estimates`, `tests/test_coding.py`)
+The pilot channel estimate of the coded chain (per symbol, regularised LS on ~390 delay taps of the twice-oversampled
+grid from 248 pilots) had an error as large as the noise: on a **static AWGN channel** rate-1/2 QPSK gave PER 1.00 at
+6 dB and 0.33 at 9 dB per-subcarrier SNR, against error-free at 5 dB with a genie channel (≈ 4 dB lost by every
+receiver). Replaced by a sparse estimate shared by the packet: simultaneous OMP over the packet's symbols (common delay
+support, per-symbol gains; taps kept while they remove more than 4x the noise energy they add; ≤ 40 taps).
+- Static AWGN: PER genie / old LS / SOMP 0.23 / 1.00 / 0.30 at 3 dB, 0.00 / 1.00 / 0.00 at 5 dB, 0.00 / 0.33 / 0.00 at
+  9 dB; estimate error / noise 0.99 (LS) vs 0.004 (SOMP). 5-path channel, 15 ms spread: 0.23 / 1.00 / 0.33 at 5 dB,
+  0.07 / 0.87 / 0.07 at 7 dB; error / noise 0.98 vs 0.05-0.08. At high SNR (5 paths) the error relative to the channel
+  is −29 / −36 / −44 dB at 20 / 30 / 40 dB SNR (LS −20 / −30 / −37): off-grid delays leave a small floor.
+- Consequence: **all PER and multipath results above (`results/e2_chain/per*.json`, `multipath.json`, and the
+  `*_hi.json` runs started before the fix) used the old estimate and must be rerun.** The SINR results with the genie
+  metric (`points.json`, E1, C1/C2) are not affected. The synthetic two-path test now decodes with a single
+  resampling (7.5 dB SINR, was 5.5 dB and failed); cancellation still gains ≈ 20 dB (27.8 dB). Part of the
+  "only cancellation decodes" result on real multipath may have come from the weak estimate: to recheck.

@@ -51,7 +51,9 @@ def test_fused_receiver_follows_within_packet_residual():
 
 def test_sic_cancels_second_path_with_different_doppler():
     """Two equal paths 10 ms apart, the second with an extra Doppler of 1.5e-4 (heave on a bottom bounce): one
-    resampling along path 0 cannot decode; decoder-aided cancellation with the known per-path Doppler can."""
+    resampling along path 0 leaves the second path's inter-carrier interference (SINR ~7.5 dB, which the rate-1/2 code
+    still decodes since the sparse channel estimate of 12 Oct 2026; with the old LS estimate, 5.5 dB, it did not);
+    decoder-aided cancellation with the known per-path Doppler removes it (~28 dB) and decodes."""
     from uwofdm import channel, receiver
     rng = np.random.default_rng(7)
     F = frame.Frame()
@@ -70,6 +72,8 @@ def test_sic_cancels_second_path_with_different_doppler():
     y = y + np.sqrt(4e-3 / 2) * (rng.standard_normal(n) + 1j * rng.standard_normal(n))
     trs = [bulk[lead:], bulk[lead:] + d2[lead:]]
     Y1 = chain.receive_branches(y, F, [trs[0]], (0, lead + 1500))[0]
-    assert not np.array_equal(receiver.decode(Y1, F), info)
+    s1 = receiver.sinr(Y1, X, F)
     branches, _ = chain.receive_sic(y, F, trs, [0.0, 0.010], (0, lead + 1500), iters=4)
+    s2 = receiver.sinr_combined(branches, X, F)
+    assert 10 * np.log10(s2[0] / s2[1]) > 10 * np.log10(s1[0] / s1[1]) + 15
     assert np.array_equal(receiver.decode_combined(branches, F), info)
