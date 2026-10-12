@@ -141,7 +141,9 @@ def receive_signal_fused(y, F, search=(0, None), eps_max=3e-3, params=None, back
     return Y, info
 
 
-SIGNAL_FUSION = dict(sigma_r0=2e-4, sigma_dr0=2e-3, q=(4e-3) ** 2)
+# tuned 12 Oct 2026 (scripts/b1_tune_signal_kalman.py: best mean over 4 cases x 2 SNRs; flat for q_std 5e-4 ... 1e-3,
+# worse below; the hand-set (2e-3, (4e-3)^2) was 0.13 dB lower on average, up to 0.5 dB on 4 s packets)
+SIGNAL_FUSION = dict(sigma_r0=2e-4, sigma_dr0=5e-4, q=(1e-3) ** 2)
 
 
 def receive_fused(y, F, prior, search=(0, None), eps_res_max=3e-4, params=None, backoff=0):

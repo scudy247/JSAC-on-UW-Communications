@@ -615,3 +615,17 @@ packets (same packets for all; choice per packet f = fused, s = signal):
 - Never below the signal-only receiver, no loss with good sensors; most of the recovery comes from the adaptation
   itself (industrial unaided, buoy-buoy 4 s: fused output chosen in 7 of 8 packets). Poor sensors still gain
   +4 to +15 dB on the rough links. To use as the sensor receiver in the reruns (PER, multipath, high statistics).
+
+## Fair baselines (12 Oct 2026; `scripts/b1_tune_signal_kalman.py`, `scripts/b2_baselines.py`, `pfft.py`)
+- **Signal-only Kalman tuned:** grid sigma_dr0 {5e-4, 2e-3, 8e-3} x q_std {1e-4 ... 6.4e-2}, buoy-buoy OOI 1 / 4 s,
+  seabed OOI 4 s, seabed CDIP 1 s, 20 / 30 dB, 8 packets. sigma_dr0 hardly matters; q_std 5e-4 ... 1e-3 best (mean
+  23.75-23.77 dB), 2.5e-4: 23.55, 1e-4: 22.0, 4e-3 (hand-set): 23.64, 6.4e-2: 22.4. New default (5e-4, (1e-3)^2):
+  +0.13 dB on average, up to +0.5 dB on 4 s packets — the earlier comparisons were not unfair on this point. (The
+  high-statistics runs started at 13:41 use the hand-set values.)
+- **Partial-FFT demodulation** (Yerramalli, Stojanovic, Mitra 2012; segment weights and sparse taps by LS on the
+  pilots): synthetic 6e-4 slow wave + 3e-4 at 0.8 Hz, 40 dB: signal Kalman 29.2 -> 32.4 / 35.8 / 37.9 dB with 2 / 4 / 8
+  segments (no fast part: 35.9 -> 39.6); after the Li/Lee front end < 1 dB. A strong signal-only baseline; as a
+  demodulator it can follow sensor fusion too.
+- **Statistics warning:** power-averaged SINR over 8-20 packets is dominated by the worst packets: the signal-only
+  Kalman on buoy-buoy 4 s gave 12-13.5 dB on the packet sets of e2_chain / e2_imu_grades and ~24 dB on the sweep's
+  8 packets. Large SINR gains must be re-measured with more packets and reported with median and percentiles.

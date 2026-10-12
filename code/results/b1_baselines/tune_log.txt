@@ -1,0 +1,64 @@
+buoy - buoy, OOI Irminger     7 sym  sigma_dr0 5e-04 q_std 1.0e-03: 20 dB  19.8  30 dB  29.0
+buoy - buoy, OOI Irminger     7 sym  sigma_dr0 5e-04 q_std 4.0e-03: 20 dB  19.8  30 dB  29.0
+buoy - buoy, OOI Irminger     7 sym  sigma_dr0 5e-04 q_std 1.6e-02: 20 dB  19.6  30 dB  27.6
+buoy - buoy, OOI Irminger     7 sym  sigma_dr0 5e-04 q_std 6.4e-02: 20 dB  18.9  30 dB  24.3
+buoy - buoy, OOI Irminger     7 sym  sigma_dr0 2e-03 q_std 1.0e-03: 20 dB  19.8  30 dB  28.9
+buoy - buoy, OOI Irminger     7 sym  sigma_dr0 2e-03 q_std 4.0e-03: 20 dB  19.8  30 dB  29.0
+buoy - buoy, OOI Irminger     7 sym  sigma_dr0 2e-03 q_std 1.6e-02: 20 dB  19.7  30 dB  27.6
+buoy - buoy, OOI Irminger     7 sym  sigma_dr0 2e-03 q_std 6.4e-02: 20 dB  18.9  30 dB  24.3
+buoy - buoy, OOI Irminger     7 sym  sigma_dr0 8e-03 q_std 1.0e-03: 20 dB  19.8  30 dB  28.9
+buoy - buoy, OOI Irminger     7 sym  sigma_dr0 8e-03 q_std 4.0e-03: 20 dB  19.8  30 dB  29.0
+buoy - buoy, OOI Irminger     7 sym  sigma_dr0 8e-03 q_std 1.6e-02: 20 dB  19.7  30 dB  27.8
+buoy - buoy, OOI Irminger     7 sym  sigma_dr0 8e-03 q_std 6.4e-02: 20 dB  19.1  30 dB  24.9
+buoy - buoy, OOI Irminger    27 sym  sigma_dr0 5e-04 q_std 1.0e-03: 20 dB  18.8  30 dB  24.0
+buoy - buoy, OOI Irminger    27 sym  sigma_dr0 5e-04 q_std 4.0e-03: 20 dB  18.7  30 dB  23.5
+buoy - buoy, OOI Irminger    27 sym  sigma_dr0 5e-04 q_std 1.6e-02: 20 dB  18.4  30 dB  22.6
+buoy - buoy, OOI Irminger    27 sym  sigma_dr0 5e-04 q_std 6.4e-02: 20 dB  18.1  30 dB  21.9
+buoy - buoy, OOI Irminger    27 sym  sigma_dr0 2e-03 q_std 1.0e-03: 20 dB  18.8  30 dB  24.0
+buoy - buoy, OOI Irminger    27 sym  sigma_dr0 2e-03 q_std 4.0e-03: 20 dB  18.7  30 dB  23.5
+buoy - buoy, OOI Irminger    27 sym  sigma_dr0 2e-03 q_std 1.6e-02: 20 dB  18.4  30 dB  22.6
+buoy - buoy, OOI Irminger    27 sym  sigma_dr0 2e-03 q_std 6.4e-02: 20 dB  18.1  30 dB  21.9
+buoy - buoy, OOI Irminger    27 sym  sigma_dr0 8e-03 q_std 1.0e-03: 20 dB  18.8  30 dB  24.0
+buoy - buoy, OOI Irminger    27 sym  sigma_dr0 8e-03 q_std 4.0e-03: 20 dB  18.7  30 dB  23.4
+buoy - buoy, OOI Irminger    27 sym  sigma_dr0 8e-03 q_std 1.6e-02: 20 dB  18.4  30 dB  22.6
+buoy - buoy, OOI Irminger    27 sym  sigma_dr0 8e-03 q_std 6.4e-02: 20 dB  18.1  30 dB  22.0
+buoy -> seabed, OOI Irminger 27 sym  sigma_dr0 5e-04 q_std 1.0e-03: 20 dB  19.8  30 dB  28.8
+buoy -> seabed, OOI Irminger 27 sym  sigma_dr0 5e-04 q_std 4.0e-03: 20 dB  19.8  30 dB  28.5
+buoy -> seabed, OOI Irminger 27 sym  sigma_dr0 5e-04 q_std 1.6e-02: 20 dB  19.7  30 dB  28.1
+buoy -> seabed, OOI Irminger 27 sym  sigma_dr0 5e-04 q_std 6.4e-02: 20 dB  19.6  30 dB  27.6
+buoy -> seabed, OOI Irminger 27 sym  sigma_dr0 2e-03 q_std 1.0e-03: 20 dB  19.8  30 dB  28.8
+buoy -> seabed, OOI Irminger 27 sym  sigma_dr0 2e-03 q_std 4.0e-03: 20 dB  19.8  30 dB  28.5
+buoy -> seabed, OOI Irminger 27 sym  sigma_dr0 2e-03 q_std 1.6e-02: 20 dB  19.7  30 dB  28.1
+buoy -> seabed, OOI Irminger 27 sym  sigma_dr0 2e-03 q_std 6.4e-02: 20 dB  19.6  30 dB  27.6
+buoy -> seabed, OOI Irminger 27 sym  sigma_dr0 8e-03 q_std 1.0e-03: 20 dB  19.8  30 dB  28.8
+buoy -> seabed, OOI Irminger 27 sym  sigma_dr0 8e-03 q_std 4.0e-03: 20 dB  19.8  30 dB  28.5
+buoy -> seabed, OOI Irminger 27 sym  sigma_dr0 8e-03 q_std 1.6e-02: 20 dB  19.7  30 dB  28.1
+buoy -> seabed, OOI Irminger 27 sym  sigma_dr0 8e-03 q_std 6.4e-02: 20 dB  19.7  30 dB  27.7
+buoy -> seabed, CDIP swell    7 sym  sigma_dr0 5e-04 q_std 1.0e-03: 20 dB  20.0  30 dB  30.0
+buoy -> seabed, CDIP swell    7 sym  sigma_dr0 5e-04 q_std 4.0e-03: 20 dB  20.0  30 dB  30.0
+buoy -> seabed, CDIP swell    7 sym  sigma_dr0 5e-04 q_std 1.6e-02: 20 dB  19.9  30 dB  29.8
+buoy -> seabed, CDIP swell    7 sym  sigma_dr0 5e-04 q_std 6.4e-02: 20 dB  19.9  30 dB  29.2
+buoy -> seabed, CDIP swell    7 sym  sigma_dr0 2e-03 q_std 1.0e-03: 20 dB  20.0  30 dB  30.0
+buoy -> seabed, CDIP swell    7 sym  sigma_dr0 2e-03 q_std 4.0e-03: 20 dB  20.0  30 dB  30.0
+buoy -> seabed, CDIP swell    7 sym  sigma_dr0 2e-03 q_std 1.6e-02: 20 dB  19.9  30 dB  29.8
+buoy -> seabed, CDIP swell    7 sym  sigma_dr0 2e-03 q_std 6.4e-02: 20 dB  19.9  30 dB  29.2
+buoy -> seabed, CDIP swell    7 sym  sigma_dr0 8e-03 q_std 1.0e-03: 20 dB  20.0  30 dB  30.0
+buoy -> seabed, CDIP swell    7 sym  sigma_dr0 8e-03 q_std 4.0e-03: 20 dB  20.0  30 dB  30.0
+buoy -> seabed, CDIP swell    7 sym  sigma_dr0 8e-03 q_std 1.6e-02: 20 dB  19.9  30 dB  29.8
+buoy -> seabed, CDIP swell    7 sym  sigma_dr0 8e-03 q_std 6.4e-02: 20 dB  19.9  30 dB  29.3
+mean SINR over cases and SNRs per setting:
+  sigma_dr0 5e-04 q_std 1.0e-03: 23.77 dB
+  sigma_dr0 2e-03 q_std 1.0e-03: 23.77 dB
+  sigma_dr0 8e-03 q_std 1.0e-03: 23.76 dB
+  sigma_dr0 5e-04 q_std 4.0e-03: 23.65 dB
+  sigma_dr0 2e-03 q_std 4.0e-03: 23.64 dB
+  sigma_dr0 8e-03 q_std 4.0e-03: 23.64 dB
+  sigma_dr0 8e-03 q_std 1.6e-02: 23.25 dB
+  sigma_dr0 2e-03 q_std 1.6e-02: 23.22 dB
+  sigma_dr0 5e-04 q_std 1.6e-02: 23.21 dB
+  sigma_dr0 8e-03 q_std 6.4e-02: 22.57 dB
+  sigma_dr0 2e-03 q_std 6.4e-02: 22.45 dB
+  sigma_dr0 5e-04 q_std 6.4e-02: 22.43 dB
+best: sigma_dr0 5e-04, q_std 1.0e-03 (current 2e-3, 4.0e-3)
+
+[exited with code 0]
