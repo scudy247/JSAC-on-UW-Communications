@@ -77,3 +77,30 @@ def test_sic_cancels_second_path_with_different_doppler():
     s2 = receiver.sinr_combined(branches, X, F)
     assert 10 * np.log10(s2[0] / s2[1]) > 10 * np.log10(s1[0] / s1[1]) + 15
     assert np.array_equal(receiver.decode_combined(branches, F), info)
+
+
+def test_safe_fusion_never_much_worse_than_signal_only():
+    """A poor prior (true Doppler + an offset of 5e-4 + a 0.3 Hz error of 3e-4: beyond the fixed +-3e-4 window of
+    receive_fused) breaks the fixed-setting fusion; receive_fused_safe detects the poor prior from the chirps, widens
+    its window, and keeps the signal-only output if that is better. With a good prior it keeps the fused output."""
+    rng = np.random.default_rng(4)
+    F = frame.Frame(n_data=27)
+    o = F.o
+    X = o.random_symbols(F.n_data, rng)
+    X[:, F.nulls] = 0
+    s = F.build(o.random_symbols(F.n_header, rng), X)
+    lead = 1500
+    x = np.concatenate([np.zeros(lead, complex), s, np.zeros(8000, complex)])
+    t = np.arange(len(x)) / o.fs
+    true = 6e-4 * np.sin(2 * np.pi * 0.15 * t) + 3e-4 * np.sin(2 * np.pi * 0.4 * t + 2)
+    y = waveform.warp(x, o.fs, true, o.fc)
+    y = y + np.sqrt(4e-3 / 2) * (rng.standard_normal(len(y)) + 1j * rng.standard_normal(len(y)))  # 30 dB
+    search = (0, lead + 1500)
+    sig = _sir(chain.receive_signal_fused(y, F, search)[0], X, F)
+    bad = (true + 5e-4 + 3e-4 * np.sin(2 * np.pi * 0.3 * t))[lead:]
+    Yb, info = chain.receive_fused_safe(y, F, bad, search)
+    assert info["prior_quality"] > 5e-4
+    assert _sir(Yb, X, F) > sig - 1.0
+    good = (true + 5e-6)[lead:]
+    Yg, info = chain.receive_fused_safe(y, F, good, search)
+    assert info["choice"] == "fused" and _sir(Yg, X, F) > sig - 0.5

@@ -172,6 +172,45 @@ def receive_fused(y, F, prior, search=(0, None), eps_res_max=3e-4, params=None, 
                    r_std=r_std, t_grid=t_grid)
 
 
+def null_sinr(Y, F):
+    """SINR the receiver can measure without a genie: power on used subcarriers vs noise + interference on the in-band
+    nulls, over the packet's data symbols."""
+    pn = max(float(np.mean(np.abs(Y[:, F.nulls]) ** 2)), 1e-12)
+    return max(float(np.mean(np.abs(Y[:, F.used]) ** 2)) / pn - 1.0, 1e-3)
+
+
+PRIOR_POOR = 2e-4  # prior error [scale] at which fusion takes the signal-only Kalman settings
+
+
+def receive_fused_safe(y, F, prior, search=(0, None), prior_std=None, eps_max=3e-3, backoff=0):
+    """Sensor-aided Kalman fusion that is never much worse than the signal alone (12 Oct 2026: with poor sensors the
+    fixed-setting receive_fused fell 3-19 dB below the signal-only Kalman).
+    1. Prior quality, per packet: the mean scale of the packet from preamble / postamble over the full +-eps_max
+       range, against the mean of the prior over the same span; s = max(prior_std, 2 |difference|), prior_std being
+       the sensor's specified error if known.
+    2. Fusion adapted to s: residual window max(3e-4, 4 s); prior uncertainty sigma_r0 >= 2 s; rate and process noise
+       moved from the sensor settings (FUSION) to the signal-only ones (SIGNAL_FUSION) as s grows to PRIOR_POOR
+       (geometric interpolation).
+    3. Guard: the signal-only Kalman is run too and the output with the higher null-subcarrier SINR is kept."""
+    o = F.o
+    n_pre, _ = estimators.detect_chirp(y, F, *search)
+    n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
+    eps_sig = estimators.scale_pre_post(n_pre, n_post, F.gap)
+    diff = eps_sig - float(np.mean(prior[:F.gap]))
+    s = max(prior_std or 0.0, 2 * abs(diff))
+    w = min(s / PRIOR_POOR, 1.0)
+    blend = lambda a, b: float(np.exp((1 - w) * np.log(a) + w * np.log(b)))
+    p = dict(sigma_r0=max(FUSION["sigma_r0"], 2 * s), sigma_dr0=blend(FUSION["sigma_dr0"], SIGNAL_FUSION["sigma_dr0"]),
+             q=blend(FUSION["q"], SIGNAL_FUSION["q"]))
+    window = min(max(3e-4, 4 * s), eps_max)
+    Ya, ia = receive_fused(y, F, prior, search, eps_res_max=window, params=p, backoff=backoff)
+    Yb, ib = receive_signal_fused(y, F, search, eps_max=eps_max, backoff=backoff)
+    sa, sb = null_sinr(Ya, F), null_sinr(Yb, F)
+    info = dict(prior_offset=diff, prior_quality=s, window=window, params=p, null_sinr_fused=sa, null_sinr_signal=sb,
+                choice="fused" if sa >= sb else "signal")
+    return (Ya if sa >= sb else Yb), dict(ia if sa >= sb else ib, **info)
+
+
 def receive_cho_kim(y, F, search=(0, None), eps_max=3e-3, rho_min=0.4, backoff=0):
     """Cho and Kim (IET Commun. 2026) baseline: constant velocity + constant acceleration over the frame. Velocity
     (mean scale) from preamble / postamble; acceleration from the per-symbol frequency offsets given by the

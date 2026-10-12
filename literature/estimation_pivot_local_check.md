@@ -74,3 +74,13 @@ queries. ACM page of "Doppler Correction of Mobile Acoustic Communication via ..
 - **Verdict:** E1/E2 not found in UWA; the mechanism has radio precedents (GNSS/IMU-aided pre-compensation, mostly
   patents), so the novelty claim is "first for UWA, with real wave-motion data, the side-information sizing, and the
   fusion with signal estimates", not "first sensor-aided Doppler" in general.
+
+## WUWNet'18 paper resolved (12 Oct 2026)
+"Doppler correction of mobile acoustic communication via adjustable AD sampling rate", X. Wang, S. Zheng, Q. Tao,
+F. Zhang, A. Song, F. Tong, WUWNet 2018, doi:10.1145/3291940.3291978; journal version: S. Zheng, F. Tong, B. Li,
+Q. Tao, A. Song, F. Zhang, "Design and Evaluation of an Acoustic Modem for a Small Autonomous Unmanned Vehicle",
+Sensors 19(13):2923, 2019 (PMC6651003). DSSS modem for small AUVs; the Doppler factor is estimated **from the
+received signal** ("Each signal frame begins with a synchronization signal that also serves as the Doppler probe";
+"the Doppler can be obtained by performing cross-correlation") and applied by retuning the ADC sampling clock
+instead of resampling. No IMU / DVL / GPS input, no velocity exchanged between nodes. **Not prior art for G1/G2**;
+cite as a low-complexity compensator (hardware resampling), consistent with "compensation is a working tool".

@@ -599,3 +599,19 @@ class values, to check against datasheets), each with and without aiding.
 - **Defect found: fusion can be much worse than signal-only** (industrial unaided: 8.9 vs 12.0, 9.7 vs 28.3 dB): the
   prior error exceeds the fixed +-3e-4 residual window and the Kalman prior variance tuned for the old model; the
   receiver trusts the prior blindly. Fix: prior-quality-aware fusion with a signal-only guard (next).
+
+### Prior-quality-aware fusion (`chain.receive_fused_safe`, 12 Oct 2026)
+Prior quality per packet from the chirps (mean scale over the full ±3e-3 range against the prior's mean; s = 2 |diff|),
+residual window max(3e-4, 4 s), Kalman settings moved from the sensor ones to the signal-only ones as s → 2e-4, and a
+guard that keeps the signal-only Kalman output when its null-subcarrier SINR is higher. Real OOI motion, 30 dB, 8
+packets (same packets for all; choice per packet f = fused, s = signal):
+
+| Link, packet | signal Kalman | industrial: fixed / safe | consumer: fixed / safe | industrial unaided: fixed / safe |
+|---|---|---|---|---|
+| buoy-buoy, 1 s | 23.9 | 29.7 / 29.7 | 21.8 / 28.0 | 27.3 / 28.8 |
+| buoy-buoy, 4 s | 13.5 | 29.5 / 29.6 | 22.3 / 27.4 | 17.2 / 28.5 |
+| seabed OOI, 4 s | 27.6 | 29.7 / 29.8 | 29.4 / 29.5 | 19.8 / 28.8 |
+
+- Never below the signal-only receiver, no loss with good sensors; most of the recovery comes from the adaptation
+  itself (industrial unaided, buoy-buoy 4 s: fused output chosen in 7 of 8 packets). Poor sensors still gain
+  +4 to +15 dB on the rough links. To use as the sensor receiver in the reruns (PER, multipath, high statistics).
