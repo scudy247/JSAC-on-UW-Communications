@@ -104,3 +104,25 @@ def test_safe_fusion_never_much_worse_than_signal_only():
     good = (true + 5e-6)[lead:]
     Yg, info = chain.receive_fused_safe(y, F, good, search)
     assert info["choice"] == "fused" and _sir(Yg, X, F) > sig - 0.5
+
+
+def test_wave_model_stationary_variance_and_tracking():
+    """Wave-state model (fusion.wave_model): the oscillator's stationary std is sigma_w; from one noisy Doppler
+    measurement per 150 ms symbol over 4 s, the wave smoother follows a 0.12 Hz wave better than the generic
+    random-walk smoother with the signal-only settings."""
+    A, Qc, P0 = fusion.wave_model(0.12, 0.2, 3e-4)
+    F, Q = fusion._discretise(A, Qc, 0.5)
+    P = P0.copy()
+    for _ in range(2000):
+        P = F @ P @ F.T + Q
+    assert abs(np.sqrt(P[2, 2]) / 3e-4 - 1) < 0.05
+    rng = np.random.default_rng(3)
+    t = np.arange(0.2, 4.2, 0.15)
+    true = lambda x: 3e-4 * np.sin(2 * np.pi * 0.12 * x + 0.7)
+    ev = [(ti, "r", true(ti) + 2e-5 * rng.standard_normal(), (2e-5) ** 2) for ti in t]
+    tg = np.linspace(0.1, 4.3, 200)
+    r_w, _ = fusion.smooth_lti(ev, tg, A, Qc, P0)
+    r_g, _ = fusion.smooth(ev, tg, 2e-4, 5e-4, (1e-3) ** 2)
+    e = lambda r: np.sqrt(np.mean((r - true(tg)) ** 2))
+    assert e(r_w) < e(r_g)
+    assert e(r_w) < 2e-5

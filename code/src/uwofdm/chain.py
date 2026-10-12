@@ -151,7 +151,8 @@ SIGNAL_FUSION = dict(sigma_r0=2e-4, sigma_dr0=5e-4, q=(1e-3) ** 2)
 def receive_fused(y, F, prior, search=(0, None), eps_res_max=3e-4, params=None, backoff=0):
     """Sensor-aided receiver with Kalman fusion: resample along the prior, measure the postamble timing and each
     symbol's residual frequency offset (with SNR-dependent variance), smooth the residual Doppler over the packet
-    (fusion.smooth), resample once along it, demodulate without per-symbol corrections."""
+    (fusion.smooth; or the wave-state model fusion.wave_model / smooth_lti if params["wave"] = (f_p, zeta,
+    sigma_w)), resample once along it, demodulate without per-symbol corrections."""
     p = dict(FUSION, **(params or {}))
     o, c = F.o, F.chirp()
     n_pre, _ = estimators.detect_chirp(y, F, *search)
@@ -174,7 +175,11 @@ def receive_fused(y, F, prior, search=(0, None), eps_res_max=3e-4, params=None, 
         events.append(((a + o.n_fft / 2) / o.fs, "r", d / o.fc, var))
         snrs.append(snr)
     t_grid = np.arange(0, len(z0), 160) / o.fs  # every 5 ms
-    r_hat, r_std = fusion.smooth(events, t_grid, p["sigma_r0"], p["sigma_dr0"], p["q"])
+    if p.get("wave") is not None:  # wave-state model (fusion.wave_model): params["wave"] = (f_p, zeta, sigma_w)
+        A, Qc, P0 = fusion.wave_model(*p["wave"], sigma_b0=p["sigma_r0"])
+        r_hat, r_std = fusion.smooth_lti(events, t_grid, A, Qc, P0)
+    else:
+        r_hat, r_std = fusion.smooth(events, t_grid, p["sigma_r0"], p["sigma_dr0"], p["q"])
     r_full = np.interp(np.arange(len(z0)) / o.fs, t_grid, r_hat)
     z = unwarp(z0, o.fs, r_full, o.fc)
     Y, _ = _demod(z, F, cfo=False, backoff=backoff)
@@ -192,7 +197,7 @@ def null_sinr(Y, F):
 PRIOR_POOR = 2e-4  # prior error [scale] at which fusion takes the signal-only Kalman settings
 
 
-def receive_fused_safe(y, F, prior, search=(0, None), prior_std=None, eps_max=3e-3, backoff=0):
+def receive_fused_safe(y, F, prior, search=(0, None), prior_std=None, eps_max=3e-3, backoff=0, wave=None):
     """Sensor-aided Kalman fusion that is never much worse than the signal alone (12 Oct 2026: with poor sensors the
     fixed-setting receive_fused fell 3-19 dB below the signal-only Kalman).
     1. Prior quality, per packet: the mean scale of the packet from preamble / postamble over the full +-eps_max
@@ -212,9 +217,12 @@ def receive_fused_safe(y, F, prior, search=(0, None), prior_std=None, eps_max=3e
     blend = lambda a, b: float(np.exp((1 - w) * np.log(a) + w * np.log(b)))
     p = dict(sigma_r0=max(FUSION["sigma_r0"], 2 * s), sigma_dr0=blend(FUSION["sigma_dr0"], SIGNAL_FUSION["sigma_dr0"]),
              q=blend(FUSION["q"], SIGNAL_FUSION["q"]))
+    if wave is not None:  # wave=(sensor residual params, signal-only params), each (f_p, zeta, sigma_w)
+        p["wave"] = wave[0]
     window = min(max(3e-4, 4 * s), eps_max)
     Ya, ia = receive_fused(y, F, prior, search, eps_res_max=window, params=p, backoff=backoff)
-    Yb, ib = receive_signal_fused(y, F, search, eps_max=eps_max, backoff=backoff)
+    Yb, ib = receive_signal_fused(y, F, search, eps_max=eps_max, backoff=backoff,
+                                  params=None if wave is None else dict(wave=wave[1]))
     sa, sb = null_sinr(Ya, F), null_sinr(Yb, F)
     info = dict(prior_offset=diff, prior_quality=s, window=window, params=p, null_sinr_fused=sa, null_sinr_signal=sb,
                 choice="fused" if sa >= sb else "signal")

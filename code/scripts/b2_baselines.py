@@ -20,7 +20,7 @@ import sys
 
 import numpy as np
 
-from uwofdm import chain, frame, motion, sideinfo, waveform
+from uwofdm import chain, frame, fusion, motion, sideinfo, waveform
 from uwofdm.experiment import at_times, genie_powers
 from uwofdm.paths import output_dir
 from e2_chain import SCENARIOS, SIGMA_IMU, allocation
@@ -39,7 +39,7 @@ def run_case(label, n_data, n, seed, sk_params):
 
 
 def run_link(tx_track, rx_track, n_data, n, seed, sk_params, grades=GRADES, n_seg=N_SEG, snrs=SNRS_DB, ofdm=None,
-             pilot_track=False, only_new=False):
+             pilot_track=False, only_new=False, wave=False):
     """Per-packet SINR of every receiver on one link (tracks), n packets; returns {(snr, receiver): stats}."""
     d = motion.link_doppler(tx_track, rx_track)
     F = frame.Frame(n_data=n_data) if ofdm is None else frame.Frame(o=ofdm, n_data=n_data)
@@ -50,6 +50,12 @@ def run_link(tx_track, rx_track, n_data, n, seed, sk_params, grades=GRADES, n_se
     if grades:
         ranges, alloc = allocation(F, nodes[grades[0]][0], tx_track.fs, budgets=(32,))
         a = alloc[(32, "none")]
+    if wave:  # wave-state model parameters from the whole record (sea state known from past packets)
+        tr = np.arange(d["times"][0] + 240, d["times"][-1] - 20, 1 / tx_track.fs)
+        eps_r = at_times(d["eps"], d["times"], tx_track.fs, tr)
+        wave_sig = fusion.fit_wave(eps_r, tx_track.fs)
+        wave_sen = {g: fusion.fit_wave(eps_r - tx.estimate(tr, SIGMA_IMU) - rx.estimate(tr, SIGMA_IMU), tx_track.fs)
+                    for g, (tx, rx) in nodes.items()}
     rng = np.random.default_rng(seed)
     per = {}
     for t0 in rng.uniform(d["times"][0] + 240, d["times"][-1] - T - 20, n):
@@ -83,7 +89,14 @@ def run_link(tx_track, rx_track, n_data, n, seed, sk_params, grades=GRADES, n_se
                 out["pilot_track"] = Yp
                 for P in n_seg:
                     out[f"pfft{P}_pilot_track"] = chain._demod_pfft(inf_p["z"], F, X, P)[0]
-            for g, pr in priors.items():
+            if wave:
+                Yw, inf_w = chain.receive_signal_fused(y, F, search, params=dict(wave=wave_sig))
+                out["signal_wave"] = Yw
+                for P in n_seg:
+                    out[f"pfft{P}_signal_wave"] = chain._demod_pfft(inf_w["z"], F, X, P)[0]
+                for g, pr in priors.items():
+                    out[f"safe_{g}_wave"] = chain.receive_fused_safe(y, F, pr, search, wave=(wave_sen[g], wave_sig))[0]
+            for g, pr in (priors.items() if not only_new else ()):
                 Yf, inf_f = chain.receive_fused_safe(y, F, pr, search)
                 out[f"safe_{g}"] = Yf
                 for P in n_seg:
