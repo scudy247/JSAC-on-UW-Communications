@@ -66,26 +66,25 @@ Details in [`code/RESULTS.md`](code/RESULTS.md).
   while it stays about 20–25 dB below the coherent channel (Bellhop with measured surface roughness; literature value
   still to find).
 
-## End-to-end results (12–13 Oct 2026)
-Full chain on real buoy motion (frame with up/down chirps, side-information header, coded OFDM data, real pilot
-channel estimate), compared with the state of the art: the Li et al. 2008 front end used by Lee et al. 2026, Cho–Kim
-2026, and **a signal-only Kalman receiver (our smoother without sensors), the strongest signal-only baseline**.
-Figures: `code/results/figures/`; numbers: [`code/RESULTS.md`](code/RESULTS.md).
-- **Single path, SINR:** gain of sensor fusion over the best signal-only receiver at 30 dB is 0 dB in a moderate sea
-  (CDIP), +0.4 / +3.9 dB on buoy → seabed OOI (1 / 4 s packets), **+6.0 / +14.6 dB on buoy–buoy OOI**; up to +20 dB
-  over Li/Lee. Cho–Kim degrades with packet length and fails in the rough sea.
-- **Coded PER:** with 1 s packets the sensor chain equals the signal-only Kalman (Li/Lee floors in rough seas); with
-  4 s packets on buoy–buoy the **best signal-only receiver keeps a 5–10% error floor (QPSK and 16-QAM), the sensor
-  chain has none.**
-- **Multipath (Bellhop, each path with its own Doppler):** the bottom bounce on a buoy–buoy link carries the heave
-  (× sin 10°), so one resampling cannot fix both paths. Decoder-aided per-path cancellation with sensor-predicted
-  Doppler gains +3–4 dB over every signal-only receiver (including Tu-like multi-branch and a signal-only
-  cancellation) and roughly halves the PER; it needs the path angles within ≈ 0.5–1°, delays from the signal.
-- **Side information:** 10–30 bits per second of packet (< 1% overhead) recover the gain of transmitter-side
-  compensation; the header is read in 95–100% of packets from 0 dB SNR, with fallback to signal-only.
-- **Regime (the claim):** sensor-aided estimation removes the floors that every signal-only receiver keeps when the
-  sea is rough, both ends move and packets are long, and enables per-path cancellation in multipath; elsewhere it
-  matches the best signal-only receiver, consistent with Lee et al. 2026.
+## End-to-end results (12 Oct 2026, after fair baselines — supersedes the earlier gains)
+Details and every correction in [`code/RESULTS.md`](code/RESULTS.md).
+- **Single path: no SINR gain against a fair signal-only receiver.** With a tuned signal-only Kalman, partial-FFT
+  demodulation and a wide enough null-subcarrier search (+-4 subcarriers), sensor fusion gains 0-0.3 dB even in the
+  tail of rough, long, buoy-buoy packets (30 packets per case). The earlier +6 / +14.6 dB came from weaker baselines
+  (+-2 search, no partial FFT) and few packets.
+- **What sensors still buy:** the same SINR without partial FFT or pilot tracking; 8-30x smaller Doppler search;
+  3-10x fewer wrong postamble locks near -9 dB (~1 dB of acquisition SNR); per the T3 bound, the sensor prior can
+  replace pilot-phase tracking (+5-7 dB on the bound, invisible at the noise level).
+- **Realistic sensors:** GNSS-aided industrial MEMS behave like the original model inside the fusion; consumer MEMS
+  and unaided sensors need the prior-quality guard (`chain.receive_fused_safe`), which never falls below signal-only.
+- **Side information (E1):** closed form for the bits (T2) validated within 1 dB (90th pct); ~15-30 bits per
+  second of packet in rough seas; per-class quantiser ranges cost < 0.5 dB if per platform type; header read
+  >= 90 % from 0 dB (single path), 4-6 dB worse in multipath; a wrong header is harmless with the guard.
+- **Multipath:** sensor-predicted per-path cancellation was the strongest result, but it was measured with the old
+  channel and receivers; the channel is now realistic (fractional delays, path clusters, sound-speed profile,
+  receiver angles from a nominal geometry) and the evaluation is **on hold** with the other reruns.
+- **Open decision (PLAN.md):** framing — (a) cost / complexity and pilot overhead, (b) multipath per-path
+  cancellation, (c) transmit-side / E3.
 
 ## Gaps with the literature
 Checks: local library (19 queries), web (11 queries) and OpenAlex (4), 9–12 Oct 2026
@@ -170,12 +169,10 @@ code/                Python package uwofdm (motion, IMU model, OFDM, Doppler war
 ```
 
 ## Status
-- **12–13 Oct 2026:** contribution switched to estimation; gap check done (G1–G2 open in UWA); Lee et al. 2026 read;
-  README, PLAN and deck rewritten. E1 (side information, header) and E2 (end-to-end chain, Kalman fusion, per-path
-  cancellation) built and compared with Li/Lee, Cho–Kim, a signal-only Kalman, Tu-like multi-branch and a
-  signal-only cancellation, in SINR and coded PER, single path and Bellhop multipath (results above).
-  Running: high-statistics runs for the figures (`code/scripts/paper_stats.py`). Next: paper skeleton and figure
-  scripts; closed form for side-information bits (T2); DESERT decisions.
+- **12 Oct 2026 (evening):** fair signal-only baselines built (tuned Kalman, partial FFT, ICI-aware, pilot tracking,
+  numerology); realistic IMU model; sparse channel estimate (removed a 4 dB loss); T2 and T3; Phase 4 complete; the
+  single-path sensor gain vanished against the fair baselines. Reruns (PER, sea states, numerology, multipath) on
+  hold until the framing decision. Experiments run in tmux (`code/run_job.sh`). Study guide: [`STUDY_GUIDE.md`](STUDY_GUIDE.md).
 - **Done before (9–11 Oct, compensation phase, all reusable):** Phase 0 on real buoy motion; models (motion, IMU,
   OFDM, wideband Doppler, multipath, Bellhop with surface loss and scattered power); closed forms from estimation
   error to interference, validated; placement evaluator and maps; three link scenarios, sweeps and robustness checks.

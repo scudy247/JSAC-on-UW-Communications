@@ -100,7 +100,7 @@ and the receiver's estimate budget?
 
 ---
 
-## Phase 4 — E1: Doppler side information 🔄 (T2)
+## Phase 4 — E1: Doppler side information ✅ (T2 done 12 Oct; optional: coherent header for multipath)
 **Question.** What should the transmitter send about its own motion, in how many bits, to reach a target accuracy;
 how does the receiver read it before it knows the Doppler; how does sending compare with applying (pre-compensation)?
 
@@ -118,7 +118,7 @@ of the scenarios.
 
 ---
 
-## Phase 5 — E2: end-to-end chain and fusion ▶️ (T3, main result)
+## Phase 5 — E2: end-to-end chain and fusion ▶️ (fair baselines, acquisition, T3 bound done 12 Oct; single-path gain ~0; framing decision pending)
 **Question.** How much better, cheaper or more robust is a receiver that fuses side information, its own IMU and the
 signal than one that uses the signal alone?
 
