@@ -106,3 +106,15 @@ def test_mean_scale_unbiased_under_acceleration():
     n_post, _ = estimators.detect_chirp(y, F, int(n_pre + 0.99 * F.gap), int(n_pre + 1.01 * F.gap))
     true_mean = (1.0 + 0.4 * F.gap / 2 / F.o.fs) / 1500.0
     assert abs(estimators.scale_pre_post(n_pre, n_post, F.gap) - true_mean) < 1e-5  # single up-chirp: 3.6e-5
+
+
+def test_detect_refinement_stays_within_half_a_sample():
+    """estimators.detect: the parabolic refinement is clamped to +-0.5 sample (a near-flat peak at low SNR once moved
+    the preamble position past the end of the signal)."""
+    from uwofdm import estimators
+    ref = np.ones(8, complex)
+    y = np.zeros(64, complex)
+    y[20:28] = 1.0
+    y[19] = y[28] = 0.999999  # nearly flat top: tiny parabola curvature
+    pos, _ = estimators.detect(y, ref, first_path=None)
+    assert 18.5 <= pos <= 21.5

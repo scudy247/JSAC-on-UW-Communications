@@ -37,6 +37,7 @@ def detect(y, ref, start=0, stop=None, first_path=FIRST_PATH):
         l, c, r = a[i - 1], a[i], a[i + 1]
         den = l - 2 * c + r
         d = 0.5 * (l - r) / den if den != 0 else 0.0
+        d = float(np.clip(d, -0.5, 0.5))  # a near-flat noise peak (den ~ 0) once threw the position past the signal
     return max(start, 0) + i + d, float(a[i] / np.linalg.norm(ref) ** 2)
 
 
