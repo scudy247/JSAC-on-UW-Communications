@@ -1,0 +1,134 @@
+{
+ "n_packets": 200,
+ "wrong_threshold": 0.0001,
+ "rows": [
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 7,
+   "prior_sigma": {
+    "industrial": 9.0499445627541e-05,
+    "old": 2e-05
+   },
+   "snr_db": -12,
+   "preamble_miss": 0.99,
+   "wrong_full": 1.0,
+   "wrong_prior_industrial": 1.0,
+   "wrong_prior_old": 0.5,
+   "lags_full": 253,
+   "lags_prior_industrial": 34,
+   "lags_prior_old": 12
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 7,
+   "prior_sigma": {
+    "industrial": 9.0499445627541e-05,
+    "old": 2e-05
+   },
+   "snr_db": -11,
+   "preamble_miss": 0.96,
+   "wrong_full": 0.625,
+   "wrong_prior_industrial": 0.125,
+   "wrong_prior_old": 0.125,
+   "lags_full": 253,
+   "lags_prior_industrial": 34,
+   "lags_prior_old": 12
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 7,
+   "prior_sigma": {
+    "industrial": 9.0499445627541e-05,
+    "old": 2e-05
+   },
+   "snr_db": -10,
+   "preamble_miss": 0.845,
+   "wrong_full": 0.5806451612903226,
+   "wrong_prior_industrial": 0.16129032258064516,
+   "wrong_prior_old": 0.0967741935483871,
+   "lags_full": 253,
+   "lags_prior_industrial": 34,
+   "lags_prior_old": 12
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 7,
+   "prior_sigma": {
+    "industrial": 9.0499445627541e-05,
+    "old": 2e-05
+   },
+   "snr_db": -9,
+   "preamble_miss": 0.63,
+   "wrong_full": 0.25675675675675674,
+   "wrong_prior_industrial": 0.10810810810810811,
+   "wrong_prior_old": 0.10810810810810811,
+   "lags_full": 253,
+   "lags_prior_industrial": 34,
+   "lags_prior_old": 12
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 7,
+   "prior_sigma": {
+    "industrial": 9.0499445627541e-05,
+    "old": 2e-05
+   },
+   "snr_db": -8,
+   "preamble_miss": 0.35,
+   "wrong_full": 0.1076923076923077,
+   "wrong_prior_industrial": 0.038461538461538464,
+   "wrong_prior_old": 0.038461538461538464,
+   "lags_full": 253,
+   "lags_prior_industrial": 34,
+   "lags_prior_old": 12
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 7,
+   "prior_sigma": {
+    "industrial": 9.0499445627541e-05,
+    "old": 2e-05
+   },
+   "snr_db": -7,
+   "preamble_miss": 0.15,
+   "wrong_full": 0.041176470588235294,
+   "wrong_prior_industrial": 0.01764705882352941,
+   "wrong_prior_old": 0.011764705882352941,
+   "lags_full": 253,
+   "lags_prior_industrial": 34,
+   "lags_prior_old": 12
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 7,
+   "prior_sigma": {
+    "industrial": 9.0499445627541e-05,
+    "old": 2e-05
+   },
+   "snr_db": -6,
+   "preamble_miss": 0.005,
+   "wrong_full": 0.005025125628140704,
+   "wrong_prior_industrial": 0.005025125628140704,
+   "wrong_prior_old": 0.005025125628140704,
+   "lags_full": 253,
+   "lags_prior_industrial": 34,
+   "lags_prior_old": 12
+  },
+  {
+   "scenario": "buoy - buoy, OOI Irminger",
+   "n_data": 7,
+   "prior_sigma": {
+    "industrial": 9.0499445627541e-05,
+    "old": 2e-05
+   },
+   "snr_db": -4,
+   "preamble_miss": 0.0,
+   "wrong_full": 0.0,
+   "wrong_prior_industrial": 0.0,
+   "wrong_prior_old": 0.0,
+   "lags_full": 253,
+   "lags_prior_industrial": 34,
+   "lags_prior_old": 12
+  }
+ ]
+}

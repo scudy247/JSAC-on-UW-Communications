@@ -650,3 +650,31 @@ packets (same packets for all; choice per packet f = fused, s = signal):
   rough sea and long packets, and there only in the tail (worst packets): +5.5 dB at the 10th percentile, +6 dB
   power average, 0 dB median.** Partial FFT closes the seabed and short-packet cases. The earlier +14.6 dB was
   against a weaker baseline on 20 packets. Claim to reframe: robustness / outage, not average SINR.
+
+## T3: Bayesian Cramer-Rao bound (12 Oct 2026; `bcrb.py`, `scripts/b7_bcrb.py`, `results/b7_bcrb/`)
+Linear-Gaussian model: residual Doppler on a 10 ms grid over the frame; prior covariance from the auto- and
+cross-correlations of up to 1 h of real motion (signal-only: the link Doppler; sensor-aided: the link Doppler
+conditioned on the sensor prior, side information + own IMU, grades old / industrial / consumer); measurements =
+per-symbol null-subcarrier offsets + postamble timing (+ pilot carrier-phase increments); bound = MMSE error
+covariance, mapped to interference as in the simulations. (First attempt with packet-wise sample covariances
+overfitted the 435 x 435 matrices and put consumer above industrial; prior from the error covariance alone was also
+wrong: it discards the motion statistics.) SIR bound at 30 dB, cfo+timing / +pilots:
+
+| Case | signal only | old IMU model | industrial MEMS | consumer MEMS | sensor prior alone (industrial) |
+|---|---|---|---|---|---|
+| buoy-buoy 1 s | 43.4 / 47.2 | 50.2 / 51.9 | 48.5 / 50.3 | 43.6 / 47.5 | 8.6 |
+| buoy-buoy 4 s | 43.5 / 47.8 | 50.2 / 52.7 | 49.4 / 52.2 | 43.9 / 48.8 | 9.3 |
+| seabed OOI 4 s | 44.9 / 48.3 | 51.4 / 54.0 | 49.7 / 52.6 | 45.4 / 49.4 | 13.8 |
+| seabed CDIP 1 s | 51.6 / 59.0 | 55.7 / 64.5 | 53.9 / 61.7 | 53.1 / 60.9 | 13.9 |
+
+- **In the linear regime every receiver could be noise-limited:** the signal-only bound is >= 43 dB SIR at 30 dB SNR,
+  so SINR ~ SNR. The sensor prior raises the bound by +5-7 dB (industrial), +0.2-1.5 (consumer) — invisible at
+  the noise level. The prior alone is far from enough (9-14 dB): sensors must be fused with the signal.
+- **The prior replaces pilot tracking:** industrial prior without pilot phases (48.5-49.7) >= signal-only with them
+  (47.2-48.3). Pilot count barely matters in the bound (31 vs 248 pilots: 0.2-0.7 dB on OOI).
+- **Reading with the simulations:** typical packets reach ~29.7-29.9 dB SINR at 30 dB (near the bound); the
+  simulated sensor gain lives in the tail of rough long packets, where signal-only receivers leave the linear regime
+  (ICI corrupts the very measurements, wrapping/ambiguities, wrong locks). The mean-square bound cannot see this;
+  the right theory for the claim is a threshold analysis (Ziv-Zakai bound, or the probability that the uncorrected
+  residual exceeds the measurement's linear range), where the sensor prior moves the receiver away from the
+  threshold. Next for T3.
