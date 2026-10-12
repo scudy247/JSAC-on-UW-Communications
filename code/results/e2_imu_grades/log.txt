@@ -1,0 +1,20 @@
+buoy -> seabed, CDIP swell    7 sym SNR 20: Li/Lee  19.8  signal Kalman  20.0 | fused: old  20.0  nav  20.0  industrial  20.0  consumer  19.9  nav_unaided  20.0  industrial_unaided  19.9
+buoy -> seabed, CDIP swell    7 sym SNR 30: Li/Lee  28.2  signal Kalman  29.9 | fused: old  30.0  nav  30.0  industrial  29.9  consumer  29.6  nav_unaided  29.9  industrial_unaided  29.6
+                             prior rms eps: old 7.0e-06  nav 6.3e-06  industrial 7.9e-05  consumer 1.9e-04  nav_unaided 5.3e-05  industrial_unaided 2.2e-04
+buoy -> seabed, CDIP swell   27 sym SNR 20: Li/Lee  18.9  signal Kalman  19.9 | fused: old  20.0  nav  20.0  industrial  20.0  consumer  19.9  nav_unaided  20.0  industrial_unaided  19.9
+buoy -> seabed, CDIP swell   27 sym SNR 30: Li/Lee  24.2  signal Kalman  29.8 | fused: old  30.0  nav  30.0  industrial  29.9  consumer  29.7  nav_unaided  29.9  industrial_unaided  29.6
+                             prior rms eps: old 1.8e-05  nav 1.8e-05  industrial 7.2e-05  consumer 1.5e-04  nav_unaided 6.0e-05  industrial_unaided 2.1e-04
+buoy -> seabed, OOI Irminger  7 sym SNR 20: Li/Lee  17.7  signal Kalman  19.9 | fused: old  20.0  nav  20.0  industrial  20.0  consumer  19.9  nav_unaided  20.0  industrial_unaided  18.9
+buoy -> seabed, OOI Irminger  7 sym SNR 30: Li/Lee  21.1  signal Kalman  29.6 | fused: old  29.9  nav  29.9  industrial  29.8  consumer  29.6  nav_unaided  29.8  industrial_unaided  24.6
+                             prior rms eps: old 9.8e-06  nav 1.1e-05  industrial 7.7e-05  consumer 1.2e-04  nav_unaided 5.0e-05  industrial_unaided 3.2e-04
+buoy -> seabed, OOI Irminger 27 sym SNR 20: Li/Lee  13.2  signal Kalman  19.8 | fused: old  19.9  nav  19.9  industrial  19.9  consumer  19.7  nav_unaided  19.9  industrial_unaided   8.2
+buoy -> seabed, OOI Irminger 27 sym SNR 30: Li/Lee  14.2  signal Kalman  28.3 | fused: old  29.8  nav  29.7  industrial  29.6  consumer  28.8  nav_unaided  29.7  industrial_unaided   9.7
+                             prior rms eps: old 5.4e-05  nav 5.5e-05  industrial 9.0e-05  consumer 1.8e-04  nav_unaided 8.2e-05  industrial_unaided 3.9e-04
+buoy - buoy, OOI Irminger     7 sym SNR 20: Li/Lee  15.3  signal Kalman  19.3 | fused: old  20.0  nav  20.0  industrial  19.9  consumer  18.6  nav_unaided  19.9  industrial_unaided  14.0
+buoy - buoy, OOI Irminger     7 sym SNR 30: Li/Lee  16.9  signal Kalman  25.9 | fused: old  29.8  nav  29.8  industrial  29.7  consumer  24.1  nav_unaided  29.7  industrial_unaided  15.3
+                             prior rms eps: old 1.2e-05  nav 1.0e-05  industrial 6.8e-05  consumer 2.0e-04  nav_unaided 8.4e-05  industrial_unaided 4.5e-04
+buoy - buoy, OOI Irminger    27 sym SNR 20: Li/Lee   8.7  signal Kalman  11.4 | fused: old  19.9  nav  19.9  industrial  19.9  consumer  17.9  nav_unaided  19.9  industrial_unaided   8.3
+buoy - buoy, OOI Irminger    27 sym SNR 30: Li/Lee   9.0  signal Kalman  12.0 | fused: old  29.7  nav  29.7  industrial  29.6  consumer  22.1  nav_unaided  29.5  industrial_unaided   8.9
+                             prior rms eps: old 4.4e-05  nav 4.3e-05  industrial 9.9e-05  consumer 2.5e-04  nav_unaided 1.0e-04  industrial_unaided 4.4e-04
+
+[exited with code 0]

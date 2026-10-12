@@ -571,3 +571,31 @@ support, per-symbol gains; taps kept while they remove more than 4x the noise en
   metric (`points.json`, E1, C1/C2) are not affected. The synthetic two-path test now decodes with a single
   resampling (7.5 dB SINR, was 5.5 dB and failed); cancellation still gains ≈ 20 dB (27.8 dB). Part of the
   "only cancellation decodes" result on real multipath may have come from the weak estimate: to recheck.
+
+## Realistic motion sensors (12 Oct 2026; `imu.py`, `scripts/e2_imu_grades.py`, `results/e2_imu_grades/`)
+The original IMU model (true velocity read 50 ms late, bridged with the true acceleration, + Gauss-Markov drift
+0.01 m/s, 20 s) has almost no error at wave frequencies. `imu.RealisticIMU` builds the estimate like a motion sensor:
+accelerometer white noise, bias instability, scale factor, attitude errors rotating the specific force (gravity leaks
+into the horizontal axes), complementary filter with GNSS (or DVL) velocity, or a 1st-order high-pass without aiding;
+IMU-to-modem timing error; lever-arm length error and gyro noise. Grades nav / industrial / consumer (representative
+class values, to check against datasheets), each with and without aiding.
+- Wave-band (> 0.04 Hz) velocity error, OOI Irminger: old model 0.005 m/s; nav 0.005-0.006 (horizontal) / 0.003
+  (vertical); industrial 0.05 / 0.008; consumer 0.20 / 0.025; unaided: nav 0.03-0.05, industrial 0.07-0.10 / 0.10.
+  The old model was in effect a GNSS-aided navigation-grade sensor. Tilt leakage dominates, on the horizontal axes,
+  which carry the Doppler of near-horizontal links.
+- Chain (32-bit side information, Kalman fusion, 20 packets, same packets and noise for every grade), SINR at 30 dB:
+
+| Link, packet | Li/Lee | signal Kalman | old | nav | industrial | consumer | nav unaided | industrial unaided |
+|---|---|---|---|---|---|---|---|---|
+| seabed CDIP, 1 / 4 s | 28.2 / 24.2 | 29.9 / 29.8 | 30.0 / 30.0 | 30.0 / 30.0 | 29.9 / 29.9 | 29.6 / 29.7 | 29.9 / 29.9 | 29.6 / 29.6 |
+| seabed OOI, 1 / 4 s | 21.1 / 14.2 | 29.6 / 28.3 | 29.9 / 29.8 | 29.9 / 29.7 | 29.8 / 29.6 | 29.6 / 28.8 | 29.8 / 29.7 | 24.6 / 9.7 |
+| buoy-buoy OOI, 1 / 4 s | 16.9 / 9.0 | 25.9 / 12.0 | 29.8 / 29.7 | 29.8 / 29.7 | 29.7 / 29.6 | 24.1 / 22.1 | 29.7 / 29.5 | 15.3 / 8.9 |
+
+  Prior rms Doppler error (buoy-buoy 4 s): old 4.4e-5, nav 4.3e-5, industrial 9.9e-5, consumer 2.5e-4, nav unaided
+  1.0e-4, industrial unaided 4.4e-4.
+- **The gain survives GNSS-aided industrial MEMS** (+17.6 dB over the best signal-only receiver on buoy-buoy 4 s,
+  although the prior is 2-6x worse than with the old model: fusion with the signal absorbs it); consumer grade keeps
+  +10 dB there but falls below signal-only on buoy-buoy 1 s (24.1 vs 25.9).
+- **Defect found: fusion can be much worse than signal-only** (industrial unaided: 8.9 vs 12.0, 9.7 vs 28.3 dB): the
+  prior error exceeds the fixed +-3e-4 residual window and the Kalman prior variance tuned for the old model; the
+  receiver trusts the prior blindly. Fix: prior-quality-aware fusion with a signal-only guard (next).
