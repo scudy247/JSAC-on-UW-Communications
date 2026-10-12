@@ -50,7 +50,7 @@ def receive_signal_only(y, F, search=(0, None), eps_max=3e-3, cfo=True, backoff=
     n_pre, _ = estimators.detect_chirp(y, F, *search)
     n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
     eps = estimators.scale_pre_post(n_pre, n_post, F.gap)
-    i0 = int(round(n_pre))
+    i0 = max(0, int(round(n_pre)))  # a wrong lock near the buffer start must not wrap around
     seg = y[i0:i0 + int(F.length * (1 + 2 * eps_max)) + 4096]
     z = unwarp(seg, o.fs, np.full(len(seg), eps), o.fc)
     Y, offs = _demod(z, F, cfo, backoff)
@@ -61,7 +61,7 @@ def receive_aided(y, F, prior, search=(0, None), eps_res_max=3e-4, prepost=True,
     """prior: Doppler trajectory for emitted samples 0 .. len(prior)-1 of the frame (side information + own IMU)."""
     o, c = F.o, F.chirp()
     n_pre, _ = estimators.detect_chirp(y, F, *search)
-    i0 = int(round(n_pre))
+    i0 = max(0, int(round(n_pre)))  # a wrong lock near the buffer start must not wrap around
     seg = y[i0:i0 + len(prior)]
     z = unwarp(seg, o.fs, prior[:len(seg)], o.fc)
     eps_r = 0.0
@@ -79,7 +79,7 @@ def read_header(y, F, rx_prior, alloc, search=(0, None), eps_max=3e-3, backoff=0
     symbol -> soft DBPSK bits -> CRC. Returns (ok, payload bits, info)."""
     o = F.o
     n_pre, _ = estimators.detect_chirp(y, F, *search)
-    i0 = int(round(n_pre))
+    i0 = max(0, int(round(n_pre)))  # a wrong lock near the buffer start must not wrap around
     seg = y[i0:i0 + len(rx_prior)]
     z = unwarp(seg, o.fs, rx_prior[:len(seg)], o.fc)
     m_pre, _ = estimators.detect_chirp(z, F, 0, 8)
@@ -140,10 +140,10 @@ def receive_signal_fused(y, F, search=(0, None), eps_max=3e-3, params=None, back
     n_pre, _ = estimators.detect_chirp(y, F, *search)
     n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
     eps = estimators.scale_pre_post(n_pre, n_post, F.gap)
-    i0 = int(round(n_pre))
+    i0 = max(0, int(round(n_pre)))  # a wrong lock near the buffer start must not wrap around
     prior = np.full(int(F.length * (1 + 2 * eps_max)) + 4096, eps)
     p = dict(SIGNAL_FUSION, **(params or {}))
-    Y, info = receive_fused(y[i0 - 64:], F, prior, (0, 200), eps_res_max=3e-4, params=p, backoff=backoff)
+    Y, info = receive_fused(y[max(0, i0 - 64):], F, prior, (0, 200), eps_res_max=3e-4, params=p, backoff=backoff)
     info.update(eps_mean=eps)
     return Y, info
 
@@ -161,7 +161,7 @@ def receive_fused(y, F, prior, search=(0, None), eps_res_max=3e-4, params=None, 
     p = dict(FUSION, **(params or {}))
     o, c = F.o, F.chirp()
     n_pre, _ = estimators.detect_chirp(y, F, *search)
-    i0 = int(round(n_pre))
+    i0 = max(0, int(round(n_pre)))  # a wrong lock near the buffer start must not wrap around
     seg = y[i0:i0 + len(prior)]
     z0 = unwarp(seg, o.fs, prior[:len(seg)], o.fc)
     m_pre, _ = estimators.detect_chirp(z0, F, 0, 8)
@@ -244,7 +244,7 @@ def receive_cho_kim(y, F, search=(0, None), eps_max=3e-3, rho_min=0.4, backoff=0
     n_pre, _ = estimators.detect_chirp(y, F, *search)
     n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
     eps = estimators.scale_pre_post(n_pre, n_post, F.gap)
-    i0 = int(round(n_pre))
+    i0 = max(0, int(round(n_pre)))  # a wrong lock near the buffer start must not wrap around
     seg = y[i0:i0 + int(F.length * (1 + 2 * eps_max)) + 4096]
     z0 = unwarp(seg, o.fs, np.full(len(seg), eps), o.fc)
     starts = [F.header_start] + [F.data_start + k * o.n_symbol for k in range(F.n_data)]
@@ -268,7 +268,7 @@ def receive_branches(y, F, trajectories, search=(0, None), backoff=0):
     corrections. Returns the list of branch outputs (combine with receiver.combine / decode_combined)."""
     o = F.o
     n_pre, _ = estimators.detect_chirp(y, F, *search)
-    i0 = int(round(n_pre))
+    i0 = max(0, int(round(n_pre)))  # a wrong lock near the buffer start must not wrap around
     out = []
     for tr in trajectories:
         seg = y[i0:i0 + len(tr)]
@@ -303,7 +303,7 @@ def receive_sic(y, F, trajectories, rel_delays, search=(0, None), iters=3, mod="
     from .waveform import warp_delayed
     o = F.o
     n_pre, _ = estimators.detect_chirp(y, F, *search)
-    i0 = int(round(n_pre))
+    i0 = max(0, int(round(n_pre)))  # a wrong lock near the buffer start must not wrap around
     n = min(len(trajectories[0]), len(y) - i0)
     seg = y[i0:i0 + n]
     common = 0.0
@@ -419,7 +419,7 @@ def refine_paths_by_search(y, F, trs, rel, search=(0, None), grid=np.linspace(-6
     o = F.o
     trs = [np.array(t, float) for t in trs]
     n_pre, _ = estimators.detect_chirp(y, F, *search)
-    i0 = int(round(n_pre))
+    i0 = max(0, int(round(n_pre)))  # a wrong lock near the buffer start must not wrap around
     n = min(len(trs[0]), len(y) - i0)
     seg = y[i0:i0 + n]
     a, b = F.header_start, F.post_start - F.n_guard
@@ -520,7 +520,7 @@ def receive_pfft(y, F, pilots, search=(0, None), front="kalman", n_seg=4, eps_ma
         n_pre, _ = estimators.detect_chirp(y, F, *search)
         n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
         eps = estimators.scale_pre_post(n_pre, n_post, F.gap)
-        i0 = int(round(n_pre))
+        i0 = max(0, int(round(n_pre)))  # a wrong lock near the buffer start must not wrap around
         seg = y[i0:i0 + int(F.length * (1 + 2 * eps_max)) + 4096]
         z, cfo = unwarp(seg, o.fs, np.full(len(seg), eps), o.fc), True
     return _demod_pfft(z, F, pilots, n_seg, cfo, backoff)
@@ -581,7 +581,7 @@ def receive_pilot_track(y, F, pilots, search=(0, None), eps_max=3e-3, params=Non
     n_pre, _ = estimators.detect_chirp(y, F, *search)
     n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
     eps = estimators.scale_pre_post(n_pre, n_post, F.gap)
-    i0 = int(round(n_pre))
+    i0 = max(0, int(round(n_pre)))  # a wrong lock near the buffer start must not wrap around
     seg = y[i0:i0 + int(F.length * (1 + 2 * eps_max)) + 4096]
     z = unwarp(seg, o.fs, np.full(len(seg), eps), o.fc)
     _, pil_mask = receiver.masks(F)
