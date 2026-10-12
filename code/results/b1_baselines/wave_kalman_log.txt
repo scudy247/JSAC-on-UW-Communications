@@ -1,0 +1,35 @@
+queued Mon Oct 12 02:31:06 PM UTC 2026
+started Mon Oct 12 02:31:06 PM UTC 2026
+buoy - buoy, OOI Irminger     7 sym SNR 20 pfft8_signal_wave      (power avg / median / p10)  19.5 /  19.6 /  19.5
+buoy - buoy, OOI Irminger     7 sym SNR 20 safe_industrial_wave   (power avg / median / p10)  19.9 /  19.9 /  19.8
+buoy - buoy, OOI Irminger     7 sym SNR 20 safe_old_wave          (power avg / median / p10)  19.9 /  19.9 /  19.8
+buoy - buoy, OOI Irminger     7 sym SNR 20 signal_wave            (power avg / median / p10)  19.7 /  19.8 /  19.5
+buoy - buoy, OOI Irminger     7 sym SNR 30 pfft8_signal_wave      (power avg / median / p10)  29.7 /  29.8 /  29.2
+buoy - buoy, OOI Irminger     7 sym SNR 30 safe_industrial_wave   (power avg / median / p10)  29.2 /  29.3 /  28.4
+buoy - buoy, OOI Irminger     7 sym SNR 30 safe_old_wave          (power avg / median / p10)  29.2 /  29.3 /  28.6
+buoy - buoy, OOI Irminger     7 sym SNR 30 signal_wave            (power avg / median / p10)  28.0 /  29.0 /  27.1
+buoy - buoy, OOI Irminger    27 sym SNR 20 pfft8_signal_wave      (power avg / median / p10)  19.5 /  19.6 /  19.4
+buoy - buoy, OOI Irminger    27 sym SNR 20 safe_industrial_wave   (power avg / median / p10)  19.0 /  19.4 /  18.5
+buoy - buoy, OOI Irminger    27 sym SNR 20 safe_old_wave          (power avg / median / p10)  18.9 /  19.4 /  17.7
+buoy - buoy, OOI Irminger    27 sym SNR 20 signal_wave            (power avg / median / p10)  18.8 /  19.4 /  17.3
+buoy - buoy, OOI Irminger    27 sym SNR 30 pfft8_signal_wave      (power avg / median / p10)  29.3 /  29.6 /  28.5
+buoy - buoy, OOI Irminger    27 sym SNR 30 safe_industrial_wave   (power avg / median / p10)  24.9 /  26.6 /  22.4
+buoy - buoy, OOI Irminger    27 sym SNR 30 safe_old_wave          (power avg / median / p10)  24.7 /  26.6 /  21.8
+buoy - buoy, OOI Irminger    27 sym SNR 30 signal_wave            (power avg / median / p10)  23.7 /  26.6 /  19.4
+buoy -> seabed, OOI Irminger 27 sym SNR 20 pfft8_signal_wave      (power avg / median / p10)  19.6 /  19.6 /  19.5
+buoy -> seabed, OOI Irminger 27 sym SNR 20 safe_industrial_wave   (power avg / median / p10)  19.6 /  19.8 /  19.3
+buoy -> seabed, OOI Irminger 27 sym SNR 20 safe_old_wave          (power avg / median / p10)  19.6 /  19.8 /  19.3
+buoy -> seabed, OOI Irminger 27 sym SNR 20 signal_wave            (power avg / median / p10)  19.6 /  19.8 /  19.3
+buoy -> seabed, OOI Irminger 27 sym SNR 30 pfft8_signal_wave      (power avg / median / p10)  29.7 /  29.8 /  29.6
+buoy -> seabed, OOI Irminger 27 sym SNR 30 safe_industrial_wave   (power avg / median / p10)  27.4 /  28.1 /  25.6
+buoy -> seabed, OOI Irminger 27 sym SNR 30 safe_old_wave          (power avg / median / p10)  27.4 /  28.1 /  25.6
+buoy -> seabed, OOI Irminger 27 sym SNR 30 signal_wave            (power avg / median / p10)  27.4 /  28.1 /  25.6
+buoy -> seabed, CDIP swell    7 sym SNR 20 pfft8_signal_wave      (power avg / median / p10)  19.6 /  19.6 /  19.5
+buoy -> seabed, CDIP swell    7 sym SNR 20 safe_industrial_wave   (power avg / median / p10)  20.0 /  20.0 /  19.9
+buoy -> seabed, CDIP swell    7 sym SNR 20 safe_old_wave          (power avg / median / p10)  20.0 /  20.0 /  20.0
+buoy -> seabed, CDIP swell    7 sym SNR 20 signal_wave            (power avg / median / p10)  19.6 /  19.8 /  19.1
+buoy -> seabed, CDIP swell    7 sym SNR 30 pfft8_signal_wave      (power avg / median / p10)  29.8 /  29.8 /  29.7
+buoy -> seabed, CDIP swell    7 sym SNR 30 safe_industrial_wave   (power avg / median / p10)  29.9 /  29.9 /  29.7
+buoy -> seabed, CDIP swell    7 sym SNR 30 safe_old_wave          (power avg / median / p10)  29.9 /  29.9 /  29.8
+buoy -> seabed, CDIP swell    7 sym SNR 30 signal_wave            (power avg / median / p10)  28.9 /  29.4 /  27.5
+exit 0 Mon Oct 12 02:35:54 PM UTC 2026

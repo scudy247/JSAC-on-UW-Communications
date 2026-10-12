@@ -717,3 +717,28 @@ industrial 9 / 6 / 4 / 1%); buoy-buoy 1 s smaller gains. Search cost: 829 -> 98 
   the +-0.5-1 deg cancellation tolerance) but delay 11.21 vs 10.71 ms (delays must come from the signal); a wrong
   profile (summer assumed, isovelocity true) predicts one path instead of two.
 - Not yet evaluated end to end (multipath reruns on hold, PLAN.md "Decision pending").
+
+## Baseline comparison rerun with the +-4 CFO search (12 Oct 2026; `results/b1_baselines/compare.json`)
+Same 30 packets per case as before (old run kept as `compare_span2.json`). Power average / median / 10th percentile
+SINR at 30 dB:
+
+| Case | signal Kalman | signal Kalman + pFFT-8 | sensor fusion, industrial | + pFFT-8 |
+|---|---|---|---|---|
+| buoy-buoy OOI 1 s | 29.1 / 29.4 / 28.3 | 29.8 / 29.9 / 29.6 | 29.7 / 29.8 / 29.4 | 29.8 / 29.9 / 29.6 |
+| buoy-buoy OOI 4 s | 26.1 / 27.8 / 24.1 | 29.6 / 29.7 / 29.4 | 29.6 / 29.6 / 29.3 | 29.8 / 29.8 / 29.5 |
+| seabed OOI 4 s | 28.2 / 28.2 / 27.1 | 29.8 / 29.8 / 29.7 | 29.7 / 29.7 / 29.5 | 29.8 / 29.9 / 29.7 |
+| seabed CDIP 1 s | 29.9 / 29.9 / 29.8 | 29.9 / 29.9 / 29.8 | 29.9 / 29.9 / 29.8 | 29.9 / 29.9 / 29.8 |
+
+At 20 dB, buoy-buoy 4 s: signal Kalman + pFFT-8 19.6 / 19.6 / 19.5, sensor fusion 19.9 / 19.9 / 19.9.
+**With fair signal-only baselines the single-path SINR gain of sensor fusion is 0-0.3 dB, also in the tail.** The
+sensor receiver reaches it without partial FFT; the signal-only one needs Kalman + partial FFT. Reruns on hold
+(PLAN.md, "Decision pending").
+
+## Wave-state Kalman model on real motion (12 Oct 2026; `scripts/b9_wave_kalman.py`) — negative result
+Same packets. SINR at 30 dB, power avg / median / p10 (random-walk smoother in brackets, power avg): signal-only
+buoy-buoy 4 s 23.7 / 26.6 / 19.4 (26.1); + pFFT-8 29.3 / 29.6 / 28.5 (29.6); sensor fusion industrial 24.9 / 26.6 /
+22.4 (29.6); seabed OOI 4 s signal 27.4 (28.2), sensor 27.4 (29.7); buoy-buoy 1 s signal 28.0 (29.1), sensor 29.2
+(29.7). **The single-oscillator wave model is worse than the tuned random-walk smoother everywhere** (up to -4.7 dB
+for sensor fusion on buoy-buoy 4 s). Likely cause: one oscillator with the half-power bandwidth of the spectral peak
+is too rigid for broad-band residuals (several wave components, the sensor residual is not wave-shaped). Not pursued:
+the tuned random walk stays the default; a multi-oscillator model is possible but has no remaining gain to recover.
