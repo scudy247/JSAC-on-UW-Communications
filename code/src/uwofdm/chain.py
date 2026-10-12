@@ -514,3 +514,40 @@ def receive_pfft(y, F, pilots, search=(0, None), front="kalman", n_seg=4, eps_ma
         seg = y[i0:i0 + int(F.length * (1 + 2 * eps_max)) + 4096]
         z, cfo = unwarp(seg, o.fs, np.full(len(seg), eps), o.fc), True
     return _demod_pfft(z, F, pilots, n_seg, cfo, backoff)
+
+
+_LEAK = {}
+
+
+def _demod_ici(z, F, pilots, n_seg=8, iters=2, backoff=0):
+    """ICI-aware equalisation (ici.py) of a resampled frame z: first decisions from partial-FFT demodulation, then
+    per symbol `iters` rounds of per-segment sparse taps (least squares on pilots + decisions) and joint MMSE over the
+    active band. pilots: (n_data, n_sc) with the pilot symbols in place. Returns equalised symbols (unit channel)."""
+    from . import ici, receiver
+    o = F.o
+    Z, inf = _demod_pfft(z, F, pilots, n_seg, False, backoff)
+    S = inf.get("support")
+    if not S:
+        return Z, dict(inf, ici=False)
+    _, act, _, A_a = receiver._dictionary(o)
+    key = (o.n_sc, o.n_fft, n_seg)
+    if key not in _LEAK:
+        _LEAK[key] = ici.leakage(o, n_seg, o.bins()[act])
+    C = _LEAK[key]
+    A = A_a[:, S]
+    _, pil_mask = receiver.masks(F)
+    pm, nm = pil_mask[act], F.nulls[act]
+    data = F.used[act] & ~pm
+    Hz, _ = receiver.channel_estimates(Z, F, P=pilots[:, pil_mask])
+    out = np.zeros((F.n_data, o.n_sc), complex)
+    for k in range(F.n_data):
+        a = F.data_start + k * o.n_symbol + o.n_cp - backoff
+        seg = z[a:a + o.n_fft]
+        if len(seg) < o.n_fft:
+            seg = np.pad(seg, (0, o.n_fft - len(seg)))
+        Y = (np.fft.fft(seg)[o.bins()] * np.sqrt(o.n_sc) / o.n_fft)[act]
+        X0 = np.where(np.abs(Hz[k, act]) > 1e-12, Z[k, act] / np.where(Hz[k, act] == 0, 1, Hz[k, act]), 0)
+        X0[pm] = pilots[k, act][pm]
+        X0[nm] = 0
+        out[k, act] = ici.equalise_symbol(Y, X0, C, A, data, pm, nm, iters=iters)
+    return out, dict(inf, ici=True)

@@ -35,13 +35,18 @@ N_SEG = (4, 8)
 
 def run_case(label, n_data, n, seed, sk_params):
     tx_track, rx_track = SCENARIOS[label]()
+    return run_link(tx_track, rx_track, n_data, n, seed, sk_params)
+
+
+def run_link(tx_track, rx_track, n_data, n, seed, sk_params, grades=GRADES, n_seg=N_SEG, snrs=SNRS_DB):
+    """Per-packet SINR of every receiver on one link (tracks), n packets; returns {(snr, receiver): stats}."""
     d = motion.link_doppler(tx_track, rx_track)
     F = frame.Frame(n_data=n_data)
     o = F.o
     T = F.length / o.fs
     nodes = {g: (node(tx_track, d["u"], +1, 0.0, g, seed + 1), node(rx_track, d["u"], -1, d["tau"], g, seed + 2))
-             for g in GRADES}
-    ranges, alloc = allocation(F, nodes["old"][0], tx_track.fs, budgets=(32,))
+             for g in grades}
+    ranges, alloc = allocation(F, nodes[grades[0]][0], tx_track.fs, budgets=(32,))
     a = alloc[(32, "none")]
     rng = np.random.default_rng(seed)
     per = {}
@@ -60,19 +65,19 @@ def run_case(label, n_data, n, seed, sk_params):
             c = sideinfo.project(tx.estimate(te[:F.length], SIGMA_IMU), te[:F.length] - t0, T, 24)
             priors[g] = sideinfo.reconstruct(sideinfo.quantise_alloc(c, a, ranges), np.minimum(te - t0, T), T) \
                 + rx.estimate(te, SIGMA_IMU)
-        for snr in SNRS_DB:
+        for snr in snrs:
             sig = np.sqrt(4.0 / 10 ** (snr / 10) / 2)
             y = y0 + sig * (rp.standard_normal(len(y0)) + 1j * rp.standard_normal(len(y0)))
             search = (0, lead + 1500)
             out = {"lilee": chain.receive_signal_only(y, F, search)[0]}
             Ys, inf = chain.receive_signal_fused(y, F, search, params=sk_params)
             out["signal_kalman"] = Ys
-            for P in N_SEG:
+            for P in n_seg:
                 out[f"pfft{P}_kalman"] = chain._demod_pfft(inf["z"], F, X, P)[0]
             for g, pr in priors.items():
                 Yf, inf_f = chain.receive_fused_safe(y, F, pr, search)
                 out[f"safe_{g}"] = Yf
-                for P in N_SEG:
+                for P in n_seg:
                     out[f"safe_{g}_pfft{P}"] = chain._demod_pfft(inf_f["z"], F, X, P)[0]
             for k, Y in out.items():
                 per.setdefault((snr, k), []).append(genie_powers(Y, X, F.used))

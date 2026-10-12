@@ -629,3 +629,9 @@ packets (same packets for all; choice per packet f = fused, s = signal):
 - **Statistics warning:** power-averaged SINR over 8-20 packets is dominated by the worst packets: the signal-only
   Kalman on buoy-buoy 4 s gave 12-13.5 dB on the packet sets of e2_chain / e2_imu_grades and ~24 dB on the sweep's
   8 packets. Large SINR gains must be re-measured with more packets and reported with median and percentiles.
+- **ICI-aware equaliser** (`ici.py`, `chain._demod_ici`: per-segment sparse taps from pilots + decisions, joint MMSE
+  over the active band, initialised by partial FFT): synthetic, signal Kalman / pFFT-8 / ICI-aware: no fast part
+  36.2 / 39.7 / 39.6; fast 3e-4 at 40 dB 29.1 / 37.9 / 37.0, at 30 dB 26.7 / 29.6 / 29.9; fast 6e-4 at 40 dB
+  23.8 / 34.9 / 33.5 (16 segments: pFFT 36.3, ICI-aware 34.7; 4 iterations no better). Gains much over the
+  Kalman alone but stays ~1.4 dB below partial FFT: **partial FFT is the strongest signal-only baseline we have**;
+  ICI-aware receivers with per-path Doppler or polynomial bases (literature) are not implemented.

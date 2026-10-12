@@ -13,3 +13,6 @@ project_idea/**/*.snm
 project_idea/**/*.toc
 project_idea/**/*.vrb
 project_idea/**/*.synctex.gz
+
+# job logs (tmux runs, code/run_job.sh)
+code/results/logs/
