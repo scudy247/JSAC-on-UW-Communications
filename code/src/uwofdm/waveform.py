@@ -75,6 +75,15 @@ def warp(s, fs, eps, fc):
     return resample_at(s, n + phi * fs) * np.exp(2j * np.pi * fc * phi)
 
 
+def warp_delayed(s, fs, eps, fc, delay):
+    """warp of s delayed by `delay` seconds (fractional: band-limited interpolation), i.e. y(n) = s(n + phi(n) fs -
+    delay fs) exp(j 2 pi fc phi(n)); the carrier phase of the delay is left to the path gain. Equals warp of a
+    zero-padded s when delay fs is an integer."""
+    phi = phase_track(eps, fs)
+    n = np.arange(len(eps))
+    return resample_at(s, n + phi * fs - delay * fs) * np.exp(2j * np.pi * fc * phi)
+
+
 def unwarp(y, fs, eps, fc):
     """Inverse of `warp` for the trajectory eps: returns z with warp(z, fs, eps, fc) ~ y. Used for transmit-side
     pre-compensation (z is sent) and for receiver compensation (z is demodulated)."""

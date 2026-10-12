@@ -14,18 +14,19 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from .waveform import warp
+from .waveform import warp, warp_delayed
 
 
 @dataclass
 class Path:
     delay: float  # [s], relative to the first arrival
-    gain: complex
+    gain: object  # complex, or one value per output sample (fading within the packet)
     delta_eps: object = 0.0  # path-specific Doppler offset: constant, or one value per output sample
 
 
 def apply(s, fs, fc, eps_bulk, paths, extra=0):
-    """Received baseband: sum over paths of warp(delayed s, eps_bulk + delta_p) * gain. The output has
+    """Received baseband: sum over paths of warp(delayed s, eps_bulk + delta_p) * gain, delays fractional (before
+    12 Oct 2026 they were rounded to whole samples, which flattered per-path cancellation). The output has
     len(s) + extra samples (room for the longest delay and compression); eps_bulk per output sample, or scalar."""
     n = len(s) + extra
     eps_bulk = np.broadcast_to(np.asarray(eps_bulk, float), (n,)) if np.ndim(eps_bulk) == 0 else \
@@ -33,9 +34,9 @@ def apply(s, fs, fc, eps_bulk, paths, extra=0):
     s_pad = np.pad(s, (0, extra))
     y = np.zeros(n, complex)
     for p in paths:
-        shift = int(round(p.delay * fs))
-        sp = np.concatenate([np.zeros(shift, complex), s_pad])[:n]
-        y += p.gain * warp(sp, fs, eps_bulk + p.delta_eps, fc)
+        g = p.gain if np.ndim(p.gain) == 0 else np.pad(np.asarray(p.gain, complex), (0, max(0, n - len(p.gain))),
+                                                         mode="edge")[:n]
+        y += g * warp_delayed(s_pad, fs, eps_bulk + p.delta_eps, fc, p.delay)  # fractional delays (12 Oct 2026)
     return y
 
 

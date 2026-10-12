@@ -295,7 +295,7 @@ def receive_sic(y, F, trajectories, rel_delays, search=(0, None), iters=3, mod="
     from path 0 alone locked in at 9 bit errors on a two-path test, from the combined branches they keep improving),
     "hard", or a callable branches -> X. Returns (branches, info); decode with receiver.decode_combined."""
     from .receiver import build_data, combine, decode_combined, hard_decisions
-    from .waveform import warp
+    from .waveform import warp_delayed
     o = F.o
     n_pre, _ = estimators.detect_chirp(y, F, *search)
     i0 = int(round(n_pre))
@@ -321,11 +321,7 @@ def receive_sic(y, F, trajectories, rel_delays, search=(0, None), iters=3, mod="
             Xh = decisions(branches)
         s_hat = F.build(np.zeros((F.n_header, o.n_sc), complex), Xh)
         s_hat = np.pad(s_hat, (0, max(0, n - len(s_hat))))[:n]
-        regen = []
-        for tr, d in zip(trajectories, rel_delays):
-            k = int(round(d * o.fs))
-            sp = np.concatenate([np.zeros(k, complex), s_hat])[:n]
-            regen.append(warp(sp, o.fs, tr[:n], o.fc))
+        regen = [warp_delayed(s_hat, o.fs, tr[:n], o.fc, d) for tr, d in zip(trajectories, rel_delays)]
         A = np.stack([r[a:b] for r in regen], axis=1)
         gains = np.linalg.lstsq(A, seg[a:b], rcond=None)[0]
         branches, cleaned = [], []
@@ -414,7 +410,7 @@ def refine_paths_by_search(y, F, trs, rel, search=(0, None), grid=np.linspace(-6
     fresh decisions. Used by the signal-only cancellation (wide grid around chirp estimates) and, around a sensor
     prediction with a narrow grid, to absorb path-angle errors."""
     from .receiver import build_data, decode_combined
-    from .waveform import warp
+    from .waveform import warp_delayed
     o = F.o
     trs = [np.array(t, float) for t in trs]
     n_pre, _ = estimators.detect_chirp(y, F, *search)
@@ -427,12 +423,11 @@ def refine_paths_by_search(y, F, trs, rel, search=(0, None), grid=np.linspace(-6
         Xh = build_data(decode_combined(br, F, mod), F, mod)
         s_hat = F.build(np.zeros((F.n_header, o.n_sc), complex), Xh)
         s_hat = np.pad(s_hat, (0, max(0, n - len(s_hat))))[:n]
-        shifted = [np.concatenate([np.zeros(int(round(d * o.fs)), complex), s_hat])[:n] for d in rel]
-        regen = [warp(sp, o.fs, tr[:n], o.fc) for sp, tr in zip(shifted, trs)]
+        regen = [warp_delayed(s_hat, o.fs, tr[:n], o.fc, d) for tr, d in zip(trs, rel)]
         for p in range(len(trs)):
             best = None
             for dlt in grid:
-                cand = warp(shifted[p], o.fs, trs[p][:n] + dlt, o.fc)
+                cand = warp_delayed(s_hat, o.fs, trs[p][:n] + dlt, o.fc, rel[p])
                 res = _fit_residual(seg, regen[:p] + [cand] + regen[p + 1:], a, b)
                 if best is None or res < best[0]:
                     best = (res, dlt, cand)

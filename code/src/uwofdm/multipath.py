@@ -22,6 +22,32 @@ from .channel import Path
 from .experiment import at_times
 
 
+# Downward-refracting summer profile for a 100 m shelf (warm mixed layer over a thermocline), [(depth m, c m/s)]
+SUMMER_SSP = [(0.0, 1515.0), (15.0, 1514.0), (30.0, 1500.0), (50.0, 1494.0), (100.0, 1492.0)]
+
+
+def ssp_to_depth(ssp, depth):
+    """The profile cut or extended (last speed held) to end exactly at the water depth (Bellhop requires it)."""
+    if ssp is None:
+        return None
+    z = np.array([p[0] for p in ssp], float)
+    c = np.array([p[1] for p in ssp], float)
+    keep = [(float(zi), float(ci)) for zi, ci in zip(z, c) if zi < depth]
+    return keep + [(float(depth), float(np.interp(depth, z, c)))]
+
+
+def nominal_angles(geometry, ssp=None, min_rel_db=-20.0, surface_rms=None):
+    """Path (departure, arrival) angles and relative delays a receiver would predict from its own Bellhop run on a
+    nominal geometry / profile (which may differ from the true one): list of (src_deg, rcv_deg, rel_delay_s),
+    strongest paths within min_rel_db, sorted by delay."""
+    kw = {} if ssp is None else dict(ssp=ssp_to_depth(ssp, geometry[3]))
+    arr = bellhop.merge(bellhop.arrivals(*geometry, surface_rms=surface_rms, **kw))
+    p = np.array([abs(a.amp) ** 2 for a in arr])
+    keep = sorted([a for a, pp in zip(arr, p) if 10 * np.log10(pp / p.max()) >= min_rel_db], key=lambda a: a.delay)
+    t0 = keep[0].delay
+    return [(a.src_angle_deg, a.rcv_angle_deg, a.delay - t0) for a in keep]
+
+
 def _directions(u, theta_deg):
     """Unit propagation direction for a declination theta (positive down) along the horizontal direction of u."""
     uh = np.array([u[0], u[1], 0.0])
@@ -41,16 +67,22 @@ class LinkMultipath:
     """Bellhop paths of one link, fixed for a run; build(tg, rng) gives the bulk Doppler and the paths of one packet."""
 
     def __init__(self, tx, rx, geometry, surface_rms, w_record, fs_record, rho_db=None, n_scatter=24,
-                 min_rel_db=-20.0, seed=0):
+                 min_rel_db=-20.0, seed=0, ssp=None, cluster=None):
         """geometry: (range [m], tx depth, rx depth, water depth) for Bellhop; w_record: vertical velocity of the sea
-        surface (e.g. the buoy's heave velocity) at fs_record, for the scattered paths."""
+        surface (e.g. the buoy's heave velocity) at fs_record, for the scattered paths. ssp: sound-speed profile
+        [(z, c)] (None: isovelocity; SUMMER_SSP: downward refracting). cluster: (n_sub, angle_spread_deg,
+        delay_spread_s) splits every coherent path into n_sub sub-paths with random angle and delay offsets and
+        complex Gaussian gains drawn per packet: each path then fades and has its own Doppler spread within the
+        packet (micro-multipath from small-scale roughness and bathymetry); None: one frozen ray per path."""
         self.tx, self.rx = tx, rx
         d = motion.link_doppler(tx, rx)
         self.u, self.tau = d["u"], d["tau"]
-        rough = bellhop.merge(bellhop.arrivals(*geometry, surface_rms=surface_rms))
+        kw = {} if ssp is None else dict(ssp=ssp_to_depth(ssp, geometry[3]))
+        rough = bellhop.merge(bellhop.arrivals(*geometry, surface_rms=surface_rms, **kw))
         p = np.array([abs(a.amp) ** 2 for a in rough])
         self.coh = [a for a, pp in zip(rough, p) if 10 * np.log10(pp / p.max()) >= min_rel_db]
-        smooth = bellhop.merge(bellhop.arrivals(*geometry))
+        self.cluster = cluster
+        smooth = bellhop.merge(bellhop.arrivals(*geometry, **kw))
         self.surf = [a for a in smooth if a.n_top > 0]
         self.rho_db, self.n_scatter = rho_db, n_scatter
         self.w, self.fs_w = np.asarray(w_record, float), fs_record
@@ -63,7 +95,17 @@ class LinkMultipath:
         g = g / np.sqrt(np.sum(np.abs(g) ** 2))
         ref = int(np.argmax(np.abs(g)))
         bulk = eps[ref]
-        paths = [Path(a.delay - t0, gk, e - bulk) for a, gk, e in zip(self.coh, g, eps)]
+        if self.cluster is None:
+            paths = [Path(a.delay - t0, gk, e - bulk) for a, gk, e in zip(self.coh, g, eps)]
+        else:
+            n_sub, ang, dly = self.cluster
+            paths = []
+            for a, gk in zip(self.coh, g):
+                c = (rng.standard_normal(n_sub) + 1j * rng.standard_normal(n_sub)) / np.sqrt(2 * n_sub)
+                for j in range(n_sub):
+                    e = path_eps(self.tx, self.rx, self.u, self.tau, tg, a.src_angle_deg + ang * rng.standard_normal(),
+                                 a.rcv_angle_deg + ang * rng.standard_normal())
+                    paths.append(Path(max(0.0, a.delay - t0 + dly * rng.standard_normal()), gk * c[j], e - bulk))
         if self.rho_db is not None and self.surf:
             rho = 10 ** (self.rho_db / 10)
             ps = np.array([abs(a.amp) ** 2 for a in self.surf])

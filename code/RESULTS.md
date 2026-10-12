@@ -702,3 +702,18 @@ industrial 9 / 6 / 4 / 1%); buoy-buoy 1 s smaller gains. Search cost: 829 -> 98 
 - The prior cuts wrong postamble locks 3-10x and the search 8-30x, but preamble detection fails in the same SNR band,
   so packet acquisition improves by ~1 dB of SNR only (the preamble is detected without the prior). A Doppler-
   sensitive preamble (searched over a Doppler grid) would gain more; with chirps the gain is mostly computational.
+
+## Realistic multipath channel, code (12 Oct 2026; Phase 1; `waveform.warp_delayed`, `channel.py`, `multipath.py`)
+- **Fractional path delays** in the channel and in the cancellation's regeneration (both rounded to whole samples
+  before, which flattered per-path cancellation).
+- **Path clusters** (`LinkMultipath(cluster=(n_sub, angle_spread_deg, delay_spread_s))`): each Bellhop path becomes
+  n_sub sub-paths with random angle / delay offsets and complex Gaussian gains drawn per packet. With (5, 0.3 deg,
+  0.05 ms) on buoy-buoy OOI: path power varies ~2 dB (std) between packets; Doppler spread within the bottom-bounce
+  cluster ~3e-6 (~1.3 rad of relative phase over 4 s: fading within long packets).
+- **Sound-speed profile** option (`SUMMER_SSP`, downward refracting) and **receiver-side path prediction from a
+  nominal geometry** (`nominal_angles`). Buoy-buoy at 10 m depth: isovelocity gives direct + bottom bounce (10.2 deg,
+  10.71 ms); the summer profile with the measured surface roughness leaves a single coherent path (the two-path heave
+  problem disappears). Receiver errors of +3 m water depth and +2 % range: bottom-bounce angle 10.3 vs 10.2 deg (within
+  the +-0.5-1 deg cancellation tolerance) but delay 11.21 vs 10.71 ms (delays must come from the signal); a wrong
+  profile (summer assumed, isovelocity true) predicts one path instead of two.
+- Not yet evaluated end to end (multipath reruns on hold, PLAN.md "Decision pending").

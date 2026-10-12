@@ -167,6 +167,13 @@ MAC, multi-user hook, WOSS per-path step).
 
 ---
 
+## Decision pending (12 Oct 2026)
+With fair signal-only baselines (tuned Kalman, partial FFT, null-subcarrier search +-4) the single-path SINR gain of
+sensor fusion is ~0-0.3 dB even in the tail of rough, long packets (RESULTS.md, "Baseline comparison rerun"). Reruns of
+the high-statistics PER / multipath, sea-state, numerology and pilot-tracking runs are **on hold** until the group
+decides the framing: (a) cost / complexity and pilot overhead, (b) multipath per-path cancellation after making the
+channel realistic (Phase 1), (c) back to transmit-side / E3. Outputs obtained with the +-2 search are kept as *_span2.
+
 ## Timeline
 About 24 weeks from 12 Oct 2026 to 31 March 2027. Critical path: Phase 2 coded PER (needed to answer Lee et al.)
 → Phase 4 (E1) → Phase 5 (E2, main result) → Phase 8. Phase 3 is reframing only. Phases 6–7 alongside; if time runs

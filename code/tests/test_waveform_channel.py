@@ -128,3 +128,19 @@ def test_genie_matches_ici_closed_form():
         assert abs(10 * np.log10(sig / err) - theory.ici_sir_db(e ** 2, o.fc, o.n_fft / o.fs)) < 1.0
     sig, err = genie_powers(o.demodulate(np.roll(s, 7), 4), X, o.active)  # a timing offset is removed
     assert 10 * np.log10(sig / err) > 60
+
+
+def test_warp_delayed_matches_integer_shift_and_interpolates():
+    """waveform.warp_delayed: equals warp of a zero-padded signal for an integer delay; a half-sample delay lands
+    between the two integer neighbours (band-limited)."""
+    from uwofdm import waveform
+    rng = np.random.default_rng(0)
+    o = OFDM()
+    s = o.modulate(o.random_symbols(2, rng))
+    eps = np.full(len(s), 2e-4)
+    a = waveform.warp_delayed(s, o.fs, eps, o.fc, 7 / o.fs)
+    b = waveform.warp(np.concatenate([np.zeros(7, complex), s])[:len(s)], o.fs, eps, o.fc)
+    assert np.max(np.abs(a[64:-64] - b[64:-64])) < 1e-6
+    h = waveform.warp_delayed(s, o.fs, eps, o.fc, 7.5 / o.fs)
+    c = waveform.warp_delayed(s, o.fs, eps, o.fc, 8 / o.fs)
+    assert np.mean(np.abs(h - 0.5 * (a + c)) ** 2) < 0.05 * np.mean(np.abs(a) ** 2)
