@@ -175,7 +175,7 @@ def receive_fused(y, F, prior, search=(0, None), eps_res_max=3e-4, params=None, 
     z = unwarp(z0, o.fs, r_full, o.fc)
     Y, _ = _demod(z, F, cfo=False, backoff=backoff)
     return Y, dict(n_pre=n_pre, tau_post=tau_post, snr_est_db=10 * np.log10(np.mean(snrs)), r_hat=r_hat,
-                   r_std=r_std, t_grid=t_grid)
+                   r_std=r_std, t_grid=t_grid, z=z)
 
 
 def null_sinr(Y, F):
@@ -460,3 +460,55 @@ def receive_sensor_sic(y, F, trs, rel, search=(0, None), iters=3, mod="qpsk", ba
     if grid is not None and len(trs) > 1:
         trs = refine_paths_by_search(y, F, trs, rel, search, grid, passes, mod, backoff)
     return receive_sic(y, F, trs, rel, search, iters=iters, mod=mod, backoff=backoff)
+
+
+def _demod_pfft(z, F, pilots, n_seg=4, cfo=False, backoff=0):
+    """Data symbols of a resampled frame z by partial-FFT demodulation (pfft.py): optional per-symbol residual CFO
+    first, sparse delay support from the packet's ordinary FFT outputs (receiver.somp), then per-symbol segment
+    weights and taps by least squares on the pilots. pilots: (n_data, n_sc) with the pilot symbols in place."""
+    from . import pfft, receiver
+    o = F.o
+    _, pil_mask = receiver.masks(F)
+    pil_all, _, A_p, _ = receiver._dictionary(o)
+    sel = np.isin(pil_all, np.where(pil_mask)[0])
+    pil, A = pil_all[sel], A_p[sel]
+    segs, Y = [], np.empty((F.n_data, o.n_sc), complex)
+    for k in range(F.n_data):
+        a = F.data_start + k * o.n_symbol + o.n_cp - backoff
+        seg = z[a:a + o.n_fft]
+        if len(seg) < o.n_fft:
+            seg = np.pad(seg, (0, o.n_fft - len(seg)))
+        if cfo:
+            d = estimators.residual_cfo(seg, o, span=CFO_SPAN, n_grid=81, null_bins=F.null_bins())
+            seg = seg * np.exp(-2j * np.pi * d * np.arange(o.n_fft) / o.fs)
+        segs.append(seg)
+        Y[k] = np.fft.fft(seg)[o.bins()] * np.sqrt(o.n_sc) / o.n_fft
+    nv = float(np.mean(np.abs(Y[:, F.nulls]) ** 2))
+    S, _ = receiver.somp(Y[:, pil] / pilots[:, pil], max(nv, 1e-12), A)
+    if not S:
+        return Y, dict(weights=None)
+    Z, W = np.empty_like(Y), []
+    for k, seg in enumerate(segs):
+        Yp = pfft.segment_ffts(seg, o, n_seg)
+        w, _ = pfft.combine_weights(Yp, pilots[k, pil], pil, A[:, S])
+        Z[k] = w @ Yp
+        W.append(w)
+    return Z, dict(weights=np.array(W), support=S)
+
+
+def receive_pfft(y, F, pilots, search=(0, None), front="kalman", n_seg=4, eps_max=3e-3, backoff=0):
+    """Signal-only receiver with partial-FFT demodulation after a signal-only front end: front 'kalman' = the
+    resampling of the signal-only Kalman (receive_signal_fused); 'lilee' = Li et al. 2008 one scale per packet +
+    per-symbol residual CFO, as in Yerramalli et al. 2012 (resampling then partial FFT)."""
+    o = F.o
+    if front == "kalman":
+        _, info = receive_signal_fused(y, F, search, eps_max=eps_max, backoff=backoff)
+        z, cfo = info["z"], False
+    else:
+        n_pre, _ = estimators.detect_chirp(y, F, *search)
+        n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
+        eps = estimators.scale_pre_post(n_pre, n_post, F.gap)
+        i0 = int(round(n_pre))
+        seg = y[i0:i0 + int(F.length * (1 + 2 * eps_max)) + 4096]
+        z, cfo = unwarp(seg, o.fs, np.full(len(seg), eps), o.fc), True
+    return _demod_pfft(z, F, pilots, n_seg, cfo, backoff)
