@@ -777,3 +777,14 @@ Total-SIR loss vs in-sample, median / p90: class maximum 0.15 / 0.45 (1 s, none)
   12.7 dB loss) is the large OOI Irminger buoy on its moderate day, the only OOI buoy in a class of small CDIP
   Waveriders, whose class ranges clip its coefficients. Classes by Hs alone are not enough; per-platform classes, or
   a few bits per packet carrying a range scale, fix it.
+
+## Side information vs transmit-side pre-compensation (12 Oct 2026; Phase 4)
+For the intended receiver, E1 / T2: ~15-30 bits per second of packet bring side information within 1 dB of the
+transmitter applying its estimate. For other receivers (broadcast, multi-user), pre-compensation along the intended
+direction u1 leaves v . (u2 - u1) instead of v . u2. OOI Irminger buoy (fast motion + 2 m lever arm), rms Doppler of
+the transmitter share seen by a receiver at azimuth a from the intended one, no pre-compensation / with it:
+0 deg 4.5e-4 / 0; 15 deg 4.4e-4 / 1.8e-4; 30 deg 4.7e-4 / 3.6e-4; 60 deg 6.0e-4 / 6.7e-4; 90 deg 7.0e-4 / 8.9e-4;
+180 deg 4.5e-4 / 8.9e-4. Pre-compensation helps receivers within ~45 deg of the intended one and hurts beyond ~60 deg
+(up to 2x the Doppler at 180 deg). Side information carrying the transmitter's 3-D velocity serves every receiver
+(each projects it on its own path direction) at ~1.5-3x the bits of one component; it also needs no real-time
+resampling at the transmitter.
