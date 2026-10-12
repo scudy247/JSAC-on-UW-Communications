@@ -52,3 +52,24 @@ def test_ici_aware_equaliser_removes_most_intra_symbol_ici():
     sir = lambda Y: 10 * np.log10(np.divide(*genie_powers(Y, X, F.used)))
     Ys, inf = chain.receive_signal_fused(y, F, (0, lead + 1500))
     assert sir(chain._demod_ici(inf["z"], F, X, 8, 2)[0]) > sir(Ys) + 5
+
+
+def test_pilot_tracking_closed_loop_on_long_packet():
+    """4 s packet, slow 6e-4 wave + 6e-4 at 0.3 Hz, 30 dB: closed-loop pilot tracking (chain.receive_pilot_track)
+    is not worse than the signal-only Kalman (an open-loop version collapsed to ~15 dB: inter-symbol timing ramp and
+    ICI-blurred pilots)."""
+    F = frame.Frame(n_data=27)
+    o = F.o
+    rng = np.random.default_rng(2)
+    X = o.random_symbols(F.n_data, rng)
+    X[:, F.nulls] = 0
+    s = F.build(o.random_symbols(F.n_header, rng), X)
+    lead = 1500
+    x = np.concatenate([np.zeros(lead, complex), s, np.zeros(8000, complex)])
+    t = np.arange(len(x)) / o.fs
+    y = waveform.warp(x, o.fs, 6e-4 * np.sin(2 * np.pi * 0.15 * t) + 6e-4 * np.sin(2 * np.pi * 0.3 * t + 1), o.fc)
+    y = y + np.sqrt(4e-3 / 2) * (rng.standard_normal(len(y)) + 1j * rng.standard_normal(len(y)))
+    sir = lambda Y: 10 * np.log10(np.divide(*genie_powers(Y, X, F.used)))
+    se = (0, lead + 1500)
+    pt = sir(chain.receive_pilot_track(y, F, X, se)[0])
+    assert pt > 28.0 and pt > sir(chain.receive_signal_fused(y, F, se)[0]) - 0.5

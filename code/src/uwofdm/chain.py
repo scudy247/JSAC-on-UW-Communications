@@ -551,3 +551,61 @@ def _demod_ici(z, F, pilots, n_seg=8, iters=2, backoff=0):
         X0[nm] = 0
         out[k, act] = ici.equalise_symbol(Y, X0, C, A, data, pm, nm, iters=iters)
     return out, dict(inf, ici=True)
+
+
+def receive_pilot_track(y, F, pilots, search=(0, None), eps_max=3e-3, params=None, backoff=0, iters=3):
+    """Signal-only pilot tracking (PLAN: Phase 5, estimators.pilot_track), closed loop. Li et al. front end (one mean
+    scale from the chirps, resampling), then `iters` rounds of: for each pair of consecutive data symbols the
+    carrier-phase rotation of the known pilots, c_k = sum_pilots P_k conj(P_(k-1)) exp(-j b m) (P = Y / pilot
+    symbol; b the maximum-likelihood linear phase across the band, i.e. the timing change between the symbols, m the
+    pilot index about the centre), so that angle(c_k) = 2 pi fc r_k T_sym with r_k the mean residual Doppler between
+    the symbol centres; the 2 pi ambiguity (|r| ~ 2e-4) is resolved with the coarse null-subcarrier estimate; variance
+    from the pilot SNR (noise + ICI from the nulls); Kalman smoother (signal-only settings) with the postamble timing;
+    resampling along the smoothed residual. Each round measures on the signal corrected by the previous ones: in a
+    rough sea the first round sees pilots blurred by ICI (|c_k| / N down to 0.15), the next ones see clean pilots.
+    Returns (Y, info) with info["z"] (resampled frame)."""
+    from . import receiver
+    from .experiment import _ramp
+    o = F.o
+    p = dict(FUSION, **SIGNAL_FUSION, **(params or {}))
+    n_pre, _ = estimators.detect_chirp(y, F, *search)
+    n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
+    eps = estimators.scale_pre_post(n_pre, n_post, F.gap)
+    i0 = int(round(n_pre))
+    seg = y[i0:i0 + int(F.length * (1 + 2 * eps_max)) + 4096]
+    z = unwarp(seg, o.fs, np.full(len(seg), eps), o.fc)
+    _, pil_mask = receiver.masks(F)
+    pil = np.where(pil_mask)[0]
+    m = np.arange(len(pil)) - (len(pil) - 1) / 2
+    t_sym = o.n_symbol / o.fs
+    turn = 1.0 / (o.fc * t_sym)  # one 2 pi ambiguity in r
+    t_grid = np.arange(0, len(z), 160) / o.fs
+    for it in range(iters):
+        P, coarse, nvs = [], [], []
+        for k in range(F.n_data):
+            a = F.data_start + k * o.n_symbol + o.n_cp - backoff
+            w = z[a:a + o.n_fft]
+            if len(w) < o.n_fft:
+                w = np.pad(w, (0, o.n_fft - len(w)))
+            Yk = np.fft.fft(w)[o.bins()] * np.sqrt(o.n_sc) / o.n_fft
+            P.append(Yk[pil] / pilots[k, pil])
+            nvs.append(max(float(np.mean(np.abs(Yk[F.nulls]) ** 2)), 1e-12))
+            coarse.append(estimators.residual_cfo(w, o, span=CFO_SPAN, n_grid=81, null_bins=F.null_bins()) / o.fc)
+        m_pre, _ = estimators.detect_chirp(z, F, 0, 8)
+        m_post, _ = estimators.detect_chirp(z, F, *_post_window(m_pre, F, 3e-4))
+        events = [(F.post_start / o.fs, "tau", (F.gap - (m_post - m_pre)) / o.fs,
+                   (p["timing_std_samples"] / o.fs) ** 2)]
+        for k in range(1, F.n_data):
+            q = P[k] * np.conj(P[k - 1])
+            c = np.sum(q * np.exp(-1j * _ramp(q) * m))
+            r = np.angle(c) / (2 * np.pi * o.fc * t_sym)
+            r = r + turn * np.round((0.5 * (coarse[k] + coarse[k - 1]) - r) / turn)
+            pw = float(np.mean(np.abs(P[k]) ** 2))
+            var = 2 * 0.5 * (nvs[k] + nvs[k - 1]) / max(len(pil) * pw, 1e-12) / (2 * np.pi * o.fc * t_sym) ** 2 \
+                + (1e-7) ** 2
+            events.append(((F.data_start + (k - 0.5) * o.n_symbol + o.n_cp + o.n_fft / 2 - backoff) / o.fs, "r", r,
+                           var))
+        r_hat, r_std = fusion.smooth(events, t_grid, p["sigma_r0"], p["sigma_dr0"], p["q"])
+        z = unwarp(z, o.fs, np.interp(np.arange(len(z)) / o.fs, t_grid, r_hat), o.fc)
+    Y, _ = _demod(z, F, cfo=False, backoff=backoff)
+    return Y, dict(eps=eps, r_hat=r_hat, r_std=r_std, t_grid=t_grid, z=z)

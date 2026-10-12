@@ -38,7 +38,8 @@ def run_case(label, n_data, n, seed, sk_params):
     return run_link(tx_track, rx_track, n_data, n, seed, sk_params)
 
 
-def run_link(tx_track, rx_track, n_data, n, seed, sk_params, grades=GRADES, n_seg=N_SEG, snrs=SNRS_DB, ofdm=None):
+def run_link(tx_track, rx_track, n_data, n, seed, sk_params, grades=GRADES, n_seg=N_SEG, snrs=SNRS_DB, ofdm=None,
+             pilot_track=False, only_new=False):
     """Per-packet SINR of every receiver on one link (tracks), n packets; returns {(snr, receiver): stats}."""
     d = motion.link_doppler(tx_track, rx_track)
     F = frame.Frame(n_data=n_data) if ofdm is None else frame.Frame(o=ofdm, n_data=n_data)
@@ -46,8 +47,9 @@ def run_link(tx_track, rx_track, n_data, n, seed, sk_params, grades=GRADES, n_se
     T = F.length / o.fs
     nodes = {g: (node(tx_track, d["u"], +1, 0.0, g, seed + 1), node(rx_track, d["u"], -1, d["tau"], g, seed + 2))
              for g in grades}
-    ranges, alloc = allocation(F, nodes[grades[0]][0], tx_track.fs, budgets=(32,))
-    a = alloc[(32, "none")]
+    if grades:
+        ranges, alloc = allocation(F, nodes[grades[0]][0], tx_track.fs, budgets=(32,))
+        a = alloc[(32, "none")]
     rng = np.random.default_rng(seed)
     per = {}
     for t0 in rng.uniform(d["times"][0] + 240, d["times"][-1] - T - 20, n):
@@ -69,11 +71,18 @@ def run_link(tx_track, rx_track, n_data, n, seed, sk_params, grades=GRADES, n_se
             sig = np.sqrt(4.0 / 10 ** (snr / 10) / 2)
             y = y0 + sig * (rp.standard_normal(len(y0)) + 1j * rp.standard_normal(len(y0)))
             search = (0, lead + 1500)
-            out = {"lilee": chain.receive_signal_only(y, F, search)[0]}
-            Ys, inf = chain.receive_signal_fused(y, F, search, params=sk_params)
-            out["signal_kalman"] = Ys
-            for P in n_seg:
-                out[f"pfft{P}_kalman"] = chain._demod_pfft(inf["z"], F, X, P)[0]
+            out = {}
+            if not only_new:  # only_new: skip the receivers already run on the same packets (same seed)
+                out["lilee"] = chain.receive_signal_only(y, F, search)[0]
+                Ys, inf = chain.receive_signal_fused(y, F, search, params=sk_params)
+                out["signal_kalman"] = Ys
+                for P in n_seg:
+                    out[f"pfft{P}_kalman"] = chain._demod_pfft(inf["z"], F, X, P)[0]
+            if pilot_track:
+                Yp, inf_p = chain.receive_pilot_track(y, F, X, search, params=sk_params)
+                out["pilot_track"] = Yp
+                for P in n_seg:
+                    out[f"pfft{P}_pilot_track"] = chain._demod_pfft(inf_p["z"], F, X, P)[0]
             for g, pr in priors.items():
                 Yf, inf_f = chain.receive_fused_safe(y, F, pr, search)
                 out[f"safe_{g}"] = Yf
