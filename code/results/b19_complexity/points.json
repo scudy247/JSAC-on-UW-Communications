@@ -1,0 +1,248 @@
+[
+ {
+  "case": "single path, 7 symbols",
+  "receiver": "Li/Lee",
+  "mflops": 216.341252,
+  "parts": {
+   "fft": 143.67744,
+   "resampling": 12.28058,
+   "cfo_rotation": 60.383232
+  }
+ },
+ {
+  "case": "single path, 7 symbols",
+  "receiver": "Cho-Kim",
+  "mflops": 28.89268,
+  "parts": {
+   "fft": 4.33152,
+   "resampling": 24.56116
+  }
+ },
+ {
+  "case": "single path, 7 symbols",
+  "receiver": "signal Kalman",
+  "mflops": 261.213616,
+  "parts": {
+   "fft": 167.5776,
+   "resampling": 24.56116,
+   "cfo_rotation": 69.009408,
+   "least_squares": 0.065448
+  }
+ },
+ {
+  "case": "single path, 7 symbols",
+  "receiver": "signal Kalman + pFFT8",
+  "mflops": 284.265456,
+  "parts": {
+   "fft": 183.06048,
+   "resampling": 24.56116,
+   "cfo_rotation": 69.009408,
+   "least_squares": 7.634408
+  }
+ },
+ {
+  "case": "single path, 7 symbols",
+  "receiver": "pilot tracking (3 rounds)",
+  "mflops": 666.3214265863652,
+  "parts": {
+   "fft": 435.85436258636514,
+   "resampling": 49.12232,
+   "cfo_rotation": 181.149696,
+   "least_squares": 0.195048
+  }
+ },
+ {
+  "case": "single path, 7 symbols",
+  "receiver": "sensors + 2 chirp estimates",
+  "mflops": 29.38496,
+  "parts": {
+   "fft": 5.00736,
+   "resampling": 24.3776
+  }
+ },
+ {
+  "case": "single path, 7 symbols",
+  "receiver": "sensors + per-symbol CFO",
+  "mflops": 229.114112,
+  "parts": {
+   "fft": 144.35328,
+   "resampling": 24.3776,
+   "cfo_rotation": 60.383232
+  }
+ },
+ {
+  "case": "single path, 7 symbols",
+  "receiver": "sensor fusion (Kalman)",
+  "mflops": 259.677728,
+  "parts": {
+   "fft": 166.22592,
+   "resampling": 24.3776,
+   "cfo_rotation": 69.009408,
+   "least_squares": 0.0648
+  }
+ },
+ {
+  "case": "single path, 7 symbols",
+  "receiver": "safe sensor fusion (with guard)",
+  "mflops": 523.502544,
+  "parts": {
+   "fft": 336.41472,
+   "resampling": 48.93876,
+   "cfo_rotation": 138.018816,
+   "least_squares": 0.130248
+  }
+ },
+ {
+  "case": "single path, 7 symbols",
+  "receiver": "common: channel estimate + decoder",
+  "mflops": 5.680192,
+  "parts": {
+   "least_squares": 2.01376,
+   "decoder": 3.666432
+  }
+ },
+ {
+  "case": "single path, 7 symbols",
+  "receiver": "transmitter: side-information encoding",
+  "mflops": 197.59104,
+  "parts": {
+   "least_squares": 197.59104
+  }
+ },
+ {
+  "case": "single path, 27 symbols",
+  "receiver": "Li/Lee",
+  "mflops": 817.420292,
+  "parts": {
+   "fft": 547.1232,
+   "resampling": 37.39034,
+   "cfo_rotation": 232.906752
+  }
+ },
+ {
+  "case": "single path, 27 symbols",
+  "receiver": "Cho-Kim",
+  "mflops": 84.42676,
+  "parts": {
+   "fft": 9.64608,
+   "resampling": 74.78068
+  }
+ },
+ {
+  "case": "single path, 27 symbols",
+  "receiver": "signal Kalman",
+  "mflops": 892.452184,
+  "parts": {
+   "fft": 575.93856,
+   "resampling": 74.78068,
+   "cfo_rotation": 241.532928,
+   "least_squares": 0.200016
+  }
+ },
+ {
+  "case": "single path, 27 symbols",
+  "receiver": "signal Kalman + pFFT8",
+  "mflops": 964.790104,
+  "parts": {
+   "fft": 635.65824,
+   "resampling": 74.78068,
+   "cfo_rotation": 241.532928,
+   "least_squares": 12.818256
+  }
+ },
+ {
+  "case": "single path, 27 symbols",
+  "receiver": "pilot tracking (3 rounds)",
+  "mflops": 2513.4187658742544,
+  "parts": {
+   "fft": 1664.5383978742545,
+   "resampling": 149.56136,
+   "cfo_rotation": 698.720256,
+   "least_squares": 0.598752
+  }
+ },
+ {
+  "case": "single path, 27 symbols",
+  "receiver": "sensors + 2 chirp estimates",
+  "mflops": 84.22016,
+  "parts": {
+   "fft": 9.92256,
+   "resampling": 74.2976
+  }
+ },
+ {
+  "case": "single path, 27 symbols",
+  "receiver": "sensors + per-symbol CFO",
+  "mflops": 854.604032,
+  "parts": {
+   "fft": 547.39968,
+   "resampling": 74.2976,
+   "cfo_rotation": 232.906752
+  }
+ },
+ {
+  "case": "single path, 27 symbols",
+  "receiver": "sensor fusion (Kalman)",
+  "mflops": 890.216768,
+  "parts": {
+   "fft": 574.18752,
+   "resampling": 74.2976,
+   "cfo_rotation": 241.532928,
+   "least_squares": 0.19872
+  }
+ },
+ {
+  "case": "single path, 27 symbols",
+  "receiver": "safe sensor fusion (with guard)",
+  "mflops": 1785.679512,
+  "parts": {
+   "fft": 1153.13664,
+   "resampling": 149.07828,
+   "cfo_rotation": 483.065856,
+   "least_squares": 0.398736
+  }
+ },
+ {
+  "case": "single path, 27 symbols",
+  "receiver": "common: channel estimate + decoder",
+  "mflops": 14.707392,
+  "parts": {
+   "least_squares": 0.56544,
+   "decoder": 14.141952
+  }
+ },
+ {
+  "case": "single path, 27 symbols",
+  "receiver": "transmitter: side-information encoding",
+  "mflops": 639.95904,
+  "parts": {
+   "least_squares": 639.95904
+  }
+ },
+ {
+  "case": "multipath (buoy-buoy two-path), 7 symbols",
+  "receiver": "multipath: signal-only cancellation",
+  "mflops": 11237.683368,
+  "parts": {
+   "fft": 221.92128,
+   "correlation": 10.6496,
+   "resampling": 7466.59264,
+   "cfo_rotation": 69.009408,
+   "least_squares": 3359.51748,
+   "decoder": 109.99296
+  }
+ },
+ {
+  "case": "multipath (buoy-buoy two-path), 7 symbols",
+  "receiver": "multipath: sensor cancellation (no guard)",
+  "mflops": 6711.924228,
+  "parts": {
+   "fft": 212.45952,
+   "correlation": 10.6496,
+   "resampling": 4623.22198,
+   "cfo_rotation": 69.009408,
+   "least_squares": 1719.588648,
+   "decoder": 76.995072
+  }
+ }
+]

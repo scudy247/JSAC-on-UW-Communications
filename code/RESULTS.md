@@ -854,3 +854,32 @@ match the signal-only Kalman; with Kalman + partial FFT the difference vanishes.
 - **Multipath control, buoy-buoy with the summer profile** (`b13_multipath.py bb_summer_1s`, 20 packets): one coherent
   path, so cancellation has nothing to do: all receivers within ~1 dB (30 dB: signal Kalman + pFFT 29.8, sensor
   fusion + pFFT 29.9, Li/Lee 19.8 power average). The two-path results follow.
+
+## Frequency scaling of the E3 rule (14 Oct 2026; Phase 3, candidate E; `scripts/b18_freq_scaling.py`)
+Validated evaluator at fc = 8 / 16 / 32 / 64 kHz (same symbol timing), 30 dB, industrial MEMS. SIR signal-only /
+with sensors, buoy-buoy OOI 1 s: two estimates 12.6 / 38.4, 6.5 / 33.0, 0.5 / 27.1, -5.5 / 21.2; per symbol 28.8 /
+43.3, 22.9 / 41.1, 16.9 / 37.0, 10.9 / 31.6; Kalman 42.8 / 44.4, 39.6 / 41.3, 34.8 / 36.5, 29.1 / 30.8; Kalman +
+pFFT 57.9 / 60.5, 53.2 / 55.6, 47.5 / 49.8, 41.6 / 43.8 (other cases alike).
+- Everything drops ~6 dB per octave (interference ~ (fc eps T)^2, partly offset by estimate noise ~ 1 / fc); the rule
+  is unchanged: with Kalman + partial FFT the sensors add 0.4-2.5 dB at any fc; at the per-symbol level their gain
+  grows slightly with fc (+14...+20 dB at 16 kHz, +18...+21 dB at 64 kHz on OOI links).
+- At 64 kHz the signal-only Kalman alone falls to ~29-33 dB on rough links: partial FFT becomes necessary at 30 dB SNR
+  for signal-only and sensor-aided receivers alike; two-estimate sensor receivers drop to 11-35 dB. Higher frequency
+  raises the bar for every receiver without opening a new gap.
+
+## Complexity per receiver (14 Oct 2026; Phase 2, candidate C; `scripts/b19_complexity.py`)
+Instrumented operation counts (FFT 5 N log2 N, resampling ~260 flops per output, CFO-grid rotation, correlations,
+least squares, decoders) on the same real-motion packet (buoy-buoy OOI, 30 dB). Mflop per packet, 1.05 / 4.05 s:
+Li/Lee 216 / 817; Cho-Kim 29 / 84; signal Kalman 261 / 893; + pFFT8 284 / 965; pilot tracking (3 rounds) 666 / 2513;
+sensors + 2 chirp estimates 29 / 84; sensors + per-symbol CFO 229 / 855; sensor fusion (Kalman) 260 / 890; safe
+fusion with guard 524 / 1786; common channel estimate + decoder 6 / 15. Multipath (buoy-buoy two-path, 1 s):
+signal-only cancellation 11 238, sensor cancellation 6 712 (the per-path search dominates).
+- **Implementation caveats:** ~90 % of the signal Kalman's cost is the brute-force null-subcarrier CFO search (81
+  full FFTs per symbol); a ~12-evaluation golden-section search cuts it ~7x (signal Kalman ~65-70 Mflop per 1 s
+  packet). The transmitter's side-information encoding counts 198 / 640 Mflop only because it uses a general
+  least-squares solver; the projection is ~2 Mflop of inner products. The guard doubles the safe fusion's cost;
+  it could run only when the prior looks inconsistent.
+- **Conclusion:** at equal SINR the cheap sensor receiver is ~2-2.5x cheaper than an efficient signal-only Kalman on
+  1 s packets and no cheaper on 4 s packets (per E3 it then needs per-symbol estimates too); multipath cancellation
+  is ~1.7x cheaper with sensors. Against that, the node needs IMU / GNSS hardware and power. **The cost argument is a
+  supporting result, not a headline.**
