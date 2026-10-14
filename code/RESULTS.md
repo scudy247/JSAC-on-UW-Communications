@@ -928,3 +928,24 @@ buoy-buoy -13.0 -> 0.8, -1.1 -> 9.9, 6.1 -> 10.7, 9.3 -> 11.4; seabed OOI -11.1 
   cancellation 26.7, sensor cancellation 27.3, signal Kalman 27.2 power average; ideal two-path cancellation worse,
   22.8, since the paths cannot be separated); the guard chose signal-only in 60-70 % of packets. No sensor advantage
   without resolvable paths of different Doppler, as expected.
+
+## Multipath, 16-QAM (14 Oct 2026; Phase 5; `b13_multipath.py bb_iso_1s_16qam`, 30 packets per point)
+Buoy-buoy OOI, two paths 10.7 ms apart (direct + bottom bounce, Doppler differing by the heave on the bounce),
+industrial MEMS, 1 s packets, coded 16-QAM. SINR power average / median / 10th percentile [dB], PER:
+
+| SNR | signal Kalman | Tu grid | signal cancellation | sensor cancellation | ideal cancellation |
+|---|---|---|---|---|---|
+| 20 | 14.8 / 13.5 / 6.2, 0.40 | 14.2 / 13.3 / 6.5, 0.37 | 17.7 / 17.9 / 14.4, 0.03 | **19.1 / 19.3 / 17.7**, 0.07 | 19.6 / 19.4 / 18.1, 0.07 |
+| 25 | 17.6 / 14.3 / 6.4, 0.33 | 16.9 / 14.4 / 6.8, 0.33 | 21.2 / 21.3 / 15.9, 0.10 | **23.3 / 23.1 / 21.6**, 0.03 | 24.3 / 23.9 / 22.7, 0.07 |
+| 30 | 19.9 / 14.6 / 6.4, 0.33 | 19.1 / 14.7 / 6.8, 0.33 | 24.3 / 23.9 / 16.8, 0.10 | **26.6 / 26.4 / 24.4**, 0.10 | 28.5 / 28.5 / 26.9, 0.10 |
+
+- Sensor-aided cancellation over signal-only cancellation: **+1.4 / +2.1 / +2.3 dB** average and **+3.3 / +5.7 /
+  +7.6 dB** at the 10th percentile (20 / 25 / 30 dB); within 0.5–1.9 dB of ideal cancellation. The tail gain grows
+  with SNR (signal-only per-path estimates do not improve, the sensor path prediction does not depend on SNR).
+- Without cancellation (signal Kalman, Tu grid, pFFT) the bounce caps 16-QAM at PER 0.33–0.50 at any SNR.
+- **PER does not separate the cancellations:** 0.03–0.10 for every cancelling receiver, the ideal one included (1–3
+  packets in 30). That floor comes from something common, not from Doppler estimation; not investigated. Claim
+  for this point: SINR (mean and tail), not PER. Larger statistics are needed for any PER statement.
+- The guard chose signal-only in 13–23 % of packets, at no cost (with and without guard within 0.1 dB).
+- Earlier smoke packet (one packet, 30 dB): sensor cancellation decoded, signal cancellation did not. Consistent
+  with the tail above, not with the mean.
