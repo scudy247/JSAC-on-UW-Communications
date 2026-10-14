@@ -142,8 +142,15 @@ and the regime where it matters is mapped (SNR × packet length × sea state × 
 ---
 
 ## Phase 6 — Multi-user extension ⬜ (optional for the first submission)
-Per-user side information sets each gateway branch from priors (Tu et al. 2013 baseline). Code as in the archived
-plan (`multiuser.py`: uplink signal, single / multiple resampling, prior-driven branches, guard bands).
+Per-user side information sets each gateway branch from priors (Tu et al. 2013 baseline). Reframed for estimation
+(14 Oct 2026): the gateway must estimate K Doppler trajectories, each from 1/K of the band with the other users present.
+
+| Code | What it does | Status |
+|---|---|---|
+| `multiuser.py` | `UserFrame` (single-user frame restricted to a subband: own pilots / nulls, subband chirps, guard subcarriers as extra nulls; every chain.py receiver runs on it unchanged), `contiguous` allocation with guards, uplink sum, receivers: common resampling, per-user branch signal-only (Tu et al.) and signal Kalman, per-user branch from priors + safe fusion, genie | 🟡 written 14 Oct, not run |
+| `scripts/b22_multiuser.py` | Buoy gateway with seabed users (Doppler = gateway motion on each direction: the prior needs no side information) or buoy users (own motion); K = 2, 4, 8; guards 0, 8, 32; SNR 20, 30 dB; SINR, worst user, PER, goodput; genie with the user alone splits inter-user from estimation loss | 🟡 written, not run (≈ 3 h on one core at 8 packets) |
+| `tests/test_multiuser.py` | Disjoint subbands, chirps in band, two users with opposite Doppler decoded per branch | 🟡 not run |
+| interleaved allocation | Tu et al.'s alternative | ⬜ if time |
 
 ---
 
