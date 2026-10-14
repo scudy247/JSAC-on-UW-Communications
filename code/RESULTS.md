@@ -907,3 +907,19 @@ signal-only cancellation 11 238, sensor cancellation 6 712 (the per-path search 
 - No PER difference with QPSK rate 1/2 (both cancellations decode all 30 packets): the SINR gain becomes a PER gain
   only where the margin is small — higher-order modulation or code rate (next check).
 - With diffuse scattering at -20 dB the gain shrinks to +0.5...+1.8 dB (everything capped near 21 dB).
+
+## B: low SNR / long coherent integration (14 Oct 2026; Phase 5; `scripts/b20_long_integration.py`)
+Phase-level Monte Carlo on real motion, 16 s packets, 60 per point: best effective coherent gain G = 10 log10(T_int L)
+(dB re 1 s; maximum 12.0 dB = all 16 s integrated without loss). Signal-only = linear MMSE from per-segment frequency
+measurements (CRB at the CNR; a segment usable only above 10 dB of segment SNR; best segment length); sensor-aided =
+the same + the industrial-MEMS prior. Signal-only -> sensor-aided at CNR 5 / 10 / 15 / 20 dB-Hz, 16 kHz:
+buoy-buoy -13.0 -> 0.8, -1.1 -> 9.9, 6.1 -> 10.7, 9.3 -> 11.4; seabed OOI -11.1 -> 3.0, 1.6 -> 10.0, 6.7 -> 11.3,
+9.6 -> 11.5; seabed CDIP -6.1 -> 4.2, 5.1 -> 10.4, 7.9 -> 11.4, 9.7 -> 11.7; at >= 25 dB-Hz within 0.8 dB.
+4 kHz, buoy-buoy: -7.9 -> 7.8, 5.9 -> 10.8, 8.1 -> 11.6, 9.9 -> 11.8. Sensors alone: 1-4 dB at 16 kHz, 8-10 dB at 4 kHz.
+- **First large advantage: at low CNR sensor-aided estimation gains +5...+11 dB (10 dB-Hz), +4...+5 dB (15 dB-Hz),
+  ~+2 dB (20 dB-Hz) of coherent gain; equivalently ~10 dB less signal strength for the same integration gain.**
+  It comes from fusing the sensor prior with the few usable signal measurements; sensors alone are not enough at
+  16 kHz (slow errors accumulate phase over 16 s).
+- Regime: 10-15 dB-Hz is roughly -25...-30 dB of SNR across an 8 kHz band: very long-range, low-rate (spread-
+  spectrum) links, not the OFDM data links of the chain. Caveats: phase level (no waveform), simple threshold model,
+  receivers know the motion statistics. A waveform check (spread-spectrum or long-symbol receiver) is needed.
