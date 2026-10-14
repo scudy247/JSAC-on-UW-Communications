@@ -843,3 +843,14 @@ noise level. **Cost ladder** (SIR at 30 dB; signal-only / with industrial MEMS a
 receiver (two chirp estimates, no per-symbol tracking) sensors add +17 to +30 dB and make 1 s packets noise-limited up
 to ~30 dB SNR — what a signal-only receiver needs a Kalman tracker for; on 4 s packets sensors + per-symbol estimates
 match the signal-only Kalman; with Kalman + partial FFT the difference vanishes.
+
+## Sensor-fusion tuning, coherent header in multipath, summer-profile control (14 Oct 2026)
+- **Sensor Kalman tuning** (`scripts/b14_tune_fusion.py`, same cases as the signal-only tuning): flat optimum; best
+  (sigma_dr0 3e-4, q_std 1e-3) 0.03 dB above the current setting (3e-4, 2e-4), which stays. The sensor side was not
+  disadvantaged by hand-set values.
+- **Coherent header** (pilots in the header symbol, channel estimate, coherent combining): accepted at -3 / 0 / 3 / 6 /
+  10 dB, single path 0.77 / 1.00 / 1.00 / 1.00 / 1.00 (DBPSK 0.40 / 0.90 / 1.00 ...); **multipath 0.37 / 0.71 / 0.94 /
+  0.97 / 1.00 (DBPSK 0.21 / 0.46 / 0.80 / 0.91 / 0.97)**: ~3 dB recovered; no undetected errors.
+- **Multipath control, buoy-buoy with the summer profile** (`b13_multipath.py bb_summer_1s`, 20 packets): one coherent
+  path, so cancellation has nothing to do: all receivers within ~1 dB (30 dB: signal Kalman + pFFT 29.8, sensor
+  fusion + pFFT 29.9, Li/Lee 19.8 power average). The two-path results follow.
