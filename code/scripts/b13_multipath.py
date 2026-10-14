@@ -31,12 +31,15 @@ LINKS = {"bb_iso": (buoy_buoy_link, (1000.0, 10.0, 10.0, 100.0), None),
          "bb_summer": (buoy_buoy_link, (1000.0, 10.0, 10.0, 100.0), multipath.SUMMER_SSP),
          "seabed_iso": (lambda: seabed_link("ooi", OOI_DAY, (0.0, 0.0, 2.0)), (1000.0, 2.0, 99.5, 100.0), None)}
 CONFIGS = {"bb_iso_1s": ("bb_iso", None, 7), "bb_iso_1s_rho20": ("bb_iso", -20.0, 7), "bb_iso_4s": ("bb_iso", None, 27),
-           "bb_summer_1s": ("bb_summer", None, 7), "seabed_iso_1s": ("seabed_iso", None, 7)}
+           "bb_summer_1s": ("bb_summer", None, 7), "seabed_iso_1s": ("seabed_iso", None, 7),
+           "bb_iso_1s_16qam": ("bb_iso", None, 7, "16qam", (20, 25, 30))}
 SNRS = (10, 20, 30)
 
 
 def run(config, n):
-    env, rho, n_data = CONFIGS[config]
+    env, rho, n_data = CONFIGS[config][:3]
+    mod = CONFIGS[config][3] if len(CONFIGS[config]) > 3 else "qpsk"
+    snrs = CONFIGS[config][4] if len(CONFIGS[config]) > 4 else SNRS
     make, geo, ssp = LINKS[env]
     tx_track, rx_track = make()
     rng = np.random.default_rng(31)
@@ -59,8 +62,8 @@ def run(config, n):
     acc = {}
     for t0 in rng.uniform(tx_track.t[0] + 240, tx_track.t[-1] - T - 60, n):
         rp = np.random.default_rng(rng.integers(1 << 30))
-        info = rp.integers(0, 2, receiver.n_info_bits(F))
-        X = receiver.build_data(info, F)
+        info = rp.integers(0, 2, receiver.n_info_bits(F, mod))
+        X = receiver.build_data(info, F, mod)
         Xf = X.copy()
         Xf[:, F.nulls] = 0
         s = F.build(o.random_symbols(F.n_header, rp), X)
@@ -84,7 +87,7 @@ def run(config, n):
             ideal_trs.append(bulk[lead:] + (p_.delta_eps[lead:] if np.ndim(p_.delta_eps) else p_.delta_eps))
             ideal_d.append(p_.delay)
         ideal_d = [dd - min(ideal_d) for dd in ideal_d]
-        for snr in SNRS:
+        for snr in snrs:
             sig = np.sqrt(4.0 / 10 ** (snr / 10) / 2)
             y = y0 + sig * (rp.standard_normal(len(y0)) + 1j * rp.standard_normal(len(y0)))
             se_ = (0, lead + 1500)
@@ -93,20 +96,20 @@ def run(config, n):
             out["signal_kalman"] = [Ys]
             out["pfft8_kalman"] = [chain._demod_pfft(inf["z"], F, mpchain.pilot_frame(F), 8)[0]]
             out["tu_grid"] = chain.receive_branches(y, F, chain.grid_trajectories(y, F, search=se_), se_)
-            br_sig, _ = mpchain.receive_sic_signal(y, F, se_)
+            br_sig, _ = mpchain.receive_sic_signal(y, F, se_, mod=mod)
             out["signal_sic"] = br_sig
             Yf, inf_f = chain.receive_fused_safe(y, F, prior, se_)
             out["fused_safe"] = [Yf]
             out["fused_safe_pfft8"] = [chain._demod_pfft(inf_f["z"], F, mpchain.pilot_frame(F), 8)[0]]
-            br_sen, si = mpchain.receive_sic_sensor(y, F, pred, pred_delays, se_, signal_branches=br_sig)
+            br_sen, si = mpchain.receive_sic_sensor(y, F, pred, pred_delays, se_, mod=mod, signal_branches=br_sig)
             out["sensor_sic"] = br_sen
             out["sensor_sic_noguard"] = si["sensor_branches"]
             if len(ideal_trs) > 1:
-                out["ideal_sic"] = mpchain.sic(y, F, ideal_trs, ideal_d, se_)[0]
+                out["ideal_sic"] = mpchain.sic(y, F, ideal_trs, ideal_d, se_, mod=mod)[0]
             for k, br in out.items():
                 e = acc.setdefault((snr, k), dict(pw=[], err=[]))
                 e["pw"].append(receiver.sinr_combined(br, Xf, F))
-                e["err"].append(not np.array_equal(receiver.decode_combined(br, F), info))
+                e["err"].append(not np.array_equal(receiver.decode_combined(br, F, mod), info))
             acc.setdefault((snr, "_sensor_choice"), dict(c=[]))["c"].append(si.get("choice"))
     rows = []
     for (snr, k), e in sorted(acc.items()):
@@ -118,7 +121,7 @@ def run(config, n):
         rows.append(dict(config=config, snr_db=snr, receiver=k, sinr_power_avg_db=float(10 * np.log10(pw[:, 0].sum() / pw[:, 1].sum())),
                          sinr_median_db=float(np.median(db)), sinr_p10_db=float(np.percentile(db, 10)),
                          per=float(np.mean(e["err"])), per_packet_db=[float(v) for v in db]))
-    for snr in SNRS:
+    for snr in snrs:
         print(f"{config} SNR {snr} (SINR power avg / median / p10, PER):", flush=True)
         for r in rows:
             if r["snr_db"] == snr and "receiver" in r:
