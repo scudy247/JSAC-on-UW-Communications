@@ -1,5 +1,6 @@
 """Long-integration waveform receiver (longint.py): exact compensation gives full efficiency; at high CNR the
-signal-only receiver recovers a sinusoidal Doppler; without compensation the efficiency collapses."""
+signal-only receiver recovers a sinusoidal Doppler; without compensation the efficiency collapses; the frequency search
+stays inside its window."""
 import numpy as np
 
 from uwofdm import chain, longint
@@ -18,3 +19,15 @@ def test_long_integration_receiver():
     assert longint.efficiency(y0, c, fs, 8.0) < 0.1
     eff, traj = longint.receive(y, y0, c, fs, fc, np.full(n, np.mean(eps)), 45.0, 0.5, dict(chain.SIGNAL_FUSION))
     assert eff(8.0) > 0.8
+
+
+def test_search_window():
+    fs, t_seg = 4000.0, 0.5
+    rng = np.random.default_rng(1)
+    n = int(4 * fs)
+    c = longint.dsss(4000, 1000.0, fs, rng)
+    t = np.arange(n) / fs
+    z = c * np.exp(2j * np.pi * 7.3 * t)  # a clean tone at 7.3 Hz
+    assert all(abs(f - 7.3) < 0.1 for _, f, _ in longint.segment_freqs(z, c, fs, t_seg, band_hz=20.0))
+    noise = (rng.standard_normal(n) + 1j * rng.standard_normal(n)) * 10
+    assert all(abs(f) <= 20.0 + 1e-9 for _, f, _ in longint.segment_freqs(noise, c, fs, t_seg, band_hz=20.0))
