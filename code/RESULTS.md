@@ -895,3 +895,15 @@ signal-only cancellation 11 238, sensor cancellation 6 712 (the per-path search 
 - Partial FFT degrades in multipath (Kalman + pFFT 15.4 dB, p10 0.4 dB, PER 0.30 at 30 dB): its pilot-based segment
   weights are confused by the second path. The best signal-only receiver here is the cancellation, without pFFT.
 - The guard chose the signal-only output in 10-20 % of packets without changing the averages.
+
+## Multipath on the realistic channel: buoy-buoy, two paths, no scattering (14 Oct 2026; Phase 5; `b13_multipath.py bb_iso_1s`)
+30 packets, 1 s, QPSK rate 1/2, industrial MEMS, nominal-geometry angles. SINR power average / p10 (PER):
+10 dB: Kalman single resampling 7.6 / 3.9 (0.13); signal-only cancellation 9.4 / 7.8 (0); sensor cancellation 9.8 /
+8.1 (0); ideal 9.9 / 8.4 (0). 20 dB: 14.7 / 5.6 (0.10); 17.8 / 13.3 (0); 19.2 / 16.2 (0); 19.8 / 18.1 (0).
+30 dB: 20.0 / 5.8 (0.07); 24.6 / 17.5 (0); 27.1 / 21.6 (0); 29.4 / 27.8 (0). Tu grid MRC 19.2 / 6.4 (0) at 30 dB.
+- **Sensor cancellation beats the redesigned signal-only cancellation by +0.4 / +1.4 / +2.5 dB (power average) and
+  +0.3 / +2.9 / +4.1 dB at the 10th percentile, at 10 / 20 / 30 dB**; at 30 dB it is 2.3 dB from ideal path
+  knowledge, signal-only 4.8 dB. The single test packet (+6.7 dB) was optimistic.
+- No PER difference with QPSK rate 1/2 (both cancellations decode all 30 packets): the SINR gain becomes a PER gain
+  only where the margin is small — higher-order modulation or code rate (next check).
+- With diffuse scattering at -20 dB the gain shrinks to +0.5...+1.8 dB (everything capped near 21 dB).
