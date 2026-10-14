@@ -883,3 +883,15 @@ signal-only cancellation 11 238, sensor cancellation 6 712 (the per-path search 
   1 s packets and no cheaper on 4 s packets (per E3 it then needs per-symbol estimates too); multipath cancellation
   is ~1.7x cheaper with sensors. Against that, the node needs IMU / GNSS hardware and power. **The cost argument is a
   supporting result, not a headline.**
+
+## Multipath on the realistic channel: buoy-buoy, two paths + diffuse scattering rho = -20 dB (14 Oct 2026; Phase 5; `b13_multipath.py bb_iso_1s_rho20`)
+20 packets, 1 s, industrial MEMS, nominal-geometry angles, clusters, fractional delays. SINR power average (PER):
+10 dB: Kalman single resampling 7.6 (0.15), Tu grid 7.6 (0.10), signal-only cancellation 9.1 (0), sensor cancellation
+9.6 (0), ideal 9.6 (0); 20 dB: 13.5 (0.05), 13.1 (0), 16.1 (0), 17.5 (0), 17.7 (0); 30 dB: 16.0 (0.05), 15.4 (0),
+19.1 (0), 20.9 (0), 21.5 (0). 10th percentile: sensor cancellation +0.5 / +1.3 / +2.4 dB over signal-only cancellation.
+- Cancellation matters here (single-resampling receivers lose 5-35 % of packets), for both sides; **sensor
+  cancellation gains +0.5 to +1.8 dB over the redesigned signal-only cancellation** and is within 0.2-0.6 dB of ideal
+  path knowledge; same PER at 20 packets. The scattered energy caps every receiver near 21 dB.
+- Partial FFT degrades in multipath (Kalman + pFFT 15.4 dB, p10 0.4 dB, PER 0.30 at 30 dB): its pilot-based segment
+  weights are confused by the second path. The best signal-only receiver here is the cancellation, without pFFT.
+- The guard chose the signal-only output in 10-20 % of packets without changing the averages.
