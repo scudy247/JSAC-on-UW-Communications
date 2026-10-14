@@ -30,8 +30,8 @@ Sampling: errors are generated on the track grid (10 Hz OOI, 1.28 Hz CDIP); whit
 on the coarse CDIP grid only their in-band (< 0.64 Hz) part is present, which is the part that integrates into
 velocity error.
 
-Grades (GRADES) are representative values of three sensor classes, to be checked against specific datasheets before
-they go into the paper; the aided / unaided variants differ only in aid_sigma.
+Grades (GRADES) are anchored on datasheets of three sensor classes (see the comment above GRADES); the aided /
+unaided variants differ only in aid_sigma.
 """
 from dataclasses import dataclass, replace
 
@@ -70,19 +70,28 @@ class ImuGrade:
         return replace(self, name=self.name + "_unaided", aid_sigma=None)
 
 
-# Representative classes (to verify against datasheets): marine motion reference unit / FOG INS; industrial MEMS
-# AHRS; consumer MEMS. Aiding: GNSS velocity for surface nodes.
+# Classes anchored on datasheets (checked 14 Oct 2026; values of 12 Oct in brackets):
+#  nav        marine motion reference unit, Kongsberg MRU 5+: roll / pitch 0.008 deg RMS (+-5 deg amplitude), real-time
+#             heave velocity 0.01 m/s RMS (third-party listing) [tilt 0.02 deg, aid 0.02 m/s]
+#  industrial GNSS/INS module, Xsens MTi-680G: accelerometer 60 ug/sqrt(Hz), in-run bias 10-15 ug, roll / pitch
+#             0.2 deg RMS, velocity 0.05 m/s RMS, gyro 8 deg/h [bias 15 ug, tilt 0.25 deg]; the ADIS16470 (100
+#             ug/sqrt(Hz), 13 ug, 0.34 deg/sqrt(h)) is in the same class
+#  consumer   phone-grade MEMS, Bosch BMI088: accelerometer 160-190 ug/sqrt(Hz) (ICM-42688-P: 65-70) [150 ug];
+#             roll / pitch of a low-cost AHRS ~1 deg (no datasheet figure; typical)
+# Aiding: GNSS velocity for surface nodes. Crossover hp_hz tuned per grade (scripts/b15_imu_sweep.py: the best
+# crossover grows with the tilt error: nav 0.02, industrial 0.1, consumer 0.3 Hz) [0.03 / 0.05 Hz]. The multipath runs
+# started 14 Oct 08:45 use the bracketed values.
 GRADES = {
     "nav": ImuGrade("nav", accel_noise=20 * UG, accel_bias=10 * UG, accel_bias_tau=300.0, accel_scale=1e-4,
-                    tilt_std=0.02 * DEG, yaw_std=0.1 * DEG, tilt_tau=30.0, gyro_noise=0.005 * DEG / 60,
-                    hp_hz=0.02, unaided_hp_hz=0.005, aid_sigma=0.02, aid_latency=0.005, timing_std=0.001,
+                    tilt_std=0.008 * DEG, yaw_std=0.1 * DEG, tilt_tau=30.0, gyro_noise=0.005 * DEG / 60,
+                    hp_hz=0.02, unaided_hp_hz=0.005, aid_sigma=0.01, aid_latency=0.005, timing_std=0.001,
                     lever_frac=0.01),
-    "industrial": ImuGrade("industrial", accel_noise=60 * UG, accel_bias=15 * UG, accel_bias_tau=100.0,
-                           accel_scale=1e-3, tilt_std=0.25 * DEG, yaw_std=1.0 * DEG, tilt_tau=10.0,
-                           gyro_noise=0.2 * DEG / 60, hp_hz=0.03, unaided_hp_hz=0.01, aid_sigma=0.03,
+    "industrial": ImuGrade("industrial", accel_noise=60 * UG, accel_bias=12 * UG, accel_bias_tau=100.0,
+                           accel_scale=1e-3, tilt_std=0.2 * DEG, yaw_std=0.5 * DEG, tilt_tau=10.0,
+                           gyro_noise=0.007 * DEG, hp_hz=0.1, unaided_hp_hz=0.01, aid_sigma=0.03,
                            aid_latency=0.01, timing_std=0.005, lever_frac=0.02),
-    "consumer": ImuGrade("consumer", accel_noise=150 * UG, accel_bias=50 * UG, accel_bias_tau=50.0, accel_scale=5e-3,
-                         tilt_std=1.0 * DEG, yaw_std=3.0 * DEG, tilt_tau=5.0, gyro_noise=36 * DEG / 60, hp_hz=0.05,
+    "consumer": ImuGrade("consumer", accel_noise=170 * UG, accel_bias=50 * UG, accel_bias_tau=50.0, accel_scale=5e-3,
+                         tilt_std=1.0 * DEG, yaw_std=3.0 * DEG, tilt_tau=5.0, gyro_noise=36 * DEG / 60, hp_hz=0.3,
                          unaided_hp_hz=0.02, aid_sigma=0.05, aid_latency=0.02, timing_std=0.010, lever_frac=0.05),
 }
 GRADES.update({g.name + "_unaided": g.unaided() for g in list(GRADES.values())})

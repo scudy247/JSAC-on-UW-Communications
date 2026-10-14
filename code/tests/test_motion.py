@@ -84,3 +84,20 @@ def test_auv_maneuvering():
     assert np.allclose(sp, 1.5)
     h = np.degrees(np.arctan2(a.vel_slow[:, 1], a.vel_slow[:, 0]))
     assert abs(h[0] - 45.0) < 1e-6 and abs(abs(h[1499] - h[1199]) - 90.0) < 1.0  # one 30 s turn at 3 deg/s by t = 150 s
+
+
+def test_link_doppler_moving_matches_static_and_follows_an_auv():
+    """Moving geometry: for nodes without slow motion it equals link_doppler; an AUV cruising straight away from a
+    static receiver at 1.5 m/s has eps = -1.5 / c and a delay growing by 1.5 / c per second."""
+    fs, n = 10.0, 6000
+    rng = np.random.default_rng(0)
+    v = np.zeros((n, 3))
+    v[:, 2] = motion.jonswap_velocity(fs, n, 0.1, 0.3, rng)
+    a = motion.Track(fs, v, np.zeros((n, 3)), np.array([0.0, 0.0, -5.0]))
+    b = motion.static_track(fs, n, (1000.0, 0.0, -50.0))
+    st, mv = motion.link_doppler(a, b), motion.link_doppler_moving(a, b, motion.link_doppler(a, b)["times"])
+    assert np.max(np.abs(st["eps"] - mv["eps"])) < 1e-7
+    auv = motion.Track(fs, np.zeros((n, 3)), np.tile([-1.5, 0.0, 0.0], (n, 1)), np.array([0.0, 0.0, -50.0]))
+    m = motion.link_doppler_moving(auv, b, auv.t[100:5000])
+    assert np.allclose(m["eps"], -1.5 / motion.C, atol=1e-8)
+    assert abs((m["tau"][-1] - m["tau"][0]) / (auv.t[4999] - auv.t[100]) - 1.5 / motion.C) < 1e-6

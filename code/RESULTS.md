@@ -802,3 +802,20 @@ bottom bounce 10.7 ms). Accepted at -3 / 0 / 3 / 6 / 10 dB: single path 0.40 / 0
   fusion 0.4 / 0.9 / -18.1. 4 s: safe 27.1 / 27.5 / 25.6 vs signal 26.8 / 27.5 / 25.2; fixed 4.7 / 5.9 / -2.1.
   **The prior-quality guard turns a wrong header into a signal-only packet; without it the packet is lost.**
   With CRC-8 about 1 in 256 corrupted headers passes, so the guard is required.
+
+## Phase 1 remainder (14 Oct 2026): sensor grades from datasheets, tilt / crossover sweep, scattered power
+- **Grades anchored on datasheets** (`imu.GRADES`): navigation = Kongsberg MRU 5+ (roll / pitch 0.008 deg RMS, heave
+  velocity 0.01 m/s RMS); industrial = Xsens MTi-680G (60 ug/sqrt(Hz), 10-15 ug, 0.2 deg RMS, velocity 0.05 m/s RMS);
+  consumer = Bosch BMI088 (160-190 ug/sqrt(Hz)), ~1 deg AHRS tilt (typical, no datasheet). Previous values were
+  close (navigation slightly pessimistic).
+- **Tilt x crossover sweep** (`scripts/b15_imu_sweep.py`, industrial grade otherwise): wave-band horizontal error on
+  OOI Irminger, by crossover 0.01 / 0.03 / 0.1 / 0.3 Hz: tilt 0.01 deg 0.011 / 0.012 / 0.015 / 0.022 m/s; 0.2 deg
+  0.038 / 0.037 / 0.022 / 0.022; 1 deg 0.180 / 0.172 / 0.079 / 0.030 (CDIP similar, slightly lower). **The best
+  crossover grows with the tilt error** (GNSS should carry more of the wave band when attitude is poor): with it
+  tuned, industrial MEMS reach 0.022 m/s and consumer MEMS 0.030 m/s instead of 0.037 / 0.17. The industrial and
+  consumer grades were pessimistic; crossovers now 0.1 / 0.3 Hz. Key assumption left: GNSS velocity accuracy at the
+  buoy (0.03-0.05 m/s per sample at 5 Hz) and its transfer to the transducer below.
+- **Scattered surface power (rho):** no measured coherent-to-incoherent ratio at 10-30 kHz in rough shallow water was
+  found. Context: log(CTIR) falls linearly with time after the first arrival, slope proportional to Hs (3.5 kHz,
+  JASA 2006); at 17 kHz surface motion reduces acoustic coherence by 20-30 % (Sci. Rep. 2020); Doppler spread grows
+  with frequency (JASA EL 2010, 10-18 kHz). rho stays a swept parameter (-30, -20 dB; 0 dB worst case).

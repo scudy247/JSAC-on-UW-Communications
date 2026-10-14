@@ -1,0 +1,386 @@
+[
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.01,
+  "crossover_hz": 0.01,
+  "wave_band_h_err": 0.011052130833916873,
+  "wave_band_z_err": 0.006024322541712853,
+  "total_h_err": 0.01799864968633982
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.01,
+  "crossover_hz": 0.03,
+  "wave_band_h_err": 0.011735804256166493,
+  "wave_band_z_err": 0.006874797308214492,
+  "total_h_err": 0.0134441711875902
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.01,
+  "crossover_hz": 0.1,
+  "wave_band_h_err": 0.01523954432387057,
+  "wave_band_z_err": 0.01381567919959637,
+  "total_h_err": 0.015935138934424126
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.01,
+  "crossover_hz": 0.3,
+  "wave_band_h_err": 0.02156983311107618,
+  "wave_band_z_err": 0.02417024481023505,
+  "total_h_err": 0.02199089572007333
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.05,
+  "crossover_hz": 0.01,
+  "wave_band_h_err": 0.014327933647602483,
+  "wave_band_z_err": 0.00603188870923193,
+  "total_h_err": 0.059656517050060545
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.05,
+  "crossover_hz": 0.03,
+  "wave_band_h_err": 0.0147206461650927,
+  "wave_band_z_err": 0.006868230774964231,
+  "total_h_err": 0.02413448517625636
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.05,
+  "crossover_hz": 0.1,
+  "wave_band_h_err": 0.01591411169836926,
+  "wave_band_z_err": 0.013834200760589629,
+  "total_h_err": 0.016715677912600955
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.05,
+  "crossover_hz": 0.3,
+  "wave_band_h_err": 0.021622777101144974,
+  "wave_band_z_err": 0.024205296371204447,
+  "total_h_err": 0.02204154787203509
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.1,
+  "crossover_hz": 0.01,
+  "wave_band_h_err": 0.02130317589127563,
+  "wave_band_z_err": 0.006210803175391621,
+  "total_h_err": 0.11632768469917149
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.1,
+  "crossover_hz": 0.03,
+  "wave_band_h_err": 0.021134369459785553,
+  "wave_band_z_err": 0.007009256983332228,
+  "total_h_err": 0.042821587410129154
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.1,
+  "crossover_hz": 0.1,
+  "wave_band_h_err": 0.01749222250718115,
+  "wave_band_z_err": 0.013907340292447284,
+  "total_h_err": 0.01866627136037514
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.1,
+  "crossover_hz": 0.3,
+  "wave_band_h_err": 0.021731339377742416,
+  "wave_band_z_err": 0.024254592617719065,
+  "total_h_err": 0.02215527332801136
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.2,
+  "crossover_hz": 0.01,
+  "wave_band_h_err": 0.03785408279730216,
+  "wave_band_z_err": 0.007062301365985614,
+  "total_h_err": 0.23074604795958023
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.2,
+  "crossover_hz": 0.03,
+  "wave_band_h_err": 0.036662001562792444,
+  "wave_band_z_err": 0.007742319477921861,
+  "total_h_err": 0.08266177910627509
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.2,
+  "crossover_hz": 0.1,
+  "wave_band_h_err": 0.02235132657391344,
+  "wave_band_z_err": 0.014216245501927384,
+  "total_h_err": 0.024704766031469136
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.2,
+  "crossover_hz": 0.3,
+  "wave_band_h_err": 0.022086756323887943,
+  "wave_band_z_err": 0.024371312106681496,
+  "total_h_err": 0.02254706220120154
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.5,
+  "crossover_hz": 0.01,
+  "wave_band_h_err": 0.09070022465454687,
+  "wave_band_z_err": 0.011796272935285302,
+  "total_h_err": 0.5748910749620013
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.5,
+  "crossover_hz": 0.03,
+  "wave_band_h_err": 0.08681315927251776,
+  "wave_band_z_err": 0.012148340670749116,
+  "total_h_err": 0.2044642396387214
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.5,
+  "crossover_hz": 0.1,
+  "wave_band_h_err": 0.04225781479485084,
+  "wave_band_z_err": 0.0162849724204118,
+  "total_h_err": 0.048856179238695126
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 0.5,
+  "crossover_hz": 0.3,
+  "wave_band_h_err": 0.02416256383159168,
+  "wave_band_z_err": 0.02486302680507837,
+  "total_h_err": 0.024911880899112455
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 1.0,
+  "crossover_hz": 0.01,
+  "wave_band_h_err": 0.18000962134977652,
+  "wave_band_z_err": 0.021737331553274297,
+  "total_h_err": 1.148766168967814
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 1.0,
+  "crossover_hz": 0.03,
+  "wave_band_h_err": 0.17182615657411268,
+  "wave_band_z_err": 0.02185491380505054,
+  "total_h_err": 0.4082598306889831
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 1.0,
+  "crossover_hz": 0.1,
+  "wave_band_h_err": 0.07924890507519446,
+  "wave_band_z_err": 0.0222220286637917,
+  "total_h_err": 0.09301060366306801
+ },
+ {
+  "record": "OOI Irminger",
+  "tilt_deg": 1.0,
+  "crossover_hz": 0.3,
+  "wave_band_h_err": 0.03013496280632483,
+  "wave_band_z_err": 0.026123943709864424,
+  "total_h_err": 0.031727307061985774
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.01,
+  "crossover_hz": 0.01,
+  "wave_band_h_err": 0.0034316063711143673,
+  "wave_band_z_err": 0.003387429972286589,
+  "total_h_err": 0.013152718492875299
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.01,
+  "crossover_hz": 0.03,
+  "wave_band_h_err": 0.004739988523204816,
+  "wave_band_z_err": 0.004776208135811386,
+  "total_h_err": 0.007597503798918956
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.01,
+  "crossover_hz": 0.1,
+  "wave_band_h_err": 0.009162661149364927,
+  "wave_band_z_err": 0.009526668489165755,
+  "total_h_err": 0.010139872964057583
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.01,
+  "crossover_hz": 0.3,
+  "wave_band_h_err": 0.013903692211480441,
+  "wave_band_z_err": 0.014289957385791769,
+  "total_h_err": 0.01448627466311972
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.05,
+  "crossover_hz": 0.01,
+  "wave_band_h_err": 0.008946504147099814,
+  "wave_band_z_err": 0.0033993041020485993,
+  "total_h_err": 0.060568202293134865
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.05,
+  "crossover_hz": 0.03,
+  "wave_band_h_err": 0.009177109798216405,
+  "wave_band_z_err": 0.004784626701084061,
+  "total_h_err": 0.020718598753160837
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.05,
+  "crossover_hz": 0.1,
+  "wave_band_h_err": 0.009786689548239884,
+  "wave_band_z_err": 0.009529083352401848,
+  "total_h_err": 0.010935673913137656
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.05,
+  "crossover_hz": 0.3,
+  "wave_band_h_err": 0.013920231886113148,
+  "wave_band_z_err": 0.014290659713150793,
+  "total_h_err": 0.014509098035224445
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.1,
+  "crossover_hz": 0.01,
+  "wave_band_h_err": 0.01713372998004751,
+  "wave_band_z_err": 0.0034364571919034644,
+  "total_h_err": 0.12073164724942226
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.1,
+  "crossover_hz": 0.03,
+  "wave_band_h_err": 0.016662864272529117,
+  "wave_band_z_err": 0.004810779517112289,
+  "total_h_err": 0.03985563807149751
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.1,
+  "crossover_hz": 0.1,
+  "wave_band_h_err": 0.0115199856483574,
+  "wave_band_z_err": 0.009535712612792605,
+  "total_h_err": 0.013106951427160911
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.1,
+  "crossover_hz": 0.3,
+  "wave_band_h_err": 0.013974974968317205,
+  "wave_band_z_err": 0.014291970465459604,
+  "total_h_err": 0.01458136110676828
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.2,
+  "crossover_hz": 0.01,
+  "wave_band_h_err": 0.03388111665412695,
+  "wave_band_z_err": 0.003581614930884677,
+  "total_h_err": 0.24121667588387247
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.2,
+  "crossover_hz": 0.03,
+  "wave_band_h_err": 0.03243435523457816,
+  "wave_band_z_err": 0.004913920450507769,
+  "total_h_err": 0.07888508965139868
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.2,
+  "crossover_hz": 0.1,
+  "wave_band_h_err": 0.016745257818424057,
+  "wave_band_z_err": 0.009560969269506357,
+  "total_h_err": 0.01950195428688123
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.2,
+  "crossover_hz": 0.3,
+  "wave_band_h_err": 0.014196013602198758,
+  "wave_band_z_err": 0.014296034222423436,
+  "total_h_err": 0.014868431634465665
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.5,
+  "crossover_hz": 0.01,
+  "wave_band_h_err": 0.08443667917584212,
+  "wave_band_z_err": 0.004468831318220382,
+  "total_h_err": 0.6027988082883478
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.5,
+  "crossover_hz": 0.03,
+  "wave_band_h_err": 0.08046601808292977,
+  "wave_band_z_err": 0.005582528535120469,
+  "total_h_err": 0.19660547514272014
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.5,
+  "crossover_hz": 0.1,
+  "wave_band_h_err": 0.03625107884943862,
+  "wave_band_z_err": 0.009731159599443913,
+  "total_h_err": 0.04288297250385206
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 0.5,
+  "crossover_hz": 0.3,
+  "wave_band_h_err": 0.015671290108948525,
+  "wave_band_z_err": 0.014319744419757719,
+  "total_h_err": 0.01674608752383966
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 1.0,
+  "crossover_hz": 0.01,
+  "wave_band_h_err": 0.16880169663187028,
+  "wave_band_z_err": 0.006745043937963168,
+  "total_h_err": 1.205478102352634
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 1.0,
+  "crossover_hz": 0.03,
+  "wave_band_h_err": 0.16076498332080694,
+  "wave_band_z_err": 0.007498301926869747,
+  "total_h_err": 0.39301925583588415
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 1.0,
+  "crossover_hz": 0.1,
+  "wave_band_h_err": 0.07075231521858859,
+  "wave_band_z_err": 0.010309653371968586,
+  "total_h_err": 0.08394477009690522
+ },
+ {
+  "record": "CDIP swell",
+  "tilt_deg": 1.0,
+  "crossover_hz": 0.3,
+  "wave_band_h_err": 0.02009062524703273,
+  "wave_band_z_err": 0.0143974220611976,
+  "total_h_err": 0.022196750040594786
+ }
+]

@@ -28,17 +28,7 @@ SIGMA_RX = 3e-6
 T_FP = np.geomspace(0.015, 1.5, 34)  # packet length in wave periods (T from 0.15 to 15 s)
 
 
-def jonswap_velocity(fs, n, fp, sigma, rng, gamma=3.3):
-    """Velocity along the path with a JONSWAP shape (random phases), scaled to std sigma."""
-    f = np.fft.rfftfreq(n, 1 / fs)
-    f[0] = 1e-9
-    s = np.where(f <= fp, 0.07, 0.09)
-    S_eta = f ** -5 * np.exp(-1.25 * (fp / f) ** 4) * gamma ** np.exp(-((f - fp) ** 2) / (2 * s ** 2 * fp ** 2))
-    S_v = (2 * np.pi * f) ** 2 * S_eta
-    S_v[0] = 0.0
-    X = np.sqrt(S_v) * np.exp(2j * np.pi * rng.uniform(size=len(f)))
-    v = np.fft.irfft(X, n)
-    return v * sigma / v.std()
+jonswap_velocity = motion.jonswap_velocity  # moved to uwofdm.motion (14 Oct 2026)
 
 
 def tracks(rng):

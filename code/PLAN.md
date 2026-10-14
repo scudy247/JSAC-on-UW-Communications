@@ -57,7 +57,7 @@ code/
 
 ---
 
-## Phase 1 — Models 🟡 (core done)
+## Phase 1 — Models ✅ (14 Oct: realistic multipath, datasheet sensor grades, tilt / crossover sweep, moving geometry; rho stays swept — no measured value found)
 | Code | What it has to do | Status |
 |---|---|---|
 | `motion.*` | Tracks (buoy, static, AUV leg, manoeuvring AUV), lever arm, link Doppler split | ✅ |
@@ -65,8 +65,8 @@ code/
 | `imu.py` | Realistic sensor error model: accelerometer noise / bias / scale, attitude leakage, complementary filter with or without GNSS / DVL aiding, timing error; grades nav / industrial / consumer (± aiding); optional `grade=` in `NodeIMU`, `IMU3` | ✅ 12 Oct; grade experiment ✅ (gain survives GNSS-aided industrial MEMS, RESULTS.md); next: datasheet values, tilt-error and crossover sweeps ⬜ |
 | `waveform.*`, `channel.*` | OFDM, Doppler warp / unwarp, multipath with per-path Doppler | ✅ |
 | `bellhop.py` | Arrivals, coherent rough-surface loss, scattered-surface floor (swept) | 🟡 ✅ Bellhop paths in the chain (`multipath.py`: per-path Doppler from angles, diffuse scattering; first-arrival detection); experiment `scripts/e2_multipath.py` ⏳; open: literature value for scattered power; per-path compensation 🟡: Tu-like multi-branch MRC ✅, sensor-aided decoder-aided per-path cancellation ✅ (decodes real buoy–buoy two-path packets where all others fail); realistic per-path prediction ✅ (`sensors.py`: 3-axis IMU, two-component side information 64 bits, Bellhop angles; still decodes); signal-only cancellation baseline ✅ (`receive_signal_sic`: chirp delays + per-path search; decodes 1/3 real buoy–buoy packets vs 3/3 with sensors); angle errors ✅ (sensors alone ≤ 0.5°, with a narrow search ≈ 1°; delays must come from the signal: a 0.15 ms geometric delay error broke the search); next: statistics from `scripts/e2_multipath.py` |
-| synthetic spectra | JONSWAP motion for sea-state sweeps (exists in `scripts/c2_map.py`; move to `motion`) | 🟡 |
-| moving geometry | u(t), τ(t) for long AUV runs | ⬜ |
+| synthetic spectra | JONSWAP motion for sea-state sweeps | ✅ `motion.jonswap_velocity` (14 Oct) |
+| moving geometry | u(t), τ(t) for long AUV runs | ✅ `motion.link_doppler_moving` (14 Oct) |
 
 ---
 

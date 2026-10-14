@@ -150,3 +150,43 @@ def link_doppler(tx, rx, times=None, lever_tx=None, lever_rx=None, c=C):
     eps_slow = (vs_tx - vs_rx) @ u / c
     return {"times": times, "tau": tau, "u": u, "eps": eps_tx + eps_rx + eps_slow,
             "eps_tx": eps_tx, "eps_rx": eps_rx, "eps_slow": eps_slow}
+
+
+# --------------------------------------------------------------------------- synthetic seas and moving geometry
+def jonswap_velocity(fs, n, fp, sigma, rng, gamma=3.3):
+    """Velocity series with a JONSWAP wave shape (peak fp, peak enhancement gamma, random phases), scaled to std
+    sigma (moved from scripts/c2_map.py for sea-state sweeps)."""
+    f = np.fft.rfftfreq(n, 1 / fs)
+    f[0] = 1e-9
+    s = np.where(f <= fp, 0.07, 0.09)
+    S_eta = f ** -5 * np.exp(-1.25 * (fp / f) ** 4) * gamma ** np.exp(-((f - fp) ** 2) / (2 * s ** 2 * fp ** 2))
+    S_v = (2 * np.pi * f) ** 2 * S_eta
+    S_v[0] = 0.0
+    v = np.fft.irfft(np.sqrt(S_v) * np.exp(2j * np.pi * rng.uniform(size=len(f))), n)
+    return v * sigma / v.std()
+
+
+def positions(track):
+    """(N, 3) positions: the mean position plus the integrated slow velocity (cruise, drift; the wave-driven fast
+    part moves the node by metres only and is left to the Doppler)."""
+    disp = np.cumsum(track.vel_slow, 0) / track.fs
+    return track.pos0 + disp - disp[0]
+
+
+def link_doppler_moving(tx, rx, times=None, c=C, iters=3):
+    """link_doppler with time-varying geometry, for long runs (AUV legs): direction u(t) and delay tau(t) from the
+    positions at emission (tx) and reception (rx) times, tau solved by fixed-point iteration; eps(t) =
+    (v_tx(t) - v_rx(t + tau(t))) . u(t) / c with the total velocities. Returns times, tau (array), u ((N, 3)), eps."""
+    if times is None:
+        times = tx.t
+    p_tx = np.stack([np.interp(times, tx.t, positions(tx)[:, i]) for i in range(3)], 1)
+    prx = positions(rx)
+    tau = np.full(len(times), np.linalg.norm(rx.pos0 - tx.pos0) / c)
+    for _ in range(iters):
+        p_rx = np.stack([np.interp(times + tau, rx.t, prx[:, i]) for i in range(3)], 1)
+        tau = np.linalg.norm(p_rx - p_tx, axis=1) / c
+    d = p_rx - p_tx
+    u = d / np.linalg.norm(d, axis=1, keepdims=True)
+    v_tx = tx.velocity_at(times, "total")
+    v_rx = rx.velocity_at(times + tau, "total")
+    return {"times": times, "tau": tau, "u": u, "eps": np.einsum("ij,ij->i", v_tx - v_rx, u) / c}
