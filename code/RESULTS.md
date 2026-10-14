@@ -923,3 +923,8 @@ buoy-buoy -13.0 -> 0.8, -1.1 -> 9.9, 6.1 -> 10.7, 9.3 -> 11.4; seabed OOI -11.1 
 - Regime: 10-15 dB-Hz is roughly -25...-30 dB of SNR across an 8 kHz band: very long-range, low-rate (spread-
   spectrum) links, not the OFDM data links of the chain. Caveats: phase level (no waveform), simple threshold model,
   receivers know the motion statistics. A waveform check (spread-spectrum or long-symbol receiver) is needed.
+- **Control, buoy -> seabed OOI** (`b13_multipath.py seabed_iso_1s`, 20 packets): direct + bottom bounce 0.07 ms apart
+  at the same angle (5.6 deg), i.e. one resolvable path: all receivers within ~0.6 dB (30 dB: signal-only
+  cancellation 26.7, sensor cancellation 27.3, signal Kalman 27.2 power average; ideal two-path cancellation worse,
+  22.8, since the paths cannot be separated); the guard chose signal-only in 60-70 % of packets. No sensor advantage
+  without resolvable paths of different Doppler, as expected.
