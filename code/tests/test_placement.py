@@ -66,3 +66,23 @@ def test_generic_placements_in_harness():
     res = run_link(tx, rx, cfg, np.random.default_rng(0))
     assert abs(res["split_0.01"]["sir_sim_db"] - res["own[tx+rx]+rx[line2]_0.01"]["sir_sim_db"]) < 1e-6
     assert np.isfinite(res["own[tx]+rx[quad]_0.01"]["sir_theory_db"])
+
+
+def test_fair_stages_order():
+    """Fair receiver stages: the Kalman smoother beats per-symbol estimates on wave motion, partial FFT adds on top,
+    and the realistic sensor grade plugs in (finite, ordered predictions)."""
+    from uwofdm import imu
+    fs0, n = 10.0, 30000
+    t = np.arange(n) / fs0
+    rng = np.random.default_rng(0)
+    v = np.zeros((n, 3))
+    v[:, 0] = motion.jonswap_velocity(fs0, n, 0.1, 0.5, rng)
+    v[:, 2] = motion.jonswap_velocity(fs0, n, 0.1, 0.5, rng)
+    tx = motion.Track(fs0, v, np.zeros((n, 3)), np.array([0.0, 0.0, -5.0]))
+    rx = motion.static_track(fs0, n, (1000.0, 0.0, -100.0))
+    fs, comps = placement.link_components(tx, rx, placement.NodeSensors(grade=imu.GRADES["industrial"]), None)
+    ev = {(r["tx_imu"], r["stage"]): r["sir_db"]
+          for r in placement.evaluate(fs, comps, placement.ReceiverModel(packet_s=1.05, stages=("sym", "smooth", "smooth+pfft8")))}
+    assert ev[(False, "smooth")] > ev[(False, "sym")]
+    assert ev[(False, "smooth+pfft8")] > ev[(False, "smooth")]
+    assert np.isfinite(ev[(True, "smooth")])

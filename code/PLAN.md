@@ -87,7 +87,7 @@ and shows where it is not (high SNR / 16-QAM, long frames, rough sea, both ends 
 
 ---
 
-## Phase 3 — E3: who estimates what ♻️ (done in the compensation phase; reframe)
+## Phase 3 — E3: who estimates what ✅ reframed 14 Oct (fair receiver stages + realistic sensors in the evaluator, validated within 0.13 dB median; rule: sensors substitute for receiver complexity; multipath extension waits for the multipath runs)
 **Question.** Which part of the Doppler should come from which source, given sensor quality, latency, packet length
 and the receiver's estimate budget?
 

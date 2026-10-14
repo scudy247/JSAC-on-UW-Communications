@@ -30,6 +30,39 @@ import numpy as np
 from . import motion, theory
 
 STAGES = ("none", "sym", "const2", "line2", "quad", "stale")
+# Stages of the fair end-to-end chain (14 Oct 2026): the Kalman smoother on per-symbol estimates with the signal-only
+# ("smooth") or sensor-fusion ("smooth_s") settings, each optionally followed by partial-FFT demodulation ("+pfftP":
+# the phase variation between the P segments of every FFT window is removed, so interference is counted within
+# segments). The old stages (piecewise per symbol, polynomial fits) understated the signal-only receivers.
+STAGES_FAIR = ("none", "smooth", "smooth+pfft8", "smooth_s", "smooth_s+pfft8")
+
+
+def _split_stage(stage):
+    base, _, pf = stage.partition("+pfft")
+    return base, (int(pf) if pf else 1)
+
+
+_SMOOTH = {}
+
+
+def smoother_weights(t, centres, sigma, settings):
+    """Weights (len(t), len(centres)) of the RTS smoother (fusion.smooth, linear in the measurements) from one
+    residual-Doppler estimate per symbol centre (std sigma) to the trajectory on t."""
+    from . import fusion
+    key = (len(t), float(t[-1]), tuple(np.round(centres, 6)), sigma, tuple(sorted(settings.items())))
+    if key not in _SMOOTH:
+        W = np.zeros((len(t), len(centres)))
+        for i in range(len(centres)):
+            ev = [(c_, "r", 1.0 if j == i else 0.0, sigma ** 2) for j, c_ in enumerate(centres)]
+            W[:, i] = fusion.smooth(ev, t, settings["sigma_r0"], settings["sigma_dr0"], settings["q"])[0]
+        _SMOOTH[key] = W
+    return _SMOOTH[key]
+
+
+def _smooth_settings(base):
+    from . import chain
+    return dict(chain.SIGNAL_FUSION) if base == "smooth" else \
+        {k: chain.FUSION[k] for k in ("sigma_r0", "sigma_dr0", "q")}
 
 
 @dataclass
@@ -42,6 +75,9 @@ class NodeSensors:
     extrapolate: bool = True  # bridge the latency with the measured acceleration
     lever_corrected: bool = True  # add omega x r from the gyro
     u_error_deg: float = 0.0  # azimuth error of the path direction it projects on
+    grade: object = None  # imu.ImuGrade: the estimate comes from imu.RealisticIMU (sigma / tau unused)
+    lever_m: float = None  # lever-arm length for the realistic model's gyro term
+    seed: int = 0
 
 
 @dataclass
@@ -73,6 +109,13 @@ def receiver_stage(stage, rx, f):
         return (theory.kernel_samples(f, t_s, T, order), 0.0, theory.noise_samples(rx.sigma, t_s, T, order))
     if stage == "stale":
         return theory.kernel_stale_packet(f, rx.stale_h, T), 0.0, rx.sigma ** 2
+    base, _ = _split_stage(stage)
+    if base in ("smooth", "smooth_s"):  # residual-variance kernel of the linear smoother, from its weights
+        t, t_s, W, _ = stage_estimator(stage, rx)
+        E = np.exp(2j * np.pi * np.outer(t, f)) - W @ np.exp(2j * np.pi * np.outer(t_s, f))
+        k = np.mean(np.abs(E) ** 2, axis=0)
+        k0 = float(np.mean((1 - W.sum(1)) ** 2))
+        return k, k0, rx.sigma ** 2 * float(np.mean(np.sum(W ** 2, 1)))
     raise ValueError(stage)
 
 
@@ -103,6 +146,13 @@ def stage_estimator(stage, rx):
         return t, t_s, W, windows
     if stage == "stale":
         return t, np.array([-rx.stale_h]), np.ones((len(t), 1)), windows
+    base, n_seg = _split_stage(stage)
+    if base in ("smooth", "smooth_s"):
+        W = smoother_weights(t, centres, rx.sigma, _smooth_settings(base))
+        if n_seg > 1:  # partial FFT: interference counted within each of the n_seg segments of every window
+            windows = [(a + (b - a) * j // n_seg, a + (b - a) * (j + 1) // n_seg) for a, b in windows
+                       for j in range(n_seg)]
+        return t, centres, W, windows
     raise ValueError(stage)
 
 
@@ -162,7 +212,14 @@ def link_components(tx_track, rx_track, tx_sensors, rx_sensors, c=motion.C):
     for name, tr, tt, sign, sen, true in (("tx", tx_track, t, +1, tx_sensors, d["eps_tx"]),
                                           ("rx", rx_track, t + tau, -1, rx_sensors, d["eps_rx"])):
         comp = Component(name, true)
-        if sen is not None and sen.has_imu:
+        if sen is not None and sen.has_imu and sen.grade is not None:
+            from .imu import RealisticIMU
+            u_hat = _rotate(u, sen.u_error_deg)
+            est = RealisticIMU(tr, sen.grade, np.random.default_rng(sen.seed), sen.latency, sen.extrapolate,
+                               sen.lever_corrected, sen.lever_m).velocity(tt)
+            comp.after_node = true - sign * (est @ u_hat) / c
+            comp.drift = (0.0, sen.tau)  # every error is in the estimate itself
+        elif sen is not None and sen.has_imu:
             u_hat = _rotate(u, sen.u_error_deg)
             v = tr.velocity_at(tt, "fast") + (tr.velocity_at(tt, "lever") if sen.lever_corrected else 0.0)
             view = sign * (v @ u_hat) / c
@@ -234,7 +291,7 @@ def evaluate(fs, comps, rx, floor=0.0):
             x = comp.after_node if on else comp.true
             parts[comp.name] = _series_var(x, fs, kern, k0)
             parts_ici[comp.name] = _series_var(x, fs, kici, kici0)
-            if on:
+            if on and comp.drift[0] > 0:
                 parts[comp.name] += _drift_var(*comp.drift, kern, fs / 2)
                 parts_ici[comp.name] += _drift_var(*comp.drift, kici, fs / 2)
         parts["rx_noise"], parts["floor"] = noise, floor

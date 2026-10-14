@@ -1,136 +1,142 @@
 [
  {
   "part": "read_rate",
-  "channel": "single path",
+  "channel": "single path, DBPSK",
   "snr_db": -3,
   "accepted": 0.4,
   "undetected_wrong": 0.0
  },
  {
   "part": "read_rate",
-  "channel": "single path",
+  "channel": "single path, DBPSK",
   "snr_db": 0,
   "accepted": 0.9,
   "undetected_wrong": 0.0
  },
  {
   "part": "read_rate",
-  "channel": "single path",
+  "channel": "single path, DBPSK",
   "snr_db": 3,
   "accepted": 1.0,
   "undetected_wrong": 0.0
  },
  {
   "part": "read_rate",
-  "channel": "single path",
+  "channel": "single path, DBPSK",
   "snr_db": 6,
   "accepted": 1.0,
   "undetected_wrong": 0.0
  },
  {
   "part": "read_rate",
-  "channel": "single path",
+  "channel": "single path, DBPSK",
   "snr_db": 10,
   "accepted": 1.0,
   "undetected_wrong": 0.0
  },
  {
   "part": "read_rate",
-  "channel": "multipath",
+  "channel": "single path, coherent",
+  "snr_db": -3,
+  "accepted": 0.77,
+  "undetected_wrong": 0.0
+ },
+ {
+  "part": "read_rate",
+  "channel": "single path, coherent",
+  "snr_db": 0,
+  "accepted": 1.0,
+  "undetected_wrong": 0.0
+ },
+ {
+  "part": "read_rate",
+  "channel": "single path, coherent",
+  "snr_db": 3,
+  "accepted": 1.0,
+  "undetected_wrong": 0.0
+ },
+ {
+  "part": "read_rate",
+  "channel": "single path, coherent",
+  "snr_db": 6,
+  "accepted": 1.0,
+  "undetected_wrong": 0.0
+ },
+ {
+  "part": "read_rate",
+  "channel": "single path, coherent",
+  "snr_db": 10,
+  "accepted": 1.0,
+  "undetected_wrong": 0.0
+ },
+ {
+  "part": "read_rate",
+  "channel": "multipath, DBPSK",
   "snr_db": -3,
   "accepted": 0.21,
   "undetected_wrong": 0.0
  },
  {
   "part": "read_rate",
-  "channel": "multipath",
+  "channel": "multipath, DBPSK",
   "snr_db": 0,
   "accepted": 0.46,
   "undetected_wrong": 0.0
  },
  {
   "part": "read_rate",
-  "channel": "multipath",
+  "channel": "multipath, DBPSK",
   "snr_db": 3,
   "accepted": 0.8,
   "undetected_wrong": 0.0
  },
  {
   "part": "read_rate",
-  "channel": "multipath",
+  "channel": "multipath, DBPSK",
   "snr_db": 6,
   "accepted": 0.91,
   "undetected_wrong": 0.0
  },
  {
   "part": "read_rate",
-  "channel": "multipath",
+  "channel": "multipath, DBPSK",
   "snr_db": 10,
   "accepted": 0.97,
   "undetected_wrong": 0.0
  },
  {
-  "part": "wrong_header",
-  "n_data": 7,
-  "receiver": "signal_kalman",
-  "median_db": 29.271448359559937,
-  "p10_db": 26.678702125052375,
-  "power_avg_db": 28.512035521064373
+  "part": "read_rate",
+  "channel": "multipath, coherent",
+  "snr_db": -3,
+  "accepted": 0.37,
+  "undetected_wrong": 0.0
  },
  {
-  "part": "wrong_header",
-  "n_data": 7,
-  "receiver": "fusion_correct_header",
-  "median_db": 29.75908638903203,
-  "p10_db": 29.259005372363816,
-  "power_avg_db": 29.64800444141556
+  "part": "read_rate",
+  "channel": "multipath, coherent",
+  "snr_db": 0,
+  "accepted": 0.71,
+  "undetected_wrong": 0.0
  },
  {
-  "part": "wrong_header",
-  "n_data": 7,
-  "receiver": "fusion_wrong_header",
-  "median_db": 29.355271716189172,
-  "p10_db": 26.678702125052375,
-  "power_avg_db": 28.551733307334292
+  "part": "read_rate",
+  "channel": "multipath, coherent",
+  "snr_db": 3,
+  "accepted": 0.94,
+  "undetected_wrong": 0.0
  },
  {
-  "part": "wrong_header",
-  "n_data": 7,
-  "receiver": "fusion_fixed_wrong_header",
-  "median_db": 0.9369693035892063,
-  "p10_db": -18.083303526160858,
-  "power_avg_db": 0.39034737934473196
+  "part": "read_rate",
+  "channel": "multipath, coherent",
+  "snr_db": 6,
+  "accepted": 0.97,
+  "undetected_wrong": 0.0
  },
  {
-  "part": "wrong_header",
-  "n_data": 27,
-  "receiver": "signal_kalman",
-  "median_db": 27.455740167525835,
-  "p10_db": 25.175721970919856,
-  "power_avg_db": 26.84666820553452
- },
- {
-  "part": "wrong_header",
-  "n_data": 27,
-  "receiver": "fusion_correct_header",
-  "median_db": 29.544785574188705,
-  "p10_db": 29.115291553179564,
-  "power_avg_db": 29.484839137262526
- },
- {
-  "part": "wrong_header",
-  "n_data": 27,
-  "receiver": "fusion_wrong_header",
-  "median_db": 27.455740167525835,
-  "p10_db": 25.599293070748185,
-  "power_avg_db": 27.11281388847309
- },
- {
-  "part": "wrong_header",
-  "n_data": 27,
-  "receiver": "fusion_fixed_wrong_header",
-  "median_db": 5.9421025925795465,
-  "p10_db": -2.0923858256251475,
-  "power_avg_db": 4.651709911186829
+  "part": "read_rate",
+  "channel": "multipath, coherent",
+  "snr_db": 10,
+  "accepted": 1.0,
+  "undetected_wrong": 0.0
  }
 ]

@@ -819,3 +819,27 @@ bottom bounce 10.7 ms). Accepted at -3 / 0 / 3 / 6 / 10 dB: single path 0.40 / 0
   found. Context: log(CTIR) falls linearly with time after the first arrival, slope proportional to Hs (3.5 kHz,
   JASA 2006); at 17 kHz surface motion reduces acoustic coherence by 20-30 % (Sci. Rep. 2020); Doppler spread grows
   with frequency (JASA EL 2010, 10-18 kHz). rho stays a swept parameter (-30, -20 dB; 0 dB worst case).
+
+## E3 reframed: evaluator with the fair receiver stages and realistic sensors (14 Oct 2026; Phase 3)
+`placement.py`: new receiver stages "smooth" / "smooth_s" (the Kalman smoother as a linear estimator, weights from
+fusion.smooth on unit impulses; signal-only / sensor settings) and "+pfft8" (partial FFT: interference counted within
+the 8 segments of each FFT window); `NodeSensors(grade=...)` takes the node's estimate from imu.RealisticIMU.
+**Validation against the fair end-to-end comparison** (`scripts/b16_e3_validate.py`; 4 cases x 4 receivers x 20 / 30
+dB): prediction - simulated median SINR, median +0.13 dB, max 1.9 dB (signal-only Kalman, buoy-buoy 4 s, 30 dB:
+29.7 vs 27.8; power average 26.1 — the tail of bad packets that the mean-square model cannot see).
+The old Phase 3 headline (+4 to +15 dB "at equal budget") compared sensors with a per-symbol piecewise stage (22.9 dB
+SIR on buoy-buoy); against the Kalman smoother the node stage adds 1-2 dB of SIR at 38-45 dB, i.e. nothing at the
+noise level. **Cost ladder** (SIR at 30 dB; signal-only / with industrial MEMS at both moving ends):
+
+| Receiver machinery | buoy-buoy 1 s | buoy-buoy 4 s | seabed OOI 4 s | seabed CDIP 1 s |
+|---|---|---|---|---|
+| none (sensors alone) | - / 21.1 | - / 21.1 | - / 24.2 | - / 26.2 |
+| two chirp estimates (line) | 6.5 / 33.0 | -7.5 / 23.3 | -4.4 / 25.8 | 19.8 / 43.6 |
+| one estimate per symbol | 22.9 / 41.1 | 22.9 / 41.1 | 26.1 / 42.8 | 36.7 / 44.3 |
+| Kalman smoother | 39.6 / 41.3 | 40.8 / 41.6 | 42.2 / 43.8 | 44.5 / 45.4 |
+| Kalman + partial FFT | 53.2 / 55.6 | 54.9 / 55.9 | 57.1 / 59.4 | 62.0 / 63.3 |
+
+**New E3 rule: sensors substitute for receiver complexity, they do not raise the ceiling.** With the cheapest
+receiver (two chirp estimates, no per-symbol tracking) sensors add +17 to +30 dB and make 1 s packets noise-limited up
+to ~30 dB SNR — what a signal-only receiver needs a Kalman tracker for; on 4 s packets sensors + per-symbol estimates
+match the signal-only Kalman; with Kalman + partial FFT the difference vanishes.
