@@ -71,9 +71,10 @@ class LinkMultipath:
         """geometry: (range [m], tx depth, rx depth, water depth) for Bellhop; w_record: vertical velocity of the sea
         surface (e.g. the buoy's heave velocity) at fs_record, for the scattered paths. ssp: sound-speed profile
         [(z, c)] (None: isovelocity; SUMMER_SSP: downward refracting). cluster: (n_sub, angle_spread_deg,
-        delay_spread_s) splits every coherent path into n_sub sub-paths with random angle and delay offsets and
-        complex Gaussian gains drawn per packet: each path then fades and has its own Doppler spread within the
-        packet (micro-multipath from small-scale roughness and bathymetry); None: one frozen ray per path."""
+        delay_spread_s) splits every boundary-interacting coherent path (surface or bottom bounce) into n_sub sub-paths
+        with random angle and delay offsets and complex Gaussian gains drawn per packet: such a path then fades, has
+        its own Doppler spread within the packet and a frequency response of its own (micro-multipath from
+        small-scale roughness); the direct path stays a single ray. None: one frozen ray per path.""" 
         self.tx, self.rx = tx, rx
         d = motion.link_doppler(tx, rx)
         self.u, self.tau = d["u"], d["tau"]
@@ -95,12 +96,19 @@ class LinkMultipath:
         g = g / np.sqrt(np.sum(np.abs(g) ** 2))
         ref = int(np.argmax(np.abs(g)))
         bulk = eps[ref]
+        self.groups = []  # indices of the paths (rays or sub-paths) of each coherent arrival, in self.coh order
         if self.cluster is None:
             paths = [Path(a.delay - t0, gk, e - bulk) for a, gk, e in zip(self.coh, g, eps)]
+            self.groups = [[i] for i in range(len(paths))]
         else:
             n_sub, ang, dly = self.cluster
             paths = []
-            for a, gk in zip(self.coh, g):
+            for a, gk, e0 in zip(self.coh, g, eps):
+                if a.n_top + a.n_bot == 0:  # the direct path touches no boundary: a single ray, no spread
+                    self.groups.append([len(paths)])
+                    paths.append(Path(a.delay - t0, gk, e0 - bulk))
+                    continue
+                self.groups.append(list(range(len(paths), len(paths) + n_sub)))
                 c = (rng.standard_normal(n_sub) + 1j * rng.standard_normal(n_sub)) / np.sqrt(2 * n_sub)
                 for j in range(n_sub):
                     e = path_eps(self.tx, self.rx, self.u, self.tau, tg, a.src_angle_deg + ang * rng.standard_normal(),

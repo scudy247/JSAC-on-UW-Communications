@@ -110,3 +110,58 @@ def qam16_llr(y, h, noise_var):
 
 
 MODS = {"qpsk": (2, qpsk, qpsk_llr), "16qam": (4, qam16, qam16_llr)}
+
+
+def bcjr(llr, n_info):
+    """Max-log-MAP (BCJR) decoder for the zero-tail code: channel LLRs (2 per input step, positive = bit 0) ->
+    (a posteriori LLRs of the coded bits, a posteriori LLRs of the info bits). Used for soft interference
+    cancellation (soft symbols from the coded-bit LLRs) where Viterbi only gives hard decisions."""
+    n_steps = n_info + K - 1
+    L = np.asarray(llr, float)[:2 * n_steps].reshape(n_steps, 2)
+    src = np.repeat(np.arange(N_STATES), 2)
+    inp = np.tile([0, 1], N_STATES)
+    dst = _NEXT[src, inp]
+    sgn = _SIGN[src, inp].astype(float)  # (2 N_STATES, 2): +1 for coded bit 0
+    gam = 0.5 * (L @ sgn.T)  # (n_steps, 2 N_STATES) branch metrics
+    neg = -1e30
+    alpha = np.full((n_steps + 1, N_STATES), neg)
+    alpha[0, 0] = 0.0
+    for t in range(n_steps):
+        cand = alpha[t, src] + gam[t]
+        a = np.full(N_STATES, neg)
+        np.maximum.at(a, dst, cand)
+        alpha[t + 1] = a - a.max()
+    beta = np.full((n_steps + 1, N_STATES), neg)
+    beta[n_steps, 0] = 0.0  # zero tail ends in state 0
+    for t in range(n_steps - 1, -1, -1):
+        cand = beta[t + 1, dst] + gam[t]
+        b = np.full(N_STATES, neg)
+        np.maximum.at(b, src, cand)
+        beta[t] = b - b.max()
+    tot = alpha[:-1, src] + gam + beta[1:, dst]  # (n_steps, 2 N_STATES)
+    out = np.empty((n_steps, 2))
+    for j in range(2):
+        b0 = sgn[:, j] > 0
+        out[:, j] = tot[:, b0].max(1) - tot[:, ~b0].max(1)
+    info = tot[:, inp == 0].max(1) - tot[:, inp == 1].max(1)
+    return out.reshape(-1), info[:n_info]
+
+
+def soft_qpsk(llr):
+    """Expected Gray-QPSK symbols from coded-bit LLRs (pairs per symbol): (tanh(L0/2) + j tanh(L1/2)) / sqrt 2."""
+    t = np.tanh(0.5 * np.clip(np.asarray(llr, float), -40, 40)).reshape(-1, 2)
+    return (t[:, 0] + 1j * t[:, 1]) / np.sqrt(2)
+
+
+def soft_qam16(llr):
+    """Expected Gray 16-QAM symbols from coded-bit LLRs (4 per symbol: b0 b1 on I, b2 b3 on Q)."""
+    p0 = 1.0 / (1.0 + np.exp(-np.clip(np.asarray(llr, float), -40, 40))).reshape(-1, 4)  # P(bit = 0)
+    def axis(pa, pb):
+        e = 0.0
+        for (b0, b1), lev in _PAM4.items():
+            e = e + (pa if b0 == 0 else 1 - pa) * (pb if b1 == 0 else 1 - pb) * lev
+        return e
+    return (axis(p0[:, 0], p0[:, 1]) + 1j * axis(p0[:, 2], p0[:, 3])) / np.sqrt(10)
+
+
+SOFT = {"qpsk": soft_qpsk, "16qam": soft_qam16}

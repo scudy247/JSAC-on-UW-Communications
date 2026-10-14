@@ -1,0 +1,161 @@
+{
+ "config": "bb_iso_1s",
+ "n_packets": 1,
+ "nominal": [
+  [
+   0.0,
+   0.0,
+   0.0
+  ],
+  [
+   10.3719139,
+   -10.3719139,
+   0.010986804999999933
+  ]
+ ],
+ "summary": [
+  {
+   "delay_ms": 0.0,
+   "power_db": 0.0,
+   "src_deg": 0.0,
+   "rcv_deg": 0.0,
+   "n_top": 0,
+   "n_bot": 0
+  },
+  {
+   "delay_ms": 10.713874999999984,
+   "power_db": -1.348390410522657,
+   "src_deg": 10.2039671,
+   "rcv_deg": -10.2039671,
+   "n_top": 0,
+   "n_bot": 1
+  }
+ ],
+ "rows": [
+  {
+   "config": "bb_iso_1s",
+   "snr_db": 30,
+   "sensor_guard_choice_signal": 0.0
+  },
+  {
+   "config": "bb_iso_1s",
+   "snr_db": 30,
+   "receiver": "fused_safe",
+   "sinr_power_avg_db": 7.745873850570843,
+   "sinr_median_db": 7.745873850570843,
+   "sinr_p10_db": 7.745873850570843,
+   "per": 0.0,
+   "per_packet_db": [
+    7.745873850570843
+   ]
+  },
+  {
+   "config": "bb_iso_1s",
+   "snr_db": 30,
+   "receiver": "fused_safe_pfft8",
+   "sinr_power_avg_db": 5.079671763507748,
+   "sinr_median_db": 5.079671763507748,
+   "sinr_p10_db": 5.079671763507748,
+   "per": 1.0,
+   "per_packet_db": [
+    5.079671763507748
+   ]
+  },
+  {
+   "config": "bb_iso_1s",
+   "snr_db": 30,
+   "receiver": "ideal_sic",
+   "sinr_power_avg_db": 28.525960709977195,
+   "sinr_median_db": 28.525960709977195,
+   "sinr_p10_db": 28.525960709977195,
+   "per": 0.0,
+   "per_packet_db": [
+    28.525960709977195
+   ]
+  },
+  {
+   "config": "bb_iso_1s",
+   "snr_db": 30,
+   "receiver": "lilee",
+   "sinr_power_avg_db": 7.658597079920073,
+   "sinr_median_db": 7.658597079920073,
+   "sinr_p10_db": 7.658597079920073,
+   "per": 0.0,
+   "per_packet_db": [
+    7.658597079920073
+   ]
+  },
+  {
+   "config": "bb_iso_1s",
+   "snr_db": 30,
+   "receiver": "pfft8_kalman",
+   "sinr_power_avg_db": 5.126542530512412,
+   "sinr_median_db": 5.126542530512412,
+   "sinr_p10_db": 5.126542530512412,
+   "per": 1.0,
+   "per_packet_db": [
+    5.126542530512412
+   ]
+  },
+  {
+   "config": "bb_iso_1s",
+   "snr_db": 30,
+   "receiver": "sensor_sic",
+   "sinr_power_avg_db": 26.11875582689502,
+   "sinr_median_db": 26.11875582689502,
+   "sinr_p10_db": 26.11875582689502,
+   "per": 0.0,
+   "per_packet_db": [
+    26.11875582689502
+   ]
+  },
+  {
+   "config": "bb_iso_1s",
+   "snr_db": 30,
+   "receiver": "sensor_sic_noguard",
+   "sinr_power_avg_db": 26.11875582689502,
+   "sinr_median_db": 26.11875582689502,
+   "sinr_p10_db": 26.11875582689502,
+   "per": 0.0,
+   "per_packet_db": [
+    26.11875582689502
+   ]
+  },
+  {
+   "config": "bb_iso_1s",
+   "snr_db": 30,
+   "receiver": "signal_kalman",
+   "sinr_power_avg_db": 7.722473851962574,
+   "sinr_median_db": 7.722473851962574,
+   "sinr_p10_db": 7.722473851962574,
+   "per": 0.0,
+   "per_packet_db": [
+    7.722473851962574
+   ]
+  },
+  {
+   "config": "bb_iso_1s",
+   "snr_db": 30,
+   "receiver": "signal_sic",
+   "sinr_power_avg_db": 19.387677436181253,
+   "sinr_median_db": 19.387677436181253,
+   "sinr_p10_db": 19.387677436181253,
+   "per": 0.0,
+   "per_packet_db": [
+    19.387677436181253
+   ]
+  },
+  {
+   "config": "bb_iso_1s",
+   "snr_db": 30,
+   "receiver": "tu_grid",
+   "sinr_power_avg_db": 7.714906166189797,
+   "sinr_median_db": 7.714906166189797,
+   "sinr_p10_db": 7.714906166189797,
+   "per": 0.0,
+   "per_packet_db": [
+    7.714906166189797
+   ]
+  }
+ ]
+}

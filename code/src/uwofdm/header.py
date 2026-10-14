@@ -75,3 +75,42 @@ def check(bits):
     """Split payload and CRC; True if the CRC matches."""
     payload, crc = bits[:-8], bits[-8:]
     return payload, bool(np.array_equal(crc8(payload), crc))
+
+
+# --------------------------------------------------------------------------- coherent header (14 Oct 2026)
+HEADER_PILOT_SEED = 991
+
+
+def _coherent_layout(o, used, pilot_mask):
+    pil = np.where(used & pilot_mask)[0]
+    dat = np.where(used & ~pilot_mask)[0]
+    pv = np.exp(1j * np.pi / 4 * (2 * np.random.default_rng(HEADER_PILOT_SEED).integers(0, 4, len(pil)) + 1))
+    return pil, dat, pv
+
+
+def modulate_coherent(bits, o, used, pilot_mask):
+    """Coherent header symbol: known QPSK pilots on the frame's pilot comb, BPSK on the other used subcarriers, bit i
+    repeated on data subcarriers i, i + n, i + 2n, ... (n = len(bits)). In multipath the DBPSK header lost 4-6 dB
+    (differential detection across frequency-selective subcarriers); this one is detected with a channel estimate."""
+    pil, dat, pv = _coherent_layout(o, used, pilot_mask)
+    X = np.zeros((1, o.n_sc), complex)
+    X[0, pil] = pv
+    X[0, dat] = 1 - 2 * np.array([bits[i % len(bits)] for i in range(len(dat))], float)
+    return X
+
+
+def demodulate_coherent(Y, n_bits, F):
+    """Coherent detection: sparse channel estimate from the header pilots (receiver.channel_estimates, one symbol),
+    maximum-ratio combining of each bit's repetitions with the noise measured on the nulls -> bits, soft values."""
+    from . import receiver
+    o = F.o
+    _, pil_mask = receiver.masks(F)
+    pil, dat, pv = _coherent_layout(o, F.used, pil_mask)
+    P = np.zeros((1, o.n_sc), complex)
+    P[0, pil] = pv
+    H, NV = receiver.channel_estimates(Y[None, :], F, P=P[:, pil_mask])
+    z = np.real(np.conj(H[0, dat]) * Y[dat]) / NV[0]
+    soft = np.zeros(n_bits)
+    for i, v in enumerate(z):
+        soft[i % n_bits] += v
+    return (soft < 0).astype(int), soft

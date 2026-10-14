@@ -74,9 +74,10 @@ def receive_aided(y, F, prior, search=(0, None), eps_res_max=3e-4, prepost=True,
     return Y, dict(n_pre=n_pre, eps_residual=eps_r, cfo=offs, post_window=_post_window(0, F, eps_res_max))
 
 
-def read_header(y, F, rx_prior, alloc, search=(0, None), eps_max=3e-3, backoff=0):
+def read_header(y, F, rx_prior, alloc, search=(0, None), eps_max=3e-3, backoff=0, coherent=False, n_bits=None):
     """Side-information header only: own IMU -> mean scale from preamble / postamble -> residual CFO of the header
-    symbol -> soft DBPSK bits -> CRC. Returns (ok, payload bits, info)."""
+    symbol -> soft bits (DBPSK, or coherent with header pilots if coherent=True) -> CRC. n_bits: payload + CRC
+    (default sum(alloc) + 8). Returns (ok, payload bits, info)."""
     o = F.o
     n_pre, _ = estimators.detect_chirp(y, F, *search)
     i0 = max(0, int(round(n_pre)))  # a wrong lock near the buffer start must not wrap around
@@ -91,7 +92,8 @@ def read_header(y, F, rx_prior, alloc, search=(0, None), eps_max=3e-3, backoff=0
     d = estimators.residual_cfo(hseg, o, span=CFO_SPAN, n_grid=81, null_bins=F.null_bins())
     hseg = hseg * np.exp(-2j * np.pi * d * np.arange(o.n_fft) / o.fs)
     Yh = np.fft.fft(hseg)[o.bins()] * np.sqrt(o.n_sc) / o.n_fft
-    bits, soft = hdr.demodulate(Yh, int(np.sum(alloc)) + 8, o, F.used)
+    nb = n_bits or int(np.sum(alloc)) + 8
+    bits, soft = hdr.demodulate_coherent(Yh, nb, F) if coherent else hdr.demodulate(Yh, nb, o, F.used)
     payload, ok = hdr.check(bits)
     return ok, payload, dict(header_ok=ok, header_margin=float(np.min(np.abs(soft))), eps_mean=eps_mean, header_cfo=d)
 

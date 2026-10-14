@@ -38,7 +38,7 @@ def setup(n_data, seed):
     return tx, rx, d, F, ntx, nrx, ranges, alloc[(32, "none")]
 
 
-def make_packet(F, d, tx, ntx, nrx, ranges, a, t0, rp, link=None):
+def make_packet(F, d, tx, ntx, nrx, ranges, a, t0, rp, link=None, coherent=False):
     o = F.o
     T = F.length / o.fs
     te = t0 + np.arange(F.length + 4000) / o.fs
@@ -46,7 +46,9 @@ def make_packet(F, d, tx, ntx, nrx, ranges, a, t0, rp, link=None):
     bits = header.pack(c, a, ranges)
     X = o.random_symbols(F.n_data, rp)
     X[:, F.nulls] = 0
-    s = F.build(header.modulate(bits, o, F.used), X)
+    from uwofdm import receiver
+    hsym = header.modulate_coherent(bits, o, F.used, receiver.masks(F)[1]) if coherent else header.modulate(bits, o, F.used)
+    s = F.build(hsym, X)
     lead = int(rp.integers(500, 3000))
     x = np.concatenate([np.zeros(lead, complex), s, np.zeros(9000, complex)])
     extra = int(0.09 * o.fs)
@@ -67,21 +69,22 @@ def part1(n):
     links = {"single path": None,
              "multipath": multipath.LinkMultipath(tx, rx, GEO, sigma_eta(tx), tx.vel_fast[:, 2], tx.fs,
                                                   cluster=(5, 0.3, 5e-5))}
-    for name, link in links.items():
+    for (name, link), coh in [(kv, c) for kv in links.items() for c in (False, True)]:
+        name = f"{name}, {'coherent' if coh else 'DBPSK'}"
         rng = np.random.default_rng(42)
         acc = {s: [0, 0] for s in SNRS_DB}
         for t0 in rng.uniform(d["times"][0] + 240, d["times"][-1] - T - 60, n):
             rp = np.random.default_rng(rng.integers(1 << 30))
-            y0, X, bits, rx_est, lead, _ = make_packet(F, d, tx, ntx, nrx, ranges, a, t0, rp, link)
+            y0, X, bits, rx_est, lead, _ = make_packet(F, d, tx, ntx, nrx, ranges, a, t0, rp, link, coh)
             for snr in SNRS_DB:
                 sig = np.sqrt(4.0 / 10 ** (snr / 10) / 2)
                 y = y0 + sig * (rp.standard_normal(len(y0)) + 1j * rp.standard_normal(len(y0)))
-                ok, payload, _ = chain.read_header(y, F, rx_est, a, (0, lead + 1500))
+                ok, payload, _ = chain.read_header(y, F, rx_est, a, (0, lead + 1500), coherent=coh)
                 acc[snr][0] += ok
                 acc[snr][1] += ok and not np.array_equal(payload, bits[:-8])
         for snr, (ok, wrong) in acc.items():
             rows.append(dict(part="read_rate", channel=name, snr_db=snr, accepted=ok / n, undetected_wrong=wrong / n))
-            print(f"header, {name:11s} SNR {snr:3d} dB: accepted {ok / n:.2f}, accepted but wrong {wrong / n:.3f}",
+            print(f"header, {name:25s} SNR {snr:3d} dB: accepted {ok / n:.2f}, accepted but wrong {wrong / n:.3f}",
                   flush=True)
     return rows
 
@@ -122,7 +125,7 @@ def part2(n):
 
 def main():
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 100
-    rows = part1(n) + part2(max(10, n // 5))
+    rows = part1(n) + (part2(max(10, n // 5)) if "--no-part2" not in sys.argv else [])
     with open(os.path.join(output_dir("b12_header"), "points.json"), "w", encoding="utf-8") as fh:
         json.dump(rows, fh, indent=1)
 

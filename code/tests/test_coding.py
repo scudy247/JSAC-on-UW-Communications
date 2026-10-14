@@ -96,3 +96,18 @@ def test_sparse_channel_estimate_close_to_genie():
         assert np.mean(np.abs(H_ls[:, data] - Ht[data]) ** 2) > 0.5 * nv
         ok += np.array_equal(receiver.decode(Y, F), info)
     assert ok >= 3
+
+
+def test_bcjr_matches_viterbi_and_soft_symbols():
+    """Max-log-MAP decoder: info decisions equal Viterbi's on a noisy codeword; coded-bit decisions equal the
+    re-encoded Viterbi path; soft QPSK symbols tend to the transmitted ones when the LLRs are large."""
+    rng = np.random.default_rng(1)
+    info = rng.integers(0, 2, 500)
+    c = coding.encode(info)
+    x = 1 - 2 * c.astype(float)
+    llr = 2 * (x + 0.8 * rng.standard_normal(len(x))) / 0.64
+    coded, info_llr = coding.bcjr(llr, len(info))
+    assert np.array_equal((info_llr < 0).astype(int), coding.viterbi(llr, len(info)))
+    assert np.array_equal((coded < 0).astype(int), coding.encode(coding.viterbi(llr, len(info))))  # ML path
+    s = coding.soft_qpsk(40.0 * (1 - 2 * c[:200]))
+    assert np.allclose(s, coding.qpsk(c[:200]), atol=1e-6)
