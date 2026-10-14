@@ -3,6 +3,8 @@
 # priority (nice 19), log in results/logs/<name>.log ending with "exit <code> <date>". Survives closing the terminal
 # or Claude. Refuses to start when MAX_JOBS of our experiments already run (the machine is shared).
 # Usage: bash run_job.sh <name> <script.py> [args...]
+# WAIT=1 queues one job; do not queue several at once: they poll independently and can all start when one slot frees
+# (overshooting MAX_JOBS). For several jobs, run them as one sequential chain in a single tmux window.
 # Monitor: tmux ls; tmux list-windows -t doppler; tail -f code/results/logs/<name>.log; attach: tmux attach -t doppler
 set -e
 MAX_JOBS=${MAX_JOBS:-4}
