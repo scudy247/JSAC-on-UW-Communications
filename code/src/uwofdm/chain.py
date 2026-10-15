@@ -565,7 +565,7 @@ def _demod_ici(z, F, pilots, n_seg=8, iters=2, backoff=0):
     return out, dict(inf, ici=True)
 
 
-def receive_pilot_track(y, F, pilots, search=(0, None), eps_max=3e-3, params=None, backoff=0, iters=3):
+def receive_pilot_track(y, F, pilots, search=(0, None), eps_max=3e-3, params=None, backoff=0, iters=3, prior=None):
     """Signal-only pilot tracking (PLAN: Phase 5, estimators.pilot_track), closed loop. Li et al. front end (one mean
     scale from the chirps, resampling), then `iters` rounds of: for each pair of consecutive data symbols the
     carrier-phase rotation of the known pilots, c_k = sum_pilots P_k conj(P_(k-1)) exp(-j b m) (P = Y / pilot
@@ -575,17 +575,25 @@ def receive_pilot_track(y, F, pilots, search=(0, None), eps_max=3e-3, params=Non
     from the pilot SNR (noise + ICI from the nulls); Kalman smoother (signal-only settings) with the postamble timing;
     resampling along the smoothed residual. Each round measures on the signal corrected by the previous ones: in a
     rough sea the first round sees pilots blurred by ICI (|c_k| / N down to 0.15), the next ones see clean pilots.
+    prior (sensor-aided variant, 15 Oct 2026): a Doppler trajectory per emitted sample of the frame (side information
+    + own IMU); the first resampling follows it instead of the chirps' mean scale, and the smoother takes the sensor
+    settings (FUSION: small, slow residual) unless params say otherwise.
     Returns (Y, info) with info["z"] (resampled frame)."""
     from . import receiver
     from .experiment import _ramp
     o = F.o
-    p = dict(FUSION, **SIGNAL_FUSION, **(params or {}))
+    p = dict(FUSION, **(SIGNAL_FUSION if prior is None else {}), **(params or {}))
     n_pre, _ = estimators.detect_chirp(y, F, *search)
-    n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
-    eps = estimators.scale_pre_post(n_pre, n_post, F.gap)
     i0 = max(0, int(round(n_pre)))  # a wrong lock near the buffer start must not wrap around
-    seg = y[i0:i0 + int(F.length * (1 + 2 * eps_max)) + 4096]
-    z = unwarp(seg, o.fs, np.full(len(seg), eps), o.fc)
+    if prior is None:
+        n_post, _ = estimators.detect_chirp(y, F, *_post_window(n_pre, F, eps_max))
+        eps = estimators.scale_pre_post(n_pre, n_post, F.gap)
+        seg = y[i0:i0 + int(F.length * (1 + 2 * eps_max)) + 4096]
+        z = unwarp(seg, o.fs, np.full(len(seg), eps), o.fc)
+    else:
+        seg = y[i0:i0 + len(prior)]
+        z = unwarp(seg, o.fs, prior[:len(seg)], o.fc)
+        eps = float(np.mean(prior[:F.gap]))
     _, pil_mask = receiver.masks(F)
     pil = np.where(pil_mask)[0]
     m = np.arange(len(pil)) - (len(pil) - 1) / 2

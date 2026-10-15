@@ -24,6 +24,9 @@ Gateway receivers per user (receive_users):
                  the header is assumed decoded (Phase 4 measured it)
   branch_pilot   the same branch with closed-loop pilot tracking (chain.receive_pilot_track: per-symbol pilot phase
                  rotations, Kalman smoother, three rounds), the strongest signal-only tracker of the single-user study
+  branch_sensor_pilot  pilot tracking started from the sensor prior (chain.receive_pilot_track(prior=...)), with
+                 the guard of the safe fusion: the output with the higher null-subcarrier SINR between it and
+                 branch_pilot is kept (never much worse than the best signal-only tracker)
   branch_genie   the true Doppler of the user, no estimation (what inter-user interference and noise leave)
 """
 from dataclasses import dataclass
@@ -33,7 +36,8 @@ import numpy as np
 from . import chain, receiver, waveform
 from .frame import Frame
 
-RECEIVERS = ("common", "branch_signal", "branch_kalman", "branch_pilot", "branch_sensor", "branch_genie")
+RECEIVERS = ("common", "branch_signal", "branch_kalman", "branch_pilot", "branch_sensor", "branch_sensor_pilot",
+             "branch_genie")
 
 
 @dataclass
@@ -140,12 +144,26 @@ def receive_users(y, frames, priors, truths, searches, eps_max=3e-3, which=RECEI
     need = {"common", "branch_signal"} & set(which)
     sig = [chain.receive_signal_only(y, F, s, eps_max=eps_max) for F, s in zip(frames, searches)] if need else []
     eps_c = float(np.mean([i["eps"] for _, i in sig])) if sig else 0.0
+    cache = {}
+
+    def pilot(k, F, s):  # signal-only pilot tracking, shared by branch_pilot and the guard of branch_sensor_pilot
+        if k not in cache:
+            cache[k] = chain.receive_pilot_track(y, F, pilot_grid(F), s, eps_max=eps_max)
+        return cache[k]
+
+    def sensor_pilot(k, F, s):
+        Ya, ia = chain.receive_pilot_track(y, F, pilot_grid(F), s, eps_max=eps_max, prior=priors[k])
+        Yb, ib = pilot(k, F, s)
+        sa, sb = chain.null_sinr(Ya, F), chain.null_sinr(Yb, F)
+        return (Ya, dict(ia, choice="sensor")) if sa >= sb else (Yb, dict(ib, choice="signal"))
+
     for k, (F, s) in enumerate(zip(frames, searches)):
         L = int(F.length * (1 + 2 * eps_max)) + 4096
         run = {"common": lambda: chain.receive_aided(y, F, np.full(L, eps_c), s, prepost=False),
                "branch_signal": lambda: sig[k],
                "branch_kalman": lambda: chain.receive_signal_fused(y, F, s, eps_max=eps_max),
-               "branch_pilot": lambda: chain.receive_pilot_track(y, F, pilot_grid(F), s, eps_max=eps_max),
+               "branch_pilot": lambda: pilot(k, F, s),
+               "branch_sensor_pilot": lambda: sensor_pilot(k, F, s),
                "branch_sensor": lambda: chain.receive_fused_safe(y, F, priors[k], s, eps_max=eps_max),
                "branch_genie": lambda: chain.receive_aided(y, F, truths[k], s, prepost=False, cfo=False)}
         for r in which:

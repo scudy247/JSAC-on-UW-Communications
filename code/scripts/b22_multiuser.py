@@ -114,11 +114,11 @@ def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True):
                       p10_sinr_db=float(np.percentile(sinr, 10)), per=float(err.mean()),
                       per_ci95=wilson(int(err.sum()), len(err)), goodput_bps=float(K * bits * (1 - err.mean()) / T),
                       per_user_packet_sinr_db=[round(float(x), 2) for x in sinr.ravel()])
-    for base in ("branch_signal", "branch_pilot"):  # paired gain of ours over each signal-only baseline
-        d = np.array(rec["branch_sensor"]["sinr"]) - np.array(rec[base]["sinr"])
-        out["branch_sensor"]["gain_over_" + base] = dict(mean_db=float(d.mean()),
-                                                         ci95=ci95(d.reshape(-1, K).mean(1)),
-                                                         fraction_positive=float(np.mean(d > 0)))
+    for ours in ("branch_sensor", "branch_sensor_pilot"):  # paired gain of ours over each signal-only baseline
+        for base in ("branch_signal", "branch_pilot"):
+            d = np.array(rec[ours]["sinr"]) - np.array(rec[base]["sinr"])
+            out[ours]["gain_over_" + base] = dict(mean_db=float(d.mean()), ci95=ci95(d.reshape(-1, K).mean(1)),
+                                                  fraction_positive=float(np.mean(d > 0)))
     return out
 
 
@@ -158,12 +158,14 @@ def main():
                 for snr in ints(a.snrs):
                     res = run(case, K, guard, snr, a.n, rng, mod=a.mod, alone=not a.no_alone)
                     rows.append(dict(scenario=case, K=K, guard=guard, snr_db=snr, n_packets=a.n, mod=a.mod, **res))
-                    g = res["branch_sensor"]
+                    g, gp = res["branch_sensor"], res["branch_sensor_pilot"]
                     print(f"{case:13s} K {K} guard {guard:2d} SNR {snr} {a.mod} | mean SINR / PER: " + "  ".join(
                         f"{r} {v['mean_sinr_db']:5.1f}/{v['per']:.2f}" for r, v in res.items()) +
                         f" | ours - Tu {g['gain_over_branch_signal']['mean_db']:+.1f}"
                         f"+-{g['gain_over_branch_signal']['ci95']:.1f}, ours - pilot "
-                        f"{g['gain_over_branch_pilot']['mean_db']:+.1f}+-{g['gain_over_branch_pilot']['ci95']:.1f}",
+                        f"{g['gain_over_branch_pilot']['mean_db']:+.1f}+-{g['gain_over_branch_pilot']['ci95']:.1f}"
+                        f", ours+pilot - pilot {gp['gain_over_branch_pilot']['mean_db']:+.1f}"
+                        f"+-{gp['gain_over_branch_pilot']['ci95']:.1f}",
                         flush=True)
                     with open(os.path.join(output_dir("b22_multiuser"), a.out + ".json"), "w", encoding="utf-8") as fh:
                         json.dump(rows, fh, indent=1)
