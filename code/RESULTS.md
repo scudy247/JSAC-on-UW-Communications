@@ -949,3 +949,22 @@ industrial MEMS, 1 s packets, coded 16-QAM. SINR power average / median / 10th p
 - The guard chose signal-only in 13–23 % of packets, at no cost (with and without guard within 0.1 dB).
 - Earlier smoke packet (one packet, 30 dB): sensor cancellation decoded, signal cancellation did not. Consistent
   with the tail above, not with the mean.
+
+## Multipath, 4 s packets (14 Oct 2026; Phase 5; `b13_multipath.py bb_iso_4s`, 10 packets per point)
+Same two-path buoy-buoy channel as above, QPSK, 27 data symbols (4 s). SINR power average / median / 10th
+percentile [dB], PER:
+
+| SNR | signal Kalman | Tu grid | signal cancellation | sensor cancellation | sensor, no guard | ideal cancellation |
+|---|---|---|---|---|---|---|
+| 10 | 7.2 / 7.5 / 5.3, 0.20 | 7.5 / 7.7 / 6.0, 0.10 | 8.2 / 8.3 / 7.6, 0 | **9.0 / 9.0 / 8.2**, 0 | 8.9 / 9.0 / 7.4, 0 | 9.7 / 9.5 / 8.6, 0 |
+| 20 | 13.5 / 13.7 / 9.4, 0.20 | 13.2 / 13.8 / 9.6, 0 | 15.9 / 16.4 / 13.4, 0 | **17.2 / 17.0 / 16.5**, 0 | 16.5 / 16.8 / 14.7, 0 | 19.5 / 19.4 / 18.3, 0 |
+| 30 | 17.3 / 16.0 / 10.3, 0.30 | 16.8 / 16.0 / 10.4, 0.20 | 21.2 / 21.0 / 15.5, 0 | **23.0 / 23.1 / 21.6**, 0 | 22.0 / 22.0 / 19.3, 0 | 29.0 / 29.1 / 27.9, 0 |
+
+- Sensor over signal cancellation: **+0.8 / +1.3 / +1.8 dB** average, **+0.6 / +3.1 / +6.1 dB** at the 10th
+  percentile (10 / 20 / 30 dB): the same pattern as 1 s packets (tail gain growing with SNR), slightly smaller.
+- Both cancellations decode every packet (QPSK); the non-cancelling receivers lose 10–30 % of packets.
+- On 4 s packets the guard matters: without it sensor cancellation is 0.7–1.0 dB lower at 20–30 dB (the guard chose
+  signal-only in 40–50 % of packets).
+- Gap to ideal cancellation grows with SNR (2.3 dB at 20, 6 dB at 30): residual path-Doppler error over 4 s;
+  room for a per-path tracker inside the packet.
+- 10 packets per point: indicative; the held high-statistics reruns (Wed 21) should include it.
