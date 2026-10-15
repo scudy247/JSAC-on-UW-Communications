@@ -22,6 +22,8 @@ Gateway receivers per user (receive_users):
   branch_sensor  branches set from priors: the user's side information (its own IMU share; zero for a static node) +
                  the gateway's IMU projected on the user's direction, then the safe fusion (chain.receive_fused_safe);
                  the header is assumed decoded (Phase 4 measured it)
+  branch_pilot   the same branch with closed-loop pilot tracking (chain.receive_pilot_track: per-symbol pilot phase
+                 rotations, Kalman smoother, three rounds), the strongest signal-only tracker of the single-user study
   branch_genie   the true Doppler of the user, no estimation (what inter-user interference and noise leave)
 """
 from dataclasses import dataclass
@@ -31,7 +33,7 @@ import numpy as np
 from . import chain, receiver, waveform
 from .frame import Frame
 
-RECEIVERS = ("common", "branch_signal", "branch_kalman", "branch_sensor", "branch_genie")
+RECEIVERS = ("common", "branch_signal", "branch_kalman", "branch_pilot", "branch_sensor", "branch_genie")
 
 
 @dataclass
@@ -124,6 +126,13 @@ def add_noise(y, o, snr_db, rng):
     return y + sigma * (rng.standard_normal(len(y)) + 1j * rng.standard_normal(len(y)))
 
 
+def pilot_grid(F):
+    """Known pilot symbols of the user's data symbols on the full subcarrier grid (n_data, n_sc)."""
+    P = np.zeros((F.n_data, F.o.n_sc), complex)
+    P[:, receiver.masks(F)[1]] = receiver.pilot_symbols(F)
+    return P
+
+
 def receive_users(y, frames, priors, truths, searches, eps_max=3e-3, which=RECEIVERS):
     """Demodulated data symbols per receiver and user: {receiver: [Y_k]}, and per-user info. priors[k] / truths[k]:
     the user's sensor prior / true Doppler per emitted sample of its frame; searches[k]: its preamble search window."""
@@ -136,6 +145,7 @@ def receive_users(y, frames, priors, truths, searches, eps_max=3e-3, which=RECEI
         run = {"common": lambda: chain.receive_aided(y, F, np.full(L, eps_c), s, prepost=False),
                "branch_signal": lambda: sig[k],
                "branch_kalman": lambda: chain.receive_signal_fused(y, F, s, eps_max=eps_max),
+               "branch_pilot": lambda: chain.receive_pilot_track(y, F, pilot_grid(F), s, eps_max=eps_max),
                "branch_sensor": lambda: chain.receive_fused_safe(y, F, priors[k], s, eps_max=eps_max),
                "branch_genie": lambda: chain.receive_aided(y, F, truths[k], s, prepost=False, cfo=False)}
         for r in which:

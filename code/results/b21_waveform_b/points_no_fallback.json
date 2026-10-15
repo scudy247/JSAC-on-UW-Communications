@@ -1,0 +1,602 @@
+[
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 5,
+  "none_db": -19.208029587683797,
+  "band_hz": {
+   "signal": 40.69473262971463,
+   "sensor": 1.4016288156115444
+  },
+  "signal": {
+   "best_gain_db": -20.687759381854754,
+   "t_seg": 0.25,
+   "best_t_int": 8.0
+  },
+  "sensor": {
+   "best_gain_db": 3.8613113730430415,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 10,
+  "none_db": -19.190898014560204,
+  "band_hz": {
+   "signal": 40.69473262971463,
+   "sensor": 1.4016288156115444
+  },
+  "signal": {
+   "best_gain_db": -20.341119474554382,
+   "t_seg": 1.0,
+   "best_t_int": 1.0
+  },
+  "sensor": {
+   "best_gain_db": 9.250010912869627,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 15,
+  "none_db": -19.224236022567162,
+  "band_hz": {
+   "signal": 40.69473262971463,
+   "sensor": 1.4016288156115444
+  },
+  "signal": {
+   "best_gain_db": -3.633331616482376,
+   "t_seg": 0.5,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 10.463949219060925,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 20,
+  "none_db": -19.14550097842838,
+  "band_hz": {
+   "signal": 40.69473262971463,
+   "sensor": 1.4016288156115444
+  },
+  "signal": {
+   "best_gain_db": 5.491601019194173,
+   "t_seg": 0.5,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.328581235890226,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 25,
+  "none_db": -19.23022676923975,
+  "band_hz": {
+   "signal": 40.69473262971463,
+   "sensor": 1.4016288156115444
+  },
+  "signal": {
+   "best_gain_db": 7.5490640480688995,
+   "t_seg": 0.5,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.666474371826565,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 5,
+  "none_db": -12.48887712830056,
+  "band_hz": {
+   "signal": 10.173683157428657,
+   "sensor": 0.3504072039028861
+  },
+  "signal": {
+   "best_gain_db": -16.586806506110463,
+   "t_seg": 0.5,
+   "best_t_int": 4.0
+  },
+  "sensor": {
+   "best_gain_db": 4.626213321966831,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 10,
+  "none_db": -12.388141759129532,
+  "band_hz": {
+   "signal": 10.173683157428657,
+   "sensor": 0.3504072039028861
+  },
+  "signal": {
+   "best_gain_db": -6.50290914457149,
+   "t_seg": 1.0,
+   "best_t_int": 8.0
+  },
+  "sensor": {
+   "best_gain_db": 10.714403280528435,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 15,
+  "none_db": -12.597661682880554,
+  "band_hz": {
+   "signal": 10.173683157428657,
+   "sensor": 0.3504072039028861
+  },
+  "signal": {
+   "best_gain_db": 3.4632441111520067,
+   "t_seg": 0.5,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.571370726504835,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 20,
+  "none_db": -12.702115863696104,
+  "band_hz": {
+   "signal": 10.173683157428657,
+   "sensor": 0.3504072039028861
+  },
+  "signal": {
+   "best_gain_db": 7.218739738677657,
+   "t_seg": 0.5,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.79539916822682,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy - buoy, OOI Irminger",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 25,
+  "none_db": -12.683092860331854,
+  "band_hz": {
+   "signal": 10.173683157428657,
+   "sensor": 0.3504072039028861
+  },
+  "signal": {
+   "best_gain_db": 9.06849377740366,
+   "t_seg": 0.5,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.90192168946312,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 5,
+  "none_db": -17.89603967399241,
+  "band_hz": {
+   "signal": 29.039668695277648,
+   "sensor": 0.9765449752545706
+  },
+  "signal": {
+   "best_gain_db": -22.87876681026021,
+   "t_seg": 0.25,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 4.923269535921954,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 10,
+  "none_db": -17.978840429810873,
+  "band_hz": {
+   "signal": 29.039668695277648,
+   "sensor": 0.9765449752545706
+  },
+  "signal": {
+   "best_gain_db": -16.148676070561997,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 9.390227665063872,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 15,
+  "none_db": -17.956456439838377,
+  "band_hz": {
+   "signal": 29.039668695277648,
+   "sensor": 0.9765449752545706
+  },
+  "signal": {
+   "best_gain_db": -0.7222741011231841,
+   "t_seg": 0.5,
+   "best_t_int": 8.0
+  },
+  "sensor": {
+   "best_gain_db": 10.890146469558875,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 20,
+  "none_db": -17.968338551630996,
+  "band_hz": {
+   "signal": 29.039668695277648,
+   "sensor": 0.9765449752545706
+  },
+  "signal": {
+   "best_gain_db": 7.562720428201692,
+   "t_seg": 0.5,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.499871066794935,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 25,
+  "none_db": -18.084668655427226,
+  "band_hz": {
+   "signal": 29.039668695277648,
+   "sensor": 0.9765449752545706
+  },
+  "signal": {
+   "best_gain_db": 9.612680939166797,
+   "t_seg": 0.5,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.780812680835698,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 5,
+  "none_db": -12.109621886857882,
+  "band_hz": {
+   "signal": 7.259917173819412,
+   "sensor": 0.24413624381364266
+  },
+  "signal": {
+   "best_gain_db": -16.306618513690918,
+   "t_seg": 0.5,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 5.268820578601615,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 10,
+  "none_db": -12.107028230760125,
+  "band_hz": {
+   "signal": 7.259917173819412,
+   "sensor": 0.24413624381364266
+  },
+  "signal": {
+   "best_gain_db": -1.8638897654500874,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 10.284316373232251,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 15,
+  "none_db": -12.094119882208808,
+  "band_hz": {
+   "signal": 7.259917173819412,
+   "sensor": 0.24413624381364266
+  },
+  "signal": {
+   "best_gain_db": 6.408439005771063,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.41226817019762,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 20,
+  "none_db": -12.135354698202715,
+  "band_hz": {
+   "signal": 7.259917173819412,
+   "sensor": 0.24413624381364266
+  },
+  "signal": {
+   "best_gain_db": 9.309044186568324,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.829165797109287,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, OOI Irminger",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 25,
+  "none_db": -12.109405878771591,
+  "band_hz": {
+   "signal": 7.259917173819412,
+   "sensor": 0.24413624381364266
+  },
+  "signal": {
+   "best_gain_db": 10.832117748391736,
+   "t_seg": 0.5,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.948715916414837,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 5,
+  "none_db": -7.4135610626688155,
+  "band_hz": {
+   "signal": 7.437172463004267,
+   "sensor": 0.8324267222471339
+  },
+  "signal": {
+   "best_gain_db": -11.876959209696441,
+   "t_seg": 2.0,
+   "best_t_int": 2.0
+  },
+  "sensor": {
+   "best_gain_db": 5.181303653677855,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 10,
+  "none_db": -7.424641707579642,
+  "band_hz": {
+   "signal": 7.437172463004267,
+   "sensor": 0.8324267222471339
+  },
+  "signal": {
+   "best_gain_db": -0.016252020947407048,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 10.123373372397817,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 15,
+  "none_db": -7.4300891194831165,
+  "band_hz": {
+   "signal": 7.437172463004267,
+   "sensor": 0.8324267222471339
+  },
+  "signal": {
+   "best_gain_db": 7.068770544971313,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.213792498948623,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 20,
+  "none_db": -7.4121121204738305,
+  "band_hz": {
+   "signal": 7.437172463004267,
+   "sensor": 0.8324267222471339
+  },
+  "signal": {
+   "best_gain_db": 9.620302428609097,
+   "t_seg": 0.5,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.605792860093405,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "fc_hz": 16000.0,
+  "cnr_dbhz": 25,
+  "none_db": -7.4241396222501,
+  "band_hz": {
+   "signal": 7.437172463004267,
+   "sensor": 0.8324267222471339
+  },
+  "signal": {
+   "best_gain_db": 10.897766915707734,
+   "t_seg": 0.5,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.811672317405142,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 5,
+  "none_db": -1.666909069410305,
+  "band_hz": {
+   "signal": 1.8592931157510668,
+   "sensor": 0.20810668056178347
+  },
+  "signal": {
+   "best_gain_db": -1.75748000988577,
+   "t_seg": 2.0,
+   "best_t_int": 8.0
+  },
+  "sensor": {
+   "best_gain_db": 5.593238821738799,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 10,
+  "none_db": -1.6658094777806685,
+  "band_hz": {
+   "signal": 1.8592931157510668,
+   "sensor": 0.20810668056178347
+  },
+  "signal": {
+   "best_gain_db": 5.566005227766775,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 10.65225944567917,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 15,
+  "none_db": -1.660995110817626,
+  "band_hz": {
+   "signal": 1.8592931157510668,
+   "sensor": 0.20810668056178347
+  },
+  "signal": {
+   "best_gain_db": 9.69225917694214,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.570449543488525,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 20,
+  "none_db": -1.6678087765255345,
+  "band_hz": {
+   "signal": 1.8592931157510668,
+   "sensor": 0.20810668056178347
+  },
+  "signal": {
+   "best_gain_db": 11.022718914942295,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.832792911042862,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ },
+ {
+  "scenario": "buoy -> seabed, CDIP swell",
+  "fc_hz": 4000.0,
+  "cnr_dbhz": 25,
+  "none_db": -1.66735534296361,
+  "band_hz": {
+   "signal": 1.8592931157510668,
+   "sensor": 0.20810668056178347
+  },
+  "signal": {
+   "best_gain_db": 11.524053741919037,
+   "t_seg": 1.0,
+   "best_t_int": 16.0
+  },
+  "sensor": {
+   "best_gain_db": 11.971218354435846,
+   "t_seg": 2.0,
+   "best_t_int": 16.0
+  }
+ }
+]

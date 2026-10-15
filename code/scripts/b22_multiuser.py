@@ -15,11 +15,13 @@ Receivers (multiuser.RECEIVERS) plus genie_alone: the genie branch with the user
 split the inter-user loss from the estimation loss. Metrics per user: SINR after the receiver's own channel estimate,
 packet error (coded QPSK); per configuration: mean and worst-user SINR, PER, and goodput (info bits of the decoded
 packets per second of frame, summed over the users).
-Usage: python scripts/b22_multiuser.py [n_packets]. Output: results/b22_multiuser/points.json.
+Usage: python scripts/b22_multiuser.py [n_packets] [--mod qpsk|16qam] [--cases ...] [--ks 2,4,8] [--guards 0,8,32]
+[--snrs 20,30] [--no-alone] [--out name]. Output: results/b22_multiuser/<name>.json (95 % confidence intervals,
+paired gains of ours over the signal-only baselines).
 """
+import argparse
 import json
 import os
-import sys
 from functools import lru_cache
 
 import numpy as np
@@ -58,7 +60,7 @@ def tracks(case, K):
     return gw, users
 
 
-def run(case, K, guard, snr_db, n, rng, o=None):
+def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True):
     o = o or waveform.OFDM()
     frames = mu.contiguous(o, K, guard)
     gw, users = tracks(case, K)
@@ -68,7 +70,8 @@ def run(case, K, guard, snr_db, n, rng, o=None):
     T = frames[0].length / o.fs
     lo = max(d["times"][0] for d in links) + 240
     hi = min(d["times"][-1] for d in links) - T - 20
-    rec = {r: dict(sinr=[], err=[]) for r in mu.RECEIVERS + ("genie_alone",)}
+    names = mu.RECEIVERS + (("genie_alone",) if alone else ())
+    rec = {r: dict(sinr=[], err=[]) for r in names}
     for t0 in rng.uniform(lo, hi, n):
         rp = np.random.default_rng(rng.integers(1 << 30))
         lead, tail, m_off = int(rp.integers(500, 3000)), 8000, int(MAX_OFF * o.fs)
@@ -76,7 +79,7 @@ def run(case, K, guard, snr_db, n, rng, o=None):
         tg = t0 - lead / o.fs + np.arange(lead + m_off + frames[0].length + tail) / o.fs
         pk, xs, eps, priors, truths = [], [], [], [], []
         for k, F in enumerate(frames):
-            info, X, s = mu.user_packet(F, rp)
+            info, X, s = mu.user_packet(F, rp, mod)
             x = np.zeros(len(tg), complex)
             x[lead + offs[k]:lead + offs[k] + len(s)] = s
             d = links[k]
@@ -91,39 +94,78 @@ def run(case, K, guard, snr_db, n, rng, o=None):
         Ys, _ = mu.receive_users(y, frames, priors, truths, searches)
         for r, by_user in Ys.items():
             for k, Y in enumerate(by_user):
-                s_db, e = mu.score(Y, pk[k][1], pk[k][0], frames[k])
+                s_db, e = mu.score(Y, pk[k][1], pk[k][0], frames[k], mod)
                 rec[r]["sinr"].append(s_db)
                 rec[r]["err"].append(e)
-        for k, F in enumerate(frames):  # the user alone in the band, same noise level
+        for k, F in enumerate(frames if alone else ()):  # the user alone in the band, same noise level
             ya = mu.add_noise(mu.uplink([xs[k]], [eps[k]], o.fs, o.fc), o, snr_db, rp)
             Y = mu.receive_users(ya, [F], [priors[k]], [truths[k]], [searches[k]], which=("branch_genie",))[0][
                 "branch_genie"][0]
-            s_db, e = mu.score(Y, pk[k][1], pk[k][0], F)
+            s_db, e = mu.score(Y, pk[k][1], pk[k][0], F, mod)
             rec["genie_alone"]["sinr"].append(s_db)
             rec["genie_alone"]["err"].append(e)
-    bits = sum(n_info_bits(F) for F in frames) / K
+    bits = sum(n_info_bits(F, mod) for F in frames) / K
     out = {}
     for r, v in rec.items():
         sinr = np.array(v["sinr"]).reshape(-1, K)
         err = np.array(v["err"], float)
-        out[r] = dict(mean_sinr_db=float(np.mean(sinr)), worst_user_sinr_db=float(np.mean(sinr.min(1))),
-                      per=float(err.mean()), goodput_bps=float(K * bits * (1 - err.mean()) / T))
+        out[r] = dict(mean_sinr_db=float(np.mean(sinr)), mean_sinr_ci95=ci95(sinr.mean(1)),
+                      worst_user_sinr_db=float(np.mean(sinr.min(1))), worst_user_ci95=ci95(sinr.min(1)),
+                      p10_sinr_db=float(np.percentile(sinr, 10)), per=float(err.mean()),
+                      per_ci95=wilson(int(err.sum()), len(err)), goodput_bps=float(K * bits * (1 - err.mean()) / T),
+                      per_user_packet_sinr_db=[round(float(x), 2) for x in sinr.ravel()])
+    for base in ("branch_signal", "branch_pilot"):  # paired gain of ours over each signal-only baseline
+        d = np.array(rec["branch_sensor"]["sinr"]) - np.array(rec[base]["sinr"])
+        out["branch_sensor"]["gain_over_" + base] = dict(mean_db=float(d.mean()),
+                                                         ci95=ci95(d.reshape(-1, K).mean(1)),
+                                                         fraction_positive=float(np.mean(d > 0)))
     return out
 
 
+def ci95(x):
+    """95 % confidence half-width of the mean of independent samples x (one per packet)."""
+    x = np.asarray(x, float)
+    return float(1.96 * x.std(ddof=1) / np.sqrt(len(x))) if len(x) > 1 else float("nan")
+
+
+def wilson(k, n):
+    """95 % Wilson interval of a proportion k / n."""
+    if n == 0:
+        return [float("nan")] * 2
+    p, z = k / n, 1.96
+    c = (p + z * z / (2 * n)) / (1 + z * z / n)
+    h = z * np.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / (1 + z * z / n)
+    return [float(max(0.0, c - h)), float(min(1.0, c + h))]
+
+
 def main():
-    n = int(sys.argv[1]) if len(sys.argv) > 1 else 8
+    ap = argparse.ArgumentParser()
+    ap.add_argument("n", type=int, nargs="?", default=8, help="packets per point")
+    ap.add_argument("--mod", default="qpsk")
+    ap.add_argument("--cases", default=",".join(CASES))
+    ap.add_argument("--ks", default=",".join(map(str, KS)))
+    ap.add_argument("--guards", default=",".join(map(str, GUARDS)))
+    ap.add_argument("--snrs", default=",".join(map(str, SNRS)))
+    ap.add_argument("--no-alone", action="store_true", help="skip the genie with the user alone")
+    ap.add_argument("--out", default="points", help="output file name (results/b22_multiuser/<out>.json)")
+    a = ap.parse_args()
+    ints = lambda t: [int(v) for v in t.split(",")]
     rng = np.random.default_rng(13)
     rows = []
-    for case in CASES:
-        for K in KS:
-            for guard in GUARDS:
-                for snr in SNRS:
-                    res = run(case, K, guard, snr, n, rng)
-                    rows.append(dict(scenario=case, K=K, guard=guard, snr_db=snr, n_packets=n, **res))
-                    print(f"{case:13s} K {K} guard {guard:2d} SNR {snr} | mean SINR / PER: " + "  ".join(
-                        f"{r} {v['mean_sinr_db']:5.1f}/{v['per']:.2f}" for r, v in res.items()), flush=True)
-                    with open(os.path.join(output_dir("b22_multiuser"), "points.json"), "w", encoding="utf-8") as fh:
+    for case in a.cases.split(","):
+        for K in ints(a.ks):
+            for guard in ints(a.guards):
+                for snr in ints(a.snrs):
+                    res = run(case, K, guard, snr, a.n, rng, mod=a.mod, alone=not a.no_alone)
+                    rows.append(dict(scenario=case, K=K, guard=guard, snr_db=snr, n_packets=a.n, mod=a.mod, **res))
+                    g = res["branch_sensor"]
+                    print(f"{case:13s} K {K} guard {guard:2d} SNR {snr} {a.mod} | mean SINR / PER: " + "  ".join(
+                        f"{r} {v['mean_sinr_db']:5.1f}/{v['per']:.2f}" for r, v in res.items()) +
+                        f" | ours - Tu {g['gain_over_branch_signal']['mean_db']:+.1f}"
+                        f"+-{g['gain_over_branch_signal']['ci95']:.1f}, ours - pilot "
+                        f"{g['gain_over_branch_pilot']['mean_db']:+.1f}+-{g['gain_over_branch_pilot']['ci95']:.1f}",
+                        flush=True)
+                    with open(os.path.join(output_dir("b22_multiuser"), a.out + ".json"), "w", encoding="utf-8") as fh:
                         json.dump(rows, fh, indent=1)
 
 
