@@ -16,9 +16,13 @@ Receivers (identical except for the prior):
      receiver does not search the whole band, and a narrower window means fewer noise peaks, i.e. a lower threshold;
      at low SNR this gives genuine outliers (the threshold is not modelled, it happens); residual Doppler scale =
      frequency / fc;
+     the code timing drifts with the residual Doppler (0.8 chip mid-packet for a 3e-4 swing at 0.12 Hz), so each
+     segment also searches the chip timing over +-max_shift samples (a code-tracking loop's job), keeping the
+     strongest peak;
   3. Kalman / RTS smoother (fusion.smooth) over the segment measurements with their Cramer-Rao variance, then
      outlier gating (measurements beyond GATE sigma of the smoothed track are dropped, smoothing repeated);
-  4. final resampling along the estimated trajectory.
+  4. second pass (rounds=2): resample along the estimated trajectory, measure what is left, smooth, add (corrects
+     the timing drift the first pass worked through); final resampling along the estimated trajectory.
 Metric: coherent-integration efficiency of the compensated noise-free signal over windows of t_int,
 E |mean over the window of z0 conj(c)|^2 — the quality of the Doppler estimate alone, comparable with the
 phase-level study.
@@ -46,18 +50,24 @@ def received(c, fs, fc, eps, cnr_dbhz, rng):
     return y0, y0 + sigma * (rng.standard_normal(len(y0)) + 1j * rng.standard_normal(len(y0)))
 
 
-def segment_freqs(z, c, fs, t_seg, pad=8, band_hz=None):
+def segment_freqs(z, c, fs, t_seg, pad=8, band_hz=None, max_shift=0):
     """Per segment: (centre time [s], ML frequency [Hz], peak-to-mean ratio of the periodogram within the window)
-    of the despread signal z conj(c); the peak is searched within +-band_hz (None: the whole band), widened to at
-    least two resolution cells (2 / t_seg)."""
+    of the despread signal z conj(c shifted by d samples), d in +-max_shift chosen for the strongest peak; the peak
+    is searched within +-band_hz (None: the whole band), widened to at least two resolution cells (2 / t_seg)."""
     n = int(round(t_seg * fs))
     N = pad * n
     f = np.fft.fftfreq(N, 1 / fs)
     inside = np.ones(N, bool) if band_hz is None else np.abs(f) <= max(band_hz, 2 / t_seg)
     out = []
     for a in range(0, len(z) - n + 1, n):
-        d = z[a:a + n] * np.conj(c[a:a + n])
-        P = np.abs(np.fft.fft(d, N)) ** 2
+        best = None
+        for sh in range(-max_shift, max_shift + 1):
+            if a + sh < 0 or a + sh + n > len(c):
+                continue
+            Pd = np.abs(np.fft.fft(z[a:a + n] * np.conj(c[a + sh:a + sh + n]), N)) ** 2
+            if best is None or np.max(Pd[inside]) > np.max(best[inside]):
+                best = Pd
+        P = best
         Pw = np.where(inside, P, 0.0)
         k = int(np.argmax(Pw))
         freq = float(f[k])
@@ -94,14 +104,17 @@ def efficiency(z0c, c, fs, t_int):
     return float(np.mean([abs(np.mean(d[a:a + w])) ** 2 for a in range(0, len(d) - w + 1, w)]))
 
 
-def receive(y, y0, c, fs, fc, coarse, cnr_dbhz, t_seg, settings, band_hz=None, grid_step=0.05):
+def receive(y, y0, c, fs, fc, coarse, cnr_dbhz, t_seg, settings, band_hz=None, grid_step=0.05, rounds=2,
+            max_shift=3):
     """Steps 1-4 for one receiver. coarse: per-sample Doppler of the coarse correction (a constant mean, or the
     sensor prior); band_hz: frequency search window around it. Returns (efficiency function of t_int, estimated
     trajectory per sample)."""
-    z = unwarp(y, fs, coarse[:len(y)], fc)
-    meas = segment_freqs(z, c, fs, t_seg, band_hz=band_hz)
     t_grid = np.arange(0, len(y) / fs, grid_step)
-    r_hat = track(meas, fc, cnr_dbhz, t_seg, t_grid, settings)
-    traj = coarse[:len(y)] + np.interp(np.arange(len(y)) / fs, t_grid, r_hat)
+    traj = np.array(coarse[:len(y)], float)
+    for _ in range(rounds):
+        z = unwarp(y, fs, traj, fc)
+        meas = segment_freqs(z, c, fs, t_seg, band_hz=band_hz, max_shift=max_shift)
+        r_hat = track(meas, fc, cnr_dbhz, t_seg, t_grid, settings)
+        traj = traj + np.interp(np.arange(len(y)) / fs, t_grid, r_hat)
     z0c = unwarp(y0, fs, traj, fc)
     return (lambda t_int: efficiency(z0c, c, fs, t_int)), traj
