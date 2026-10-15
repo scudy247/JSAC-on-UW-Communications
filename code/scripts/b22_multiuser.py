@@ -32,7 +32,9 @@ from uwofdm.paths import output_dir
 from uwofdm.receiver import n_info_bits
 from c2_sweeps import OOI_DAY
 from e2_chain import SIGMA_IMU
-from e2_imu_grades import node
+from e2_imu_grades import _static
+from uwofdm import imu
+from uwofdm.experiment import NodeIMU
 
 CASES = ("seabed users", "buoy users")
 KS = (2, 4, 8)
@@ -60,13 +62,32 @@ def tracks(case, K):
     return gw, users
 
 
-def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True):
+def rotate(u, deg):
+    """Direction u turned by deg in azimuth (the horizontal part rotated, the vertical kept)."""
+    a = np.deg2rad(deg)
+    return np.array([u[0] * np.cos(a) - u[1] * np.sin(a), u[0] * np.sin(a) + u[1] * np.cos(a), u[2]])
+
+
+def node_hat(track, u, sign, shift, grade, seed, u_hat):
+    """e2_imu_grades.node with the node projecting its velocity on a believed direction u_hat."""
+    kw = dict(sigmas=(SIGMA_IMU,), tau_imu=20.0, latency=0.05, extrapolate=True, lever_corrected=True, u_hat=u_hat)
+    if _static(track):
+        return NodeIMU(track, u, sign, shift, np.random.default_rng(seed), grade=imu.ZERO, **dict(kw, latency=0.0))
+    lever_m = 2.0 if track.vel_lever is not None else None
+    return NodeIMU(track, u, sign, shift, np.random.default_rng(seed), grade=imu.GRADES[grade], lever_m=lever_m, **kw)
+
+
+def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GRADE, dir_err_deg=0.0):
     o = o or waveform.OFDM()
     frames = mu.contiguous(o, K, guard)
     gw, users = tracks(case, K)
     links = [motion.link_doppler(u, gw) for u in users]
-    nodes = [(node(u, d["u"], +1, 0.0, GRADE, 100 + k), node(gw, d["u"], -1, d["tau"], GRADE, GW_SEED))
-             for k, (u, d) in enumerate(zip(users, links))]  # one gateway sensor: same seed, projected per user
+    # one gateway sensor: same seed, projected per user; dir_err_deg: both ends believe a direction turned by a
+    # random azimuth error (std dir_err_deg, fixed per user), e.g. from stale or coarse position knowledge
+    errs = np.random.default_rng(77 + K).normal(0.0, dir_err_deg, K)
+    nodes = [(node_hat(u, d["u"], +1, 0.0, grade, 100 + k, rotate(d["u"], e)),
+              node_hat(gw, d["u"], -1, d["tau"], grade, GW_SEED, rotate(d["u"], e)))
+             for k, (u, d, e) in enumerate(zip(users, links, errs))]
     T = frames[0].length / o.fs
     lo = max(d["times"][0] for d in links) + 240
     hi = min(d["times"][-1] for d in links) - T - 20
@@ -147,6 +168,8 @@ def main():
     ap.add_argument("--guards", default=",".join(map(str, GUARDS)))
     ap.add_argument("--snrs", default=",".join(map(str, SNRS)))
     ap.add_argument("--no-alone", action="store_true", help="skip the genie with the user alone")
+    ap.add_argument("--grade", default=GRADE, help="motion-sensor grade of every moving node (imu.GRADES)")
+    ap.add_argument("--dir-err-deg", type=float, default=0.0, help="std of the azimuth error of the believed directions")
     ap.add_argument("--out", default="points", help="output file name (results/b22_multiuser/<out>.json)")
     a = ap.parse_args()
     ints = lambda t: [int(v) for v in t.split(",")]
@@ -156,8 +179,10 @@ def main():
         for K in ints(a.ks):
             for guard in ints(a.guards):
                 for snr in ints(a.snrs):
-                    res = run(case, K, guard, snr, a.n, rng, mod=a.mod, alone=not a.no_alone)
-                    rows.append(dict(scenario=case, K=K, guard=guard, snr_db=snr, n_packets=a.n, mod=a.mod, **res))
+                    res = run(case, K, guard, snr, a.n, rng, mod=a.mod, alone=not a.no_alone, grade=a.grade,
+                              dir_err_deg=a.dir_err_deg)
+                    rows.append(dict(scenario=case, K=K, guard=guard, snr_db=snr, n_packets=a.n, mod=a.mod,
+                                     grade=a.grade, dir_err_deg=a.dir_err_deg, **res))
                     g, gp = res["branch_sensor"], res["branch_sensor_pilot"]
                     print(f"{case:13s} K {K} guard {guard:2d} SNR {snr} {a.mod} | mean SINR / PER: " + "  ".join(
                         f"{r} {v['mean_sinr_db']:5.1f}/{v['per']:.2f}" for r, v in res.items()) +
