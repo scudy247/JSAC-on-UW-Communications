@@ -36,6 +36,7 @@ import numpy as np
 from . import chain, receiver, waveform
 from .frame import Frame
 
+SINR_FLOOR_DB = -10.0
 RECEIVERS = ("common", "branch_signal", "branch_kalman", "branch_pilot", "branch_sensor", "branch_sensor_pilot",
              "branch_genie")
 
@@ -174,6 +175,8 @@ def receive_users(y, frames, priors, truths, searches, eps_max=3e-3, which=RECEI
 
 
 def score(Y, X, info_bits, F, mod="qpsk"):
-    """(SINR [dB] after the receiver's own channel estimate, packet error)."""
+    """(SINR [dB] after the receiver's own channel estimate, floored at SINR_FLOOR_DB: a receiver that lost lock
+    has no channel estimate (signal power 0) and would put -inf into the averages; packet error)."""
     s, e = receiver.sinr(Y, X, F)
-    return 10 * np.log10(s / max(e, 1e-30)), bool(np.any(receiver.decode(Y, F, mod) != info_bits))
+    return max(10 * np.log10(max(s, 1e-30) / max(e, 1e-30)), SINR_FLOOR_DB), \
+        bool(np.any(receiver.decode(Y, F, mod) != info_bits))

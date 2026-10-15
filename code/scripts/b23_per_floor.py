@@ -6,7 +6,8 @@ null subcarriers (receiver.combine -> channel_estimates NV), which do not see al
 subcarriers after cancellation, so the LLRs are overconfident.
 Same packets as b13 (same seeds, same channel and noise), ideal_sic only. Per packet: decoded or not; per OFDM symbol,
 the decoder's effective noise (mean NVe on data subcarriers) vs the true error |Z - X|^2 after MRC; and a re-decode with the true per-symbol error variance in place of NVe (oracle noise).
-If the oracle re-decode removes the failures, the floor is the noise estimate, not Doppler estimation.
+If the oracle re-decode removes the failures, the floor is the noise estimate, not Doppler estimation. Candidate
+fix tested on the same packets: receiver.NOISE_SOURCE = "max" (noise also from the pilot residual).
 Usage: python scripts/b23_per_floor.py [n_packets] [snr_db]. Output: results/b23_per_floor/points.json.
 """
 import json
@@ -79,15 +80,22 @@ def main():
         ok = np.array_equal(receiver.decode_combined(br, F, mod), info)
         NVo = np.repeat(nv_true[:, None], o.n_sc, 1)
         ok_oracle = np.array_equal(decode_with(Z, NVo, F, mod), info)
+        receiver.NOISE_SOURCE = "max"  # candidate fix: noise also from the pilot residual
+        ok_pilot = np.array_equal(receiver.decode_combined(br, F, mod), info)
+        nv_fix = receiver.combine(br, F)[1][:, data].mean(1)
+        receiver.NOISE_SOURCE = "nulls"
         sinr_db = 10 * np.log10(np.sum(np.abs(X[:, data]) ** 2) / np.sum(err_true))
-        rows.append(dict(packet=i, ok=ok, ok_oracle_noise=ok_oracle, sinr_db=float(sinr_db),
+        rows.append(dict(packet=i, ok=ok, ok_oracle_noise=ok_oracle, ok_pilot_noise=ok_pilot,
+                         nv_fix_db=[float(10 * np.log10(v)) for v in nv_fix], sinr_db=float(sinr_db),
                          nv_decoder_db=[float(10 * np.log10(v)) for v in nv_dec],
                          nv_true_db=[float(10 * np.log10(v)) for v in nv_true]))
-        print(f"packet {i:3d} SINR {sinr_db:5.1f} dB ok {ok} oracle-noise ok {ok_oracle} | per symbol, decoder noise "
+        print(f"packet {i:3d} SINR {sinr_db:5.1f} dB ok {ok} oracle-noise ok {ok_oracle} pilot-noise ok {ok_pilot} | per symbol, decoder noise "
               f"- true error [dB]: " + " ".join(f"{10 * np.log10(a / b):+.1f}" for a, b in zip(nv_dec, nv_true)),
               flush=True)
     fails = [r for r in rows if not r["ok"]]
-    print(f"failures {len(fails)}/{n}; fixed by oracle noise {sum(r['ok_oracle_noise'] for r in fails)}", flush=True)
+    print(f"failures {len(fails)}/{n}; fixed by oracle noise {sum(r['ok_oracle_noise'] for r in fails)}; by pilot-residual"
+          f" noise {sum(r['ok_pilot_noise'] for r in fails)}; pilot-residual noise breaks "
+          f"{sum(r['ok'] and not r['ok_pilot_noise'] for r in rows)} good packets", flush=True)
     with open(os.path.join(output_dir("b23_per_floor"), "points.json"), "w", encoding="utf-8") as fh:
         json.dump(rows, fh, indent=1)
 

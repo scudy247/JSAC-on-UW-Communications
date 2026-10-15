@@ -25,6 +25,9 @@ from . import coding
 from .experiment import MAX_DELAY, MIN_DELAY, _estimator
 
 CHANNEL_ESTIMATOR = "somp"
+NOISE_SOURCE = "nulls"  # "nulls": noise + interference from the in-band nulls (default); "max": the larger of that and
+# the pilot residual after the sparse channel fit (15 Oct 2026, scripts/b23_per_floor.py: cancellation residue and
+# neighbouring users' leakage can sit on the data subcarriers without reaching the nulls)
 MAX_TAPS = 40
 TAP_GAIN = 4.0  # a tap must remove more than TAP_GAIN x (noise variance x symbols) of pilot residual energy
 _DICT = {}
@@ -87,6 +90,10 @@ def channel_estimates(Y, F, P=None, method=None):
     S, coef = somp(R, float(np.mean(NV)), A_p[sel])
     if S:
         H[:, act] = (A_a[:, S] @ coef).T
+    if NOISE_SOURCE == "max":  # per-symbol pilot residual (unit-power pilots), degrees of freedom of the fit removed
+        res = R - (A_p[sel][:, S] @ coef).T if S else R
+        nv_pil = np.sum(np.abs(res) ** 2, axis=1) / max(R.shape[1] - len(S), 1)
+        NV = np.maximum(NV, nv_pil)
     return H, NV
 
 
