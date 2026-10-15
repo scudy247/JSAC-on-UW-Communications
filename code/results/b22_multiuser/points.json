@@ -1,0 +1,1550 @@
+[
+ {
+  "scenario": "seabed users",
+  "K": 2,
+  "guard": 0,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 16.715558083622387,
+   "worst_user_sinr_db": 16.471507352405048,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_signal": {
+   "mean_sinr_db": 17.811175899517064,
+   "worst_user_sinr_db": 17.632308397436073,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 17.173106405050483,
+   "worst_user_sinr_db": 16.6741662084565,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 19.130981205159284,
+   "worst_user_sinr_db": 18.9577159174141,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_genie": {
+   "mean_sinr_db": 19.229330093343684,
+   "worst_user_sinr_db": 19.04596858059449,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.77806644170615,
+   "worst_user_sinr_db": 19.69322671300593,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 2,
+  "guard": 0,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 19.965588867636153,
+   "worst_user_sinr_db": 19.49657416012967,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_signal": {
+   "mean_sinr_db": 22.12264565265278,
+   "worst_user_sinr_db": 21.641370827962444,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 20.725785846260735,
+   "worst_user_sinr_db": 19.985062746055526,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 25.66670971587625,
+   "worst_user_sinr_db": 25.16724002270542,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_genie": {
+   "mean_sinr_db": 25.806305896474683,
+   "worst_user_sinr_db": 25.279243526845818,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.573921782757708,
+   "worst_user_sinr_db": 29.46209139028269,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 2,
+  "guard": 8,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 16.879007105644483,
+   "worst_user_sinr_db": 16.584056449713266,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_signal": {
+   "mean_sinr_db": 18.134932736705885,
+   "worst_user_sinr_db": 17.90694762582536,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 17.709736361236132,
+   "worst_user_sinr_db": 17.186779410331425,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 19.548631276231923,
+   "worst_user_sinr_db": 19.47891502836411,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_genie": {
+   "mean_sinr_db": 19.623974425897977,
+   "worst_user_sinr_db": 19.544687635145618,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.778678210865245,
+   "worst_user_sinr_db": 19.67210459199027,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 2,
+  "guard": 8,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 19.042722570379865,
+   "worst_user_sinr_db": 18.731801166074295,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_signal": {
+   "mean_sinr_db": 24.540119685705406,
+   "worst_user_sinr_db": 24.216420449333413,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 24.06958983788836,
+   "worst_user_sinr_db": 23.38718387849844,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 27.59058053429792,
+   "worst_user_sinr_db": 27.210514864656297,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_genie": {
+   "mean_sinr_db": 28.15266609826423,
+   "worst_user_sinr_db": 27.826339998028846,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.57627488195007,
+   "worst_user_sinr_db": 29.50506398711493,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 2,
+  "guard": 32,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 16.52814243126683,
+   "worst_user_sinr_db": 16.241494444637418,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_signal": {
+   "mean_sinr_db": 18.045128206638577,
+   "worst_user_sinr_db": 17.821131428318587,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 17.546228526283528,
+   "worst_user_sinr_db": 17.222775126507813,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 19.48733205266563,
+   "worst_user_sinr_db": 19.353710313965365,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_genie": {
+   "mean_sinr_db": 19.585200175714277,
+   "worst_user_sinr_db": 19.49709112500742,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.690401879892505,
+   "worst_user_sinr_db": 19.619489873244255,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 2,
+  "guard": 32,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 21.12988611975173,
+   "worst_user_sinr_db": 20.764839718800616,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_signal": {
+   "mean_sinr_db": 25.159239966333168,
+   "worst_user_sinr_db": 24.540765530054987,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 24.75867405856155,
+   "worst_user_sinr_db": 23.84709030654768,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 27.546238922426603,
+   "worst_user_sinr_db": 27.18943341058086,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_genie": {
+   "mean_sinr_db": 28.55394582067361,
+   "worst_user_sinr_db": 28.289177107124516,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.62891570081338,
+   "worst_user_sinr_db": 29.531952562997766,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 4,
+  "guard": 0,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 15.032855227933078,
+   "worst_user_sinr_db": 12.031759189310876,
+   "per": 0.0625,
+   "goodput_bps": 3323.227611940298
+  },
+  "branch_signal": {
+   "mean_sinr_db": 17.051895949476517,
+   "worst_user_sinr_db": 15.799589714534772,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 16.135533650390855,
+   "worst_user_sinr_db": 13.327075997000415,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 17.662437067366554,
+   "worst_user_sinr_db": 16.557189337350096,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "branch_genie": {
+   "mean_sinr_db": 17.82439622384306,
+   "worst_user_sinr_db": 16.720389505494314,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.582656590082465,
+   "worst_user_sinr_db": 19.428584654821,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 4,
+  "guard": 0,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 19.171623052902497,
+   "worst_user_sinr_db": 17.032750112988133,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "branch_signal": {
+   "mean_sinr_db": 20.67728863925562,
+   "worst_user_sinr_db": 18.115788497635073,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 19.23518418401997,
+   "worst_user_sinr_db": 15.722218140498484,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 21.78258923057888,
+   "worst_user_sinr_db": 18.784538051805676,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "branch_genie": {
+   "mean_sinr_db": 21.955804405398382,
+   "worst_user_sinr_db": 18.903491868229388,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.349978845448092,
+   "worst_user_sinr_db": 29.19776566956764,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 4,
+  "guard": 8,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 16.955414675599904,
+   "worst_user_sinr_db": 16.10472289188155,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_signal": {
+   "mean_sinr_db": 17.880430309598047,
+   "worst_user_sinr_db": 17.16274740456735,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 17.115161391132354,
+   "worst_user_sinr_db": 14.326867152354392,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 18.859228652447403,
+   "worst_user_sinr_db": 18.338692553328315,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_genie": {
+   "mean_sinr_db": 19.1106682160912,
+   "worst_user_sinr_db": 18.77581000051075,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.59187503058731,
+   "worst_user_sinr_db": 19.42294570510395,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 4,
+  "guard": 8,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 20.884607354380613,
+   "worst_user_sinr_db": 17.999256869846988,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_signal": {
+   "mean_sinr_db": 22.604951418248913,
+   "worst_user_sinr_db": 20.242071145859654,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 21.1455985890721,
+   "worst_user_sinr_db": 16.674084676334537,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 24.805759113104955,
+   "worst_user_sinr_db": 22.870040650062748,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_genie": {
+   "mean_sinr_db": 26.01806788095525,
+   "worst_user_sinr_db": 24.54520405502945,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.394288139882853,
+   "worst_user_sinr_db": 29.18514545717116,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 4,
+  "guard": 32,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 16.703070947963297,
+   "worst_user_sinr_db": 15.50260816058528,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_signal": {
+   "mean_sinr_db": 17.81186568062246,
+   "worst_user_sinr_db": 16.97500244119914,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 16.7657061688513,
+   "worst_user_sinr_db": 13.269309429679758,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 18.885659936669093,
+   "worst_user_sinr_db": 18.438581551500658,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_genie": {
+   "mean_sinr_db": 19.323243934796437,
+   "worst_user_sinr_db": 19.096040890531672,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.648569454042864,
+   "worst_user_sinr_db": 19.51577392959463,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 4,
+  "guard": 32,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 20.28371381829684,
+   "worst_user_sinr_db": 17.317621847580217,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_signal": {
+   "mean_sinr_db": 23.689460788191994,
+   "worst_user_sinr_db": 21.780768062782432,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 22.164266538621312,
+   "worst_user_sinr_db": 17.900744374850454,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 25.82049655397789,
+   "worst_user_sinr_db": 24.087040002972188,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_genie": {
+   "mean_sinr_db": 27.37707172579704,
+   "worst_user_sinr_db": 26.186241643146058,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.314945327144407,
+   "worst_user_sinr_db": 29.089068695460675,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 8,
+  "guard": 0,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 14.833302959230723,
+   "worst_user_sinr_db": 11.806757690098152,
+   "per": 0.03125,
+   "goodput_bps": 3416.651119402985
+  },
+  "branch_signal": {
+   "mean_sinr_db": 15.817284081931795,
+   "worst_user_sinr_db": 13.533991137229524,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 14.769831768850445,
+   "worst_user_sinr_db": 11.086302149541222,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 16.472375583949464,
+   "worst_user_sinr_db": 13.887550997216188,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "branch_genie": {
+   "mean_sinr_db": 16.79132189690376,
+   "worst_user_sinr_db": 14.209189565433864,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.56958809637334,
+   "worst_user_sinr_db": 19.133318848324024,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 8,
+  "guard": 0,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 17.444645098054743,
+   "worst_user_sinr_db": 13.979607422293375,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "branch_signal": {
+   "mean_sinr_db": 18.532497701119,
+   "worst_user_sinr_db": 14.569025826344058,
+   "per": 0.015625,
+   "goodput_bps": 3471.7583955223877
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 17.108052037255675,
+   "worst_user_sinr_db": 9.55434838094976,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 19.614397251974303,
+   "worst_user_sinr_db": 15.23359841780552,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "branch_genie": {
+   "mean_sinr_db": 19.9095442150115,
+   "worst_user_sinr_db": 15.724157544823944,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.27071812101292,
+   "worst_user_sinr_db": 28.826418155067785,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 8,
+  "guard": 8,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 15.924713688800399,
+   "worst_user_sinr_db": 13.582113853299013,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_signal": {
+   "mean_sinr_db": 16.628028117485094,
+   "worst_user_sinr_db": 14.918494712989016,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 15.160140176498553,
+   "worst_user_sinr_db": 10.500542346723373,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 17.6415444970391,
+   "worst_user_sinr_db": 15.83090044742492,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_genie": {
+   "mean_sinr_db": 18.65875240310271,
+   "worst_user_sinr_db": 17.972931223891173,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.620030318084403,
+   "worst_user_sinr_db": 19.22774369442665,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 8,
+  "guard": 8,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 18.765344949618473,
+   "worst_user_sinr_db": 15.939921537060208,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_signal": {
+   "mean_sinr_db": 19.694420153466815,
+   "worst_user_sinr_db": 16.249298343999815,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 17.684792255358964,
+   "worst_user_sinr_db": 12.583282185108757,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 22.08756679813923,
+   "worst_user_sinr_db": 19.22405757672152,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_genie": {
+   "mean_sinr_db": 24.40665036817404,
+   "worst_user_sinr_db": 22.342027612616796,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.271688282896005,
+   "worst_user_sinr_db": 28.74830033257607,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 8,
+  "guard": 32,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 15.679132170156759,
+   "worst_user_sinr_db": 12.550986729852971,
+   "per": 0.015625,
+   "goodput_bps": 2679.8507462686566
+  },
+  "branch_signal": {
+   "mean_sinr_db": 16.3204050590182,
+   "worst_user_sinr_db": 13.105757034873488,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 14.630269461435518,
+   "worst_user_sinr_db": 9.203423031195403,
+   "per": 0.015625,
+   "goodput_bps": 2679.8507462686566
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 17.616680416570556,
+   "worst_user_sinr_db": 15.611326676558638,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "branch_genie": {
+   "mean_sinr_db": 19.108693355342613,
+   "worst_user_sinr_db": 18.607505555411052,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.62068801868004,
+   "worst_user_sinr_db": 19.182952783318783,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  }
+ },
+ {
+  "scenario": "seabed users",
+  "K": 8,
+  "guard": 32,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 20.621161959917323,
+   "worst_user_sinr_db": 16.759120900826765,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "branch_signal": {
+   "mean_sinr_db": 21.419897494404193,
+   "worst_user_sinr_db": 18.028844000409126,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 20.379073707250697,
+   "worst_user_sinr_db": 14.716853523154674,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 22.923452973548187,
+   "worst_user_sinr_db": 19.76036759201145,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "branch_genie": {
+   "mean_sinr_db": 25.919696770651733,
+   "worst_user_sinr_db": 24.38968482613742,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.21703515282657,
+   "worst_user_sinr_db": 28.76680473184536,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 2,
+  "guard": 0,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 16.25458938026054,
+   "worst_user_sinr_db": 15.538366506464728,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_signal": {
+   "mean_sinr_db": 17.575597760970872,
+   "worst_user_sinr_db": 16.75719121941962,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 16.99970982652865,
+   "worst_user_sinr_db": 15.592090657638344,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 19.03043334227753,
+   "worst_user_sinr_db": 18.90123339272388,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_genie": {
+   "mean_sinr_db": 19.11299440873871,
+   "worst_user_sinr_db": 18.975199425805837,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.77204203178193,
+   "worst_user_sinr_db": 19.641669072261074,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 2,
+  "guard": 0,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 16.41027224819417,
+   "worst_user_sinr_db": 15.846998034090188,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_signal": {
+   "mean_sinr_db": 20.431059601869677,
+   "worst_user_sinr_db": 19.219027805850605,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 19.34216864701075,
+   "worst_user_sinr_db": 17.646790387895543,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 24.60779887136377,
+   "worst_user_sinr_db": 24.34280562515034,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "branch_genie": {
+   "mean_sinr_db": 24.816614364098733,
+   "worst_user_sinr_db": 24.5716707155569,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.520338324550327,
+   "worst_user_sinr_db": 29.45830530927105,
+   "per": 0.0,
+   "goodput_bps": 3553.7313432835817
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 2,
+  "guard": 8,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 16.42324996550297,
+   "worst_user_sinr_db": 15.66926564794996,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_signal": {
+   "mean_sinr_db": 17.285700160983897,
+   "worst_user_sinr_db": 16.543961193100312,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 16.52426798907753,
+   "worst_user_sinr_db": 15.578035334240319,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 19.472069941890975,
+   "worst_user_sinr_db": 19.347843787617045,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_genie": {
+   "mean_sinr_db": 19.564828833411898,
+   "worst_user_sinr_db": 19.447623409747525,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.684856997466476,
+   "worst_user_sinr_db": 19.598799735125404,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 2,
+  "guard": 8,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 20.085114795541358,
+   "worst_user_sinr_db": 18.77192264968085,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_signal": {
+   "mean_sinr_db": 22.413139847197918,
+   "worst_user_sinr_db": 20.299525558155267,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 21.684796831987637,
+   "worst_user_sinr_db": 19.312394519820014,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 27.07545378527306,
+   "worst_user_sinr_db": 26.385530817507124,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "branch_genie": {
+   "mean_sinr_db": 27.708588028764225,
+   "worst_user_sinr_db": 27.15824225532163,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.60006207371443,
+   "worst_user_sinr_db": 29.447250589050334,
+   "per": 0.0,
+   "goodput_bps": 3527.6119402985073
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 2,
+  "guard": 32,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 14.818716422492503,
+   "worst_user_sinr_db": 14.21760562756737,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_signal": {
+   "mean_sinr_db": 17.016064977066247,
+   "worst_user_sinr_db": 16.40301026548436,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 16.124498450387186,
+   "worst_user_sinr_db": 14.961342455542878,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 19.487502900447485,
+   "worst_user_sinr_db": 19.35389609956906,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_genie": {
+   "mean_sinr_db": 19.66839086720978,
+   "worst_user_sinr_db": 19.590239452927513,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.78299839776596,
+   "worst_user_sinr_db": 19.66593752102011,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 2,
+  "guard": 32,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 16.442922573965475,
+   "worst_user_sinr_db": 15.403322945678962,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_signal": {
+   "mean_sinr_db": 20.615427530960723,
+   "worst_user_sinr_db": 18.62887697713405,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 18.6258215835444,
+   "worst_user_sinr_db": 15.870425971694353,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 27.908440137606476,
+   "worst_user_sinr_db": 27.554396239844408,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "branch_genie": {
+   "mean_sinr_db": 28.498751485055987,
+   "worst_user_sinr_db": 28.200278014547834,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.597845814128714,
+   "worst_user_sinr_db": 29.52858794546455,
+   "per": 0.0,
+   "goodput_bps": 3438.8059701492534
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 4,
+  "guard": 0,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 14.334874698239977,
+   "worst_user_sinr_db": 12.113593156113895,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "branch_signal": {
+   "mean_sinr_db": 15.875767591842775,
+   "worst_user_sinr_db": 14.101093828284892,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 14.61784998085415,
+   "worst_user_sinr_db": 11.405059117982928,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 17.017478811696275,
+   "worst_user_sinr_db": 15.39491946703276,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "branch_genie": {
+   "mean_sinr_db": 17.10821975054821,
+   "worst_user_sinr_db": 15.452606076808923,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.60072739867377,
+   "worst_user_sinr_db": 19.453979958472956,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 4,
+  "guard": 0,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 16.39472865462985,
+   "worst_user_sinr_db": 11.759999485028196,
+   "per": 0.03125,
+   "goodput_bps": 3434.0018656716416
+  },
+  "branch_signal": {
+   "mean_sinr_db": 18.12014630237791,
+   "worst_user_sinr_db": 13.772785663098801,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 16.33211841467257,
+   "worst_user_sinr_db": 10.229649063066294,
+   "per": 0.03125,
+   "goodput_bps": 3434.0018656716416
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 20.50442624912774,
+   "worst_user_sinr_db": 17.36196707990395,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "branch_genie": {
+   "mean_sinr_db": 20.663786489373166,
+   "worst_user_sinr_db": 17.322582198668957,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.299840287158464,
+   "worst_user_sinr_db": 28.91347720772351,
+   "per": 0.0,
+   "goodput_bps": 3544.776119402985
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 4,
+  "guard": 8,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 14.705815003655369,
+   "worst_user_sinr_db": 12.178141011289627,
+   "per": 0.03125,
+   "goodput_bps": 3347.971082089552
+  },
+  "branch_signal": {
+   "mean_sinr_db": 17.14987497180291,
+   "worst_user_sinr_db": 16.079511466431537,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 15.748652856107144,
+   "worst_user_sinr_db": 12.676147052387734,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 18.73280622461549,
+   "worst_user_sinr_db": 18.221747795631835,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_genie": {
+   "mean_sinr_db": 19.152870238639515,
+   "worst_user_sinr_db": 18.704715590987,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.631124087094683,
+   "worst_user_sinr_db": 19.419650768427296,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 4,
+  "guard": 8,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 19.02256316113167,
+   "worst_user_sinr_db": 16.461680222028924,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_signal": {
+   "mean_sinr_db": 20.76087434504096,
+   "worst_user_sinr_db": 18.84240421755944,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 18.37762088014221,
+   "worst_user_sinr_db": 12.206853254443159,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 24.777469281548758,
+   "worst_user_sinr_db": 23.412916795407007,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "branch_genie": {
+   "mean_sinr_db": 26.174396720030444,
+   "worst_user_sinr_db": 24.84330749521193,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.41117859064422,
+   "worst_user_sinr_db": 29.140702358692387,
+   "per": 0.0,
+   "goodput_bps": 3455.970149253731
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 4,
+  "guard": 32,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 13.672125287870056,
+   "worst_user_sinr_db": 8.77756504516162,
+   "per": 0.0625,
+   "goodput_bps": 3000.0
+  },
+  "branch_signal": {
+   "mean_sinr_db": 16.81266151752013,
+   "worst_user_sinr_db": 15.194189516277056,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 15.22597966109566,
+   "worst_user_sinr_db": 10.885178113585326,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 18.838833485706168,
+   "worst_user_sinr_db": 18.115126330686895,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_genie": {
+   "mean_sinr_db": 19.369702470746226,
+   "worst_user_sinr_db": 19.087061216812366,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.68387360177867,
+   "worst_user_sinr_db": 19.472732741971434,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 4,
+  "guard": 32,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 18.425142921484714,
+   "worst_user_sinr_db": 14.725848070477888,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_signal": {
+   "mean_sinr_db": 20.870446755428972,
+   "worst_user_sinr_db": 17.85968036929357,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 18.246516783191133,
+   "worst_user_sinr_db": 12.391331432640465,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 24.873190211706618,
+   "worst_user_sinr_db": 23.058079797859374,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "branch_genie": {
+   "mean_sinr_db": 27.005299800117356,
+   "worst_user_sinr_db": 25.95358382452868,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.381285637168475,
+   "worst_user_sinr_db": 29.139492301736766,
+   "per": 0.0,
+   "goodput_bps": 3200.0
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 8,
+  "guard": 0,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 14.234532842508715,
+   "worst_user_sinr_db": 11.246610246176045,
+   "per": 0.015625,
+   "goodput_bps": 3471.7583955223877
+  },
+  "branch_signal": {
+   "mean_sinr_db": 14.701117760137205,
+   "worst_user_sinr_db": 11.801955039159745,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 13.36829888637157,
+   "worst_user_sinr_db": 8.802476076766277,
+   "per": 0.015625,
+   "goodput_bps": 3471.7583955223877
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 15.331306694968932,
+   "worst_user_sinr_db": 11.94222950586011,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "branch_genie": {
+   "mean_sinr_db": 15.802079949507126,
+   "worst_user_sinr_db": 12.898484631899379,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.549062243997586,
+   "worst_user_sinr_db": 19.179768598552243,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 8,
+  "guard": 0,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 15.967492230670592,
+   "worst_user_sinr_db": 11.385132074328332,
+   "per": 0.015625,
+   "goodput_bps": 3471.7583955223877
+  },
+  "branch_signal": {
+   "mean_sinr_db": 16.60995098340633,
+   "worst_user_sinr_db": 13.020914249063836,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 14.404346415896947,
+   "worst_user_sinr_db": 8.63837059284805,
+   "per": 0.015625,
+   "goodput_bps": 3471.7583955223877
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 17.784349063360125,
+   "worst_user_sinr_db": 13.246705703972884,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "branch_genie": {
+   "mean_sinr_db": 18.12547408117377,
+   "worst_user_sinr_db": 13.506476638144619,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.203496014247175,
+   "worst_user_sinr_db": 28.030382414299392,
+   "per": 0.0,
+   "goodput_bps": 3526.865671641791
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 8,
+  "guard": 8,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 15.431393097502713,
+   "worst_user_sinr_db": 12.444658708815117,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_signal": {
+   "mean_sinr_db": 16.287362433758208,
+   "worst_user_sinr_db": 13.969657758792827,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 13.978243386017352,
+   "worst_user_sinr_db": 7.153471712236943,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 17.52946870500995,
+   "worst_user_sinr_db": 15.672750867325203,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_genie": {
+   "mean_sinr_db": 18.766511947132372,
+   "worst_user_sinr_db": 18.30403056792193,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.557736112707353,
+   "worst_user_sinr_db": 19.160918873916245,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 8,
+  "guard": 8,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 17.491539626517,
+   "worst_user_sinr_db": 11.43118853368191,
+   "per": 0.015625,
+   "goodput_bps": 3271.210354477612
+  },
+  "branch_signal": {
+   "mean_sinr_db": 19.25689144269732,
+   "worst_user_sinr_db": 14.95814015125724,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 16.83401114377847,
+   "worst_user_sinr_db": 8.367433081557657,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 21.353270487765972,
+   "worst_user_sinr_db": 17.61114504448072,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "branch_genie": {
+   "mean_sinr_db": 24.193132085262516,
+   "worst_user_sinr_db": 22.2260975863173,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.169073332494374,
+   "worst_user_sinr_db": 28.76293578332342,
+   "per": 0.0,
+   "goodput_bps": 3323.1343283582087
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 8,
+  "guard": 32,
+  "snr_db": 20,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 15.624904797293887,
+   "worst_user_sinr_db": 13.388388329618781,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "branch_signal": {
+   "mean_sinr_db": 15.879689419122196,
+   "worst_user_sinr_db": 12.737380421710718,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 14.228974793949464,
+   "worst_user_sinr_db": 8.244983857195013,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 17.42307195365744,
+   "worst_user_sinr_db": 15.32480555342959,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "branch_genie": {
+   "mean_sinr_db": 19.051927166799196,
+   "worst_user_sinr_db": 18.43824385593262,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "genie_alone": {
+   "mean_sinr_db": 19.497182067560193,
+   "worst_user_sinr_db": 18.960235063802788,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  }
+ },
+ {
+  "scenario": "buoy users",
+  "K": 8,
+  "guard": 32,
+  "snr_db": 30,
+  "n_packets": 8,
+  "common": {
+   "mean_sinr_db": 16.641741094334694,
+   "worst_user_sinr_db": 8.999206011689243,
+   "per": 0.03125,
+   "goodput_bps": 2637.3134328358205
+  },
+  "branch_signal": {
+   "mean_sinr_db": 18.42332641617373,
+   "worst_user_sinr_db": 14.292241792008827,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "branch_kalman": {
+   "mean_sinr_db": 15.44437257900075,
+   "worst_user_sinr_db": 7.160997550361961,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "branch_sensor": {
+   "mean_sinr_db": 20.61597479877912,
+   "worst_user_sinr_db": 14.968378324535408,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "branch_genie": {
+   "mean_sinr_db": 25.773667111362794,
+   "worst_user_sinr_db": 24.029626876529683,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  },
+  "genie_alone": {
+   "mean_sinr_db": 29.049458728041465,
+   "worst_user_sinr_db": 27.957734494339398,
+   "per": 0.0,
+   "goodput_bps": 2722.3880597014922
+  }
+ }
+]

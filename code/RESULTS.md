@@ -968,3 +968,37 @@ percentile [dB], PER:
 - Gap to ideal cancellation grows with SNR (2.3 dB at 20, 6 dB at 30): residual path-Doppler error over 4 s;
   room for a per-path tracker inside the packet.
 - 10 packets per point: indicative; the held high-statistics reruns (Wed 21) should include it.
+
+## A: multi-user uplink (15 Oct 2026; Phase 6; `b22_multiuser.py`, 8 packets x K users per point)
+Buoy gateway (OOI Irminger, 2 m lever arm), K users on a 1000 m ring, contiguous subbands of the 992 active
+subcarriers with `guard` empty subcarriers between neighbours, QPSK, 1 s packets, industrial MEMS. Seabed users: Doppler
+= the gateway's motion on each user's direction (prior: the gateway's IMU only, no side information); buoy users: own
+motion (independent bursts) + side information. Mean SINR [dB] per user, 30 dB SNR (20 dB in brackets):
+
+| Users, K, guard | per-user signal branch (Tu et al.) | sensor branch | genie branch | genie, user alone |
+|---|---|---|---|---|
+| seabed, 2, 0 | 22.1 (17.8) | **25.7** (19.1) | 25.8 | 29.6 |
+| seabed, 4, 8 | 22.6 (17.9) | **24.8** (18.9) | 26.0 | 29.4 |
+| seabed, 8, 8 | 19.7 (16.6) | **22.1** (17.6) | 24.4 | 29.3 |
+| buoy, 2, 0 | 20.4 (17.6) | **24.6** (19.0) | 24.8 | 29.5 |
+| buoy, 2, 32 | 20.6 (17.0) | **27.9** (19.5) | 28.5 | 29.6 |
+| buoy, 4, 8 | 20.8 (17.1) | **24.8** (18.7) | 26.2 | 29.4 |
+| buoy, 8, 8 | 19.3 (16.3) | **21.4** (17.5) | 24.2 | 29.2 |
+
+- **The sensor branch beats the per-user signal branch in all 36 points**: +0.6 to +7.3 dB mean, worst user up to
+  +8.9 dB; largest with buoy users (each with its own motion: +4 to +7 dB at 30 dB for K = 2–4). With seabed users
+  it needs no side information at all (gateway IMU + user directions): +1.1 to +3.5 dB at 30 dB.
+- **Guards traded for sensors:** the sensor branch with *no* guard matches or beats the signal branch with 32-subcarrier
+  guards (buoy K = 2: 24.6 vs 20.6; K = 4: 20.5 vs 20.9; K = 8: 17.8 vs 18.4; seabed K = 2: 25.7 vs 25.2): the guards
+  free (K - 1) x 32 subcarriers, 3–23 % of the band, at the same SINR. A spectral-efficiency claim; to firm up with
+  more packets.
+- Sensor branch within 0.1–0.6 dB of the genie at K = 2; the gap grows with K (2–5 dB at K = 8 with guards): the
+  signal refinement on a narrow subband (few nulls, short-TBP chirps) is weaker.
+- **Inter-user floor:** even the genie loses 4–11 dB at 30 dB vs the user alone (neighbours' differing Doppler leaks
+  in; guards remove only part). Next step for a further gain: cancel the neighbours' leakage using their
+  (sensor-predicted) Doppler.
+- The signal Kalman branch is *worse* than the plain per-user branch here (−0.5 to −3 dB): its per-symbol CFO
+  measurements use the subband's few nulls; settings tuned on the full band. The fair signal-only reference is the
+  per-user branch (Tu et al.).
+- PER ≈ 0 for every per-user branch at 20–30 dB (QPSK): the claim is SINR; a PER separation needs 16-QAM or lower
+  SNR.
