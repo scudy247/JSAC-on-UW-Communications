@@ -20,6 +20,7 @@ Usage: python scripts/b22_multiuser.py [n_packets]. Output: results/b22_multiuse
 import json
 import os
 import sys
+from functools import lru_cache
 
 import numpy as np
 
@@ -39,8 +40,10 @@ R, LEVER, GRADE, GW_SEED = 1000.0, (0.0, 0.0, 2.0), "industrial", 7
 MAX_OFF = 0.005  # [s] asynchrony between users' frame starts
 
 
+@lru_cache(maxsize=None)
 def tracks(case, K):
-    """(gateway track, user tracks) on a common grid length."""
+    """(gateway track, user tracks) on a common grid length (cached: loading the OOI bursts is the slow part; the
+    tracks are not modified afterwards)."""
     gw = motion.buoy_track("ooi", OOI_DAY, (0.0, 0.0, -10.0), segment=3, lever=LEVER)
     az = 2 * np.pi * np.arange(K) / K + 0.3
     if case == "seabed users":
