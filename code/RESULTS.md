@@ -1002,3 +1002,31 @@ motion (independent bursts) + side information. Mean SINR [dB] per user, 30 dB S
   per-user branch (Tu et al.).
 - PER ≈ 0 for every per-user branch at 20–30 dB (QPSK): the claim is SINR; a PER separation needs 16-QAM or lower
   SNR.
+
+## B at waveform level: long coherent integration at low SNR (15 Oct 2026; Phase 5; `b21_waveform_b.py`, 40 packets)
+16 s DSSS packets (1 kchip/s) warped by real link Doppler; per-segment ML frequency estimates in each receiver's own
+search window, code-timing search, Kalman smoothing with gating, two passes. Metric: best effective coherent gain
+10 log10(T_int x efficiency) over T_int (dB re 1 s; 12 dB = 16 s fully coherent). Signal-only gets the TRUE mean
+Doppler as coarse correction and the better of tracking and mean-only (per configuration). Best coherent gain [dB],
+signal-only / sensor-aided:
+
+| Case, fc | 5 dB-Hz | 10 | 15 | 20 | 25 |
+|---|---|---|---|---|---|
+| buoy-buoy OOI, 16 kHz | -17.8 / 3.9 | -17.8 / 9.3 | -3.6 / 10.5 | 5.5 / 11.3 | 7.5 / 11.7 |
+| buoy-buoy OOI, 4 kHz | -11.7 / 4.6 | -6.5 / 10.7 | 3.5 / 11.6 | 7.2 / 11.8 | 9.1 / 11.9 |
+| buoy-seabed OOI, 16 kHz | -17.1 / 4.9 | -16.1 / 9.4 | -0.7 / 10.9 | 7.6 / 11.5 | 9.6 / 11.8 |
+| buoy-seabed OOI, 4 kHz | -11.1 / 5.3 | -1.9 / 10.3 | 6.4 / 11.4 | 9.3 / 11.8 | 10.8 / 11.9 |
+| buoy-seabed CDIP, 16 kHz | -7.1 / 5.2 | 0.0 / 10.1 | 7.1 / 11.2 | 9.6 / 11.6 | 10.9 / 11.8 |
+| buoy-seabed CDIP, 4 kHz | -1.3 / 5.6 | 5.6 / 10.7 | 9.7 / 11.6 | 11.0 / 11.8 | 11.5 / 12.0 |
+
+- Sensor-aided reaches 9–12 dB from 10 dB-Hz up in every case (near-full 16 s coherence); signal-only collapses
+  below 10–15 dB-Hz (its segment frequency estimates go below threshold) and the mean-only fallback does not save it
+  (-17 dB at 16 kHz: wave Doppler decorrelates the signal within 0.25 s even with the mean removed).
+- Above threshold (20–25 dB-Hz) the gain is modest: +2 to +6 dB at 16 kHz in the rough OOI cases, +0.5 to +2.5 dB at
+  4 kHz and in the CDIP swell. Grows with carrier frequency and sea roughness, as the theory says.
+- The +15 to +27 dB at 5–10 dB-Hz is a gain over THIS signal-only tracker (FFT segments + Kalman). A tracker with a
+  lower threshold (phase-locked loop / EKF on the despread phase, joint ML of the trajectory) would move the
+  collapse to lower CNR; the phase-level study (b20, MMSE with a 10 dB segment threshold) gave +5 to +11 dB at
+  10 dB-Hz. The true gain at threshold lies between the two; a lower-threshold signal-only baseline is needed before
+  quoting a number there.
+- Earlier run without the fallback (`points_no_fallback.json`): identical where tracking works, -20 vs -17.8 below.
