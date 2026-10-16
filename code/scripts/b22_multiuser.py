@@ -29,6 +29,7 @@ import numpy as np
 from uwofdm import motion, multiuser as mu, waveform
 from uwofdm.experiment import at_times
 from uwofdm.paths import output_dir
+from uwofdm import receiver
 from uwofdm.receiver import n_info_bits
 from c2_sweeps import OOI_DAY
 from e2_chain import SIGMA_IMU
@@ -170,8 +171,11 @@ def main():
     ap.add_argument("--no-alone", action="store_true", help="skip the genie with the user alone")
     ap.add_argument("--grade", default=GRADE, help="motion-sensor grade of every moving node (imu.GRADES)")
     ap.add_argument("--dir-err-deg", type=float, default=0.0, help="std of the azimuth error of the believed directions")
+    ap.add_argument("--noise-source", default="nulls", choices=("nulls", "max"),
+                    help="decoder noise: in-band nulls only, or also the pilot residual (receiver.NOISE_SOURCE)")
     ap.add_argument("--out", default="points", help="output file name (results/b22_multiuser/<out>.json)")
     a = ap.parse_args()
+    receiver.NOISE_SOURCE = a.noise_source
     ints = lambda t: [int(v) for v in t.split(",")]
     rng = np.random.default_rng(13)
     rows = []
@@ -182,7 +186,7 @@ def main():
                     res = run(case, K, guard, snr, a.n, rng, mod=a.mod, alone=not a.no_alone, grade=a.grade,
                               dir_err_deg=a.dir_err_deg)
                     rows.append(dict(scenario=case, K=K, guard=guard, snr_db=snr, n_packets=a.n, mod=a.mod,
-                                     grade=a.grade, dir_err_deg=a.dir_err_deg, **res))
+                                     grade=a.grade, dir_err_deg=a.dir_err_deg, noise_source=a.noise_source, **res))
                     g, gp = res["branch_sensor"], res["branch_sensor_pilot"]
                     print(f"{case:13s} K {K} guard {guard:2d} SNR {snr} {a.mod} | mean SINR / PER: " + "  ".join(
                         f"{r} {v['mean_sinr_db']:5.1f}/{v['per']:.2f}" for r, v in res.items()) +

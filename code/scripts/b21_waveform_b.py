@@ -10,7 +10,9 @@ included. Each receiver uses its best segment length. Frequency search window pe
 +-BAND_K times the RMS of its own residual over the record - signal-only: the link Doppler around the packet mean
 (motion statistics); sensor-aided: the prior's error (a calibration-level statistic of the sensor). Same cases,
 carriers and CNR grid as the phase-level study.
-Usage: python scripts/b21_waveform_b.py [n_packets]. Output: results/b21_waveform_b/points.json.
+Usage: python scripts/b21_waveform_b.py [n_packets] [ml|hmm]. Output: results/b21_waveform_b/points.json
+(points_hmm.json with the Viterbi frequency-line tracker for both receivers, the lower-threshold signal-only
+baseline).
 """
 import json
 import os
@@ -47,6 +49,8 @@ def window_rms(d, tx_track, tx, rx):
 
 def main():
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 40
+    tracker = sys.argv[2] if len(sys.argv) > 2 else "ml"  # "hmm": Viterbi frequency-line tracker (both receivers)
+    out = "points" if tracker == "ml" else f"points_{tracker}"
     rows = []
     rng = np.random.default_rng(9)
     sig_set = dict(chain.SIGNAL_FUSION)
@@ -78,7 +82,8 @@ def main():
                     for ts in T_SEGS:
                         for name, coarse, st, rms in (("signal", np.full(n_s, np.mean(eps)), sig_set, rms_sig),
                                                       ("sensor", prior, sen_set, rms_sen)):
-                            eff, _ = longint.receive(y, y0, c, FS, fc, coarse, cnr, ts, st, band_hz=BAND_K * rms * fc)
+                            eff, _ = longint.receive(y, y0, c, FS, fc, coarse, cnr, ts, st, band_hz=BAND_K * rms * fc,
+                                                     tracker=tracker)
                             for t in T_INT:
                                 acc[name][(ts, t)].append(eff(t))
                 res = {}
@@ -95,7 +100,7 @@ def main():
                 print(f"{label:28s} fc {fc / 1e3:4.0f} kHz CNR {cnr:2d} dB-Hz | best coherent gain [dB re 1 s]: none "
                       f"{g_none:5.1f}  mean only {g_mean:5.1f}  signal {res['signal']['best_gain_db']:5.1f} (seg {res['signal']['t_seg']})  sensor "
                       f"{res['sensor']['best_gain_db']:5.1f} (seg {res['sensor']['t_seg']:g})", flush=True)
-            with open(os.path.join(output_dir("b21_waveform_b"), "points.json"), "w", encoding="utf-8") as fh:
+            with open(os.path.join(output_dir("b21_waveform_b"), out + ".json"), "w", encoding="utf-8") as fh:
                 json.dump(rows, fh, indent=1)
 
 

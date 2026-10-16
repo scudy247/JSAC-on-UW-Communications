@@ -13,8 +13,9 @@ Receivers on identical packets and noise:
                 signal_sic), sensor_sic_noguard
   reference     ideal_sic (true per-path trajectories and delays)
 Metrics: SINR after the receiver's own channel estimate and MRC (receiver.sinr_combined), coded QPSK PER; per-packet
-SINR kept. Usage: python scripts/b13_multipath.py <config> [n_packets], config in CONFIGS.
-Output: results/b13_multipath/<config>.json.
+SINR kept. Usage: python scripts/b13_multipath.py <config> [n_packets] [suffix], config in CONFIGS.
+Output: results/b13_multipath/<config><suffix>.json (per-packet SINR and errors; paired McNemar test of the two
+cancellations printed per SNR).
 """
 import json
 import os
@@ -36,7 +37,7 @@ CONFIGS = {"bb_iso_1s": ("bb_iso", None, 7), "bb_iso_1s_rho20": ("bb_iso", -20.0
 SNRS = (10, 20, 30)
 
 
-def run(config, n):
+def run(config, n, suffix=""):
     env, rho, n_data = CONFIGS[config][:3]
     mod = CONFIGS[config][3] if len(CONFIGS[config]) > 3 else "qpsk"
     snrs = CONFIGS[config][4] if len(CONFIGS[config]) > 4 else SNRS
@@ -120,7 +121,8 @@ def run(config, n):
         db = 10 * np.log10(pw[:, 0] / pw[:, 1])
         rows.append(dict(config=config, snr_db=snr, receiver=k, sinr_power_avg_db=float(10 * np.log10(pw[:, 0].sum() / pw[:, 1].sum())),
                          sinr_median_db=float(np.median(db)), sinr_p10_db=float(np.percentile(db, 10)),
-                         per=float(np.mean(e["err"])), per_packet_db=[float(v) for v in db]))
+                         per=float(np.mean(e["err"])), per_packet_db=[float(v) for v in db],
+                         per_packet_err=[bool(v) for v in e["err"]]))
     for snr in snrs:
         print(f"{config} SNR {snr} (SINR power avg / median / p10, PER):", flush=True)
         for r in rows:
@@ -128,9 +130,25 @@ def run(config, n):
                 print(f"    {r['receiver']:20s} {r['sinr_power_avg_db']:5.1f} / {r['sinr_median_db']:5.1f} / {r['sinr_p10_db']:5.1f}  PER {r['per']:.2f}", flush=True)
             elif r["snr_db"] == snr:
                 print(f"    sensor guard chose signal-only in {r['sensor_guard_choice_signal']:.0%} of packets", flush=True)
-    with open(os.path.join(output_dir("b13_multipath"), f"{config}.json"), "w", encoding="utf-8") as fh:
+        by = {r["receiver"]: r["per_packet_err"] for r in rows if r["snr_db"] == snr and "receiver" in r}
+        if "sensor_sic" in by and "signal_sic" in by:
+            b, c, p = mcnemar(by["signal_sic"], by["sensor_sic"])
+            print(f"    paired PER, signal_sic vs sensor_sic: lost only by signal {b}, only by sensor {c}, "
+                  f"exact McNemar p = {p:.3f}", flush=True)
+    with open(os.path.join(output_dir("b13_multipath"), f"{config}{suffix}.json"), "w", encoding="utf-8") as fh:
         json.dump(dict(config=config, n_packets=n, nominal=nominal, summary=L.summary(), rows=rows), fh, indent=1)
 
 
+def mcnemar(err_a, err_b):
+    """Paired comparison of two receivers on the same packets: (packets lost only by a, only by b, exact two-sided
+    McNemar p-value = binomial test of b vs c with p = 1/2)."""
+    from math import comb
+    b = sum(x and not y for x, y in zip(err_a, err_b))
+    c = sum(y and not x for x, y in zip(err_a, err_b))
+    n = b + c
+    p = min(1.0, 2 * sum(comb(n, i) for i in range(0, min(b, c) + 1)) / 2 ** n) if n else 1.0
+    return b, c, p
+
+
 if __name__ == "__main__":
-    run(sys.argv[1], int(sys.argv[2]) if len(sys.argv) > 2 else 30)
+    run(sys.argv[1], int(sys.argv[2]) if len(sys.argv) > 2 else 30, sys.argv[3] if len(sys.argv) > 3 else "")

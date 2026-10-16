@@ -31,3 +31,17 @@ def test_search_window():
     assert all(abs(f - 7.3) < 0.1 for _, f, _ in longint.segment_freqs(z, c, fs, t_seg, band_hz=20.0))
     noise = (rng.standard_normal(n) + 1j * rng.standard_normal(n)) * 10
     assert all(abs(f) <= 20.0 + 1e-9 for _, f, _ in longint.segment_freqs(noise, c, fs, t_seg, band_hz=20.0))
+
+
+def test_hmm_tracker_follows_a_clean_line():
+    fs, t_seg = 4000.0, 0.5
+    rng = np.random.default_rng(2)
+    n = int(6 * fs)
+    c = longint.dsss(6000, 1000.0, fs, rng)
+    t = np.arange(n) / fs
+    f_true = 5.0 * np.sin(2 * np.pi * 0.1 * t)
+    z = c * np.exp(2j * np.pi * np.cumsum(f_true) / fs)
+    ts, f, P = longint.segment_spectra(z, c, fs, t_seg, band_hz=20.0)
+    meas = longint.hmm_freqs(ts, f, P, 3.0)
+    assert len(meas) == len(ts)
+    assert all(abs(fk - np.interp(tk, t, f_true)) < 0.6 for tk, fk, _ in meas)
