@@ -13,7 +13,9 @@ Receivers on identical packets and noise:
                 signal_sic), sensor_sic_noguard
   reference     ideal_sic (true per-path trajectories and delays)
 Metrics: SINR after the receiver's own channel estimate and MRC (receiver.sinr_combined), coded QPSK PER; per-packet
-SINR kept. Usage: python scripts/b13_multipath.py <config> [n_packets] [suffix], config in CONFIGS.
+SINR kept. Usage: python scripts/b13_multipath.py <config> [n_packets] [suffix] [start] (packets start .. start+n-1; each
+packet has its own seed, so chunks run in parallel and merge into the same result as one run);
+python scripts/b13_multipath.py merge <config> <out_suffix> <chunk_suffix> ... Config in CONFIGS.
 Output: results/b13_multipath/<config><suffix>.json (per-packet SINR and errors; paired McNemar test of the two
 cancellations printed per SNR).
 """
@@ -25,6 +27,7 @@ import numpy as np
 
 from uwofdm import chain, channel, frame, imu, motion, mpchain, multipath, receiver, sensors
 from uwofdm.paths import output_dir
+from uwofdm.stats import mcnemar, seed_of
 from c2_sweeps import OOI_DAY, buoy_buoy_link, seabed_link
 from e2_multipath import sigma_eta
 
@@ -37,7 +40,11 @@ CONFIGS = {"bb_iso_1s": ("bb_iso", None, 7), "bb_iso_1s_rho20": ("bb_iso", -20.0
 SNRS = (10, 20, 30)
 
 
-def run(config, n, suffix=""):
+N_MAX = 2000  # packet start times are drawn once for this many packets; packet i is always the same packet
+
+
+def run(config, n, suffix="", start=0):
+    """Packets start .. start + n - 1 of the configuration (chunks of one long run: packet i has its own seed)."""
     env, rho, n_data = CONFIGS[config][:3]
     mod = CONFIGS[config][3] if len(CONFIGS[config]) > 3 else "qpsk"
     snrs = CONFIGS[config][4] if len(CONFIGS[config]) > 4 else SNRS
@@ -61,8 +68,11 @@ def run(config, n, suffix=""):
     print(f"{config}: coherent paths {[(round(p['delay_ms'], 2), round(p['power_db'], 1), round(p['src_deg'], 1)) for p in L.summary()]}; "
           f"nominal {[(round(a, 1), round(d * 1e3, 2)) for a, _, d in nominal]}", flush=True)
     acc = {}
-    for t0 in rng.uniform(tx_track.t[0] + 240, tx_track.t[-1] - T - 60, n):
-        rp = np.random.default_rng(rng.integers(1 << 30))
+    t0s = rng.uniform(tx_track.t[0] + 240, tx_track.t[-1] - T - 60, N_MAX)
+    head = dict(config=config, nominal=nominal, summary=L.summary(), start=start)
+    for done, i in enumerate(range(start, start + n), 1):
+        t0 = t0s[i]
+        rp = np.random.default_rng(seed_of(config, i))
         info = rp.integers(0, 2, receiver.n_info_bits(F, mod))
         X = receiver.build_data(info, F, mod)
         Xf = X.copy()
@@ -112,17 +122,34 @@ def run(config, n, suffix=""):
                 e["pw"].append(receiver.sinr_combined(br, Xf, F))
                 e["err"].append(not np.array_equal(receiver.decode_combined(br, F, mod), info))
             acc.setdefault((snr, "_sensor_choice"), dict(c=[]))["c"].append(si.get("choice"))
+        if done % 10 == 0 or done == n:  # incremental save: a crash loses at most 10 packets
+            save(acc, head, done, suffix)
+    report(summarise(acc, config), snrs, config)
+
+
+def summarise(acc, config):
     rows = []
     for (snr, k), e in sorted(acc.items()):
         if k.startswith("_"):
-            rows.append(dict(config=config, snr_db=snr, sensor_guard_choice_signal=float(np.mean([c == "signal" for c in e["c"]]))))
+            rows.append(dict(config=config, snr_db=snr, sensor_guard_choice_signal=float(np.mean([c == "signal" for c in e["c"]])),
+                             per_packet_choice=list(e["c"])))
             continue
         pw = np.array(e["pw"])
         db = 10 * np.log10(pw[:, 0] / pw[:, 1])
         rows.append(dict(config=config, snr_db=snr, receiver=k, sinr_power_avg_db=float(10 * np.log10(pw[:, 0].sum() / pw[:, 1].sum())),
                          sinr_median_db=float(np.median(db)), sinr_p10_db=float(np.percentile(db, 10)),
                          per=float(np.mean(e["err"])), per_packet_db=[float(v) for v in db],
-                         per_packet_err=[bool(v) for v in e["err"]]))
+                         per_packet_err=[bool(v) for v in e["err"]], per_packet_pw=[[float(a), float(b)] for a, b in pw]))
+    return rows
+
+
+def save(acc, head, n_done, suffix):
+    rows = summarise(acc, head["config"])
+    with open(os.path.join(output_dir("b13_multipath"), f"{head['config']}{suffix}.json"), "w", encoding="utf-8") as fh:
+        json.dump(dict(head, n_packets=n_done, rows=rows), fh, indent=1)
+
+
+def report(rows, snrs, config):
     for snr in snrs:
         print(f"{config} SNR {snr} (SINR power avg / median / p10, PER):", flush=True)
         for r in rows:
@@ -135,20 +162,31 @@ def run(config, n, suffix=""):
             b, c, p = mcnemar(by["signal_sic"], by["sensor_sic"])
             print(f"    paired PER, signal_sic vs sensor_sic: lost only by signal {b}, only by sensor {c}, "
                   f"exact McNemar p = {p:.3f}", flush=True)
-    with open(os.path.join(output_dir("b13_multipath"), f"{config}{suffix}.json"), "w", encoding="utf-8") as fh:
-        json.dump(dict(config=config, n_packets=n, nominal=nominal, summary=L.summary(), rows=rows), fh, indent=1)
 
 
-def mcnemar(err_a, err_b):
-    """Paired comparison of two receivers on the same packets: (packets lost only by a, only by b, exact two-sided
-    McNemar p-value = binomial test of b vs c with p = 1/2)."""
-    from math import comb
-    b = sum(x and not y for x, y in zip(err_a, err_b))
-    c = sum(y and not x for x, y in zip(err_a, err_b))
-    n = b + c
-    p = min(1.0, 2 * sum(comb(n, i) for i in range(0, min(b, c) + 1)) / 2 ** n) if n else 1.0
-    return b, c, p
+def merge(config, out_suffix, chunk_suffixes):
+    """Combine chunk files <config><suffix>.json (disjoint packet ranges) into <config><out_suffix>.json."""
+    acc, head, n = {}, None, 0
+    for suf in chunk_suffixes:
+        d = json.load(open(os.path.join(output_dir("b13_multipath"), f"{config}{suf}.json")))
+        head = head or {k: d[k] for k in ("config", "nominal", "summary")}
+        n += d["n_packets"]
+        for r in d["rows"]:
+            if "receiver" in r:
+                e = acc.setdefault((r["snr_db"], r["receiver"]), dict(pw=[], err=[]))
+                e["pw"] += [tuple(x) for x in r["per_packet_pw"]]
+                e["err"] += r["per_packet_err"]
+            else:
+                acc.setdefault((r["snr_db"], "_sensor_choice"), dict(c=[]))["c"] += r["per_packet_choice"]
+    save(acc, dict(head, start=0, chunks=list(chunk_suffixes)), n, out_suffix)
+    report(summarise(acc, config), sorted({k[0] for k in acc}), config)
 
 
 if __name__ == "__main__":
-    run(sys.argv[1], int(sys.argv[2]) if len(sys.argv) > 2 else 30, sys.argv[3] if len(sys.argv) > 3 else "")
+    # run:   b13_multipath.py <config> [n_packets] [suffix] [start]
+    # merge: b13_multipath.py merge <config> <out_suffix> <chunk_suffix> ...
+    if sys.argv[1] == "merge":
+        merge(sys.argv[2], sys.argv[3], sys.argv[4:])
+    else:
+        run(sys.argv[1], int(sys.argv[2]) if len(sys.argv) > 2 else 30, sys.argv[3] if len(sys.argv) > 3 else "",
+            int(sys.argv[4]) if len(sys.argv) > 4 else 0)

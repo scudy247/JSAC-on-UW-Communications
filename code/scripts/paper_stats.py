@@ -25,5 +25,17 @@ def queue_b():
     e2_multipath.main("multipath_hi.json")
 
 
+PER_RUNS = {"qpsk_7": ("qpsk", 7, 32, (0, 3, 6, 9, 12, 20), 300),  # one PER curve per campaign job (16 Oct 2026)
+            "16qam_7": ("16qam", 7, 32, (9, 12, 15, 18, 22, 30), 200),
+            "16qam_27": ("16qam", 27, 96, (12, 15, 18, 22, 26, 30), 150),
+            "qpsk_27": ("qpsk", 27, 96, (3, 6, 9, 12, 15, 20, 25), 200)}
+
+
 if __name__ == "__main__":
-    {"A": queue_a, "B": queue_b}[sys.argv[1]]()
+    # paper_stats.py A | B            the original two queues
+    # paper_stats.py per <key> [tag]  one curve of PER_RUNS (tag default _<key>_hi)
+    if sys.argv[1] == "per":
+        mod, n_data, bits, snrs, n = PER_RUNS[sys.argv[2]]
+        run_per(mod, n_data, bits, snrs, n_packets=n, tag=sys.argv[3] if len(sys.argv) > 3 else f"_{sys.argv[2]}_hi")
+    else:
+        {"A": queue_a, "B": queue_b}[sys.argv[1]]()

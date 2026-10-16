@@ -31,6 +31,7 @@ from uwofdm.experiment import at_times
 from uwofdm.paths import output_dir
 from uwofdm import receiver
 from uwofdm.receiver import n_info_bits
+from uwofdm.stats import ci95, seed_of, wilson
 from c2_sweeps import OOI_DAY
 from e2_chain import SIGMA_IMU
 from e2_imu_grades import _static
@@ -135,29 +136,14 @@ def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GR
                       worst_user_sinr_db=float(np.mean(sinr.min(1))), worst_user_ci95=ci95(sinr.min(1)),
                       p10_sinr_db=float(np.percentile(sinr, 10)), per=float(err.mean()),
                       per_ci95=wilson(int(err.sum()), len(err)), goodput_bps=float(K * bits * (1 - err.mean()) / T),
-                      per_user_packet_sinr_db=[round(float(x), 2) for x in sinr.ravel()])
+                      per_user_packet_sinr_db=[round(float(x), 2) for x in sinr.ravel()],
+                      per_user_packet_err=[bool(x) for x in err])
     for ours in ("branch_sensor", "branch_sensor_pilot"):  # paired gain of ours over each signal-only baseline
         for base in ("branch_signal", "branch_pilot"):
             d = np.array(rec[ours]["sinr"]) - np.array(rec[base]["sinr"])
             out[ours]["gain_over_" + base] = dict(mean_db=float(d.mean()), ci95=ci95(d.reshape(-1, K).mean(1)),
                                                   fraction_positive=float(np.mean(d > 0)))
     return out
-
-
-def ci95(x):
-    """95 % confidence half-width of the mean of independent samples x (one per packet)."""
-    x = np.asarray(x, float)
-    return float(1.96 * x.std(ddof=1) / np.sqrt(len(x))) if len(x) > 1 else float("nan")
-
-
-def wilson(k, n):
-    """95 % Wilson interval of a proportion k / n."""
-    if n == 0:
-        return [float("nan")] * 2
-    p, z = k / n, 1.96
-    c = (p + z * z / (2 * n)) / (1 + z * z / n)
-    h = z * np.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / (1 + z * z / n)
-    return [float(max(0.0, c - h)), float(min(1.0, c + h))]
 
 
 def main():
@@ -177,12 +163,16 @@ def main():
     a = ap.parse_args()
     receiver.NOISE_SOURCE = a.noise_source
     ints = lambda t: [int(v) for v in t.split(",")]
-    rng = np.random.default_rng(13)
     rows = []
     for case in a.cases.split(","):
         for K in ints(a.ks):
             for guard in ints(a.guards):
                 for snr in ints(a.snrs):
+                    # per-configuration seed (stats.seed_of): the same configuration draws the same packets whatever
+                    # the order or the split of the jobs; receiver and sensor settings (noise source, grade,
+                    # direction errors) are not part of it, so a variant sees exactly the packets and noise of the
+                    # reference run (paired comparisons)
+                    rng = np.random.default_rng(seed_of(case, K, guard, snr, a.mod))
                     res = run(case, K, guard, snr, a.n, rng, mod=a.mod, alone=not a.no_alone, grade=a.grade,
                               dir_err_deg=a.dir_err_deg)
                     rows.append(dict(scenario=case, K=K, guard=guard, snr_db=snr, n_packets=a.n, mod=a.mod,

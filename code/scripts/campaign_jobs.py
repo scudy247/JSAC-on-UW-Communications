@@ -1,0 +1,87 @@
+"""
+Job list of the campaign of 17 Oct 2026 (PLAN: Phases 2, 5, 6; run by scripts/campaign.py on 25 cores).
+Each job: name, script, args, est_min (single-core minutes, from the rates measured on 14-16 Oct), after (jobs that
+must be done first). Rates: multi-user ~2.8 s per user-packet (all receivers incl. the sensor-seeded pilot
+tracker); multipath ~2.4 min per 1 s packet and ~8 min per 4 s packet (all SNRs of the configuration); B ~20 min per
+(case, carrier) at 60 packets (Viterbi tracker ~1.3x); single-path PER / sea states / numerology: guesses.
+Groups (name prefixes):
+  mu_main  multi-user grid: seabed and buoy users, K 2/4/8, guards 0/8/32, SNR 15/20/25/30 dB, 16-QAM, 100 packets
+  mu_var   multi-user robustness on the reference packets (same seeds): consumer sensors, 2 and 5 deg direction
+           errors (8 guards), pilot-residual decoder noise (no guard); buoy users, K 4/8, 20 and 30 dB
+  mp       multipath (b13): 1 s QPSK / 16-QAM / rho -20 dB (100 packets), 4 s QPSK (60), chunks merged
+  B        long integration (b21): per-segment ML and Viterbi trackers, industrial; Viterbi with consumer sensors
+  sp       single path, held high-statistics reruns: coded PER curves, sea states, numerology
+"""
+CASES = ("buoy users", "seabed users")
+USER_PACKET_S = 2.8
+JOBS = []
+
+
+def add(name, script, args, est_min, after=()):
+    JOBS.append(dict(name=name, script=script, args=list(args), est_min=round(est_min), after=list(after)))
+
+
+def q(s):
+    return "'" + s + "'"  # one shell argument
+
+
+# ---------------------------------------------------------------- multi-user, main grid
+mu_parts = []
+for case in CASES:
+    tag = case.split()[0]
+    for K in (2, 4, 8):
+        for g in (0, 8, 32):
+            for snr in (15, 20, 25, 30):
+                name = f"mu_main_{tag}_K{K}_g{g}_s{snr}"
+                add(name, "b22_multiuser.py", ["100", "--mod", "16qam", "--cases", q(case), "--ks", str(K),
+                                               "--guards", str(g), "--snrs", str(snr), "--no-alone",
+                                               "--out", "camp_" + name], K * 100 * USER_PACKET_S / 60)
+                mu_parts.append(name)
+add("mu_main_merge", "campaign_merge.py", ["b22_multiuser", "camp_mu_main"] + ["camp_" + p for p in mu_parts], 1,
+    after=mu_parts)
+
+# ---------------------------------------------------------------- multi-user, robustness (paired with mu_main)
+var_parts = []
+VARIANTS = {"consumer": (["--grade", "consumer"], 8), "direrr2": (["--dir-err-deg", "2"], 8),
+            "direrr5": (["--dir-err-deg", "5"], 8), "noisemax": (["--noise-source", "max"], 0)}
+for v, (extra, g) in VARIANTS.items():
+    for K in (4, 8):
+        for snr in (20, 30):
+            name = f"mu_var_{v}_K{K}_s{snr}"
+            add(name, "b22_multiuser.py", ["100", "--mod", "16qam", "--cases", q("buoy users"), "--ks", str(K),
+                                           "--guards", str(g), "--snrs", str(snr), "--no-alone"] + extra +
+                ["--out", "camp_" + name], K * 100 * USER_PACKET_S / 60)
+            var_parts.append(name)
+add("mu_var_merge", "campaign_merge.py", ["b22_multiuser", "camp_mu_var"] + ["camp_" + p for p in var_parts], 1,
+    after=var_parts)
+
+# ---------------------------------------------------------------- multipath, chunks of one long run per configuration
+MP = {"bb_iso_1s": (100, 20, 2.4), "bb_iso_1s_16qam": (100, 20, 2.4), "bb_iso_1s_rho20": (100, 20, 2.4),
+      "bb_iso_4s": (60, 10, 8.0)}
+for cfg, (n, chunk, rate) in MP.items():
+    chunks = []
+    for c, start in enumerate(range(0, n, chunk)):
+        name = f"mp_{cfg}_c{c}"
+        add(name, "b13_multipath.py", [cfg, str(chunk), f"_camp_c{c}", str(start)], chunk * rate)
+        chunks.append(name)
+    add(f"mp_{cfg}_merge", "b13_multipath.py", ["merge", cfg, "_camp"] + [f"_camp_c{c}" for c in range(len(chunks))],
+        1, after=chunks)
+
+# ---------------------------------------------------------------- B, long integration
+for variant, (tracker, grade, rate) in {"ml": ("ml", "industrial", 20), "hmm": ("hmm", "industrial", 26),
+                                        "hmm_consumer": ("hmm", "consumer", 26)}.items():
+    parts = []
+    for ci in range(3):
+        for fc in (16000, 4000):
+            name = f"B_{variant}_c{ci}_f{fc // 1000}"
+            add(name, "b21_waveform_b.py", ["60", tracker, "--cases", str(ci), "--fcs", str(fc), "--grade", grade,
+                                            "--out", "camp_" + name], rate)
+            parts.append(name)
+    add(f"B_{variant}_merge", "campaign_merge.py", ["b21_waveform_b", f"camp_B_{variant}"] + ["camp_" + p for p in parts],
+        1, after=parts)
+
+# ---------------------------------------------------------------- single path, held reruns
+for key, est in (("qpsk_7", 180), ("16qam_7", 180), ("16qam_27", 200), ("qpsk_27", 240)):
+    add(f"sp_per_{key}", "paper_stats.py", ["per", key, f"_{key}_camp"], est)
+add("sp_sea_states", "b3_sea_states.py", ["40"], 180)
+add("sp_numerology", "b4_numerology.py", ["40"], 120)
