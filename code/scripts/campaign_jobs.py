@@ -9,6 +9,8 @@ Groups (name prefixes):
   mu_var   multi-user robustness on the reference packets (same seeds): consumer sensors, 2 and 5 deg direction
            errors, 10 ppm modem clocks, a moderate (Hs 2.3 m) and a calm (Hs 0.9 m) OOI day (8 guards);
            pilot-residual decoder noise (no guard); buoy users, K 4/8, 20 and 30 dB
+  mu_mp    multi-user with each user through its own Bellhop channel (b22 --multipath): seabed and buoy users,
+           K 2/4/8, 8 guards, 20 and 30 dB, 100 packets (receivers unchanged: single branch per user)
   mp       multipath (b13): 1 s QPSK / 16-QAM / rho -20 dB (100 packets), 4 s QPSK (60); 1 s 16-QAM with 10 ppm
            clocks, on the moderate and on the calm day (100, paired with the reference); chunks merged
   B        long integration (b21): per-segment ML and Viterbi trackers, industrial; Viterbi with consumer sensors;
@@ -59,6 +61,20 @@ for v, (extra, g) in VARIANTS.items():
             var_parts.append(name)
 add("mu_var_merge", "campaign_merge.py", ["b22_multiuser", "camp_mu_var"] + ["camp_" + p for p in var_parts], 1,
     after=var_parts)
+
+# ---------------------------------------------------------------- multi-user over per-user multipath (16 Oct 2026)
+mp_parts = []
+for case in CASES:
+    tag = case.split()[0]
+    for K in (2, 4, 8):
+        for snr in (20, 30):
+            name = f"mu_mp_{tag}_K{K}_s{snr}"
+            add(name, "b22_multiuser.py", ["100", "--mod", "16qam", "--cases", q(case), "--ks", str(K), "--guards", "8",
+                                           "--snrs", str(snr), "--no-alone", "--multipath", "--out", "camp_" + name],
+                K * 100 * 3.2 / 60)
+            mp_parts.append(name)
+add("mu_mp_merge", "campaign_merge.py", ["b22_multiuser", "camp_mu_mp"] + ["camp_" + p for p in mp_parts], 1,
+    after=mp_parts)
 
 # ---------------------------------------------------------------- multipath, chunks of one long run per configuration
 MP = {"bb_iso_1s": (100, 20, 2.4), "bb_iso_1s_16qam": (100, 20, 2.4), "bb_iso_1s_rho20": (100, 20, 2.4),

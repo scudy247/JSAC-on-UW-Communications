@@ -26,7 +26,7 @@ from functools import lru_cache
 
 import numpy as np
 
-from uwofdm import motion, multiuser as mu, waveform
+from uwofdm import channel, motion, multipath as mpm, multiuser as mu, waveform
 from uwofdm.experiment import at_times
 from uwofdm.paths import output_dir
 from uwofdm import receiver
@@ -35,6 +35,7 @@ from uwofdm.stats import ci95, seed_of, wilson
 from c2_sweeps import OOI_DAY
 from e2_chain import SIGMA_IMU
 from e2_imu_grades import _static
+from e2_multipath import sigma_eta
 from uwofdm import imu
 from uwofdm.experiment import NodeIMU
 
@@ -43,6 +44,8 @@ KS = (2, 4, 8)
 GUARDS = (0, 8, 32)  # empty subcarriers between neighbouring users
 SNRS = (20, 30)
 R, LEVER, GRADE, GW_SEED = 1000.0, (0.0, 0.0, 2.0), "industrial", 7
+GEO = {"buoy users": (R, 10.0, 10.0, 100.0),  # Bellhop geometry per scenario: range, tx depth, rx depth, water
+       "seabed users": (R, 99.5, 10.0, 100.0)}  # depth (as b13_multipath bb_iso and seabed_iso, uplink direction)
 MAX_OFF = 0.005  # [s] asynchrony between users' frame starts
 
 
@@ -80,7 +83,7 @@ def node_hat(track, u, sign, shift, grade, seed, u_hat):
 
 
 def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GRADE, dir_err_deg=0.0, clock_ppm=0.0,
-        day=OOI_DAY):
+        day=OOI_DAY, multipath=False):
     o = o or waveform.OFDM()
     frames = mu.contiguous(o, K, guard)
     gw, users = tracks(case, K, day)
@@ -96,6 +99,11 @@ def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GR
     nodes = [(node_hat(u, d["u"], +1, 0.0, grade, 100 + k, rotate(d["u"], e)),
               node_hat(gw, d["u"], -1, d["tau"], grade, GW_SEED, rotate(d["u"], e)))
              for k, (u, d, e) in enumerate(zip(users, links, errs))]
+    # multipath (16 Oct 2026): each user reaches the gateway through its own Bellhop channel (multipath.LinkMultipath:
+    # coherent arrivals with their own Doppler from both nodes' 3-D motion along their angles, boundary bounces split
+    # into fading sub-paths); the receivers are unchanged and the genie knows the strongest path's Doppler
+    chans = [mpm.LinkMultipath(u, gw, GEO[case], sigma_eta(gw), gw.vel_fast[:, 2], gw.fs, cluster=(5, 0.3, 5e-5))
+             for u in users] if multipath else None
     T = frames[0].length / o.fs
     lo = max(d["times"][0] for d in links) + 240
     hi = min(d["times"][-1] for d in links) - T - 20
@@ -106,7 +114,7 @@ def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GR
         lead, tail, m_off = int(rp.integers(500, 3000)), 8000, int(MAX_OFF * o.fs)
         offs = [0] + list(rp.integers(0, m_off, K - 1))
         tg = t0 - lead / o.fs + np.arange(lead + m_off + frames[0].length + tail) / o.fs
-        pk, xs, eps, priors, truths = [], [], [], [], []
+        pk, ys, priors, truths = [], [], [], []
         for k, F in enumerate(frames):
             info, X, s = mu.user_packet(F, rp, mod)
             x = np.zeros(len(tg), complex)
@@ -114,11 +122,18 @@ def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GR
             d = links[k]
             te = t0 + offs[k] / o.fs + np.arange(F.length + tail // 2) / o.fs
             pk.append((info, X))
-            xs.append(x)
-            eps.append(at_times(d["eps"], d["times"], users[k].fs, tg) + eps_clk[k])
-            truths.append(at_times(d["eps"], d["times"], users[k].fs, te) + eps_clk[k])
+            if chans is None:
+                e = at_times(d["eps"], d["times"], users[k].fs, tg) + eps_clk[k]
+                ys.append(waveform.warp(x, o.fs, e, o.fc))
+                truths.append(at_times(d["eps"], d["times"], users[k].fs, te) + eps_clk[k])
+            else:
+                bulk, paths = chans[k].build(tg, rp)
+                bulk = bulk + eps_clk[k]
+                ys.append(channel.apply(x, o.fs, o.fc, bulk, paths))
+                i0 = lead + offs[k]
+                truths.append(bulk[i0:i0 + F.length + tail // 2])
             priors.append(nodes[k][0].estimate(te, SIGMA_IMU) + nodes[k][1].estimate(te, SIGMA_IMU))
-        y = mu.add_noise(mu.uplink(xs, eps, o.fs, o.fc), o, snr_db, rp)
+        y = mu.add_noise(np.sum(ys, axis=0), o, snr_db, rp)
         searches = [(0, lead + m_off + 1500)] * K
         Ys, _ = mu.receive_users(y, frames, priors, truths, searches)
         for r, by_user in Ys.items():
@@ -127,7 +142,7 @@ def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GR
                 rec[r]["sinr"].append(s_db)
                 rec[r]["err"].append(e)
         for k, F in enumerate(frames if alone else ()):  # the user alone in the band, same noise level
-            ya = mu.add_noise(mu.uplink([xs[k]], [eps[k]], o.fs, o.fc), o, snr_db, rp)
+            ya = mu.add_noise(ys[k], o, snr_db, rp)
             Y = mu.receive_users(ya, [F], [priors[k]], [truths[k]], [searches[k]], which=("branch_genie",))[0][
                 "branch_genie"][0]
             s_db, e = mu.score(Y, pk[k][1], pk[k][0], F, mod)
@@ -165,6 +180,7 @@ def main():
     ap.add_argument("--dir-err-deg", type=float, default=0.0, help="std of the azimuth error of the believed directions")
     ap.add_argument("--clock-ppm", type=float, default=0.0, help="std of each modem's clock offset [ppm]")
     ap.add_argument("--day", default=OOI_DAY, help="OOI day of the gateway and buoy users, e.g. CE04OSSM/20230731")
+    ap.add_argument("--multipath", action="store_true", help="each user through its own Bellhop channel (GEO)")
     ap.add_argument("--noise-source", default="nulls", choices=("nulls", "max"),
                     help="decoder noise: in-band nulls only, or also the pilot residual (receiver.NOISE_SOURCE)")
     ap.add_argument("--out", default="points", help="output file name (results/b22_multiuser/<out>.json)")
@@ -182,10 +198,10 @@ def main():
                     # reference run (paired comparisons)
                     rng = np.random.default_rng(seed_of(case, K, guard, snr, a.mod))
                     res = run(case, K, guard, snr, a.n, rng, mod=a.mod, alone=not a.no_alone, grade=a.grade,
-                              dir_err_deg=a.dir_err_deg, clock_ppm=a.clock_ppm, day=a.day)
+                              dir_err_deg=a.dir_err_deg, clock_ppm=a.clock_ppm, day=a.day, multipath=a.multipath)
                     rows.append(dict(scenario=case, K=K, guard=guard, snr_db=snr, n_packets=a.n, mod=a.mod,
                                      grade=a.grade, dir_err_deg=a.dir_err_deg, noise_source=a.noise_source,
-                                     clock_ppm=a.clock_ppm, day=a.day, **res))
+                                     clock_ppm=a.clock_ppm, day=a.day, multipath=a.multipath, **res))
                     g, gp = res["branch_sensor"], res["branch_sensor_pilot"]
                     print(f"{case:13s} K {K} guard {guard:2d} SNR {snr} {a.mod} | mean SINR / PER: " + "  ".join(
                         f"{r} {v['mean_sinr_db']:5.1f}/{v['per']:.2f}" for r, v in res.items()) +
