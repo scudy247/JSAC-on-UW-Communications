@@ -1030,3 +1030,58 @@ signal-only / sensor-aided:
   10 dB-Hz. The true gain at threshold lies between the two; a lower-threshold signal-only baseline is needed before
   quoting a number there.
 - Earlier run without the fallback (`points_no_fallback.json`): identical where tracking works, -20 vs -17.8 below.
+
+## A: multi-user at 100 packets, 16-QAM, with a pilot-tracking baseline (15 Oct 2026; Phase 6; `b22_multiuser.py 100 --mod 16qam --cases 'buoy users' --ks 2,4,8 --guards 0,8 --snrs 20,30 --out hi_16qam_buoy`)
+Buoy users, industrial MEMS. New signal-only baseline: closed-loop pilot tracking per user (`branch_pilot`). Gain =
+ours (`branch_sensor`) minus the BETTER signal-only receiver at each point, paired per packet, 95 % interval; win =
+fraction of user-packets where ours is higher. Mean SINR [dB]:
+
+| K, guard, SNR | Tu branch | pilot tracking | ours | genie | gain over best signal-only | win |
+|---|---|---|---|---|---|---|
+| 2, 0, 20 | 17.0 | 18.9 | 18.9 | 19.0 | +0.0 ± 0.0 | 0.49 |
+| 2, 0, 30 | 20.4 | 24.1 | 24.3 | 24.5 | +0.2 ± 0.1 | 0.69 |
+| 2, 8, 20 | 17.2 | 19.4 | 19.4 | 19.5 | -0.0 ± 0.0 | 0.45 |
+| 2, 8, 30 | 21.2 | 26.9 | 27.2 | 27.9 | +0.2 ± 0.2 | 0.59 |
+| 4, 0, 20 | 15.8 | 16.3 | 17.1 | 17.3 | +0.8 ± 0.1 | 0.88 |
+| 4, 0, 30 | 18.5 | 18.7 | 20.5 | 20.7 | +1.8 ± 0.2 | 0.91 |
+| 4, 8, 20 | 17.1 | 17.4 | 18.7 | 19.1 | +1.3 ± 0.2 | 0.94 |
+| 4, 8, 30 | 20.7 | 21.1 | 24.6 | 26.0 | +3.5 ± 0.3 | 0.96 |
+| 8, 0, 20 | 14.6 | 12.4 | 15.5 | 16.0 | +0.9 ± 0.1 | 0.85 |
+| 8, 0, 30 | 16.4 | 13.4 | 17.5 | 18.1 | +1.1 ± 0.1 | 0.85 |
+| 8, 8, 20 | 15.8 | 13.1 | 17.2 | 18.6 | +1.4 ± 0.1 | 0.90 |
+| 8, 8, 30 | 18.7 | 14.9 | 21.4 | 24.2 | +2.7 ± 0.2 | 0.91 |
+
+- K = 2: pilot tracking reaches the genie; no sensor gain (honest negative). K = 4, 8: ours beats the better
+  signal-only receiver by +0.8 to +3.5 dB with tight intervals, on 85–96 % of user-packets.
+- Pilot tracking collapses as K grows (fewer pilots per user: 24.1 → 18.7 → 13.4 dB at 30 dB, no guard); at K = 8 it is
+  worse than the simple Tu branch. Ours stays within 0.2–2.8 dB of the genie.
+- PER does not separate: 0 for everyone with 8 guards; without guards 4–28 %, the genie included, and higher at 30 than
+  at 20 dB (K = 4: genie 0.05 → 0.12; K = 8: 0.07 → 0.18). Neighbour leakage with no guard sets the floor; a PER
+  that grows with SNR points at overconfident LLRs (noise from the user's own nulls only). To test with
+  receiver.NOISE_SOURCE = "max" in the multi-user chain (b23 did not confirm it for multipath, below).
+- `common` shows -inf mean SINR: one lost lock; fixed since (SINR floored at -10 dB, multiuser.SINR_FLOOR_DB).
+
+## Multipath 16-QAM at 100 packets (15 Oct 2026; Phase 5; `b13_multipath.py bb_iso_1s_16qam 100`)
+Same channel as the 30-packet run (now `bb_iso_1s_16qam_n30.json`). SINR power average / median / 10th percentile
+[dB], PER:
+
+| SNR | signal cancellation | sensor cancellation | ideal | signal Kalman (no cancellation) |
+|---|---|---|---|---|
+| 20 | 17.7 / 17.8 / 14.1, 0.09 | **19.0 / 18.7 / 17.7, 0.04** | 19.4 / 19.1 / 18.1, 0.01 | 14.3 / 12.8 / 5.1, 0.39 |
+| 25 | 21.2 / 21.4 / 16.4, 0.09 | **23.2 / 23.1 / 21.7, 0.05** | 24.3 / 23.9 / 22.9, 0.01 | 17.2 / 14.0 / 5.2, 0.37 |
+| 30 | 24.2 / 24.5 / 17.1, 0.06 | **26.9 / 26.9 / 24.7, 0.04** | 28.9 / 28.6 / 27.6, 0.00 | 19.5 / 14.5 / 5.2, 0.37 |
+
+- Confirms the 30-packet run with 100 packets: +1.3 / +2.0 / +2.7 dB mean, **+3.6 / +5.3 / +7.6 dB at the 10th
+  percentile** (20 / 25 / 30 dB).
+- PER: sensor 0.04–0.05 vs signal 0.06–0.09, about half; pooled over the three SNRs 13 / 300 vs 24 / 300 packets.
+  Suggestive, not yet significant packet by packet (per-packet errors are not stored; a paired test needs them).
+- Ideal cancellation now 0.00–0.01 PER: the 7–10 % "floor" of the 30-packet run was those particular packets (b23).
+
+## PER-floor diagnostic of the ideal multipath receiver (15 Oct 2026; Phase 2; `b23_per_floor.py 30 30`)
+The 30 packets of the earlier run at 30 dB, ideal cancellation only: 3 / 30 fail (as before). In the failing packets
+the decoder's noise estimate (from the nulls) is 2–11 dB below the true error on some symbols (in good packets within
+~1 dB), but giving the decoder the TRUE per-symbol error fixes only 1 of 3, and the pilot-residual noise
+(receiver.NOISE_SOURCE = "max") fixes 0 and breaks none. Hypothesis not confirmed: those packets have symbols where
+cancellation itself breaks down (residue 5–11 dB above the noise on single symbols, likely the cluster sub-paths the
+"ideal" receiver does not model), not just an overconfident decoder. With 100 packets the ideal PER is 0–1 %: a rare
+event, not a floor.
