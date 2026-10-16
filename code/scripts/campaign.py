@@ -189,7 +189,8 @@ def main():
             sys.exit(1)
         os.makedirs(LOGS, exist_ok=True)
         only = f" --only {a.only}" if a.only else ""
-        cmd = (f"cd {HERE} && {PY} scripts/campaign.py run --workers {a.workers}{only} "
+        env = " ".join(f"{k}={os.environ[k]}" for k in ("CAMPAIGN_JOBS", "CAMPAIGN_STATE") if k in os.environ)
+        cmd = (f"cd {HERE} && {env} {PY} scripts/campaign.py run --workers {a.workers}{only} "
                f">> {STATE}/scheduler.log 2>&1")
         subprocess.run(["bash", "-c", "tmux has-session -t doppler 2>/dev/null || tmux new-session -d -s doppler -n idle"])
         subprocess.run(["tmux", "new-window", "-d", "-t", "doppler", "-n", "campaign", cmd], check=True)

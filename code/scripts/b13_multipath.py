@@ -41,15 +41,52 @@ SNRS = (10, 20, 30)
 
 
 N_MAX = 2000  # packet start times are drawn once for this many packets; packet i is always the same packet
+DAYS = {"calm": "CE04OSSM/20230731", "moderate": "GI01SUMO/20230915"}  # OOI days, Hs 0.9 / 2.3 m (default 6.4 m)
+
+
+def variant(config):
+    """Base configuration and options from name suffixes (16 Oct 2026): _calm / _moderate (another OOI day, both
+    buoys), _clk<p> (each modem's clock offset, std p ppm). Packets are seeded by the base configuration, so a
+    variant is paired with its reference."""
+    day, ppm = None, 0.0
+    while config not in CONFIGS:
+        head, _, tail = config.rpartition("_")
+        if tail in DAYS:
+            day = DAYS[tail]
+        elif tail.startswith("clk"):
+            ppm = float(tail[3:])
+        else:
+            raise KeyError(config)
+        config = head
+    return config, day, ppm
+
+
+def link_for(env, day):
+    """The tracks of LINKS[env], on another OOI day if day is given."""
+    make, geo, ssp = LINKS[env]
+    if day is None:
+        return make()
+    if env.startswith("bb"):
+        a = motion.buoy_track("ooi", day, (0.0, 0.0, -10.0), segment=3, lever=(0.0, 0.0, 2.0))
+        b = motion.buoy_track("ooi", day, (geo[0], 0.0, -10.0), segment=10, lever=(0.0, 0.0, 2.0))
+        n = min(a.n, b.n)
+        for tr in (a, b):
+            tr.vel_fast, tr.vel_slow = tr.vel_fast[:n], tr.vel_slow[:n]
+            tr.vel_lever = None if tr.vel_lever is None else tr.vel_lever[:n]
+        return a, b
+    return seabed_link("ooi", day, (0.0, 0.0, 2.0))
 
 
 def run(config, n, suffix="", start=0):
     """Packets start .. start + n - 1 of the configuration (chunks of one long run: packet i has its own seed)."""
-    env, rho, n_data = CONFIGS[config][:3]
-    mod = CONFIGS[config][3] if len(CONFIGS[config]) > 3 else "qpsk"
-    snrs = CONFIGS[config][4] if len(CONFIGS[config]) > 4 else SNRS
+    base, day, clock_ppm = variant(config)
+    env, rho, n_data = CONFIGS[base][:3]
+    mod = CONFIGS[base][3] if len(CONFIGS[base]) > 3 else "qpsk"
+    snrs = CONFIGS[base][4] if len(CONFIGS[base]) > 4 else SNRS
     make, geo, ssp = LINKS[env]
-    tx_track, rx_track = make()
+    tx_track, rx_track = link_for(env, day)
+    clk = np.random.default_rng(seed_of("clock", base)).normal(0.0, clock_ppm * 1e-6, 2)
+    eps_clk = clk[0] - clk[1]  # transmitter minus receiver clock offset: a constant Doppler scale, truth only
     rng = np.random.default_rng(31)
     F = frame.Frame(n_data=n_data)
     o = F.o
@@ -72,7 +109,7 @@ def run(config, n, suffix="", start=0):
     head = dict(config=config, nominal=nominal, summary=L.summary(), start=start)
     for done, i in enumerate(range(start, start + n), 1):
         t0 = t0s[i]
-        rp = np.random.default_rng(seed_of(config, i))
+        rp = np.random.default_rng(seed_of(base, i))
         info = rp.integers(0, 2, receiver.n_info_bits(F, mod))
         X = receiver.build_data(info, F, mod)
         Xf = X.copy()
@@ -82,6 +119,7 @@ def run(config, n, suffix="", start=0):
         x = np.concatenate([np.zeros(lead, complex), s, np.zeros(9000, complex)])
         tg = t0 - lead / o.fs + np.arange(len(x) + extra) / o.fs
         bulk, paths = L.build(tg, rp)
+        bulk = bulk + eps_clk
         y0 = channel.apply(x, o.fs, o.fc, bulk, paths, extra=extra)
         m = np.arange(len(x) + extra - lead)
         te = t0 + m / o.fs

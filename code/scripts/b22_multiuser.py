@@ -47,15 +47,15 @@ MAX_OFF = 0.005  # [s] asynchrony between users' frame starts
 
 
 @lru_cache(maxsize=None)
-def tracks(case, K):
+def tracks(case, K, day=OOI_DAY):
     """(gateway track, user tracks) on a common grid length (cached: loading the OOI bursts is the slow part; the
     tracks are not modified afterwards)."""
-    gw = motion.buoy_track("ooi", OOI_DAY, (0.0, 0.0, -10.0), segment=3, lever=LEVER)
+    gw = motion.buoy_track("ooi", day, (0.0, 0.0, -10.0), segment=3, lever=LEVER)
     az = 2 * np.pi * np.arange(K) / K + 0.3
     if case == "seabed users":
         users = [motion.static_track(gw.fs, gw.n, (R * np.cos(a), R * np.sin(a), -100.0)) for a in az]
     else:
-        users = [motion.buoy_track("ooi", OOI_DAY, (R * np.cos(a), R * np.sin(a), -10.0), segment=5 + 2 * k,
+        users = [motion.buoy_track("ooi", day, (R * np.cos(a), R * np.sin(a), -10.0), segment=5 + 2 * k,
                                    lever=LEVER) for k, a in enumerate(az)]
     n = min(t.n for t in [gw] + users)
     for tr in [gw] + users:
@@ -79,10 +79,16 @@ def node_hat(track, u, sign, shift, grade, seed, u_hat):
     return NodeIMU(track, u, sign, shift, np.random.default_rng(seed), grade=imu.GRADES[grade], lever_m=lever_m, **kw)
 
 
-def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GRADE, dir_err_deg=0.0):
+def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GRADE, dir_err_deg=0.0, clock_ppm=0.0,
+        day=OOI_DAY):
     o = o or waveform.OFDM()
     frames = mu.contiguous(o, K, guard)
-    gw, users = tracks(case, K)
+    gw, users = tracks(case, K, day)
+    # clock offsets (16 Oct 2026): one crystal per modem drives sampling and carrier, so a node whose clock is off by
+    # delta adds a constant Doppler scale; per link delta_user - delta_gateway, std clock_ppm per node, fixed per
+    # configuration; in the truth only (the sensors cannot see it, the signal must estimate it)
+    clk = np.random.default_rng(seed_of("clock", case, K)).normal(0.0, clock_ppm * 1e-6, K + 1)
+    eps_clk = clk[:K] - clk[K]
     links = [motion.link_doppler(u, gw) for u in users]
     # one gateway sensor: same seed, projected per user; dir_err_deg: both ends believe a direction turned by a
     # random azimuth error (std dir_err_deg, fixed per user), e.g. from stale or coarse position knowledge
@@ -109,8 +115,8 @@ def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GR
             te = t0 + offs[k] / o.fs + np.arange(F.length + tail // 2) / o.fs
             pk.append((info, X))
             xs.append(x)
-            eps.append(at_times(d["eps"], d["times"], users[k].fs, tg))
-            truths.append(at_times(d["eps"], d["times"], users[k].fs, te))
+            eps.append(at_times(d["eps"], d["times"], users[k].fs, tg) + eps_clk[k])
+            truths.append(at_times(d["eps"], d["times"], users[k].fs, te) + eps_clk[k])
             priors.append(nodes[k][0].estimate(te, SIGMA_IMU) + nodes[k][1].estimate(te, SIGMA_IMU))
         y = mu.add_noise(mu.uplink(xs, eps, o.fs, o.fc), o, snr_db, rp)
         searches = [(0, lead + m_off + 1500)] * K
@@ -157,6 +163,8 @@ def main():
     ap.add_argument("--no-alone", action="store_true", help="skip the genie with the user alone")
     ap.add_argument("--grade", default=GRADE, help="motion-sensor grade of every moving node (imu.GRADES)")
     ap.add_argument("--dir-err-deg", type=float, default=0.0, help="std of the azimuth error of the believed directions")
+    ap.add_argument("--clock-ppm", type=float, default=0.0, help="std of each modem's clock offset [ppm]")
+    ap.add_argument("--day", default=OOI_DAY, help="OOI day of the gateway and buoy users, e.g. CE04OSSM/20230731")
     ap.add_argument("--noise-source", default="nulls", choices=("nulls", "max"),
                     help="decoder noise: in-band nulls only, or also the pilot residual (receiver.NOISE_SOURCE)")
     ap.add_argument("--out", default="points", help="output file name (results/b22_multiuser/<out>.json)")
@@ -174,9 +182,10 @@ def main():
                     # reference run (paired comparisons)
                     rng = np.random.default_rng(seed_of(case, K, guard, snr, a.mod))
                     res = run(case, K, guard, snr, a.n, rng, mod=a.mod, alone=not a.no_alone, grade=a.grade,
-                              dir_err_deg=a.dir_err_deg)
+                              dir_err_deg=a.dir_err_deg, clock_ppm=a.clock_ppm, day=a.day)
                     rows.append(dict(scenario=case, K=K, guard=guard, snr_db=snr, n_packets=a.n, mod=a.mod,
-                                     grade=a.grade, dir_err_deg=a.dir_err_deg, noise_source=a.noise_source, **res))
+                                     grade=a.grade, dir_err_deg=a.dir_err_deg, noise_source=a.noise_source,
+                                     clock_ppm=a.clock_ppm, day=a.day, **res))
                     g, gp = res["branch_sensor"], res["branch_sensor_pilot"]
                     print(f"{case:13s} K {K} guard {guard:2d} SNR {snr} {a.mod} | mean SINR / PER: " + "  ".join(
                         f"{r} {v['mean_sinr_db']:5.1f}/{v['per']:.2f}" for r, v in res.items()) +

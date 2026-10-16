@@ -33,9 +33,10 @@ PER_RUNS = {"qpsk_7": ("qpsk", 7, 32, (0, 3, 6, 9, 12, 20), 300),  # one PER cur
 
 if __name__ == "__main__":
     # paper_stats.py A | B            the original two queues
-    # paper_stats.py per <key> [tag]  one curve of PER_RUNS (tag default _<key>_hi)
+    # paper_stats.py per <key> [tag] [n]  one curve of PER_RUNS (tag default _<key>_hi; n overrides the packets)
     if sys.argv[1] == "per":
         mod, n_data, bits, snrs, n = PER_RUNS[sys.argv[2]]
+        n = int(sys.argv[4]) if len(sys.argv) > 4 else n
         run_per(mod, n_data, bits, snrs, n_packets=n, tag=sys.argv[3] if len(sys.argv) > 3 else f"_{sys.argv[2]}_hi")
     else:
         {"A": queue_a, "B": queue_b}[sys.argv[1]]()

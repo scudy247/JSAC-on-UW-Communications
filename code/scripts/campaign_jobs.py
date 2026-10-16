@@ -7,9 +7,12 @@ tracker); multipath ~2.4 min per 1 s packet and ~8 min per 4 s packet (all SNRs 
 Groups (name prefixes):
   mu_main  multi-user grid: seabed and buoy users, K 2/4/8, guards 0/8/32, SNR 15/20/25/30 dB, 16-QAM, 100 packets
   mu_var   multi-user robustness on the reference packets (same seeds): consumer sensors, 2 and 5 deg direction
-           errors (8 guards), pilot-residual decoder noise (no guard); buoy users, K 4/8, 20 and 30 dB
-  mp       multipath (b13): 1 s QPSK / 16-QAM / rho -20 dB (100 packets), 4 s QPSK (60), chunks merged
-  B        long integration (b21): per-segment ML and Viterbi trackers, industrial; Viterbi with consumer sensors
+           errors, 10 ppm modem clocks, a moderate (Hs 2.3 m) and a calm (Hs 0.9 m) OOI day (8 guards);
+           pilot-residual decoder noise (no guard); buoy users, K 4/8, 20 and 30 dB
+  mp       multipath (b13): 1 s QPSK / 16-QAM / rho -20 dB (100 packets), 4 s QPSK (60); 1 s 16-QAM with 10 ppm
+           clocks, on the moderate and on the calm day (100, paired with the reference); chunks merged
+  B        long integration (b21): per-segment ML and Viterbi trackers, industrial; Viterbi with consumer sensors;
+           Viterbi with 10 ppm clocks
   sp       single path, held high-statistics reruns: coded PER curves, sea states, numerology
 """
 CASES = ("buoy users", "seabed users")
@@ -43,7 +46,9 @@ add("mu_main_merge", "campaign_merge.py", ["b22_multiuser", "camp_mu_main"] + ["
 # ---------------------------------------------------------------- multi-user, robustness (paired with mu_main)
 var_parts = []
 VARIANTS = {"consumer": (["--grade", "consumer"], 8), "direrr2": (["--dir-err-deg", "2"], 8),
-            "direrr5": (["--dir-err-deg", "5"], 8), "noisemax": (["--noise-source", "max"], 0)}
+            "direrr5": (["--dir-err-deg", "5"], 8), "noisemax": (["--noise-source", "max"], 0),
+            "clk10": (["--clock-ppm", "10"], 8), "moderate": (["--day", "GI01SUMO/20230915"], 8),
+            "calm": (["--day", "CE04OSSM/20230731"], 8)}
 for v, (extra, g) in VARIANTS.items():
     for K in (4, 8):
         for snr in (20, 30):
@@ -57,7 +62,8 @@ add("mu_var_merge", "campaign_merge.py", ["b22_multiuser", "camp_mu_var"] + ["ca
 
 # ---------------------------------------------------------------- multipath, chunks of one long run per configuration
 MP = {"bb_iso_1s": (100, 20, 2.4), "bb_iso_1s_16qam": (100, 20, 2.4), "bb_iso_1s_rho20": (100, 20, 2.4),
-      "bb_iso_4s": (60, 10, 8.0)}
+      "bb_iso_4s": (60, 10, 8.0), "bb_iso_1s_16qam_clk10": (100, 20, 2.4),
+      "bb_iso_1s_16qam_moderate": (100, 20, 2.4), "bb_iso_1s_16qam_calm": (100, 20, 2.4)}
 for cfg, (n, chunk, rate) in MP.items():
     chunks = []
     for c, start in enumerate(range(0, n, chunk)):
@@ -68,14 +74,16 @@ for cfg, (n, chunk, rate) in MP.items():
         1, after=chunks)
 
 # ---------------------------------------------------------------- B, long integration
-for variant, (tracker, grade, rate) in {"ml": ("ml", "industrial", 20), "hmm": ("hmm", "industrial", 26),
-                                        "hmm_consumer": ("hmm", "consumer", 26)}.items():
+for variant, (tracker, grade, rate, extra) in {"ml": ("ml", "industrial", 20, []),
+                                               "hmm": ("hmm", "industrial", 26, []),
+                                               "hmm_consumer": ("hmm", "consumer", 26, []),
+                                               "hmm_clk10": ("hmm", "industrial", 26, ["--clock-ppm", "10"])}.items():
     parts = []
     for ci in range(3):
         for fc in (16000, 4000):
             name = f"B_{variant}_c{ci}_f{fc // 1000}"
-            add(name, "b21_waveform_b.py", ["60", tracker, "--cases", str(ci), "--fcs", str(fc), "--grade", grade,
-                                            "--out", "camp_" + name], rate)
+            add(name, "b21_waveform_b.py", ["60", tracker, "--cases", str(ci), "--fcs", str(fc), "--grade", grade]
+                + extra + ["--out", "camp_" + name], rate)
             parts.append(name)
     add(f"B_{variant}_merge", "campaign_merge.py", ["b21_waveform_b", f"camp_B_{variant}"] + ["camp_" + p for p in parts],
         1, after=parts)
@@ -83,5 +91,5 @@ for variant, (tracker, grade, rate) in {"ml": ("ml", "industrial", 20), "hmm": (
 # ---------------------------------------------------------------- single path, held reruns
 for key, est in (("qpsk_7", 180), ("16qam_7", 180), ("16qam_27", 200), ("qpsk_27", 240)):
     add(f"sp_per_{key}", "paper_stats.py", ["per", key, f"_{key}_camp"], est)
-add("sp_sea_states", "b3_sea_states.py", ["40"], 180)
-add("sp_numerology", "b4_numerology.py", ["40"], 120)
+add("sp_sea_states", "b3_sea_states.py", ["40", "points_camp"], 180)
+add("sp_numerology", "b4_numerology.py", ["40", "numerology_camp"], 120)

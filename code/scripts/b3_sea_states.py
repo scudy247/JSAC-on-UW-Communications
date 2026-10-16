@@ -9,7 +9,7 @@ n packets per point. Receivers (scripts/b2_baselines.run_link): Li/Lee, tuned si
 partial FFT (8 segments), safe sensor fusion with GNSS-aided industrial MEMS (imu.py), the same + partial FFT.
 Each day is described by Hs (4 x std of the vertical displacement, from the vertical velocity spectrum above 0.03 Hz)
 and the rms link Doppler. Output: results/b3_sea_states/points.json (per-packet SINR kept).
-Usage: python scripts/b3_sea_states.py [n_packets]
+Usage: python scripts/b3_sea_states.py [n_packets] [out_name]
 """
 import glob
 import json
@@ -68,7 +68,7 @@ def main():
                 line = "  ".join(f"{k} {v['power_avg_db']:5.1f}/{v['median_db']:5.1f}" for (s, k), v in sorted(res.items()))
                 print(f"{source}:{name:22s} {kind:15s} Hs {desc['hs_m']:4.1f} m  {n_data:2d} sym  (power avg/median) "
                       f"{line}", flush=True)
-            with open(os.path.join(out_dir, "points.json"), "w", encoding="utf-8") as fh:
+            with open(os.path.join(out_dir, (sys.argv[2] if len(sys.argv) > 2 else "points") + ".json"), "w", encoding="utf-8") as fh:
                 json.dump(dict(n_packets=n, rows=rows), fh, indent=1)
 
 

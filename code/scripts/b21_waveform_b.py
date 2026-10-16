@@ -60,6 +60,7 @@ def main():
     ap.add_argument("--fcs", default=",".join(str(int(f)) for f in FCS))
     ap.add_argument("--cnrs", default=",".join(map(str, CNR_DBHZ)))
     ap.add_argument("--grade", default="industrial", help="sensor grade of both moving ends (imu.GRADES)")
+    ap.add_argument("--clock-ppm", type=float, default=0.0, help="std of each modem's clock offset [ppm] (truth only)")
     ap.add_argument("--out", default=None, help="output name (default points[_hmm][_grade])")
     a = ap.parse_args()
     out = a.out or "points" + ("" if a.tracker == "ml" else "_" + a.tracker) + \
@@ -75,6 +76,8 @@ def main():
         rx = node(rx_track, d["u"], -1, d["tau"], a.grade, 22)
         n_s = int(T_PKT * FS)
         rms_sig, rms_sen = window_rms(d, tx_track, tx, rx)
+        clk = np.random.default_rng(seed_of("clock", label)).normal(0.0, a.clock_ppm * 1e-6, 2)
+        eps_clk = clk[0] - clk[1]  # transmitter minus receiver clock offset: constant Doppler scale, not in the prior
         # per-case packet times and per-packet seeds (stats.seed_of): jobs split by case / carrier / CNR draw the
         # same packets as one run; tracker and grade are not in the seed, so their variants are paired
         starts = np.random.default_rng(seed_of("b21", label)).uniform(d["times"][0] + 240,
@@ -87,7 +90,7 @@ def main():
                 for i, t0 in enumerate(starts):
                     rp = np.random.default_rng(seed_of("b21", label, int(fc), cnr, i))
                     tg = t0 + np.arange(n_s) / FS
-                    eps = at_times(d["eps"], d["times"], tx_track.fs, tg)
+                    eps = at_times(d["eps"], d["times"], tx_track.fs, tg) + eps_clk
                     prior = tx.estimate(tg, SIGMA_IMU) + rx.estimate(tg, SIGMA_IMU)
                     c = longint.dsss(int(T_PKT * CHIP_RATE), CHIP_RATE, FS, rp)
                     y0, y = longint.received(c, FS, fc, eps, cnr, rp)
@@ -111,7 +114,7 @@ def main():
                 res["signal_tracked"] = dict(res["signal"])
                 if g_mean > res["signal"]["best_gain_db"]:  # best signal-only = better of tracking and mean only
                     res["signal"] = dict(best_gain_db=g_mean, t_seg=None, best_t_int=None, fallback="mean only")
-                rows.append(dict(scenario=label, fc_hz=fc, cnr_dbhz=cnr, n_packets=n, tracker=tracker, grade=a.grade,
+                rows.append(dict(scenario=label, fc_hz=fc, cnr_dbhz=cnr, n_packets=n, tracker=tracker, grade=a.grade, clock_ppm=a.clock_ppm,
                                  none_db=g_none, mean_only_db=g_mean,
                                  band_hz=dict(signal=BAND_K * rms_sig * fc, sensor=BAND_K * rms_sen * fc), **res))
                 print(f"{label:28s} fc {fc / 1e3:4.0f} kHz CNR {cnr:2d} dB-Hz | best coherent gain [dB re 1 s]: none "

@@ -15,7 +15,7 @@ Metrics: genie SINR per packet (power average, median, 10th percentile) and the 
 per packet (median, 10th percentile). Limitation: single path; with the Bellhop delay spreads (~11 ms) the 256-
 subcarrier numerology would also need denser pilots (125 Hz pilot spacing aliases delays beyond 8 ms), which is not
 charged here (favours short symbols).
-Usage: python scripts/b4_numerology.py [n_packets]. Output: results/b1_baselines/numerology.json.
+Usage: python scripts/b4_numerology.py [n_packets] [out_name]. Output: results/b1_baselines/numerology.json.
 """
 import json
 import os
@@ -58,7 +58,7 @@ def main():
                                  for (s, k), v in sorted(res.items()) if s == snr)
                 print(f"{label:28s} {dur:4.2f} s  {nsc:4d} sc ({n_data:2d} sym, eta {eta:.2f})  SNR {snr}: "
                       f"(median/p10 SINR, median rate) {line}", flush=True)
-            with open(os.path.join(out_dir, "numerology.json"), "w", encoding="utf-8") as fh:
+            with open(os.path.join(out_dir, (sys.argv[2] if len(sys.argv) > 2 else "numerology") + ".json"), "w", encoding="utf-8") as fh:
                 json.dump(dict(n_packets=n, rows=rows), fh, indent=1)
 
 
