@@ -11,6 +11,7 @@ Groups (name prefixes):
            pilot-residual decoder noise (no guard); buoy users, K 4/8, 20 and 30 dB
   mu_mp    multi-user with each user through its own Bellhop channel (b22 --multipath): seabed and buoy users,
            K 2/4/8, 8 guards, 20 and 30 dB, 100 packets (receivers unchanged: single branch per user)
+  mu_sic   the same for buoy users with per-user path cancellation (--sic): K 2/4 (60 packets), 8 (40)
   mp       multipath (b13): 1 s QPSK / 16-QAM / rho -20 dB (100 packets), 4 s QPSK (60); 1 s 16-QAM with 10 ppm
            clocks, on the moderate and on the calm day (100, paired with the reference); chunks merged
   B        long integration (b21): per-segment ML and Viterbi trackers, industrial; Viterbi with consumer sensors;
@@ -75,6 +76,16 @@ for case in CASES:
             mp_parts.append(name)
 add("mu_mp_merge", "campaign_merge.py", ["b22_multiuser", "camp_mu_mp"] + ["camp_" + p for p in mp_parts], 1,
     after=mp_parts)
+sic_parts = []  # the same with per-user path cancellation (signal-only / sensor-aided / ideal), buoy users, ~40 s/user-pkt
+for K, n in ((2, 60), (4, 60), (8, 40)):
+    for snr in (20, 30):
+        name = f"mu_sic_buoy_K{K}_s{snr}"
+        add(name, "b22_multiuser.py", [str(n), "--mod", "16qam", "--cases", q("buoy users"), "--ks", str(K), "--guards",
+                                       "8", "--snrs", str(snr), "--no-alone", "--multipath", "--sic",
+                                       "--out", "camp_" + name], K * n * 40 / 60)
+        sic_parts.append(name)
+add("mu_sic_merge", "campaign_merge.py", ["b22_multiuser", "camp_mu_sic"] + ["camp_" + p for p in sic_parts], 1,
+    after=sic_parts)
 
 # ---------------------------------------------------------------- multipath, chunks of one long run per configuration
 MP = {"bb_iso_1s": (100, 20, 2.4), "bb_iso_1s_16qam": (100, 20, 2.4), "bb_iso_1s_rho20": (100, 20, 2.4),

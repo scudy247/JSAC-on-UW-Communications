@@ -26,18 +26,15 @@ from functools import lru_cache
 
 import numpy as np
 
-from uwofdm import channel, motion, multipath as mpm, multiuser as mu, waveform
-from uwofdm.experiment import at_times
+from uwofdm import channel, imu, motion, mpchain, multipath as mpm, multiuser as mu, receiver, sensors, waveform
+from uwofdm.experiment import NodeIMU, at_times
 from uwofdm.paths import output_dir
-from uwofdm import receiver
 from uwofdm.receiver import n_info_bits
-from uwofdm.stats import ci95, seed_of, wilson
+from uwofdm.stats import ci95, mcnemar, seed_of, wilson
 from c2_sweeps import OOI_DAY
 from e2_chain import SIGMA_IMU
 from e2_imu_grades import _static
 from e2_multipath import sigma_eta
-from uwofdm import imu
-from uwofdm.experiment import NodeIMU
 
 CASES = ("seabed users", "buoy users")
 KS = (2, 4, 8)
@@ -83,7 +80,7 @@ def node_hat(track, u, sign, shift, grade, seed, u_hat):
 
 
 def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GRADE, dir_err_deg=0.0, clock_ppm=0.0,
-        day=OOI_DAY, multipath=False):
+        day=OOI_DAY, multipath=False, sic=False):
     o = o or waveform.OFDM()
     frames = mu.contiguous(o, K, guard)
     gw, users = tracks(case, K, day)
@@ -104,17 +101,29 @@ def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GR
     # into fading sub-paths); the receivers are unchanged and the genie knows the strongest path's Doppler
     chans = [mpm.LinkMultipath(u, gw, GEO[case], sigma_eta(gw), gw.vel_fast[:, 2], gw.fs, cluster=(5, 0.3, 5e-5))
              for u in users] if multipath else None
+    if sic:  # per-user path cancellation, as b13_multipath (buoy users: resolvable bottom bounce)
+        assert multipath and case == "buoy users", "--sic needs --multipath and buoy users"
+        srng = np.random.default_rng(seed_of("sic", case, K))
+        geo, se = GEO[case], sigma_eta(gw)
+        nominal = []
+        for _ in range(K):  # each user's angles from a Bellhop run on a nominal geometry with errors (range 2 %, depth 3 m)
+            g = (geo[0] * (1 + 0.02 * srng.standard_normal()), geo[1], geo[2], geo[3] + 3.0 * srng.standard_normal())
+            nominal.append(mpm.nominal_angles(g, None, surface_rms=se))
+        imu_rx = sensors.IMU3(gw, np.random.default_rng(GW_SEED), grade=imu.GRADES[grade], lever_m=2.0)
+        imu_tx = [sensors.IMU3(u, np.random.default_rng(seed_of("imu", k)), grade=imu.GRADES[grade], lever_m=2.0)
+                  for k, u in enumerate(users)]
+        si2 = [sensors.TwoComponentSideInfo(it, ch.u, frames[0].length / o.fs, 32, 32) for it, ch in zip(imu_tx, chans)]
     T = frames[0].length / o.fs
     lo = max(d["times"][0] for d in links) + 240
     hi = min(d["times"][-1] for d in links) - T - 20
-    names = mu.RECEIVERS + (("genie_alone",) if alone else ())
+    names = mu.RECEIVERS + (("genie_alone",) if alone else ()) + (("sic_signal", "sic_sensor", "sic_ideal") if sic else ())
     rec = {r: dict(sinr=[], err=[]) for r in names}
     for t0 in rng.uniform(lo, hi, n):
         rp = np.random.default_rng(rng.integers(1 << 30))
         lead, tail, m_off = int(rp.integers(500, 3000)), 8000, int(MAX_OFF * o.fs)
         offs = [0] + list(rp.integers(0, m_off, K - 1))
         tg = t0 - lead / o.fs + np.arange(lead + m_off + frames[0].length + tail) / o.fs
-        pk, ys, priors, truths = [], [], [], []
+        pk, ys, priors, truths, sic_in = [], [], [], [], []
         for k, F in enumerate(frames):
             info, X, s = mu.user_packet(F, rp, mod)
             x = np.zeros(len(tg), complex)
@@ -132,6 +141,18 @@ def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GR
                 ys.append(channel.apply(x, o.fs, o.fc, bulk, paths))
                 i0 = lead + offs[k]
                 truths.append(bulk[i0:i0 + F.length + tail // 2])
+                if sic:
+                    tf = te[0] + np.arange(F.length + tail) / o.fs  # emission times from the user's frame start
+                    q = si2[k].encode(imu_tx[k].velocity(tf[:F.length]), tf[:F.length] - tf[0])
+                    h, zv = si2[k].decode(q, tf - tf[0])
+                    pred = sensors.predict_paths(h, zv, imu_rx.velocity(tf + chans[k].tau), chans[k].u,
+                                                 [(a_, b_) for a_, b_, _ in nominal[k]])
+                    ideal, dl = [], []
+                    for grp in chans[k].groups:  # strongest sub-path of each arrival (b13's ideal knowledge)
+                        p_ = max([paths[j] for j in grp], key=lambda p: np.mean(np.abs(p.gain)))
+                        ideal.append(bulk[i0:] + (p_.delta_eps[i0:] if np.ndim(p_.delta_eps) else p_.delta_eps))
+                        dl.append(p_.delay)
+                    sic_in.append((pred, [d_ for _, _, d_ in nominal[k]], ideal, [d_ - min(dl) for d_ in dl]))
             priors.append(nodes[k][0].estimate(te, SIGMA_IMU) + nodes[k][1].estimate(te, SIGMA_IMU))
         y = mu.add_noise(np.sum(ys, axis=0), o, snr_db, rp)
         searches = [(0, lead + m_off + 1500)] * K
@@ -141,6 +162,16 @@ def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GR
                 s_db, e = mu.score(Y, pk[k][1], pk[k][0], frames[k], mod)
                 rec[r]["sinr"].append(s_db)
                 rec[r]["err"].append(e)
+        for k, F in enumerate(frames if sic else ()):  # per-user path cancellation (MRC of the path branches)
+            pred, pdel, ideal, idel = sic_in[k]
+            br_sig, _ = mpchain.receive_sic_signal(y, F, searches[k], mod=mod)
+            br_sen, _ = mpchain.receive_sic_sensor(y, F, pred, pdel, searches[k], mod=mod, signal_branches=br_sig)
+            out = dict(sic_signal=br_sig, sic_sensor=br_sen)
+            out["sic_ideal"] = mpchain.sic(y, F, ideal, idel, searches[k], mod=mod)[0] if len(ideal) > 1 else br_sig
+            for r, br in out.items():
+                sg, er = receiver.sinr_combined(br, pk[k][1], F)
+                rec[r]["sinr"].append(max(10 * np.log10(max(sg, 1e-30) / max(er, 1e-30)), mu.SINR_FLOOR_DB))
+                rec[r]["err"].append(not np.array_equal(receiver.decode_combined(br, F, mod), pk[k][0]))
         for k, F in enumerate(frames if alone else ()):  # the user alone in the band, same noise level
             ya = mu.add_noise(ys[k], o, snr_db, rp)
             Y = mu.receive_users(ya, [F], [priors[k]], [truths[k]], [searches[k]], which=("branch_genie",))[0][
@@ -159,6 +190,12 @@ def run(case, K, guard, snr_db, n, rng, o=None, mod="qpsk", alone=True, grade=GR
                       per_ci95=wilson(int(err.sum()), len(err)), goodput_bps=float(K * bits * (1 - err.mean()) / T),
                       per_user_packet_sinr_db=[round(float(x), 2) for x in sinr.ravel()],
                       per_user_packet_err=[bool(x) for x in err])
+    if sic:
+        d = np.array(rec["sic_sensor"]["sinr"]) - np.array(rec["sic_signal"]["sinr"])
+        out["sic_sensor"]["gain_over_sic_signal"] = dict(mean_db=float(d.mean()), ci95=ci95(d.reshape(-1, K).mean(1)),
+                                                         fraction_positive=float(np.mean(d > 0)),
+                                                         mcnemar=mcnemar(rec["sic_signal"]["err"],
+                                                                         rec["sic_sensor"]["err"]))
     for ours in ("branch_sensor", "branch_sensor_pilot"):  # paired gain of ours over each signal-only baseline
         for base in ("branch_signal", "branch_pilot"):
             d = np.array(rec[ours]["sinr"]) - np.array(rec[base]["sinr"])
@@ -181,6 +218,7 @@ def main():
     ap.add_argument("--clock-ppm", type=float, default=0.0, help="std of each modem's clock offset [ppm]")
     ap.add_argument("--day", default=OOI_DAY, help="OOI day of the gateway and buoy users, e.g. CE04OSSM/20230731")
     ap.add_argument("--multipath", action="store_true", help="each user through its own Bellhop channel (GEO)")
+    ap.add_argument("--sic", action="store_true", help="also per-user path cancellation (needs --multipath, buoy users)")
     ap.add_argument("--noise-source", default="nulls", choices=("nulls", "max"),
                     help="decoder noise: in-band nulls only, or also the pilot residual (receiver.NOISE_SOURCE)")
     ap.add_argument("--out", default="points", help="output file name (results/b22_multiuser/<out>.json)")
@@ -198,10 +236,11 @@ def main():
                     # reference run (paired comparisons)
                     rng = np.random.default_rng(seed_of(case, K, guard, snr, a.mod))
                     res = run(case, K, guard, snr, a.n, rng, mod=a.mod, alone=not a.no_alone, grade=a.grade,
-                              dir_err_deg=a.dir_err_deg, clock_ppm=a.clock_ppm, day=a.day, multipath=a.multipath)
+                              dir_err_deg=a.dir_err_deg, clock_ppm=a.clock_ppm, day=a.day, multipath=a.multipath,
+                              sic=a.sic)
                     rows.append(dict(scenario=case, K=K, guard=guard, snr_db=snr, n_packets=a.n, mod=a.mod,
                                      grade=a.grade, dir_err_deg=a.dir_err_deg, noise_source=a.noise_source,
-                                     clock_ppm=a.clock_ppm, day=a.day, multipath=a.multipath, **res))
+                                     clock_ppm=a.clock_ppm, day=a.day, multipath=a.multipath, sic=a.sic, **res))
                     g, gp = res["branch_sensor"], res["branch_sensor_pilot"]
                     print(f"{case:13s} K {K} guard {guard:2d} SNR {snr} {a.mod} | mean SINR / PER: " + "  ".join(
                         f"{r} {v['mean_sinr_db']:5.1f}/{v['per']:.2f}" for r, v in res.items()) +
